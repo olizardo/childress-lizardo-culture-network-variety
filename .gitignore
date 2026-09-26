@@ -1,3 +1,8 @@
+# Full raw data export (kept locally only; a minimal reproducibility
+# extract with just the columns the pipeline uses is committed as
+# grabbagdata111925.dta -- see Scripts/00_extract_minimal_data.R)
+grabbagdata111925_full.dta
+
 # Drive sync intermediate files
 draft_*.docx
 draft.docx
