@@ -1,0 +1,13 @@
+# Drive sync intermediate files
+draft_*.docx
+draft.docx
+draft_updated.docx
+draft_live.docx
+replacements.json
+*.tmp
+.tmp/
+
+# R
+.Rhistory
+.RData
+.Rproj.user/

@@ -1,0 +1,9 @@
+{
+  "permission": {
+    "bash": {
+      "cd *": "allow",
+      "Rscript *": "allow",
+      "tail *": "allow"
+    }
+  }
+}
