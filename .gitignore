@@ -3,6 +3,10 @@
 # grabbagdata111925.dta -- see Scripts/00_extract_minimal_data.R)
 grabbagdata111925_full.dta
 
+# Local submission deliverables (blind-review manuscript/title page/abstract
+# docx files built by Scripts/build_ssr_submission_docs.py)
+SSR-submission/
+
 # Drive sync intermediate files
 draft_*.docx
 draft.docx
