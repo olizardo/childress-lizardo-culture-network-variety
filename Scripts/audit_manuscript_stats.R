@@ -165,54 +165,86 @@ checks <- list(
     )
   },
 
-  # -- Inter-factor (Phi) correlations under oblimin -------------------
+  # -- Inter-factor (Phi) correlations, rotation-agnostic --------------
+  # Dual-mode: under oblimin the manuscript reports specific non-zero
+  # Phi correlations in prose (matched by the first regex below); under
+  # varimax (the standing choice as of the September 2026 revert) the
+  # manuscript instead states that the three dimensions are "forced to
+  # be uncorrelated by construction" with no numbers to extract, so we
+  # fall back to asserting the actual Phi matrices are exactly diagonal
+  # (a structural check rather than a text-vs-number diff). This keeps
+  # the check meaningful and NOT_FOUND-free regardless of which rotation
+  # is currently in force.
   function(txt_flat, prep, mods) {
     m <- str_match(txt_flat,
       "liberal \\(r\\s*=\\s*\\.(\\d{2}) weak,\\s*\\.(\\d{2}) strong\\) and conservative \\(r\\s*=\\s*\\.(\\d{2}) weak,\\s*\\.(\\d{2}) strong\\)")
-    if (is.na(m[1, 1])) return(not_found_row("phi_variety", "Phi(variety, liberal/conservative composition), weak & strong ties"))
-    rbind(
-      num_row("phi_variety_liberal_weak", "Phi(variety, liberal), weak ties", as.numeric(paste0(".", m[1, 2])), prep$weak_fit$phi["variety", "liberal"], tol = 0.006),
-      num_row("phi_variety_liberal_strong", "Phi(variety, liberal), strong ties", as.numeric(paste0(".", m[1, 3])), prep$strong_fit$phi["variety", "liberal"], tol = 0.006),
-      num_row("phi_variety_conservative_weak", "Phi(variety, conservative), weak ties", as.numeric(paste0(".", m[1, 4])), prep$weak_fit$phi["variety", "conservative"], tol = 0.006),
-      num_row("phi_variety_conservative_strong", "Phi(variety, conservative), strong ties", as.numeric(paste0(".", m[1, 5])), prep$strong_fit$phi["variety", "conservative"], tol = 0.006)
-    )
+    if (!is.na(m[1, 1])) {
+      return(rbind(
+        num_row("phi_variety_liberal_weak", "Phi(variety, liberal), weak ties", as.numeric(paste0(".", m[1, 2])), prep$weak_fit$phi["variety", "liberal"], tol = 0.006),
+        num_row("phi_variety_liberal_strong", "Phi(variety, liberal), strong ties", as.numeric(paste0(".", m[1, 3])), prep$strong_fit$phi["variety", "liberal"], tol = 0.006),
+        num_row("phi_variety_conservative_weak", "Phi(variety, conservative), weak ties", as.numeric(paste0(".", m[1, 4])), prep$weak_fit$phi["variety", "conservative"], tol = 0.006),
+        num_row("phi_variety_conservative_strong", "Phi(variety, conservative), strong ties", as.numeric(paste0(".", m[1, 5])), prep$strong_fit$phi["variety", "conservative"], tol = 0.006)
+      ))
+    }
+    if (str_detect(txt_flat, "forced to be uncorrelated by construction")) {
+      off_diag_max <- max(abs(c(
+        prep$weak_fit$phi["variety", "liberal"], prep$weak_fit$phi["variety", "conservative"],
+        prep$strong_fit$phi["variety", "liberal"], prep$strong_fit$phi["variety", "conservative"]
+      )))
+      return(num_row("phi_variety", "Phi(variety, liberal/conservative composition), weak & strong ties -- varimax orthogonality check", 0, off_diag_max, tol = 1e-8))
+    }
+    not_found_row("phi_variety", "Phi(variety, liberal/conservative composition), weak & strong ties")
   },
   function(txt_flat, prep, mods) {
     m <- str_match(txt_flat, "another \\(r\\s*=\\s*\\.(\\d{2}) weak,\\s*\\.(\\d{2})\\s*strong\\) rather than negatively related")
-    if (is.na(m[1, 1])) return(not_found_row("phi_lib_cons", "Phi(liberal, conservative composition), weak & strong ties"))
-    rbind(
-      num_row("phi_lib_cons_weak", "Phi(liberal, conservative), weak ties", as.numeric(paste0(".", m[1, 2])), prep$weak_fit$phi["liberal", "conservative"], tol = 0.006),
-      num_row("phi_lib_cons_strong", "Phi(liberal, conservative), strong ties", as.numeric(paste0(".", m[1, 3])), prep$strong_fit$phi["liberal", "conservative"], tol = 0.006)
-    )
+    if (!is.na(m[1, 1])) {
+      return(rbind(
+        num_row("phi_lib_cons_weak", "Phi(liberal, conservative), weak ties", as.numeric(paste0(".", m[1, 2])), prep$weak_fit$phi["liberal", "conservative"], tol = 0.006),
+        num_row("phi_lib_cons_strong", "Phi(liberal, conservative), strong ties", as.numeric(paste0(".", m[1, 3])), prep$strong_fit$phi["liberal", "conservative"], tol = 0.006)
+      ))
+    }
+    if (str_detect(txt_flat, "forced to be uncorrelated by construction")) {
+      off_diag_max <- max(abs(c(
+        prep$weak_fit$phi["liberal", "conservative"], prep$strong_fit$phi["liberal", "conservative"]
+      )))
+      return(num_row("phi_lib_cons", "Phi(liberal, conservative composition), weak & strong ties -- varimax orthogonality check", 0, off_diag_max, tol = 1e-8))
+    }
+    not_found_row("phi_lib_cons", "Phi(liberal, conservative composition), weak & strong ties")
   },
 
-  # -- Table A5: variety-count validation correlations -----------------
+  # -- Table A2 (fka Table A5, renamed September 2026): variety-count
+  #    validation correlations -----------------------------------------
   function(txt_flat, prep, mods) {
     m <- str_match(txt_flat,
       "most strongly correlated of the three factors with these observed counts \\(r = \\.(\\d{2}), versus \\.(\\d{2}) and \\.(\\d{2}) for liberal and conservative composition, respectively\\)")
-    if (is.na(m[1, 1])) return(not_found_row("tableA5_strong", "Table A5 strong-tie variety/liberal/conservative correlations with raw group counts"))
+    if (is.na(m[1, 1])) return(not_found_row("tableA2_strong", "Table A2 strong-tie variety/liberal/conservative correlations with raw group counts"))
     d <- prep$df
     idx <- prep$strong_fit$idx
     scores <- as.data.frame(prep$strong_fit$fa$scores)
     colnames(scores) <- names(idx)[match(seq_len(3), idx)]
     rbind(
-      num_row("tableA5_strong_variety", "Table A5: strong-tie variety vs. raw count (r)", as.numeric(paste0(".", m[1, 2])), cor(scores$variety, d$strong_variety_count1, use = "complete.obs"), tol = 0.01),
-      num_row("tableA5_strong_liberal", "Table A5: strong-tie liberal composition vs. raw count (r)", as.numeric(paste0(".", m[1, 3])), cor(scores$liberal, d$strong_variety_count1, use = "complete.obs"), tol = 0.01),
-      num_row("tableA5_strong_conservative", "Table A5: strong-tie conservative composition vs. raw count (r)", as.numeric(paste0(".", m[1, 4])), cor(scores$conservative, d$strong_variety_count1, use = "complete.obs"), tol = 0.01)
+      num_row("tableA2_strong_variety", "Table A2: strong-tie variety vs. raw count (r)", as.numeric(paste0(".", m[1, 2])), cor(scores$variety, d$strong_variety_count1, use = "complete.obs"), tol = 0.01),
+      num_row("tableA2_strong_liberal", "Table A2: strong-tie liberal composition vs. raw count (r)", as.numeric(paste0(".", m[1, 3])), cor(scores$liberal, d$strong_variety_count1, use = "complete.obs"), tol = 0.01),
+      num_row("tableA2_strong_conservative", "Table A2: strong-tie conservative composition vs. raw count (r)", as.numeric(paste0(".", m[1, 4])), cor(scores$conservative, d$strong_variety_count1, use = "complete.obs"), tol = 0.01)
     )
   },
   function(txt_flat, prep, mods) {
+    # Wording varies across revision rounds: oblimin-era prose said
+    # "liberal-composition factor correlates ..."; the varimax-reverted
+    # text drops the hyphen and "factor" ("liberal composition
+    # correlates ..."). Make both optional so future rewordings of this
+    # sentence are less likely to silently produce a false NOT_FOUND.
     m <- str_match(txt_flat,
-      "liberal-composition factor correlates about as strongly with the raw group count \\(r = \\.(\\d{2})\\) as does the variety factor itself \\(r = \\.(\\d{2})\\), and conservative composition is not far behind \\(r = \\.(\\d{2})\\)")
-    if (is.na(m[1, 1])) return(not_found_row("tableA5_weak", "Table A5 weak-tie variety/liberal/conservative correlations with raw group counts"))
+      "liberal(?:-composition factor| composition) correlates about as strongly with the raw group count \\(r = \\.(\\d{2})\\) as does the variety factor itself \\(r = \\.(\\d{2})\\), and conservative composition is not far behind \\(r = \\.(\\d{2})\\)")
+    if (is.na(m[1, 1])) return(not_found_row("tableA2_weak", "Table A2 weak-tie variety/liberal/conservative correlations with raw group counts"))
     d <- prep$df
     idx <- prep$weak_fit$idx
     scores <- as.data.frame(prep$weak_fit$fa$scores)
     colnames(scores) <- names(idx)[match(seq_len(3), idx)]
     rbind(
-      num_row("tableA5_weak_liberal", "Table A5: weak-tie liberal composition vs. raw count (r)", as.numeric(paste0(".", m[1, 2])), cor(scores$liberal, d$weak_variety_count1, use = "complete.obs"), tol = 0.01),
-      num_row("tableA5_weak_variety", "Table A5: weak-tie variety vs. raw count (r)", as.numeric(paste0(".", m[1, 3])), cor(scores$variety, d$weak_variety_count1, use = "complete.obs"), tol = 0.01),
-      num_row("tableA5_weak_conservative", "Table A5: weak-tie conservative composition vs. raw count (r)", as.numeric(paste0(".", m[1, 4])), cor(scores$conservative, d$weak_variety_count1, use = "complete.obs"), tol = 0.01)
+      num_row("tableA2_weak_liberal", "Table A2: weak-tie liberal composition vs. raw count (r)", as.numeric(paste0(".", m[1, 2])), cor(scores$liberal, d$weak_variety_count1, use = "complete.obs"), tol = 0.01),
+      num_row("tableA2_weak_variety", "Table A2: weak-tie variety vs. raw count (r)", as.numeric(paste0(".", m[1, 3])), cor(scores$variety, d$weak_variety_count1, use = "complete.obs"), tol = 0.01),
+      num_row("tableA2_weak_conservative", "Table A2: weak-tie conservative composition vs. raw count (r)", as.numeric(paste0(".", m[1, 4])), cor(scores$conservative, d$weak_variety_count1, use = "complete.obs"), tol = 0.01)
     )
   },
 
@@ -269,14 +301,26 @@ checks <- list(
   },
 
   # -- Table 1 (arts participation): race/ethnicity contrasts, Model 2 -
+  # Each of the three p-values can independently be reported as either
+  # an exact value ("p = .0XX") or an upper-bound threshold ("p < .0XX")
+  # depending on how small it is -- e.g. the multiracial contrast was
+  # "p = .005" under oblimin but tightened to "p < .001" after the
+  # varimax revert. Capture the operator for all three so a future
+  # rewording that flips any of them between "<" and "=" doesn't
+  # silently produce a NOT_FOUND.
   function(txt_flat, prep, mods) {
     m <- str_match(txt_flat,
-      "than among AAPI \\(p\\s*<\\s*\\.(\\d+)\\) or multiracial respondents \\(p\\s*=\\s*\\.(\\d+)\\); the corresponding contrast with Hispanic/Latine respondents is in the same direction but only marginally significant \\(p\\s*=\\s*\\.(\\d+)\\)")
+      "than among AAPI \\(p\\s*(<|=)\\s*\\.(\\d+)\\) or multiracial respondents \\(p\\s*(<|=)\\s*\\.(\\d+)\\); the corresponding contrast with Hispanic/Latine respondents is in the same direction but only marginally significant \\(p\\s*(<|=)\\s*\\.(\\d+)\\)")
     if (is.na(m[1, 1])) return(not_found_row("arts_race_m2", "Table 1: race/ethnicity contrasts with White respondents, Model 2"))
+    row_for <- function(id, description, op, digits, term) {
+      reported <- as.numeric(paste0(".", digits))
+      actual <- pval_of(mods$arts_models$m2, term)
+      if (op == "<") lt_row(id, description, reported, actual) else num_row(id, description, reported, actual, tol = 0.006)
+    }
     rbind(
-      lt_row("arts_race_aapi_p", "Table 1: AAPI vs. White p-value, Model 2", as.numeric(paste0(".", m[1, 2])), pval_of(mods$arts_models$m2, "race_fAAPI")),
-      num_row("arts_race_mixed_p", "Table 1: multiracial vs. White p-value, Model 2", as.numeric(paste0(".", m[1, 3])), pval_of(mods$arts_models$m2, "race_fmixed/other"), tol = 0.006),
-      num_row("arts_race_latine_p", "Table 1: Hispanic/Latine vs. White p-value, Model 2", as.numeric(paste0(".", m[1, 4])), pval_of(mods$arts_models$m2, "race_flatine"), tol = 0.006)
+      row_for("arts_race_aapi_p", "Table 1: AAPI vs. White p-value, Model 2", m[1, 2], m[1, 3], "race_fAAPI"),
+      row_for("arts_race_mixed_p", "Table 1: multiracial vs. White p-value, Model 2", m[1, 4], m[1, 5], "race_fmixed/other"),
+      row_for("arts_race_latine_p", "Table 1: Hispanic/Latine vs. White p-value, Model 2", m[1, 6], m[1, 7], "race_flatine")
     )
   }
 )

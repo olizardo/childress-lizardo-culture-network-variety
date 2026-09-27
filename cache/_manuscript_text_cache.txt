@@ -410,42 +410,34 @@ categories:
 
 We construct our primary outcome variables for cultural consumption and
 participation from these items. To that end, we used principal component
-factor analysis and retained a three-factor solution (eigenvalues > 1;
-KMO = .958), which together explained 58.7% of the variance. We rotate
-this solution obliquely (direct oblimin) rather than orthogonally
-(varimax), since there is no substantive reason to assume that public
-arts participation, everyday solitary leisure, and residual practical
-leisure are uncorrelated with one another; oblimin lets the data, rather
-than the rotation method, determine the association among these
-dimensions. We generated cultural consumption and participation
+factor analysis with varimax rotation and retained a three-factor
+solution (eigenvalues > 1; KMO = .958), which together explained 58.7%
+of the variance. We generated cultural consumption and participation
 variables for each respondent from the predicted factor scores for each
 observation, standardized to have a mean of 0 and a standard deviation
 of 1.
 
 Public Arts Participation
 
-The first factor accounted for 42.8% of the variance. As seen in Figure
+The first factor accounted for 39.9% of the variance. As seen in Figure
 1, Factor 1 is characterized by high levels of public arts
-participation, including symphony and opera attendance (loading = 0.88),
-dance performances (0.88), theater or musical performances (0.84), art
-galleries (0.83), live music concerts (0.82), museum visits (0.80),
-festivals (0.77), historic site visits (0.71), and movie theater
-attendance (0.69).
+participation, including symphony and opera attendance (loading = 0.84),
+dance performances (0.84), theater or musical performances (0.82), art
+galleries (0.81), amusement park or carnival attendance (0.81), live
+music concerts (0.81), museum visits (0.77), festival attendance (0.75),
+and sports attendance (0.74).
 
 Solitary Leisure Activities
 
-The second factor accounted for 9.1% of the variance and is
+The second factor accounted for 11.7% of the variance and is
 characterized by recreational leisure activities including “going for
-walks” (loading = 0.85), exercise or athletic activities (0.49), reading
-novels (0.43), gardening (0.33), going to the library (0.33), and hiking
-(0.29). We interpret this factor as everyday solitary leisure. The third
-factor accounts for 6.8% of the variance, and we interpret it as
-essentially a residual category, with loadings on gardening (0.54), home
-auto repair (0.41), hiking or camping (0.23), and a strong negative
-loading for fast food consumption (–0.69). Because we rotate obliquely
-rather than orthogonally, we also note that all three activity factors
-are only weakly correlated with one another (|r| ≤ .25), consistent with
-treating them as substantively distinct outcomes.
+walks” (loading = 0.81), exercise or athletic activities (0.56), reading
+novels (0.48), going to the library (0.42), hiking (0.39), and gardening
+(0.37). We interpret this factor as everyday solitary leisure. The third
+factor accounts for 7.1% of the variance, and we interpret it as
+essentially a residual category, with loadings on gardening (0.57), home
+auto repair (0.46), hiking or camping (0.28), and a strong negative
+loading for fast food consumption (–0.68).
 
 [Figure 1 About Here]
 
@@ -495,74 +487,60 @@ For each group, respondents answered on the following five-point,
 ordered scale with the following options: None/0 people; 1 person; 2 to
 5 people; 6 to 10 people; more than 10 people. For both weak and strong
 ties, we similarly rely on an exploratory principal component factor
-analysis to classify items into broader classes, again rotating the
-solution obliquely (direct oblimin) rather than orthogonally (varimax):
-there is no theoretical reason to expect that knowing more ideologically
-liberal alters and knowing more ideologically conservative alters are
-uncorrelated, since both may simply reflect a respondent’s overall
-network size or sociability rather than opposite poles of a single
-ideological spectrum. In both cases, we retain three-factor solutions
-(eigenvalues > 1; KMOs = .938 for weak ties and .935 for strong ties),
-with each solution explaining approximately 61% of the total variance.
-As we did for the cultural participation and leisure activities items,
-we calculated personal network variety and composition variables for
-each respondent from the predicted factor scores. These scores are
-standardized to have a mean of zero and a standard deviation of 1.
+analysis with varimax rotation to classify items into broader classes.
+In both cases, we retain three-factor solutions (eigenvalues > 1; KMOs =
+.938 for weak ties and .935 for strong ties), with each solution
+explaining approximately 61% of the total variance. As we did for the
+cultural participation and leisure activities items, we calculated
+personal network variety and composition variables for each respondent
+from the predicted factor scores. These scores are standardized to have
+a mean of zero and a standard deviation of 1.
 
 Network Variety
 
-Factor 1 explains 20.1% of the variance in the weak-tie model and 25.4%
+Factor 1 explains 20.1% of the variance in the weak-tie model and 23.8%
 in the strong-tie model. Across both weak- and strong-tie networks, this
 factor loads positively across a wide range of social groups rather than
 clustering around a single category. In the weak tie model, Factor 1 is
 anchored by high loadings on knowing Native Hawaiian or Pacific Islander
-(.85), American Indian (.80), MENA (.76), and Asian (.59) individuals,
-with additional loadings on class-coded ties (second-home owners; .56)
+(.83), American Indian (.79), MENA (.77), and Asian (.63) individuals,
+with additional loadings on class-coded ties (second-home owners; .59)
 and immigrant-origin contacts (knowing someone born outside the U.S.;
-.45); the strong tie model shows a highly similar pattern, including
-strong loadings on Pacific Islander (.87), MENA (.84), American Indian
-(.81), Asian (.67), immigrant-origin (.62), and second-home owner (.60)
+.51); the strong tie model shows a highly similar pattern, including
+strong loadings on Pacific Islander (.81), MENA (.80), American Indian
+(.78), Asian (.66), immigrant-origin (.63), and second-home owner (.63)
 ties. We interpret Factor 1 as capturing network variety rather than
 ties to any particular group or orientation, as we show in the
 supplementary analysis in the appendix.
 
 Network Composition
 
-In both weak and strong tie networks, Factor 2, which explains 23.9% of
-the variance for weak ties and 14.0% for strong ties, loads most
+In both weak and strong tie networks, Factor 2, which explains 22.9% of
+the variance for weak ties and 17.9% for strong ties, loads most
 strongly on left-leaning ideology and aligned groups. For weak ties,
-Factor 2 is anchored by knowing very liberal (.78) and LGBTQ (.76)
-individuals, those with low church attendance (.62) and Hispanic/Latine
-contacts (.62), with a secondary loading on urban ties (.56). The strong
-tie model shows a similar concentration on very liberal (.76) and LGBTQ
-(.69) ties, alongside low church attendance (.49) and urban (.45)
-contacts. In turn, Factor 3, which explains 17.3% of the variance for
-weak ties and 21.8% for strong ties, loads most strongly on conservative
-and religious social environments. In the weak tie model, this factor is
-anchored by knowing very conservative individuals (.84) and frequent
-churchgoers (.70), with secondary loadings on rural ties (.68) and
-second-home owners (.38); the strong tie model is centered on similarly
-strong loadings for knowing white (.80), very conservative (.79), women
-(.70), and frequent churchgoing (.70) contacts, alongside rural ties
-(.69), indicating that for strong ties this factor also picks up a
-broader conventional/mainstream social profile alongside political
-conservatism.
+Factor 2 is anchored by knowing very liberal (.75) and LGBTQ (.73)
+individuals, Hispanic/Latine contacts (.64), and men (.63), with a
+secondary loading on low church attendance (.61). The strong tie model
+shows a similar concentration on very liberal (.81) and LGBTQ (.72)
+ties, alongside low church attendance (.59) and men (.56). In turn,
+Factor 3, which explains 18.2% of the variance for weak ties and 19.6%
+for strong ties, loads most strongly on conservative and religious
+social environments. In the weak tie model, this factor is anchored by
+knowing very conservative individuals (.80) and frequent churchgoers
+(.71), with secondary loadings on knowing white (.68) and rural (.67)
+contacts; the strong tie model is centered on similarly strong loadings
+for knowing very conservative (.78), white (.73), and frequent
+churchgoing (.71) contacts, alongside rural ties (.65).
 
 We interpret Factor 3 as capturing right-leaning ideology and aligned
-groups, which remains conceptually distinct from the variety-oriented
-networks captured by Factor 1 and the liberal-aligned groups of Factor
-2, though under the oblique rotation we use here these three dimensions
-are allowed to (and do) correlate rather than being forced to
-independence: variety correlates modestly with both liberal (r = .35
-weak, .26 strong) and conservative (r = .25 weak, .44 strong)
-composition, and liberal and conservative composition are themselves
-modestly positively correlated with one another (r = .39 weak, .28
-strong) rather than negatively related, indicating that knowing more
-ideologically liberal and more ideologically conservative alters are not
-opposite poles of a single spectrum but partly co-occur, plausibly
-reflecting respondents’ overall network breadth. We thus refer to Factor
-1 as weak and strong-tie variety, and to Factors 2 and 3 as weak and
-strong-tie liberal and conservative composition.
+groups, which is clearly distinct from the variety-oriented networks
+captured by Factor 1 and the liberal-aligned groups of Factor 2; because
+we retain the orthogonal (varimax) rotation used for the activities
+battery, these three dimensions are forced to be uncorrelated by
+construction, so no inter-factor correlations are reported for this
+battery. We thus refer to Factor 1 as weak and strong-tie variety, and
+to Factors 2 and 3 as weak and strong-tie liberal and conservative
+composition.
 
 [Figure 2 About Here]
 
@@ -595,7 +573,7 @@ Across all models, and consistent with the network variety model, both
 weak- and strong-tie variety predict increasing frequencies of public
 arts participation. The coefficient estimate for the strong-tie network
 variable is more than twice that for the weak-tie variable—a
-statistically significant difference (F(1, 1213) = 19.41, p <
+statistically significant difference (F(1, 1211) = 19.20, p <
 .001)—indicating that a diverse range of strong ties has a greater
 effect on driving public arts participation. This difference is
 illustrated in Figure 3, which plots the predicted score in the public
@@ -616,9 +594,9 @@ consistent with what we would expect from previous work. Education and
 childhood exposure to the arts increase the contemporaneous frequency of
 public arts consumption. In contrast, participation in the public arts
 declines with age and is higher among self-identified white respondents
-than among AAPI (p < .001) or multiracial respondents (p = .005); the
+than among AAPI (p < .001) or multiracial respondents (p < .001); the
 corresponding contrast with Hispanic/Latine respondents is in the same
-direction but only marginally significant (p = .07). Interestingly, we
+direction but only marginally significant (p = .05). Interestingly, we
 find that political ideology has a substantively small but statistically
 significant net effect: more conservative respondents report a higher
 frequency of participation in public arts than liberals. This contrasts
@@ -633,25 +611,22 @@ ideology on self-reported taste and participation.
 As shown in Models 3 and 4, adding ideological network composition does
 little to attenuate the effects of network variety for either weak or
 strong ties, suggesting that the factor analyses capture distinct
-sources of variance in the personal networks of U.S. respondents. After
+sources of variance in the personal networks of U.S. respondents.
+Interestingly, the two principal axes of network composition pull arts
+participation in different directions depending on tie strength. After
 adjusting for relevant sociodemographic covariates in Model 4, we find
 that weak ties to people in liberal positions are associated with lower
-levels of arts participation (b = -.13, p = .001); this is the only one
-of the four composition coefficients that reaches conventional
-significance in this model, as strong-tie liberal composition (b = -.04,
-p = .27), weak-tie conservative composition (b = .01, p = .73), and
-strong-tie conservative composition (b = .03, p = .40) are not
-statistically distinguishable from zero. Note that the direct positive
-effect of conservative political ideology on arts participation in Model
-2 (b = .03, p = .03) is nonetheless fully mediated by personal network
-composition: when ideological network composition is included in Model
+levels of arts participation. In contrast, strong ties to people in
+conservative positions are associated with higher levels. Note that the
+direct positive effect of conservative political ideology on arts
+participation in Model 2 is fully mediated by personal network
+composition. When ideological network composition is included in Model
 4, the coefficient estimate is now close to zero and no longer
-statistically significant (b = -.01, p = .46), suggesting that the
-greater likelihood of those who identify as conservative reporting
-higher levels of arts participation is explained by their broader
-pattern of network composition rather than any single ideological tie
-category, consistent with a homophily effect (Mark 1998; McPherson et
-al. 2001).
+statistically significant, suggesting that the greater likelihood of
+those who identify as conservative reporting higher levels of arts
+participation is explained by their stronger ties to other persons in
+more “conservative” social positions, consistent with a homophily effect
+(Mark 1998; McPherson et al. 2001).
 
 [Table 1 About Here]
 
@@ -664,9 +639,9 @@ all specifications, weak-tie variety is positively associated with
 everyday solitary leisure, whereas strong-tie variety is negatively
 associated, net of other predictors. Substantively, a one-unit increase
 in the predicted factor score for weak-tie variety corresponds to an
-increase of approximately 0.13 to 0.21 standard deviations in solitary
+increase of approximately 0.14 to 0.23 standard deviations in solitary
 leisure across the four model specifications. In contrast, greater
-strong-tie variety is associated with a roughly 0.08 to 0.17 standard
+strong-tie variety is associated with a roughly 0.13 to 0.18 standard
 deviation decrease in the frequency of engagement in everyday leisure
 activities. As before, we observe a somewhat stronger mediation of the
 weak-tie variety effect by socio-demographic variables than for the
@@ -698,7 +673,7 @@ models, though there are also notable contrasts. Education increases the
 frequency of engagement in more solitary leisure activities, as does
 exposure to childhood arts, whose effect attenuates somewhat but remains
 statistically significant once network composition variables are
-introduced in Model 4 (b = .04, p = .02). Age does not affect solitary
+introduced in Model 4 (b = .04, p = .04). Age does not affect solitary
 leisure, which makes sense given the less demanding nature of these
 activities compared to participation in the public arts. Higher
 household income increases solitary leisure activities (in contrast to
@@ -710,25 +685,18 @@ net effect of political ideology on solitary leisure activities, with
 liberals more likely to engage in them than conservatives.
 
 As before, adding ideological network composition does little to
-attenuate the effects of network variety. In Models 3 and 4, strong ties
-to persons in “liberal” positions are positively associated with
-everyday solitary leisure (b = .11, p = .02), and weak-tie liberal
-composition shows a positive association of similar magnitude that falls
-just short of conventional significance (b = .09, p = .06). Ties to
-conservative positions show, at most, a comparably weak positive
-association for strong ties (b = .09, p = .09) and none for weak ties (b
-= .02, p = .62), so we read this pattern cautiously as suggesting that
-liberal-leaning ties are the more consistent compositional correlate of
-solitary leisure, rather than as evidence of a sharp
-liberal/conservative asymmetry. Furthermore, as observed for public arts
-participation, the association between political ideological
-self-placement and solitary leisure in Model 2 (b = -.04, p = .01) is
-fully mediated by network composition: the Model 4 estimate falls to
-near zero and loses significance (b = -.01, p = .66), suggesting that
-the higher likelihood of liberals reporting engagement in everyday
-leisure is explained by their broader pattern of network composition
-rather than any single ideological tie category, also consistent with a
-homophily effect (Mark 1998; McPherson et al. 2001).
+attenuate the effects of network variety. However, ideological
+composition plays a more consistent role in this domain. In Models 3 and
+4, both weak and strong ties to persons in “liberal” positions are
+positively associated with everyday solitary leisure, while ties to
+conservatives have no discernible impact. Furthermore, as observed for
+public arts participation, the association between political ideological
+self-placement and solitary leisure in Model 2 is fully mediated by
+network composition, suggesting that the higher likelihood of liberals
+reporting engagement in everyday leisure is explained by their higher
+propensity to have personal networks rich in strong and weak ties to
+people in “liberal” positions, also consistent with a homophily effect
+(Mark 1998; McPherson et al. 2001).
 
 [Table 2 About Here]
 
@@ -746,9 +714,9 @@ its effects should not extend to this residual domain.
 Consistent with this expectation, none of the four composition
 coefficients approaches statistical significance in Models 3 or 4 of
 Table A3, and formal Wald tests confirm that the composition block adds
-no explanatory power over models with variety alone (χ²(4) = 4.05, p =
-.399) or over models that already include the full set of
-socio-demographic controls (χ²(4) = 7.07, p = .132). This null pattern,
+no explanatory power over models with variety alone (χ²(4) = 5.99, p =
+.200) or over models that already include the full set of
+socio-demographic controls (χ²(4) = 5.61, p = .231). This null pattern,
 set alongside the associations we observe for public arts participation
 and solitary leisure, supports treating our composition measures as
 tapping domain-specific cultural and leisure engagement rather than an
@@ -768,26 +736,26 @@ cultural activities and practices most commonly measured, the basic
 findings of the NVM are robust to a novel conceptualization of how to
 measure network variety. Yet by broadening the scope of what “counts” as
 cultural participation, we find that for more everyday, solitary leisure
-activities, network variety in weak and strong ties operates in opposing
-directions, with those with more variety in their weak ties still
-engaging in more of these cultural practices as the NVM might suggest,
-while those with more strong-tie variety engaging in them less. Taken
-together, these findings suggest that network variety may not operate as
-a uniform engine of cultural omnivorousness. We also find that network
-composition is structured mainly around political ideology and
-ideologically-aligned groups, with those with liberal-leaning weak ties
-engaging in less conventional arts participation, which those with more
-liberal strong ties, and to a lesser extent liberal weak ties, seem to
-be making up for with more everyday solitary leisure. We further show
-that these composition effects are domain-specific rather than a generic
-correlate of any activity: an identical model predicting a residual,
-practical leisure factor (e.g., gardening or home repair) unrelated to
-arts or cultural consumption shows no association with network
-composition, supporting our interpretation of ideological sorting as a
-mechanism specific to cultural and leisure engagement rather than an
-artifact of general sociability. In what follows, we discuss these
-potential contributions in more detail, our limitations, and ideas for
-future research.
+activities, network variety in weak and strong ties operates
+orthogonally to each other, with those with more variety in their weak
+ties still engaging in more of these cultural practices as the NVM might
+suggest, while those with more strong-tie variety engaging in them less.
+Taken together, these findings suggest that network variety may not
+operate as a uniform engine of cultural omnivorousness. We also find
+that network composition is structured mainly around political ideology
+and ideologically-aligned groups, with those with liberal leaning weak
+ties engaging in less conventional arts participation and those with
+conservative strong ties engaging in more, which those with more liberal
+weak and strong ties seem to be making up for with more everyday
+solitary leisure. We further show that these composition effects are
+domain-specific rather than a generic correlate of any activity: an
+identical model predicting a residual, practical leisure factor (e.g.,
+gardening or home repair) unrelated to arts or cultural consumption
+shows no association with network composition, supporting our
+interpretation of ideological sorting as a mechanism specific to
+cultural and leisure engagement rather than an artifact of general
+sociability. In what follows, we discuss these potential contributions
+in more detail, our limitations, and ideas for future research.
 With respect to cultural participation, expanding the analytic scope
 beyond conventional attendance-based measures reveals distinct
 configurations that have previously been obscured in the literature.
@@ -865,7 +833,8 @@ patterns often attributed to core psychological differences between
 liberals and conservatives (e.g., Jost, 2021) are, at least in part,
 rooted in social structure.
 Our finding that weak ties to liberals are associated with lower levels
-of conventional arts participation likely reflects that our arts
+of conventional arts participation, while strong ties to conservatives
+are associated with higher levels, likely reflects that our arts
 participation factor loads most heavily on conventionally highbrow
 activities (e.g., ballet or dance performances, theater, and symphony or
 opera). As prior work shows, liberals tend to express broader tastes
@@ -1092,25 +1061,23 @@ variety count measures of the number of distinct social groups
 respondents reported knowing. Variety counts were calculated as the
 number of groups for which respondents reported knowing at least one
 person, and in Table A2, associations are reported as Pearson
-correlations. For strong ties, the network variety factor remains the
-most strongly correlated of the three factors with these observed counts
-(r = .79, versus .54 and .73 for liberal and conservative composition,
-respectively). For weak ties, this discriminant pattern is less clean
-under the oblique rotation: the liberal-composition factor correlates
-about as strongly with the raw group count (r = .76) as does the variety
-factor itself (r = .70), and conservative composition is not far behind
-(r = .62). This is an expected consequence of allowing the three
-weak-tie factors to correlate rather than forcing them to independence:
-respondents with broader weak-tie networks tend to know more people
-across all eighteen groups, including ideologically-coded ones, so the
-ideological composition factors partly track sheer network breadth as
-well as ideological content. Results are substantively similar when
-using a stricter threshold that requires respondents to report knowing
-two or more people in a given group. We therefore read Factor 1 as
-capturing cross-group breadth most cleanly for strong ties, while for
-weak ties this validation check is suggestive rather than conclusive,
-and we interpret the weak-tie composition estimates in Tables 1–2 and A3
-accordingly.
+correlations. For strong ties, the network variety factor is the most
+strongly correlated of the three factors with these observed counts (r =
+.61, versus .50 and .50 for liberal and conservative composition,
+respectively). For weak ties, this discriminant pattern is less clean:
+liberal composition correlates about as strongly with the raw group
+count (r = .59) as does the variety factor itself (r = .56), and
+conservative composition is not far behind (r = .46). This likely
+reflects the fact that respondents with broader weak-tie networks tend
+to know more people across all eighteen groups, including
+ideologically-coded ones, so the ideological composition factors partly
+track sheer network breadth as well as ideological content. Results are
+substantively similar when using a stricter threshold that requires
+respondents to report knowing two or more people in a given group. We
+therefore read Factor 1 as capturing cross-group breadth most cleanly
+for strong ties, while for weak ties this validation check is suggestive
+rather than conclusive, and we interpret the weak-tie composition
+estimates in Tables 1–2 and A3 accordingly.
 
 Table A2. Correlation Matrix of Factor Scores for Strong and Weak Tie
 Network Variety and Composition with the Count of Positions Respondents
