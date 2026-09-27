@@ -3,7 +3,12 @@
     "bash": {
       "cd *": "allow",
       "Rscript *": "allow",
-      "tail *": "allow"
+      "tail *": "allow",
+      "ls *": "allow",
+      "echo *": "allow"
     }
+  },
+  "sandbox": {
+    "enabled": false
   }
 }
