@@ -2,9 +2,9 @@
 
 | Factor Score | >=1 (weak) | >=2 (weak) | >=1 (strong) | >=2 (strong) |
 |---|---|---|---|---|
-| Weak-Tie Variety | 0.697 | 0.660 | 0.622 | 0.550 |
-| Weak-Tie Liberal Composition | 0.755 | 0.761 | 0.477 | 0.432 |
-| Weak-Tie Conservative Composition | 0.615 | 0.656 | 0.437 | 0.443 |
-| Strong-Tie Variety | 0.575 | 0.534 | 0.789 | 0.745 |
-| Strong-Tie Liberal Composition | 0.427 | 0.434 | 0.538 | 0.524 |
-| Strong-Tie Conservative Composition | 0.517 | 0.532 | 0.732 | 0.756 |
+| Weak-Tie Variety | 0.562 | 0.520 | 0.546 | 0.478 |
+| Weak-Tie Liberal Composition | 0.585 | 0.586 | 0.333 | 0.291 |
+| Weak-Tie Conservative Composition | 0.459 | 0.506 | 0.316 | 0.339 |
+| Strong-Tie Variety | 0.444 | 0.394 | 0.612 | 0.561 |
+| Strong-Tie Liberal Composition | 0.400 | 0.410 | 0.500 | 0.489 |
+| Strong-Tie Conservative Composition | 0.341 | 0.365 | 0.503 | 0.544 |

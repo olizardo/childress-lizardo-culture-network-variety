@@ -15,6 +15,7 @@
 
 suppressPackageStartupMessages({
   library(dplyr)
+  library(estimatr)
 })
 
 dir.create("cache", showWarnings = FALSE, recursive = TRUE)

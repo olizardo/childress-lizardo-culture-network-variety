@@ -1,0 +1,1140 @@
+Omar Lizardo[1]
+
+University of California, Los Angeles
+
+Clayton Childress
+
+University of British Columbia
+
+ 
+
+Abstract
+
+In this paper, we extend the Network Variety Model (NVM), the main
+framework linking diverse social networks to broader cultural
+participation, by addressing two gaps: a narrow focus on public arts and
+insufficient attention to network composition, particularly political
+ideology. Considering both conventional public arts participation and
+everyday, solitary leisure (like reading or gardening), we find that
+network variety operates differently across domains: strong-tie variety
+is the primary driver of public arts participation, whereas for solitary
+leisure activities, weak-tie variety is the primary driver, and
+strong-tie variety is a deterrent. Most significantly, our study shows
+that the association between political ideology (liberal or
+conservative) and cultural engagement is fully explained by the
+ideological makeup of personal networks, as measured by connections to
+ideologically aligned positions, suggesting that cultural stratification
+is organized relationally—through patterned, ideologically sorted social
+environments—rather than solely via personal political beliefs and
+related psychological dispositions. We close by outlining the
+implications of the results and suggesting avenues for future research.
+
+Keywords: Network Variety; Network Composition; Ideological Sorting;
+Cultural Participation; Solitary Leisure
+
+ 
+
+Introduction
+
+How do personal networks shape taste and cultural participation? On this
+question, the Erickson’s (1996) network variety mode (NVM) has been the
+main guiding framework. According to the NVM, ties that span multiple
+positions in the social structure provide greater familiarity with
+different cultural forms, thereby expanding participation and taste
+through broader exposure; in short “network variety leads to cultural
+variety.” Overall, a large body of research consistently supports this
+core proposition across national contexts, cultural domains, and
+methodological approaches. The NVM has also generated useful extensions,
+explaining, for example, how networks serve as a resource in the
+diffusion of cultural forms (Mark 1998), how network variety converts
+into cultural capital (Garrett 2016; Relish 1997), and how the outcome
+of weak ties is also a cultural strength of popular or “weak” culture
+(Lizardo 2006; Schultz and Breiger 2010).
+
+Despite broad consensus on the NVM's predictive utility and wide
+applicability, its core insights can be expanded in two generative ways.
+First, many studies of culture and networks operationalize cultural
+participation narrowly, relying on attendance-based measures tied to
+conventional arts and cultural industries. While analytically tractable,
+this approach risks classifying a substantial share of the population as
+culturally “inactive,” overlooking everyday and solitary forms of
+leisure (e.g., reading at home) that are less directly connected to
+aesthetic institutions yet still constitute meaningful patterns of
+cultural engagement. Second, work in the NVM tradition has focused
+primarily on network variety—volume, range, and heterogeneity of
+ties—while paying less attention to network composition, that is, the
+extent to which personal networks are structured around particular
+sociodemographic or ideological groups. In essence focusing on
+quantitative variety rather than the qualitative heterogeneity of
+personal networks. When qualitative variety has been incorporated, this
+is usually reserved for a single dimension of association (typically
+occupation) rather than looking across all relevant dimensions of
+association (Blau 1977). This emphasis may obscure how qualitatively
+different social environments shape cultural participation in distinct
+ways.
+
+In this paper, we address both of these issues. Substantively, we expand
+the scope of cultural participation in networks to include not only
+public arts activities but also more everyday, solitary leisure
+practices. Methodologically, we introduce a group-based adaptation of
+the position generator that captures both weak and strong ties across a
+broad range of sociodemographic and ideological positions, including
+race, gender, religiosity, urbanicity, and political orientation. This
+approach preserves the analytic strengths of the usual occupation-based
+position generator (Lin, Fu, and Hsung 2001) while defining social
+position more broadly, allowing us to distinguish between network
+variety and network composition as separate dimensions of personal
+networks.
+
+Using data from a quota sample of U.S. adults, we examine how weak- and
+strong-tie network variety and composition relate to two distinct
+domains of cultural engagement: public arts participation and everyday
+solitary leisure. We find that network variety remains a robust
+predictor of conventional arts participation, particularly for strong
+ties, but operates differently across domains. For everyday solitary
+leisure, weak- and strong-tie variety exert opposing effects,
+challenging the assumption that network diversity uniformly increases
+cultural participation. We also show that, second to variety, network
+composition is structured by political ideology and plays an independent
+role in shaping cultural engagement. Across both domains, the
+association between respondents’ political ideology and participation is
+fully mediated by the ideological composition of their personal
+networks, indicating that cultural stratification operates via patterned
+social environments rather than solely through individual dispositions.
+Taken together, these findings extend the NVM by showing that both what
+counts as cultural participation and how networks are measured shape
+conclusions about the relationship between social structure and cultural
+life.
+
+Previous Work on the Link Between Networks and Cultural Consumption
+
+The central hypothesis driving work on the effects of network ties on
+cultural tastes and consumption patterns is Erickson’s (1996) Network
+Variety Model (NVM). According to Erickson, the more diverse an
+individual’s network connections are, the more varied their tastes and
+cultural consumption habits will be. That is, network variety leads to
+cultural variety (the variety principle). The primary mechanism behind
+Erickson’s NVM is exposure: individuals whose networks span a wide range
+of positions in the social structure are exposed to a broader range of
+tastes and cultural pursuits associated with those positions, thereby
+acquiring a working familiarity with those cultural styles. In her now
+classic original study Erickson used data from a sample of respondents
+in the Toronto contract security industry, finding strong support for
+the NVM's main predictions. Net of the standard class and status
+indicators—both individual and family-of-origin—knowing people in
+diverse class positions is the best predictor of familiarity with a
+broader range of cultural pursuits. In this respect, according to the
+NVM, the oft-noted correlation between markers of social position (e.g.,
+education and occupational prestige) and cultural omnivorousness is
+(partially) spurious. People in high-status positions are more
+culturally omnivorous because they have a larger volume and broader
+range of network contacts.
+
+Erickson’s NVM has been expanded and developed in subsequent work. In a
+follow-up study, Kane (2004) uses the NVM to examine how differences in
+the structure of social capital can help explain well-established gender
+differences in cultural participation. Using data from a student sample
+at an elite university in the United States, Kane finds that respondents
+with denser networks are less likely to participate in cultural
+activities, except those (such as sports) linked to solidarity-producing
+interaction rituals (Collins 2004). More importantly, Kane finds that
+more socio-demographically heterogeneous ego networks increase the
+likelihood that individuals will consume high-status genres, providing
+evidence of a link between network structure and the accumulation of
+cultural capital as high-status signals. Importantly, all network
+effects are most potent for women, providing a social-capital
+explanation for their often-observed cultural-capital advantage over
+men.
+
+In the case of the United Kingdom, Warde & Tampubolon (2002) use data
+from the British Household Panel Survey to examine the link between
+social and cultural capital. Consistent with the NVM, they find that the
+more associational and network-based ties people have—as indexed by
+associational memberships and friendships—the more likely they are to
+participate in a broader range of recreational and leisure activities.
+Widdop (2014), for his part, builds on the distinction between “bonding”
+and “bridging” social capital (Putnam, 2001) to examine how social
+networks predict distinct patterns of musical consumption. Using data
+from the third wave of the Taking Part Survey, conducted in a random
+sample of participants in England, Widdop uses latent class analysis on
+a set of items measuring participation in live musical events featuring
+six genres of music (e.g., Opera, Classical, Rock & Pop, Folk, Jazz,
+R&B) to divide respondents into three groups: Omnivores, Univores, and
+Abstainers. Widdop measures social capital using generalized trust items
+(bonding), while indexing network ties (bridging capital) using the
+standard position generator differentiated across three types of role
+relations: Kin, Friends, and Acquaintances.[2] Widdop finds that,
+consistent with Erickson’s network variety model, omnivores have a
+greater range of connections to people in different positions. However,
+weaker and non-kin ties to those positions (acquaintances and friends)
+help predict being in the omnivore class, whereas the array of kin ties
+does not.
+
+In a recent series of studies published in English, Cebula (2015, 2019,
+2023, 2024) uses data from a sample of respondents in the Polish city of
+Wrocław to examine further empirical implications of the NVM. In the
+first study, based on face-to-face survey data collected in 2011, Cebula
+(2015) used a two-pronged approach to measure network ties: A factor
+analysis of four items aimed at measuring resources embedded in personal
+networks (via resource generator items) and the self-reported frequency
+of interaction with non-kin contacts outside the home.[3] The primary
+outcome variable was a cultural participation scale based on
+self-reported frequency of engagement in a series of cultural activities
+(e.g., art museums, galleries, theater, music performances). Consistent
+with the NVM, Cebula found that the more contacts elicited via the
+resource generator and the more frequent interactions with non-kin
+friends and acquaintances outside the home, the wider the range of
+activities respondents reported consuming at high frequency.
+
+Extending the analysis to musical taste, Cebula (2019) uses data from
+the same city collected in 2016 to measure network ties in two ways. One
+is based on the familiar position generator, but split into strong
+(friend and family) and weak (acquaintances) ties, for fourteen
+occupations distributed across the status ladder. The other is based on
+questions about how many contacts a person knows who differ from them on
+a series of characteristics (e.g., age, cultural pursuits, political
+views, organizational affiliations); this is a measure of “heterophily”
+in social connections, the obverse of the popular construct of homophily
+(McPherson et al., 2001). Cebula also measured the number of
+organizations to which the respondent reported belonging. The primary
+outcome was a measure of “omnivorousness by composition,” constructed by
+counting the number of pairs of genres classified into two distinct
+categories (highbrow and popular) that the respondent reports liking.
+Cebula’s results are once again consistent with the NVM: Respondents
+with more acquaintances (but not stronger ties, such as friends or
+relatives) across various social positions have broader musical tastes,
+as do respondents with more heterogeneous personal networks (e.g.,
+composed of people different from themselves). Meanwhile, the frequency
+of interaction with kin ties outside the home was negatively associated
+with musical taste variety, whereas associational social capital had no
+statistically significant effect. Overall, Cebula’s work establishes an
+empirical link between heterogeneity in social network ties and the
+capacity to cross symbolic boundaries associated with cultural taste.
+
+In a more recent paper, using data from more than a thousand residents
+of Wroclaw collected in 2017, Cebula (2023) connects Erickson’s NVM with
+Schultz and Breiger’s (2010) distinction between “strong” and “weak”
+culture—proposing that weak tie network diversity should be more
+predictive of the number of “weak” cultural pursuits while strong-tie
+network diversity should predict “strong” cultural pursuits. In this
+study, strong cultural pursuits are those undertaken frequently (at
+least once a month), and weak cultural pursuits are those undertaken
+less regularly (e.g., a few times a year). As in other studies, Cebula
+constructs two indicators of network diversity: one based on the
+position generator (with reported contacts split by role relations) and
+the other on a scale of contacts who are different from the respondent.
+The basic idea is that various types of network variety (weak and
+strong) should be systematically linked to corresponding types of
+cultural variety (weak and strong, respectively). Consistent with
+expectations, Cebula finds that weak tie network diversity predicts the
+number of weak cultural engagements but not the number of “strong”
+cultural engagements. Strong-tie network diversity, on the other hand,
+predicts both strong and weak cultural engagement. The volume of
+heterophilous ties, on the other hand, predicts weak cultural
+engagements but is not correlated with strong cultural pursuits.
+
+Following along these lines, other recent work examines how different
+forms of network connectivity help predict distinct forms of cultural
+taste, a critical empirical implication of the NVM. Rather than
+conceptualizing cultural and social capital as unidimensional
+constructs, this work seeks to differentiate subtypes of cultural and
+social capital and to investigate their linkages. For instance,
+Childress and collaborators (2021) disaggregate cultural capital into
+high-status forms of taste that combine inclusiveness at the level of
+genres with discernment and exclusiveness at the level of specific
+cultural objects nested within genres (e.g., artists or songs in the
+case of music). Childress et al. hypothesize that consistent with
+Erickson’s diversity principle, people whose personal network profile
+consists of weak ties to others in diverse positions will have a wider
+variety of tastes at the genre level, while also proposing a personal
+network basis for exclusionary taste at the object level with people
+whose personal network profile consists of strong ties to others in
+high-status positions are likelier to display an exclusivist cultural
+capital profile, where exclusivity is conceptualized as having a taste
+profile biased towards objects (e.g., artist or performers) that have
+received the most institutional consecration by the designated cultural
+authorities (critics and established awards).
+
+Using data from a 2018 Qualtrics panel of American respondents and the
+position generator strategy to elicit weak and strong tie contacts in
+the personal network, Childress et al. find that, indeed, the more weak
+ties (as indicated by the acquaintance role relation) one has to people
+in different occupations, the more inclusive tastes (as given by the
+volume of likes) are at the genre level across three cultural domains
+(movies, music, and television). However, the stronger ties (as
+indicated by typing the tie as either friend or family) one has to
+people in high-status occupations, the more restricted the range of
+objects liked within each genre. This means that people with the most
+social capital (e.g., a larger number of weak ties across positions,
+combined with strong ties to people in high-status positions) display a
+taste profile that combines breadth across genres with exclusivity
+within them.
+
+Summary and Empirical Expectations
+
+In sum, recent work on the links between personal networks and culture
+provides broad support for Erickson’s NVM and the associated thesis that
+network variety (e.g., range and heterogeneity) is connected to cultural
+variety in both active cultural participation and avowed tastes (at the
+level of genres). This work also expands the scope of Erickson’s
+original model to examine variation in connectivity and range across
+distinct types of network ties, and their relation to different forms of
+cultural participation and taste. Yet, the literature suffers from three
+limitations and gaps. First, with a few exceptions, most studies
+naturally focus on participation in traditional arts and on taste for
+products emanating from traditional cultural industries (e.g., music,
+film, television, and the arts). Secondly, position and resource
+generators, along with broad-based indices of connection to dissimilar
+alters, have served as the primary means of measuring volume, range, and
+heterogeneity at the personal network level. Third, this focus on volume
+and range, and reliance on standard position and resource generators to
+measure it, may overlook or mute other forms of network composition,
+such as group-based networks, which may have independent effects on
+cultural tastes and practices.
+
+Turning to the first of these observations, in relation to which
+questions are asked and what “counts” as cultural participation in
+survey research, we know from recent work that when we limit ourselves
+to traditional forms of participation in the art and culture industry, a
+substantial proportion of the population emerges as “inactive.” This
+does not mean, however, that these people do nothing; instead, they
+engage in forms of leisure and cultural activities that are less likely
+to be captured by traditional arts- and media-based indicators. Instead,
+these “invisible” leisure and culture consumption activities tend to be
+centered at home (a situation more likely after the COVID pandemic) or
+are only tangentially related to cultural consumption as traditionally
+defined, being centered around pursuits less connected to aesthetic
+engagement and more strongly connected to activities done while alone,
+such as DIY practical pastimes (e.g., gardening), self-development and
+cultivation of the mind (e.g., listening to audiobooks or informational
+podcasts), or challenging the body via various Foucaldian technologies
+of the self (e.g., fitness) (Jarness 2015; Stillerman 2023). There is no
+ex ante reasons why these forms of leisure consumption should not be
+subject to the network effects described in the NVM. Accordingly,
+whether characteristics of the personal network relate to these more
+practical or mundane forms of leisure activity in the same way they do
+to traditional forms of arts and mediated consumption remains an open
+question. In what follows, we use a measurement strategy designed to
+capture both the conventional forms of arts and media-related
+consumption and other non-standard leisure pursuits.
+
+Secondly, the way characteristics of the personal network are measured
+and defined can also be expanded. As we have seen, the main workhorse of
+previous work has been the position generator (and, secondarily, the
+resource generator). The beauty of the position generator is that it
+provides an efficient, synoptic window into how well-connected
+individuals are within the social structure. However, in defining the
+idea of social “position” almost exclusively in terms of occupation and
+occupational status (e.g., prestige or SEI indices), the position
+generator essentially reduces social structure (in Blau’s sense) to a
+single “parameter” or dimension of association, when previous work
+suggests that the multidimensionality of cultural niches is particularly
+relevant (Mark 2003). One approach we saw in Cebula’s work is to
+supplement measures of volume and connectivity extracted from position
+generators with a set of items designed to measure connectivity across
+positions defined in non-occupational terms (e.g., gender, age, and so
+forth). In what follows, we use a novel strategy that combines the
+eliciting logic of the position generator (e.g., “how many people do you
+know who are…”) but which defines position in a broader sense beyond
+occupation to include such dimensions of association as race, sexuality,
+religion, political ideology, nationality, gender, and urban/rural
+status, while also capturing variation in the strength of the tie
+between ego and the set of people mentioned in each position.
+
+Third, adapting the position generator from an occupation-based to a
+group-based measure enables a broader conceptualization of the
+relationship between personal networks and cultural practices. This
+shift potentially extends well-established research in the NVM tradition
+by incorporating composition-oriented, group-based measures that move
+beyond social class and occupational status. For example, as we already
+know, personal networks are homophilously structured along non-class
+demographic dimensions such as age, gender, and race, and cultural
+practices and tastes are likewise segmented along these lines (McPherson
+et al. 2001). Yet existing measures have made it difficult to link these
+two observations, isolate the independent effects of group-based network
+composition on cultural practices and tastes, or assess whether such
+effects are substantively meaningful. One particularly salient
+contemporary case may concern political ideology. Cultural practices and
+tastes have become increasingly intertwined with political ideology
+(DellaPosta 2020; Shi, Kiley, and Lynn 2025), while social ties in the
+United States are also increasingly sorted along ideological lines
+(Iyengar, Sood, and Lelkes 2012; Mason 2018). What remains unclear,
+however, is whether ideological sorting within personal networks
+directly contributes to the ideological stratification of cultural
+practices themselves. In this paper, in addition to our first two
+contributions, we directly address this third question.
+
+Data and Methods
+
+Data were collected in the second two weeks of April 2025 via Prolific,
+an international, high-quality data firm (Albert and Smilek, 2023;
+Douglas, Ewell & Brauer, 2023; Peer, Rothschild, Gordon, Evernden, and
+Damer, 2021; Stagnaro et al., 2024). Respondents were selected under the
+“representative sample” option, which quotas English-speaking US
+respondents by age, gender identity, race, and political affiliation,
+and compensated at Prolific’s recommended “good” rate. Respondents who
+declined a commitment check or failed both attention checks were
+excluded from the survey, and their data were not recorded (Berinsky et
+al., 2014; Geisen, 2022). Starting from 1,258 completed surveys,
+duplicates and “speeders”—defined as spending less than 1/3rd of the
+median respondent time to complete the study (Zhang & Conrad, 2014)—were
+dropped before analyses, reducing the analytic sample size to N = 1,243.
+The data were collected as part of a larger project on cultural taste
+and arts participation.
+
+Main Outcomes
+
+Respondents were asked to report their frequency of activity for 20
+items presented in random order:
+
+  (1) Go to a museum; (2) Go to an art gallery; (3) Go to the symphony,
+  orchestra, or opera; (4) Gardening or planting; (5) Go to a carnival,
+  county fair, or amusement park; (6) Go to a music concert or festival;
+  (7) Go to a play, musical, or performance in a theater; (8) Go to the
+  library; (9) Go to a fancy restaurant; (10) Eat fast food; (11) Go for
+  a walk; (12) Go to the gym, to exercise, or do yoga; (13) Go to the
+  ballet or a dance performance; (14) Go to see a movie in the theater;
+  (15) Reading a novel, poem, or play; (16) Attend a sports game or
+  match; (17) Do home or auto repair; (18) Go hiking, camping, or
+  boating; (19) Visit a historic site or landmark; (20) Go to a
+  cultural, artistic, food, or neighborhood festival.
+
+For each item, respondents were presented with seven response
+categories:
+
+  (1) zero times/not in the past year; (2) 1 to 2 times in the past
+  year; (3) 3–5 times (every few months or so); (4) 6–11 times (every
+  other month or more); (5) 12–23 times (once or twice a month); (6)
+  24–51 times (every other week to almost every week); (7) 52 or more
+  (once a week or more).
+
+We construct our primary outcome variables for cultural consumption and
+participation from these items. To that end, we used principal component
+factor analysis and retained a three-factor solution (eigenvalues > 1;
+KMO = .958), which together explained 58.7% of the variance. We rotate
+this solution obliquely (direct oblimin) rather than orthogonally
+(varimax), since there is no substantive reason to assume that public
+arts participation, everyday solitary leisure, and residual practical
+leisure are uncorrelated with one another; oblimin lets the data, rather
+than the rotation method, determine the association among these
+dimensions. We generated cultural consumption and participation
+variables for each respondent from the predicted factor scores for each
+observation, standardized to have a mean of 0 and a standard deviation
+of 1.
+
+Public Arts Participation
+
+The first factor accounted for 42.8% of the variance. As seen in Figure
+1, Factor 1 is characterized by high levels of public arts
+participation, including symphony and opera attendance (loading = 0.88),
+dance performances (0.88), theater or musical performances (0.84), art
+galleries (0.83), live music concerts (0.82), museum visits (0.80),
+festivals (0.77), historic site visits (0.71), and movie theater
+attendance (0.69).
+
+Solitary Leisure Activities
+
+The second factor accounted for 9.1% of the variance and is
+characterized by recreational leisure activities including “going for
+walks” (loading = 0.85), exercise or athletic activities (0.49), reading
+novels (0.43), gardening (0.33), going to the library (0.33), and hiking
+(0.29). We interpret this factor as everyday solitary leisure. The third
+factor accounts for 6.8% of the variance, and we interpret it as
+essentially a residual category, with loadings on gardening (0.54), home
+auto repair (0.41), hiking or camping (0.23), and a strong negative
+loading for fast food consumption (–0.69). Because we rotate obliquely
+rather than orthogonally, we also note that all three activity factors
+are only weakly correlated with one another (|r| ≤ .25), consistent with
+treating them as substantively distinct outcomes.
+
+[Figure 1 About Here]
+
+Main Predictors
+
+The main predictors in this study are constructed from a factor analysis
+of a battery of items designed to capture the range and composition of
+the personal networks of U.S. respondents across a wide range of
+possible dimensions of association (Blau 1977) and connectivity strength
+along the classic weak-to-strong tie continuum (Granovetter 1973). To
+that end, respondents answered two network modules: one for weak ties
+and one for strong ties. The prompt for weak ties was as follows:
+
+  “We're now going to ask you some questions about all the people that
+  you are acquainted with, meaning that you know their name and would
+  stop and talk at least for a moment if you ran into the person on the
+  street or in a shopping mall. Some of these questions may seem unusual
+  but they are important to understand about social networks. How many
+  people that you are acquainted with…”
+
+The prompt for strong ties differed in the following ways:
+
+  “We're now going to ask you some questions about all the people that
+  you are close with and trust. For example, good friends, people you
+  discuss important matters with, or trust for advice, or trust with
+  money. Some of these questions may seem unusual but they are important
+  to understand about social networks. How many people that you are
+  close with and trust…”
+
+For both the weak ties and strong ties modules, respondents were asked
+to identify the number of personal connections across the following 18
+groups:
+
+(1) Are gay or lesbian or queer or transgender; (2) Attend religious
+      services on a regular basis; (3) Attend religious services rarely
+      or never; (4) Are strongly liberal; (5) Are strongly
+      conservative; (6) Are Asian or Asian American; (7) Are Hispanic or
+      Latino or Latinx; (8) Are Black or African American; (9) Are
+      white; (10) Own a second home; (11) Were born in or are from a
+      country that is not the United States; (12) Are MENA (of Middle
+      Eastern or North African descent); (13) Are Native Hawaiian or
+      Pacific Islander; (14) Are American Indian or Alaska Native; (15)
+      Live in a large city (over 250,000); (16) Live in a rural area or
+      small town (less than 50,000); (17) Are men; (18) Are women.
+
+For each group, respondents answered on the following five-point,
+ordered scale with the following options: None/0 people; 1 person; 2 to
+5 people; 6 to 10 people; more than 10 people. For both weak and strong
+ties, we similarly rely on an exploratory principal component factor
+analysis to classify items into broader classes, again rotating the
+solution obliquely (direct oblimin) rather than orthogonally (varimax):
+there is no theoretical reason to expect that knowing more ideologically
+liberal alters and knowing more ideologically conservative alters are
+uncorrelated, since both may simply reflect a respondent’s overall
+network size or sociability rather than opposite poles of a single
+ideological spectrum. In both cases, we retain three-factor solutions
+(eigenvalues > 1; KMOs = .938 for weak ties and .935 for strong ties),
+with each solution explaining approximately 61% of the total variance.
+As we did for the cultural participation and leisure activities items,
+we calculated personal network variety and composition variables for
+each respondent from the predicted factor scores. These scores are
+standardized to have a mean of zero and a standard deviation of 1.
+
+Network Variety
+
+Factor 1 explains 20.1% of the variance in the weak-tie model and 25.4%
+in the strong-tie model. Across both weak- and strong-tie networks, this
+factor loads positively across a wide range of social groups rather than
+clustering around a single category. In the weak tie model, Factor 1 is
+anchored by high loadings on knowing Native Hawaiian or Pacific Islander
+(.85), American Indian (.80), MENA (.76), and Asian (.59) individuals,
+with additional loadings on class-coded ties (second-home owners; .56)
+and immigrant-origin contacts (knowing someone born outside the U.S.;
+.45); the strong tie model shows a highly similar pattern, including
+strong loadings on Pacific Islander (.87), MENA (.84), American Indian
+(.81), Asian (.67), immigrant-origin (.62), and second-home owner (.60)
+ties. We interpret Factor 1 as capturing network variety rather than
+ties to any particular group or orientation, as we show in the
+supplementary analysis in the appendix.
+
+Network Composition
+
+In both weak and strong tie networks, Factor 2, which explains 23.9% of
+the variance for weak ties and 14.0% for strong ties, loads most
+strongly on left-leaning ideology and aligned groups. For weak ties,
+Factor 2 is anchored by knowing very liberal (.78) and LGBTQ (.76)
+individuals, those with low church attendance (.62) and Hispanic/Latine
+contacts (.62), with a secondary loading on urban ties (.56). The strong
+tie model shows a similar concentration on very liberal (.76) and LGBTQ
+(.69) ties, alongside low church attendance (.49) and urban (.45)
+contacts. In turn, Factor 3, which explains 17.3% of the variance for
+weak ties and 21.8% for strong ties, loads most strongly on conservative
+and religious social environments. In the weak tie model, this factor is
+anchored by knowing very conservative individuals (.84) and frequent
+churchgoers (.70), with secondary loadings on rural ties (.68) and
+second-home owners (.38); the strong tie model is centered on similarly
+strong loadings for knowing white (.80), very conservative (.79), women
+(.70), and frequent churchgoing (.70) contacts, alongside rural ties
+(.69), indicating that for strong ties this factor also picks up a
+broader conventional/mainstream social profile alongside political
+conservatism.
+
+We interpret Factor 3 as capturing right-leaning ideology and aligned
+groups, which remains conceptually distinct from the variety-oriented
+networks captured by Factor 1 and the liberal-aligned groups of Factor
+2, though under the oblique rotation we use here these three dimensions
+are allowed to (and do) correlate rather than being forced to
+independence: variety correlates modestly with both liberal (r = .35
+weak, .26 strong) and conservative (r = .25 weak, .44 strong)
+composition, and liberal and conservative composition are themselves
+modestly positively correlated with one another (r = .39 weak, .28
+strong) rather than negatively related, indicating that knowing more
+ideologically liberal and more ideologically conservative alters are not
+opposite poles of a single spectrum but partly co-occur, plausibly
+reflecting respondents’ overall network breadth. We thus refer to Factor
+1 as weak and strong-tie variety, and to Factors 2 and 3 as weak and
+strong-tie liberal and conservative composition.
+
+[Figure 2 About Here]
+
+Other Predictors
+
+Mutivariable models adjust for a series of possible confounders (e.g.,
+variables that could be correlated with both cultural consumption and
+the range and composition of personal networks) including gender
+identification (woman; man; non-binary/trans/other), highest educational
+degree completed (HS or less, some college, college degree, graduate
+degree) childhood arts exposure (never; very rarely; somewhat rarely;
+sometimes; somewhat frequently; very frequently; all the time), age,
+ethnoracial identity (White, Black, Hispanic/Latine, Asian
+American/Pacific Islander, mixed/other), household income (13-point
+scale), and political ideology, which is constructed on a seven point,
+liberal-to-conservative scale averaged from two separate self-reports of
+ideological placement on economic and social issues, respectively.
+Descriptive statistics and the correlation matrix are provided in the
+appendix.
+
+Results
+
+Table 1 presents OLS regression models predicting arts participation as
+a function of weak- and strong-tie network variety in Models 1 and 2,
+with measures of ideological network composition added in Models 3 and
+4; diagnostic tests indicated no problematic multicollinearity among the
+included predictors.
+
+Across all models, and consistent with the network variety model, both
+weak- and strong-tie variety predict increasing frequencies of public
+arts participation. The coefficient estimate for the strong-tie network
+variable is more than twice that for the weak-tie variable—a
+statistically significant difference (F(1, 1213) = 19.41, p <
+.001)—indicating that a diverse range of strong ties has a greater
+effect on driving public arts participation. This difference is
+illustrated in Figure 3, which plots the predicted score in the public
+arts participation factor on the y-axis as a function of the
+respondent’s score in the strong-tie (solid line) and weak-tie (dashed
+line) variety factors on the x-axis. The Figure shows that a one-unit
+increase in the strong tie variety score corresponds to roughly a
+half-standard deviation increase in arts participation, after adjusting
+for other socio-demographic factors. Note also that the effect of
+weak-tie variety is more strongly mediated by the inclusion of the
+socio-demographic factors in Model 2, and is reduced by about half
+compared to Model 1. The effect of strong tie variety on public arts
+participation, on the other hand, is almost entirely direct, with the
+estimate being only slightly lower in Model 2 than in Model 1.
+
+The statistically significant sociodemographic effects in Model 2 are
+consistent with what we would expect from previous work. Education and
+childhood exposure to the arts increase the contemporaneous frequency of
+public arts consumption. In contrast, participation in the public arts
+declines with age and is higher among self-identified white respondents
+than among AAPI (p < .001) or multiracial respondents (p = .005); the
+corresponding contrast with Hispanic/Latine respondents is in the same
+direction but only marginally significant (p = .07). Interestingly, we
+find that political ideology has a substantively small but statistically
+significant net effect: more conservative respondents report a higher
+frequency of participation in public arts than liberals. This contrasts
+with previous work that has examined the impact of political ideology on
+self-reported taste for cultural items, which generally finds that
+liberals like a broader range of cultural items (Rawlings and Childress
+2023), suggesting a disjuncture between the effects of political
+ideology on self-reported taste and participation.
+
+[Figure 3 About Here]
+
+As shown in Models 3 and 4, adding ideological network composition does
+little to attenuate the effects of network variety for either weak or
+strong ties, suggesting that the factor analyses capture distinct
+sources of variance in the personal networks of U.S. respondents. After
+adjusting for relevant sociodemographic covariates in Model 4, we find
+that weak ties to people in liberal positions are associated with lower
+levels of arts participation (b = -.13, p = .001); this is the only one
+of the four composition coefficients that reaches conventional
+significance in this model, as strong-tie liberal composition (b = -.04,
+p = .27), weak-tie conservative composition (b = .01, p = .73), and
+strong-tie conservative composition (b = .03, p = .40) are not
+statistically distinguishable from zero. Note that the direct positive
+effect of conservative political ideology on arts participation in Model
+2 (b = .03, p = .03) is nonetheless fully mediated by personal network
+composition: when ideological network composition is included in Model
+4, the coefficient estimate is now close to zero and no longer
+statistically significant (b = -.01, p = .46), suggesting that the
+greater likelihood of those who identify as conservative reporting
+higher levels of arts participation is explained by their broader
+pattern of network composition rather than any single ideological tie
+category, consistent with a homophily effect (Mark 1998; McPherson et
+al. 2001).
+
+[Table 1 About Here]
+
+Table 2 examines the network predictors of everyday solitary leisure,
+again focusing on weak- and strong-tie network variety in Models 1 and
+2, with measures of ideological network composition added in Models 3
+and 4. In contrast to public-arts models, the variety of weak- and
+strong-tie personal networks exerts countervailing influences. Across
+all specifications, weak-tie variety is positively associated with
+everyday solitary leisure, whereas strong-tie variety is negatively
+associated, net of other predictors. Substantively, a one-unit increase
+in the predicted factor score for weak-tie variety corresponds to an
+increase of approximately 0.13 to 0.21 standard deviations in solitary
+leisure across the four model specifications. In contrast, greater
+strong-tie variety is associated with a roughly 0.08 to 0.17 standard
+deviation decrease in the frequency of engagement in everyday leisure
+activities. As before, we observe a somewhat stronger mediation of the
+weak-tie variety effect by socio-demographic variables than for the
+strong-tie variety, although not to the same extent as in the public
+arts participation models. Overall, it seems that, given the strong
+positive effect of variety in strong ties on more active forms of arts
+participation, they function here as a mechanism to funnel people into
+those more public pursuits, thereby depressing participation in
+competing solitary leisure activities. Weak ties, in contrast, given
+their less demanding nature, facilitate involvement across the entire
+range of leisure and cultural consumption activities.
+
+This countervailing pattern is illustrated in Figure 4, which plots the
+predicted score in the solitary leisure factor on the y-axis as a
+function of the respondent’s score in the strong-tie (solid line) and
+weak-tie (dashed line) variety factors on the x-axis, following the same
+predicted-margins specification used for Figure 3. The two predicted
+lines cross near the sample mean of the variety factors, with weak-tie
+variety associated with higher predicted solitary leisure and strong-tie
+variety associated with lower predicted solitary leisure across the
+observed range of network variety, after adjusting for other
+socio-demographic factors.
+
+[Figure 4 About Here]
+
+Looking at Model 2, we see that the effects of other socio-demographic
+variables are similar to those observed in the public arts participation
+models, though there are also notable contrasts. Education increases the
+frequency of engagement in more solitary leisure activities, as does
+exposure to childhood arts, whose effect attenuates somewhat but remains
+statistically significant once network composition variables are
+introduced in Model 4 (b = .04, p = .02). Age does not affect solitary
+leisure, which makes sense given the less demanding nature of these
+activities compared to participation in the public arts. Higher
+household income increases solitary leisure activities (in contrast to
+its null effect on public arts participation), as does
+self-identification as a woman, consistent with previously observed
+gendering of such activities, such as gardening, yoga, and,
+particularly, fiction reading (Long 2003). Finally, we also observe a
+net effect of political ideology on solitary leisure activities, with
+liberals more likely to engage in them than conservatives.
+
+As before, adding ideological network composition does little to
+attenuate the effects of network variety. In Models 3 and 4, strong ties
+to persons in “liberal” positions are positively associated with
+everyday solitary leisure (b = .11, p = .02), and weak-tie liberal
+composition shows a positive association of similar magnitude that falls
+just short of conventional significance (b = .09, p = .06). Ties to
+conservative positions show, at most, a comparably weak positive
+association for strong ties (b = .09, p = .09) and none for weak ties (b
+= .02, p = .62), so we read this pattern cautiously as suggesting that
+liberal-leaning ties are the more consistent compositional correlate of
+solitary leisure, rather than as evidence of a sharp
+liberal/conservative asymmetry. Furthermore, as observed for public arts
+participation, the association between political ideological
+self-placement and solitary leisure in Model 2 (b = -.04, p = .01) is
+fully mediated by network composition: the Model 4 estimate falls to
+near zero and loses significance (b = -.01, p = .66), suggesting that
+the higher likelihood of liberals reporting engagement in everyday
+leisure is explained by their broader pattern of network composition
+rather than any single ideological tie category, also consistent with a
+homophily effect (Mark 1998; McPherson et al. 2001).
+
+[Table 2 About Here]
+
+As a discriminant-validity check on our network composition measures, we
+re-estimate this same four-model sequence using the third, residual
+factor from our activities battery (Table A3). This factor loads on
+gardening, home or auto repair, and hiking or camping, and negatively on
+fast food consumption, and we interpret it as capturing everyday
+DIY-practical leisure rather than engagement with the arts or with
+solitary cultural consumption. If ideological network composition
+captures something specific about cultural and leisure participation,
+rather than a generic tendency toward leisure engagement of any kind,
+its effects should not extend to this residual domain.
+
+Consistent with this expectation, none of the four composition
+coefficients approaches statistical significance in Models 3 or 4 of
+Table A3, and formal Wald tests confirm that the composition block adds
+no explanatory power over models with variety alone (χ²(4) = 4.05, p =
+.399) or over models that already include the full set of
+socio-demographic controls (χ²(4) = 7.07, p = .132). This null pattern,
+set alongside the associations we observe for public arts participation
+and solitary leisure, supports treating our composition measures as
+tapping domain-specific cultural and leisure engagement rather than an
+artifact correlated with any activity measure in the battery.
+
+[Table A3 About Here]
+
+Discussion and Concluding Remarks
+
+Research on the relationship between networks and cultural taste has
+relied heavily, and productively, on the NVM, finding across a range of
+empirical sites and contexts that variety in networks and cultural
+tastes and activities are linked. In this paper, we identify three
+potentially productive supplements to this line of research and put them
+to empirical work. Broadly, we find that for the standard suite of
+cultural activities and practices most commonly measured, the basic
+findings of the NVM are robust to a novel conceptualization of how to
+measure network variety. Yet by broadening the scope of what “counts” as
+cultural participation, we find that for more everyday, solitary leisure
+activities, network variety in weak and strong ties operates in opposing
+directions, with those with more variety in their weak ties still
+engaging in more of these cultural practices as the NVM might suggest,
+while those with more strong-tie variety engaging in them less. Taken
+together, these findings suggest that network variety may not operate as
+a uniform engine of cultural omnivorousness. We also find that network
+composition is structured mainly around political ideology and
+ideologically-aligned groups, with those with liberal-leaning weak ties
+engaging in less conventional arts participation, which those with more
+liberal strong ties, and to a lesser extent liberal weak ties, seem to
+be making up for with more everyday solitary leisure. We further show
+that these composition effects are domain-specific rather than a generic
+correlate of any activity: an identical model predicting a residual,
+practical leisure factor (e.g., gardening or home repair) unrelated to
+arts or cultural consumption shows no association with network
+composition, supporting our interpretation of ideological sorting as a
+mechanism specific to cultural and leisure engagement rather than an
+artifact of general sociability. In what follows, we discuss these
+potential contributions in more detail, our limitations, and ideas for
+future research.
+With respect to cultural participation, expanding the analytic scope
+beyond conventional attendance-based measures reveals distinct
+configurations that have previously been obscured in the literature.
+That individuals with greater strong-tie variety engage in fewer
+solitary leisure activities is perhaps unsurprising, yet this pattern
+challenges an implicit assumption in the literature that greater network
+variety uniformly corresponds to greater cultural participation; a “more
+is more” assumption implicit in the NVM. More broadly, we believe
+attendance-based measures of cultural participation have (at least in
+part) achieved prominence not because of their theoretical centrality,
+but because of their close alignment with state cultural policy and
+public funding infrastructures. Our findings suggest that some
+individuals otherwise classified as culturally “inactive” may instead be
+differently active in domains that standard attendance-based measures
+fail to capture. While these cultural practices may be of less interest
+to tourism boards, asking about them reveals interesting patterns of
+network associations both within and beyond the scope of the NVM. The
+problem is further compounded by a heavy reliance on participation in
+highbrow fine arts, forms that have experienced long-term decline due to
+limited cohort replacement (Peterson and Rossman 2012), thereby possibly
+inflating the number of misclassified “inactives.” This observation
+echoes Bourdieu’s (1993) observation that defining the boundaries of
+legitimate cultural activity is a fundamentally political, rather than
+purely intellectual, act. While boundaries around what counts as
+cultural participation undoubtedly exist, they remain under-theorized
+and insufficiently specified. We view our contribution on this front as
+necessarily modest, but suggest that future research must engage this
+issue more deliberately and systematically.
+Likewise, an overreliance on position- and resource-based generators has
+facilitated comparisons across studies but may also have narrowed the
+conceptualization of network variety. Incorporating position generators
+that use sociodemographic group–based measures may offer several
+advantages. First, group-based position generators better align with how
+variation is theorized across many sociological subfields, where
+diversity is typically defined in terms of sociodemographic groups
+rather than occupational positions (Blau 1977; McPherson et al. 2001;
+Mark 2003). In this respect, the continued reliance on occupations to
+measure network variety is increasingly out of step with how variety and
+diversity are more broadly conceptualized in sociology, which (perhaps
+unfortunately) privileges identity-based distinctions while sidelining
+class and economic heterogeneity (Childress and Lizardo 2026). Second,
+sociodemographic group–based measures provide greater theoretical
+leverage for understanding cultural participation and taste. For
+example, networks composed primarily of particular occupations (e.g.,
+lawyers or carpenters) are comparatively limited in what they reveal
+about social segmentation in cultural practices. In contrast, networks
+structured more explicitly along class, racial, gendered, or ideological
+lines may more directly map onto the symbolic boundaries that organize
+cultural engagement. Again, this is not to suggest that we have
+identified the correct group-based measures, nor that occupation-based
+and group-based position generators should be treated as equivalent in a
+pro forma sense. Instead, we argue that further investigation along
+these lines is both warranted and necessary.
+Finally, our findings contribute to the growing literature on cultural
+tastes and the ideological segmentation of everyday life by
+demonstrating that ideological sorting within personal networks affects
+cultural participation and leisure practices. To our knowledge, this is
+the first study to show that ideological network composition plays a
+central role in structuring cultural engagement. Whereas prior research
+has treated political ideology primarily as an individual attribute, our
+results indicate that the relationship between ideology and cultural
+participation operates mainly through patterned social environments.
+Across both cultural domains we examine, the direct association between
+respondents’ ideological self-placement and participation is fully
+mediated by personal network composition, suggesting that cultural
+stratification is organized relationally rather than dispositionally
+(Crossley 2015; Emirbayer 1997). In this respect, our findings parallel
+a core insight of the network variety model: just as the correlation
+between markers of social position and cultural omnivorousness is partly
+spurious when network variety is unobserved, recently documented
+associations between political ideology and cultural tastes may likewise
+be overstated when ideological sorting in personal networks is not taken
+into account (DellaPosta et al. 2015). This raises the possibility that
+patterns often attributed to core psychological differences between
+liberals and conservatives (e.g., Jost, 2021) are, at least in part,
+rooted in social structure.
+Our finding that weak ties to liberals are associated with lower levels
+of conventional arts participation likely reflects that our arts
+participation factor loads most heavily on conventionally highbrow
+activities (e.g., ballet or dance performances, theater, and symphony or
+opera). As prior work shows, liberals tend to express broader tastes
+across cultural objects and to invest in variety as a marker of cultural
+capital (Rawlings and Childress 2023; Rogers and Jost 2022), whereas
+conventional highbrow cultural forms have increasingly come to be
+appreciated (and defended) as legitimate culture by conservatives
+(Purhonen and Heikkilä 2016). More broadly, these findings suggest that
+network-based ideological sorting provides a promising bridge between
+research on cultural taste and emerging frameworks on affective
+polarization, in which cultural participation practices function as
+sites through which ideological social boundaries are enacted and
+reproduced.
+Taken together, we believe the NVM remains a highly relevant and robust
+summation of the relationship between social networks and cultural
+taste. We see our work as adding to the NVM tradition by expanding its
+scope into unexplored terrain: by simultaneously accounting for both
+variety and composition in networks when studying cultural practices and
+tastes, and by broadening the range of cultural activities and practices
+under consideration. We also note that the relationship between networks
+and taste may be structured by previously unconsidered factors, such as
+the ideological composition of networks. We believe this may be
+particularly worthy of further investigation.
+
+ 
+
+References
+
+Albert, Derek A., and Daniel Smilek. 2023. “Comparing Attentional
+Disengagement between Prolific and MTurk Samples.” Scientific Reports
+13(1):20574.
+
+Berinsky, Adam J., Michele F. Margolis, and Michael W. Sances. 2014.
+“Separating the Shirkers from the Workers? Making Sure Respondents Pay
+Attention on Self-Administered Surveys.” American Journal of Political
+Science 58(3):739–53.
+
+Blau, Peter M. 1977. “A Macrosociological Theory of Social Structure.”
+American Journal of Sociology 83(1):26–54.
+
+Bourdieu, Pierre. 1993. The Field of Cultural Production: Essays on Art
+and Literature. Columbia University Press.
+
+Cebula, Michał. 2015. “Beyond Economic and Cultural Capital: Network
+Correlates of Consumption Tastes and Practices.” Polish Sociological
+Review 192(4):455–74.
+
+Cebula, Michał. 2019. “Beyond Social Class and Status. The Network
+Embeddedness of Music Consumption.” Przegląd Socjologiczny 68(2):81–105.
+
+Cebula, Michał. 2023. “Social Class, Social Networks and Variety of Weak
+and Strong Practices.” Sociology Compass 17(10):e13124.
+
+Cebula, Michał. 2024. “The Structure of Social Capital and Cultural
+Participation: A Cross-Sectional Study.” Sociological Perspectives
+67(1–3):173–95.
+
+Childress, Clayton, Shyon Baumann, Craig M. Rawlings, and Jean-François
+Nault. 2021. “Genres, Objects, and the Contemporary Expression of
+Higher-Status Tastes.” Sociological Science 8:230–64.
+
+Childress, Clayton, and Omar Lizardo. Forthcoming. “Diversity as a
+Dominant Social Value.” Annual Review of Sociology.
+
+Collins, Randall. 2004. Interaction Ritual Chains. Princeton University
+Press.
+
+Crossley, Nick. 2015. “Relational Sociology and Culture: A Preliminary
+Framework.” International Review of Sociology 25(1):65–85.
+
+DellaPosta, Daniel. 2020. “Pluralistic Collapse: The ‘Oil Spill’ Model
+of Mass Opinion Polarization.” American Sociological Review
+85(3):507–36.
+
+DellaPosta, Daniel, Yongren Shi, and Michael Macy. 2015. "Why do L
+iberals Drink Lattes?" American Journal of Sociology 120(5): 1473-1511.
+
+Douglas, Benjamin D., Patrick J. Ewell, and Markus Brauer. 2023. “Data
+Quality in Online Human-Subjects Research: Comparisons between MTurk,
+Prolific, CloudResearch, Qualtrics, and SONA.” PLOS ONE 18(3):e0279720.
+
+Emirbayer, Mustafa. 1997. “Manifesto for a Relational Sociology.”
+American Journal of Sociology 103(2):281–317.
+
+Erickson, Bonnie H. 1996. “Culture, Class, and Connections.” American
+Journal of Sociology 102(1):217–51.
+
+Garrett, Sarah B. 2016. “Foundations of the Cultural Repertoire:
+Education and Social Network Effects among Expectant Mothers.” Poetics
+55:19–35.
+
+Geisen, Emily. 2022. “Using Attention Checks in Your Surveys May Harm
+Data Quality.”
+
+Granovetter, Mark S. 1973. “The Strength of Weak Ties.” American Journal
+of Sociology 78(6):1360–80.
+
+Iyengar, Shanto, Gaurav Sood, and Yphtach Lelkes. 2012. “Affect, Not
+Ideology: A Social Identity Perspective on Polarization.” Public Opinion
+Quarterly 76(3):405–31.
+
+Jarness, Vegard. 2015. “Modes of Consumption: From ‘What’ to ‘How’ in
+Cultural Stratification Research.” Poetics 53:65–79.
+
+Jost, John T. 2021. Left and Right: The Psychological Significance of a
+Political Distinction. Oxford University Press.
+
+Kane, Danielle. 2004. “A Network Approach to the Puzzle of Women’s
+Cultural Participation.” Poetics 32(2):105–27.
+
+Lin, Nan, Yang-chih Fu, and Ray-May Hsung. 2001. “The Position
+Generator: Measurement Techniques for Investigations of Social Capital.”
+In Social Capital. Routledge.
+
+Lizardo, Omar. 2006. “How Cultural Tastes Shape Personal Networks.”
+American Sociological Review 71(5):778–807.
+
+Long, Elizabeth. 2003. Book Clubs: Women and the Uses of Reading in
+Everyday Life. University of Chicago Press.
+
+Mark, Noah. 1998. “Birds of a Feather Sing Together.” Social Forces
+77(2):453–85.
+
+Mark, Noah P. 2003. “Culture and Competition: Homophily and Distancing
+Explanations for Cultural Niches.” American Sociological Review
+68(3):319–45.
+
+Mason, Lilliana. 2018. Uncivil Agreement: How Politics Became Our
+Identity. University of Chicago Press.
+
+McPherson, Miller, Lynn Smith-Lovin, and James M. Cook. 2001. “Birds of
+a Feather: Homophily in Social Networks.” Annual Review of Sociology
+27:415–44.
+
+Peer, Eyal, David Rothschild, Andrew Gordon, Zak Evernden, and Ekaterina
+Damer. 2022. “Data Quality of Platforms and Panels for Online Behavioral
+Research.” Behavior Research Methods 54(4):1643–62.
+
+Peterson, Richard A., and Gabriel Rossman. 2008. “Changing Arts
+Audiences: Capitalizing on Omnivorousness.” In Engaging Art. Routledge.
+
+Purhonen, Semi, and Riie Heikkilä. 2017. “Food, Music and Politics: The
+Interweaving of Culinary Taste Patterns, ‘Highbrow’ Musical Taste and
+Conservative Attitudes in Finland.” Social Science Information
+56(1):74–97.
+
+Putnam, Robert D. 2001. Bowling Alone: The Collapse and Revival of
+American Community. Simon & Schuster.
+
+Rawlings, Craig M., and Clayton Childress. 2023. “The Polarization of
+Popular Culture: Tracing the Size, Shape, and Depth of the Oil Spill.”
+Social Forces 102(4):1582–1607.
+
+Relish, Michael. 1997. “It’s Not All Education: Network Measures as
+Sources of Cultural Competency.” Poetics 25(2):121–39.
+
+Rogers, Nick, and John T. Jost. 2022. “Liberals as Cultural Omnivores.”
+Journal of the Association for Consumer Research 7(3):255–65.
+
+Schultz, Jennifer, and Ronald L. Breiger. 2010. “The Strength of Weak
+Culture.” Poetics 38(6):610–24.
+
+Shi, Yongren, Kevin Kiley, and Freda B. Lynn. 2025. “Beyond Statistical
+Variables: Examining the Duality of Persons and Groups in Structuring
+Cultural Space.” Poetics 108:101967.
+
+Stagnaro, Michael Nicholas, James N. Druckman, Antonio Alonso Arechar,
+Robb Willer, and David G. Rand. 2024. “Representativeness Versus
+Attentiveness: A Comparison Across Nine Online Survey Samples.”
+
+Stillerman, Joel. 2023. Identity Investments: Middle-Class Responses to
+Precarious Privilege in Neoliberal Chile. Stanford University Press.
+
+Van der Gaag, Martin, and Tom A. B. Snijders. 2005. “The Resource
+Generator: Social Capital Quantification with Concrete Items.” Social
+Networks 27(1):1–29.
+
+Warde, Alan, and Gindo Tampubolon. 2002. “Social Capital, Networks and
+Leisure Consumption.” The Sociological Review 50(2):155–80.
+
+Widdop, Paul. 2014. “Music Consumption: Networks and Omnivorism.” In
+Social Networks and Music Worlds. Routledge.
+
+Zhang, Chan, and Frederick Conrad. 2014. “Speeding in Web Surveys: The
+Tendency to Answer Very Fast and Its Association with Straightlining.”
+Survey Research Methods 8(2):127–35.
+
+Figures[]
+
+Figure 1. Heat Map of Factor Loadings for Activities and Practices
+
+[]
+
+Figure 2. Heat Map of Factor Loadings for Weak and Strong Ties
+
+[]
+Figure 3. Weak and Strong Tie Network Variety on Arts Participation
+
+[]
+Figure 4. Weak and Strong Tie Network Variety on Solitary Leisure
+
+Tables
+
+Table 1. Coefficient Estimates of the Effects of Strong and Weak Tie
+Network Variety and Composition on Public Arts Participation Factor.[]
+
+[]Table 2. Coefficient Estimates of the Effects of Strong and Weak Tie
+Network Variety and Composition on Solitary Leisure Activities Factor.
+
+APPENDIX
+
+[]Figure A1. Correlation Heat Map of Continuous and Ordinal Predictor
+Variables.
+
+Table A1. Descriptive Statistics of the Variables Used in the Analysis.
+
+[]
+
+Network Variety
+
+To further assess the interpretation of Factor 1 as capturing network
+variety, we examined its association with independently constructed
+variety count measures of the number of distinct social groups
+respondents reported knowing. Variety counts were calculated as the
+number of groups for which respondents reported knowing at least one
+person, and in Table A2, associations are reported as Pearson
+correlations. For strong ties, the network variety factor remains the
+most strongly correlated of the three factors with these observed counts
+(r = .79, versus .54 and .73 for liberal and conservative composition,
+respectively). For weak ties, this discriminant pattern is less clean
+under the oblique rotation: the liberal-composition factor correlates
+about as strongly with the raw group count (r = .76) as does the variety
+factor itself (r = .70), and conservative composition is not far behind
+(r = .62). This is an expected consequence of allowing the three
+weak-tie factors to correlate rather than forcing them to independence:
+respondents with broader weak-tie networks tend to know more people
+across all eighteen groups, including ideologically-coded ones, so the
+ideological composition factors partly track sheer network breadth as
+well as ideological content. Results are substantively similar when
+using a stricter threshold that requires respondents to report knowing
+two or more people in a given group. We therefore read Factor 1 as
+capturing cross-group breadth most cleanly for strong ties, while for
+weak ties this validation check is suggestive rather than conclusive,
+and we interpret the weak-tie composition estimates in Tables 1–2 and A3
+accordingly.
+
+Table A2. Correlation Matrix of Factor Scores for Strong and Weak Tie
+Network Variety and Composition with the Count of Positions Respondents
+are Connected to.
+
+[]
+
+Table A3. Coefficient Estimates of the Effects of Strong and Weak Tie
+Network Variety and Composition on the Residual Factor.
+
+[]
+
+[1] Coauthorship is equal.
+
+[2] The position generator (see Lin et al., 2001) is a network,
+amembershipnd social capital survey interview elicitation technique in
+which respondents are presented with a list of social positions
+(typically occupational titles, such as doctors, lawyers, plumbers,
+nurses, carpenters) and are then asked whether they know someone in that
+position as well as other characteristics of the contact (e.g., gender,
+race, type of tie).
+
+[3] The resource generator (see Van Der Gaag & Snijders, 2 005) is a
+variation of the position generator strategy in which respondents are
+asked whether they have contacts who can help with various requests,
+problems, or services. This approach taps the extent to which resources
+are embedded in a person’s network, allowing access in times of need.

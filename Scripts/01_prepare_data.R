@@ -27,18 +27,10 @@ suppressPackageStartupMessages({
   library(GPArotation)
 })
 
-# NOTE ON ROTATION (September 2026): we use an oblique (direct oblimin)
-# rather than orthogonal (varimax) rotation for all three factor models.
-# Varimax imposes zero correlation between rotated factors by construction
-# (e.g., forcing weak-tie Liberal and Conservative Composition to be
-# statistically independent), which is a strong assumption with no
-# theoretical warrant here: knowing more people who hold a given ideology
-# is plausibly correlated with knowing more people who hold the opposing
-# one (both partly reflect a respondent's general sociability/network
-# size), and there is no substantive reason cultural-participation factors
-# (arts vs. solitary leisure vs. residual/DIY leisure) should be exactly
-# uncorrelated either. Oblimin lets the data determine the correlations
-# among factors rather than assuming them away.
+# NOTE ON ROTATION (reverted to varimax, September 2026): all three factor
+# models use orthogonal (varimax) rotation. An oblimin (oblique) variant
+# was tried and is documented in project memory/git history, but the
+# analysis has been reverted to the original varimax specification.
 
 dir.create("cache", showWarnings = FALSE, recursive = TRUE)
 
@@ -49,7 +41,7 @@ message(sprintf("  Loaded %d respondents, %d columns.", nrow(df), ncol(df)))
 # ------------------------------------------------------------------------
 # 1. Activities / leisure factor model (Table A2, Figure 1)
 # ------------------------------------------------------------------------
-message("[2/4] Fitting 3-factor PCA (oblimin) on 20 activity items...")
+message("[2/4] Fitting 3-factor PCA (varimax) on 20 activity items...")
 
 activity_items <- c(
   "museum", "art_gallery", "symphony_orchestra_opera", "gardening",
@@ -61,18 +53,17 @@ activity_items <- c(
 )
 
 act_df <- as.data.frame(df[activity_items])
-act_fa <- principal(act_df, nfactors = 3, rotate = "oblimin", scores = TRUE)
+act_fa <- principal(act_df, nfactors = 3, rotate = "varimax", scores = TRUE)
 
 # Identify which rotated component corresponds to each substantive factor
 # by looking at where theoretically anchoring items load highest, rather
 # than assuming a fixed column order (rotated column order is arbitrary
-# and can differ across software/runs). Under oblimin the residual factor
-# is not guaranteed to carry a *negative* fast-food loading the way it
-# does under varimax (the sign/orientation of an oblique axis is not tied
-# to any single item), so we identify it as whichever remaining factor
-# has the largest absolute loading on fast food, then orient its sign
-# after the fact to match the substantive interpretation (positive on
-# gardening/home-repair, negative on fast food).
+# and can differ across software/runs). We still identify the residual
+# factor as whichever remaining factor has the largest absolute loading
+# on fast food, then orient its sign to match the substantive
+# interpretation (positive on gardening/home-repair, negative on fast
+# food) -- under varimax this sign is typically already correct, but the
+# check is kept as a no-op-safe guard rather than assumed.
 act_loadings <- unclass(act_fa$loadings)
 leisure_id  <- unname(which.max(colMeans(act_loadings[c("go_for_walk", "exercise_or_yoga"), ])))
 remaining_id <- setdiff(1:3, leisure_id)
@@ -92,8 +83,10 @@ if (act_loadings["fast_food", act_factor_id["residual"]] > 0) {
   r <- act_factor_id["residual"]
   act_fa$loadings[, r] <- -act_fa$loadings[, r]
   act_fa$scores[, r]   <- -act_fa$scores[, r]
-  act_fa$Phi[, r] <- -act_fa$Phi[, r]
-  act_fa$Phi[r, ] <- -act_fa$Phi[r, ]
+  if (!is.null(act_fa$Phi)) {
+    act_fa$Phi[, r] <- -act_fa$Phi[, r]
+    act_fa$Phi[r, ] <- -act_fa$Phi[r, ]
+  }
   act_loadings <- unclass(act_fa$loadings)
 }
 
@@ -103,12 +96,22 @@ df$residual_leisure    <- act_fa$scores[, act_factor_id["residual"]]
 
 act_kmo <- KMO(cor(act_df, use = "complete.obs"))$MSA
 act_var_explained <- act_fa$Vaccounted["Cumulative Var", 3]
-act_phi <- { p <- act_fa$Phi; rownames(p) <- colnames(p) <- names(act_factor_id)[match(seq_len(3), act_factor_id)]; p[names(act_factor_id), names(act_factor_id)] }
+# Under varimax, factors are orthogonal by construction (Phi = identity,
+# so act_fa$Phi is NULL); fall back to an explicit identity matrix so
+# downstream code that reads act_phi keeps working.
+act_phi <- if (!is.null(act_fa$Phi)) {
+  p <- act_fa$Phi
+  rownames(p) <- colnames(p) <- names(act_factor_id)[match(seq_len(3), act_factor_id)]
+  p[names(act_factor_id), names(act_factor_id)]
+} else {
+  nm <- names(act_factor_id)[match(seq_len(3), act_factor_id)]
+  diag(3) |> `dimnames<-`(list(nm, nm))
+}
 
 # ------------------------------------------------------------------------
 # 2. Network tie factor models (Table A3, Figure 2)
 # ------------------------------------------------------------------------
-message("[3/4] Fitting 3-factor PCA (oblimin) on weak- and strong-tie items...")
+message("[3/4] Fitting 3-factor PCA (varimax) on weak- and strong-tie items...")
 
 network_weak_items <- c(
   "KnowLGBTQ_weak", "KnowLotsaChurch_weak", "KnowLittleChurch_weak", "KnowVeryLib_weak",
@@ -132,7 +135,7 @@ label_tie_factors <- function(loadings_mat, suffix) {
 
 fit_tie_factors <- function(items, suffix) {
   item_df <- as.data.frame(df[items])
-  fa <- principal(item_df, nfactors = 3, rotate = "oblimin", scores = TRUE)
+  fa <- principal(item_df, nfactors = 3, rotate = "varimax", scores = TRUE)
   idx <- label_tie_factors(unclass(fa$loadings), suffix)
   stopifnot(length(unique(idx)) == 3)
   list(
@@ -140,9 +143,17 @@ fit_tie_factors <- function(items, suffix) {
     idx = idx,
     kmo = KMO(cor(item_df, use = "complete.obs"))$MSA,
     var_explained = fa$Vaccounted["Cumulative Var", 3],
-    # Inter-factor correlations (Phi) implied by the oblimin rotation,
-    # relabeled to the substantive factor names for direct reporting.
-    phi = { p <- fa$Phi; rownames(p) <- colnames(p) <- names(idx)[match(seq_len(3), idx)]; p[names(idx), names(idx)] }
+    # Inter-factor correlations (Phi); under varimax these are 0 by
+    # construction (fa$Phi is NULL), so fall back to an explicit identity
+    # matrix so downstream code reading `phi` keeps working.
+    phi = if (!is.null(fa$Phi)) {
+      p <- fa$Phi
+      rownames(p) <- colnames(p) <- names(idx)[match(seq_len(3), idx)]
+      p[names(idx), names(idx)]
+    } else {
+      nm <- names(idx)[match(seq_len(3), idx)]
+      diag(3) |> `dimnames<-`(list(nm, nm))
+    }
   )
 }
 

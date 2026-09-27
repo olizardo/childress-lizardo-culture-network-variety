@@ -31,6 +31,7 @@
 # ---------------------------------------------------------------------
 
 suppressPackageStartupMessages(library(stringr))
+suppressPackageStartupMessages(library(estimatr))
 
 args <- commandArgs(trailingOnly = TRUE)
 force_pull <- "--pull" %in% args

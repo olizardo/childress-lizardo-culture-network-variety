@@ -2,21 +2,21 @@
 
 | Item | Variety | Liberal Composition | Conservative Composition |
 |---|---|---|---|
-| KnowLGBTQ |  0.27 |  0.69 | -0.05 |
-| KnowLotsaChurch |  0.26 | -0.18 |  0.70 |
-| KnowLittleChurch | -0.06 |  0.49 |  0.45 |
-| KnowVeryLib |  0.11 |  0.76 |  0.10 |
-| KnowVeryCons |  0.17 | -0.32 |  0.79 |
-| KnowAsianppl |  0.67 |  0.22 |  0.02 |
-| KnowHispanixppl |  0.54 |  0.35 |  0.04 |
-| KnowBlackppl |  0.52 |  0.21 |  0.21 |
-| KnowWhiteppl | -0.13 |  0.21 |  0.80 |
-| Know2ndHome |  0.60 | -0.14 |  0.29 |
-| KnowBornElsewhere |  0.62 |  0.26 |  0.05 |
-| KnowMENAppl |  0.84 |  0.05 | -0.03 |
-| KnowHawaiiPI |  0.87 | -0.04 | -0.08 |
-| KnowAmIndianppl |  0.81 | -0.11 |  0.05 |
-| KnowCityppl |  0.27 |  0.45 |  0.22 |
-| KnowRuralppl | -0.02 | -0.02 |  0.69 |
-| Knowwomen |  0.05 |  0.22 |  0.70 |
-| Knowmen | -0.01 |  0.40 |  0.65 |
+| KnowLGBTQ | 0.29 |  0.72 | 0.01 |
+| KnowLotsaChurch | 0.38 |  0.05 | 0.71 |
+| KnowLittleChurch | 0.07 |  0.59 | 0.41 |
+| KnowVeryLib | 0.17 |  0.81 | 0.11 |
+| KnowVeryCons | 0.31 | -0.08 | 0.78 |
+| KnowAsianppl | 0.66 |  0.36 | 0.15 |
+| KnowHispanixppl | 0.54 |  0.46 | 0.14 |
+| KnowBlackppl | 0.55 |  0.37 | 0.30 |
+| KnowWhiteppl | 0.05 |  0.39 | 0.73 |
+| Know2ndHome | 0.63 |  0.05 | 0.39 |
+| KnowBornElsewhere | 0.63 |  0.40 | 0.18 |
+| KnowMENAppl | 0.80 |  0.21 | 0.14 |
+| KnowHawaiiPI | 0.81 |  0.12 | 0.10 |
+| KnowAmIndianppl | 0.78 |  0.07 | 0.21 |
+| KnowCityppl | 0.33 |  0.56 | 0.26 |
+| KnowRuralppl | 0.12 |  0.15 | 0.65 |
+| Knowwomen | 0.21 |  0.42 | 0.67 |
+| Knowmen | 0.15 |  0.56 | 0.61 |

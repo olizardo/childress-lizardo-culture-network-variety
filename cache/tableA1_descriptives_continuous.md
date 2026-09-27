@@ -4,10 +4,10 @@
 |---|---|---|
 | Public Arts Participation (factor score) | 0.00 (1.00) | 1243 |
 | Solitary Leisure (factor score) | -0.00 (1.00) | 1243 |
-| Weak-Tie Variety (factor score) | 0.00 (1.00) | 1258 |
+| Weak-Tie Variety (factor score) | -0.00 (1.00) | 1258 |
 | Strong-Tie Variety (factor score) | -0.00 (1.00) | 1258 |
 | Weak-Tie Liberal Composition (factor score) | 0.00 (1.00) | 1258 |
-| Weak-Tie Conservative Composition (factor score) | 0.00 (1.00) | 1258 |
+| Weak-Tie Conservative Composition (factor score) | -0.00 (1.00) | 1258 |
 | Strong-Tie Liberal Composition (factor score) | 0.00 (1.00) | 1258 |
 | Strong-Tie Conservative Composition (factor score) | -0.00 (1.00) | 1258 |
 | Age (years) | 43.96 (15.73) | 1229 |
