@@ -43,34 +43,65 @@ W = NS["w"]
 WP = NS["wp"]
 R_EMBED = "{%s}embed" % NS["r"]
 
+# Re-registering the document's namespace prefixes before serialization
+# keeps ET.tostring() from renaming them to auto-generated ns0:/ns1:/...
+# prefixes. That's technically valid XML, but pandoc's docx reader (used
+# for validation elsewhere in this project's tooling) fails to parse it --
+# see Scripts/docx_text_edits.py's module docstring for the full story.
+for _prefix, _uri in [
+    ("w", NS["w"]),
+    ("w14", "http://schemas.microsoft.com/office/word/2010/wordml"),
+    ("r", NS["r"]),
+    ("wp", NS["wp"]),
+    ("a", NS["a"]),
+    ("pic", "http://schemas.openxmlformats.org/drawingml/2006/picture"),
+]:
+    ET.register_namespace(_prefix, _uri)
+
 EMU_PER_IN = 914400
 W_MAX = int(6.5 * EMU_PER_IN)   # full printable width, Letter/1in margins
 H_MAX = int(7.2 * EMU_PER_IN)   # leaves ~1.8in headroom per page for a
                                  # heading, caption, and blank spacer lines
 
 # caption text prefix (log only) -> (relationship ID, source PNG)
+#
+# NOTE (September 2026): re-derived from scratch by content inspection
+# (not adjacency -- see AGENTS.md Section 4) after a fresh download
+# showed Google Docs had reassigned every single rId since the last
+# edit, independent of the Table A2/A3 removal or Figure 4 insertion
+# content changes. Table A2 (activity item loadings) and Table A3
+# (weak-/strong-tie item loadings) were removed from the live document
+# -- see Scripts/remove_tableA2_A3_renumber.py -- because they
+# duplicated the loading matrices already shown as heat maps in Figure 1
+# and Figure 2. The surviving appendix table (formerly Table A5) was
+# renumbered to Table A2; its asset was renamed to
+# tableA2_variety_validation.png. Figure 4 was added via
+# Scripts/insert_figure4.py.
+#
+# Re-verify this map against a fresh download before every future run --
+# do not assume it is still current even if nothing was edited since.
 IMAGE_MAP = {
     "Figure 1":  ("rId9",  "Plots/fig1_activity_loadings_heatmap.png"),
     "Figure 2":  ("rId10", "Plots/fig2_network_loadings_heatmap.png"),
     "Figure 3":  ("rId11", "Plots/fig3_variety_margins_plot.png"),
-    "Table 1":   ("rId12", "Plots/table1_arts_participation.png"),
-    "Table 2":   ("rId13", "Plots/table2_solitary_leisure.png"),
-    "Table 3":   ("rId19", "Plots/table3_residual_leisure.png"),
-    "Table A1":  ("rId14", "Plots/tableA1_descriptives.png"),
-    "Table A2":  ("rId15", "Plots/tableA2_activity_loadings.png"),
-    "Table A3":  ("rId16", "Plots/tableA3_tie_loadings.png"),
-    "Table A4":  ("rId17", "Plots/figA1_predictor_correlation_heatmap.png"),
-    "Table A5":  ("rId18", "Plots/tableA5_variety_validation.png"),
+    "Figure 4":  ("rId12", "Plots/fig4_leisure_variety_margins_plot.png"),
+    "Table 1":   ("rId13", "Plots/table1_arts_participation.png"),
+    "Table 2":   ("rId14", "Plots/table2_solitary_leisure.png"),
+    "Table A1":  ("rId15", "Plots/tableA1_descriptives.png"),
+    "Table A4":  ("rId16", "Plots/figA1_predictor_correlation_heatmap.png"),
+    "Table A2 (fka A5)": ("rId17", "Plots/tableA2_variety_validation.png"),
+    "Table 3":   ("rId18", "Plots/table3_residual_leisure.png"),
 }
 
 # Exact caption-paragraph text (or unique prefix) that needs an explicit
 # pageBreakBefore so it starts a fresh page.
 PAGE_BREAK_BEFORE_PREFIXES = [
+    "Figure 4. Weak and Strong Tie Network Variety on Solitary Leisure",
     "Table 2. Coefficient Estimates",
     "Table 3. Coefficient Estimates",
     "APPENDIX",
     "Figure A4. Correlation Heat Map",
-    "Table A5. Correlation Matrix of Factor Scores",
+    "Table A2. Correlation Matrix of Factor Scores",
 ]
 
 

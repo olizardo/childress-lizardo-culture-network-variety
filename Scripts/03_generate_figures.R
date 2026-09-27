@@ -1,11 +1,14 @@
 #!/usr/bin/env Rscript
 # Scripts/03_generate_figures.R
 #
-# Generates the three publication figures at 6.5 in width, 300 DPI:
+# Generates the publication figures at 6.5 in width, 300 DPI:
 #   Figure 1: Heat map of factor loadings for activities and practices
 #   Figure 2: Heat map of factor loadings for weak and strong ties
 #   Figure 3: Weak- and strong-tie network variety on arts participation
 #             (predicted margins from Table 1, Model 2)
+#   Figure 4: Weak- and strong-tie network variety on solitary leisure
+#             (predicted margins from Table 2, Model 2) -- countervailing
+#             (opposite-signed) effects, mirroring Figure 3's layout
 
 suppressPackageStartupMessages({
   library(dplyr)
@@ -140,13 +143,68 @@ fig3 <- ggplot(fig3_dat, aes(x = x, y = fit, linetype = tie)) +
 ggsave("Plots/fig3_variety_margins_plot.png", fig3, width = 6.5, height = 5, dpi = 300)
 
 # ------------------------------------------------------------------------
+# Figure 4: Predicted solitary leisure by weak/strong-tie variety
+# (countervailing effects: weak-tie variety predicts *more* solitary
+# leisure while strong-tie variety predicts *less*, holding the other
+# tie's variety at 0 and covariates at reference values -- same layout
+# and prediction-grid logic as Figure 3, applied to Table 2, Model 2.)
+# ------------------------------------------------------------------------
+message("[4/5] Building Figure 4 (solitary leisure predicted margins plot)...")
+
+m2_leisure <- mods$leisure_models$m2
+
+make_pred_grid_leisure <- function(varying_var, other_var) {
+  base <- mdat[1, , drop = FALSE]
+  base$gender_f   <- factor("Woman", levels = levels(mdat$gender_f))
+  base$educ_cat   <- factor("College degree", levels = levels(mdat$educ_cat))
+  base$race_f     <- factor("white", levels = levels(mdat$race_f))
+  base$child_arts <- mean(mdat$child_arts)
+  base$income     <- mean(mdat$income)
+  base$age2       <- mean(mdat$age2)
+  base$poli       <- mean(mdat$poli)
+
+  newdat <- base[rep(1, length(grid_range)), ]
+  newdat[[varying_var]] <- grid_range
+  newdat[[other_var]] <- 0
+  pred <- predict(m2_leisure, newdata = newdat, se.fit = TRUE)
+  data.frame(
+    x = grid_range,
+    fit = pred$fit,
+    lo = pred$fit - 1.96 * pred$se.fit,
+    hi = pred$fit + 1.96 * pred$se.fit,
+    tie = varying_var
+  )
+}
+
+fig4_dat <- bind_rows(
+  make_pred_grid_leisure("strong_variety", "weak_variety"),
+  make_pred_grid_leisure("weak_variety", "strong_variety")
+) |>
+  mutate(tie = factor(tie, levels = c("strong_variety", "weak_variety"),
+                       labels = c("Strong-Tie Variety", "Weak-Tie Variety")))
+
+fig4 <- ggplot(fig4_dat, aes(x = x, y = fit, linetype = tie)) +
+  geom_ribbon(aes(ymin = lo, ymax = hi), alpha = 0.15, color = NA) +
+  geom_line(linewidth = 0.9) +
+  geom_hline(yintercept = 0, linetype = "dotted", color = "gray50", linewidth = 0.4) +
+  scale_linetype_manual(values = c("Strong-Tie Variety" = "solid", "Weak-Tie Variety" = "dashed"), name = NULL) +
+  labs(
+    x = "Network Variety Factor Score",
+    y = "Predicted Solitary Leisure Score"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "bottom")
+
+ggsave("Plots/fig4_leisure_variety_margins_plot.png", fig4, width = 6.5, height = 5, dpi = 300)
+
+# ------------------------------------------------------------------------
 # Figure A1: Correlation heat map of continuous/ordinal predictors
 # (replaces the Table A4 correlation matrix with a heat map in the style
 # of Plots/varcortrue.png from the childress-lizardo-aesthetic-politics
 # project: symmetric tile matrix, diagonal omitted, purple-white-blue
 # diverging fill, angled x-axis labels.)
 # ------------------------------------------------------------------------
-message("[4/4] Building Figure A1 (predictor correlation heat map)...")
+message("[5/5] Building Figure A1 (predictor correlation heat map)...")
 
 COLOR_BLUE   <- "#0077BB"
 COLOR_PURPLE <- "#882255"

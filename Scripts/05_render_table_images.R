@@ -194,68 +194,15 @@ render_table_png(
 )
 
 # ------------------------------------------------------------------------
-# Table A2: Activity item factor loadings (single table, 3 factor columns)
+# (September 2026: the former Table A2 (activity item loadings) and
+# Table A3 (weak-/strong-tie item loadings) render blocks were removed
+# from this script -- both duplicated the loading matrices already
+# shown as heat maps in Figure 1 and Figure 2, and were dropped from
+# the live manuscript via Scripts/remove_tableA2_A3_renumber.py. The
+# validation table below, formerly Table A5, was renumbered to Table
+# A2 to close the resulting gap in the appendix table sequence.)
 # ------------------------------------------------------------------------
-act_loadings <- unclass(prep$act_fa$loadings)
-colnames(act_loadings) <- names(prep$act_factor_id)[match(seq_len(ncol(act_loadings)), prep$act_factor_id)]
-act_loadings <- act_loadings[, c("arts", "leisure", "residual")]
-act_item_labels <- c(
-  museum = "Museum", art_gallery = "Art Gallery", symphony_orchestra_opera = "Symphony/Opera",
-  gardening = "Gardening", carnival_fair_amusement_park = "Carnival/Fair", music_concert_festival = "Music Concert",
-  play_or_musical = "Play/Musical", library = "Library", fancy_restaurant = "Fancy Restaurant",
-  fast_food = "Fast Food", go_for_walk = "Walk", exercise_or_yoga = "Gym/Yoga",
-  dance_performance = "Dance/Ballet", movie_theater = "Movie Theater", read_novel_poem_or_play = "Read Fiction",
-  attend_sports = "Attend Sports", home_auto_repair = "Home/Auto Repair", hiking_camping_boating = "Hiking/Camping",
-  historic_site = "Historic Site", go_to_festival = "Cultural Festival"
-)
-rows_a2 <- lapply(prep$activity_items, function(it) {
-  structure(c(act_item_labels[it], sprintf("%.3f", act_loadings[it, ])), bold = FALSE)
-})
-render_table_png(
-  header = c("", "Arts", "Leisure", "Residual"),
-  rows = rows_a2,
-  path = "Plots/tableA2_activity_loadings.png",
-  label_x = -0.02, label_hjust = 0, width = 6.0, height = 7.8
-)
-
-# ------------------------------------------------------------------------
-# Table A3: Weak- and strong-tie item factor loadings (combined table)
-# ------------------------------------------------------------------------
-tie_item_labels <- c(
-  KnowLGBTQ = "LGBTQ", KnowLotsaChurch = "Lots of Church", KnowLittleChurch = "No Church",
-  KnowVeryLib = "Very Liberal", KnowVeryCons = "Very Conservative", KnowAsianppl = "Asian",
-  KnowHispanixppl = "Hispanic", KnowBlackppl = "Black", KnowWhiteppl = "White",
-  Know2ndHome = "Owns 2nd Home", KnowBornElsewhere = "Born Elsewhere", KnowMENAppl = "MENA",
-  KnowHawaiiPI = "Hawaiian/PI", KnowAmIndianppl = "American Indian", KnowCityppl = "Live in City",
-  KnowRuralppl = "Live in Rural", Knowwomen = "Women", Knowmen = "Men"
-)
-get_tie_loadings <- function(fit, items, suffix) {
-  loadings <- unclass(fit$fa$loadings)
-  colnames(loadings) <- names(fit$idx)[match(seq_len(ncol(loadings)), fit$idx)]
-  loadings <- loadings[, c("variety", "liberal", "conservative")]
-  rownames(loadings) <- gsub(suffix, "", items)
-  loadings
-}
-weak_l   <- get_tie_loadings(prep$weak_fit, prep$network_weak_items, "_weak")
-strong_l <- get_tie_loadings(prep$strong_fit, prep$network_strong_items, "_strong")
-item_key <- gsub("_weak$", "", prep$network_weak_items)
-
-rows_a3 <- lapply(item_key, function(it) {
-  structure(c(
-    tie_item_labels[it],
-    sprintf("%.3f", weak_l[it, ]), sprintf("%.3f", strong_l[it, ])
-  ), bold = FALSE)
-})
-render_table_png(
-  header = c("", "Weak: Var.", "Weak: Lib.", "Weak: Cons.", "Strong: Var.", "Strong: Lib.", "Strong: Cons."),
-  rows = rows_a3,
-  path = "Plots/tableA3_tie_loadings.png",
-  col_x = c(0.30, 0.42, 0.54, 0.68, 0.80, 0.93),
-  label_x = -0.02, label_hjust = 0, width = 8.5, height = 7.8, base_size = 9.5
-)
-
-# ------------------------------------------------------------------------
-# Table A5: Network variety factor validation (two stacked panels)
+# Table A2 (fka Table A5): Network variety factor validation (two stacked panels)
 # ------------------------------------------------------------------------
 build_validation_panel <- function(count_var, variety_var, lib_var, cons_var, labels) {
   vars <- c(count_var, variety_var, lib_var, cons_var)
@@ -299,7 +246,7 @@ rows_a5_combined <- c(
 render_table_png(
   header = c("", "(1)", "(2)", "(3)", "(4)"),
   rows = rows_a5_combined,
-  path = "Plots/tableA5_variety_validation.png",
+  path = "Plots/tableA2_variety_validation.png",
   note = "*** p < .01, ** p < .05, * p < .1",
   col_x = c(0.62, 0.75, 0.87, 0.98),
   label_x = -0.02, label_hjust = 0, width = 7.6, height = 6.5
