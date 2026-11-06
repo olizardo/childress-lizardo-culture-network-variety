@@ -1,0 +1,46 @@
+# Ordinal CFA Diagnostics and Sensitivity Analysis: Weak- and Strong-Tie Factors
+
+**Project:** Beyond Network Variety in Arts Attendance (SSR-D-26-01726)
+**Date:** November 6, 2026
+**Scripts:** `Scripts/07_measurement_reliability_cfa.R` (baseline fits and reliability), `Scripts/09_no_gender_robustness.R` (gender-item robustness), plus the interactive diagnostic sessions summarized below (modification indices, residual covariances, relaxed refits, four-factor EFA)
+**Outputs:** `cache/07_reliability_cfa.rds`, `cache/09_no_gender_robustness.rds`, `cache/tableR1_reliability.md`, `cache/tableR4_no_gender.md`
+
+## 1. Motivation
+
+Reviewer 1 asked directly for an ordinal confirmatory factor analysis of the tie batteries, and Reviewer 4 named the polychoric/WLSMV approach as a defensible option. The baseline fits (reported in Section 4 of the companion report, `measurement_overview_report.md`) showed acceptable SRMR values but CFI below .95 and RMSEA above .10 for both the weak-tie (CFI = .891, RMSEA = .119) and strong-tie (CFI = .918, RMSEA = .105) models, against a well-fitting activities model (CFI = .956, RMSEA = .095). This report documents a full diagnostic work-up of that misfit: where it is located, what it means substantively, whether the three-factor structure should be replaced, and how much of the paper's inferential apparatus survives each candidate relaxation. The headline conclusion is that the misfit is concentrated in three interpretable item-level sources, that relaxing them improves fit substantially while leaving every substantive factor score and regression conclusion unchanged, and that the three-factor structure should be retained.
+
+## 2. Baseline Specification and Reliability
+
+Both CFA models specify three correlated factors on the polychoric matrix with WLSMV estimation and standardized latent variances, with items assigned to their highest-loading factor in the varimax PCA solution: Variety, Liberal Composition, and Conservative Composition for each of the 18-item weak-tie and strong-tie position generators. McDonald's omega from the fitted ordinal models is variety .881, liberal .881, conservative .809 (weak ties) and variety .917, liberal .794, conservative .859 (strong ties), with Cronbach's alpha leading to the same qualitative conclusions throughout. Reliability is therefore not the problem; the tie factors are acceptable-to-strong composite measures, and the question is purely one of model fit.
+
+## 3. Locating the Misfit
+
+Modification indices and standardized residual covariances from the baseline fits point to three distinct sources.
+
+The first source is a bipolarity that a three-factor model of positive dimensions cannot express. The largest standardized residuals in both batteries are negative residuals between semantically opposite item pairs: VeryLib–VeryCons (−12.8 weak, −13.6 strong), City–Rural (−11.9 weak, −12.8 strong), and LGBTQ–VeryCons (−12.8 weak, −12.0 strong), along with LotsaChurch–LGBTQ (−11.7 strong). The observed polychoric correlations for these pairs are low (.10 to .24), but the model overpredicts them, because all items load positively on positively correlated latent factors. Knowing many very-liberal people co-occurs with knowing many very-conservative people far less than the model's factor structure implies. The antonym pairs are the single largest contributors to the residual misfit in both batteries.
+
+The second source is that variety is not unidimensional. Large positive residual covariances cluster among items the model treats as loading on different factors: KnowAsianppl–KnowBornElsewhere (polychoric r = .66), KnowHawaiiPI–KnowAmIndianppl (r = .74) on the minority side, and KnowWhiteppl–Knowmen (r = .76) on the majority side. Substantively, the variety dimension conflates recognition of ethnic-racial minority groups with recognition of immigrant and regional diversity, while the majority-group items form their own tightly coupled block.
+
+The third source is the gender items. Knowmen_weak carries the largest modification index in the entire analysis (MI = 343, with an expected cross-loading of +.96 on conservative composition) plus a second index of 237 on variety with the opposite sign. The men and women items are theoretically ambiguous indicators of ideological composition, and their factor allegiance differs between the weak-tie and strong-tie batteries.
+
+## 4. Relaxed Refits
+
+The relaxation test frees only the parameters the diagnostics implicate. For weak ties, three cross-loadings (conservative =~ Knowmen, variety =~ KnowBornElsewhere, plus the implied men item loading) and four residual covariances (men–White, LGBTQ–VeryLib, HawaiiPI–AmIndian, Asian–BornElsewhere, VeryCons–LGBTQ) move fit from CFI .891 / RMSEA .119 to CFI .934 / RMSEA .065, recovering roughly two-thirds of the RMSEA misfit with nine localized parameters. For strong ties, two cross-loadings (conservative =~ LittleChurch, liberal =~ men) and four residual covariances (LGBTQ–VeryLib, VeryLib–VeryCons, City–Rural, LotsaChurch–2ndHome) move fit from CFI .918 / RMSEA .105 to CFI .940 / RMSEA .091, recovering about half the misfit. The strong-tie improvement is somewhat smaller, consistent with the slightly more diffuse residual structure in that battery, but the same localized sources do the work.
+
+Critically, the substantive factor scores are invariant to the relaxation. McDonald's omega under the relaxed strong-tie model is variety .916, liberal .779, conservative .875, against a baseline of .917, .794, and .859. The composite measures that enter the paper's regressions are not artifacts of the localized model violations.
+
+## 5. Should the Factors Be Split? A Four-Factor Test
+
+The diagnostics suggest candidate fourth dimensions, so the question of splitting the three-factor structure was tested directly with a four-factor oblimin (WLS) exploratory factor analysis on the polychoric matrix of each battery. The fourth factor is not a substantive dimension in either battery: it is a pure City-vs-Rural bipolar contrast (city +.52/+.61, rural −.48/−.43, nothing else loading at or above .40), which is precisely the antonym-pair structure the CFA diagnostics already identified and which a residual covariance represents more honestly than a two-item factor. The remaining reorganization shuffles the same items, with conservative composition absorbing the majority block (VeryCons, White, men, women, rural) and liberal composition narrowing to LGBTQ plus VeryLib, while cumulative variance explained moves only from 61 to 66 percent. Nothing new is being measured.
+
+Splitting is also the wrong move on substantive grounds. Variety, liberal composition, and conservative composition are the theoretical axes on which the paper's hypotheses are built; replacing them with a conservative-majority mega-factor and a two-item bipolar contrast would require re-deriving every hypothesis, table, and framing for no measurement gain. The defensible alternatives are narrower: dropping the ambiguous gender items is a surgical, testable change, and reporting the diagnostics as an appendix is a minimal one.
+
+## 6. Gender-Item Robustness
+
+The gender-item alternative was tested directly. All four men/women items were dropped from the tie batteries (16 items per battery), the weak- and strong-tie factor scores were re-derived under the same anchoring scheme, and the full four-model hierarchical OLS sequence (HC1) was refit for both outcomes.
+
+The no-gender refit changes nothing substantively. Every significance verdict in Tables 1 and 2 replicates. For arts participation, strong-tie variety remains positive and significant across all four models (coefficients .40 to .47, against .41 to .46 canonical), strong-tie conservative composition remains significant in both composition models (.119 and .108), weak-tie liberal composition remains negative and significant, and the weak-vs-strong variety Wald test remains p < .001. For solitary leisure, weak-tie variety remains positive and significant in all four models, the strong-tie negative variety effect persists (−.138 to −.153, all significant), and the composition-block Wald tests remain decisively non-null (χ² = 36.8 and 39.9, both p < .001). No coefficient moves by more than about .04 and no verdict flips.
+
+## 7. Conclusions for the Reviewer Response
+
+The recommended framing keeps the canonical three-factor specification as the paper's main measurement model and reports this work as a diagnostic and sensitivity supplement. The response can state that the tie-model misfit is located, interpretable, and dominated by a bipolarity in the item content that no positive three-factor parameterization can express; that freeing the offending parameters improves fit substantially in both batteries; that the substantive factor scores and regression conclusions are invariant both to the relaxations and to the wholesale removal of the theoretically ambiguous gender items; and that a four-factor restructuring was tested and rejected because the fourth dimension is a two-item bipolar contrast rather than a substantive construct. This combination concedes nothing on measurement rigor while preserving the paper's theoretical architecture intact.

@@ -1693,7 +1693,11 @@ childress-lizardo-culture-network-variety/
     ├── revert_varimax_text.py          # Sept 2026: reverted the above back to varimax, 18 text edits (see Section 5)
     ├── revert_varimax_images.py        # Sept 2026: reverted the 10 Table/Figure images back to varimax (see Section 5)
     ├── remove_tableA2_A3_renumber.py   # One-time removal of Table A2/A3 + Table A5->A2 renumbering (see Section 4)
-    └── audit_manuscript_stats.R        # Recomputes & diffs every reported statistic against the live manuscript
+    ├── 06_rotation_sensitivity.R        # Varimax vs oblimin re-run; canonical-layout caches for the audit
+    ├── 07_measurement_reliability_cfa.R # Omega/alpha + WLSMV ordinal CFA for all three measurement models
+    ├── 08_solitary_robustness.R         # Solitary-leisure operationalization sensitivity (variants A/B/C)
+    ├── 09_no_gender_robustness.R        # Drops men/women items from tie batteries; refits Tables 1-2
+    ├── audit_manuscript_stats.R        # Recomputes & diffs every reported statistic against the live manuscript
 ```
 
 ### 3a. One-Figure/Table-Per-Page Layout Standard (Applied September 2026)
@@ -1741,7 +1745,7 @@ The live Google Doc embeds 10 floating (anchored) images (10 original + Table 3 
 - `Scripts/sync_manuscript.py`'s `IMAGE_MAP` dict is the single source of truth for this mapping in code; keep it and this table synchronized.
 
 ### 4a. Automated Manuscript Statistic Audit (`Scripts/audit_manuscript_stats.R`)
-To catch exactly the kind of numeric drift documented manually in Sections 6-7 below without another manual audit pass, `Scripts/audit_manuscript_stats.R` recomputes ~25 individual reported statistics (KMOs, variance explained, Phi/inter-factor correlations, Table 1/2/3 Wald tests and coefficient ranges, Table A2/fka-A5 validation correlations, and selected p-values) directly from `cache/01_prepared_data.rds`/`cache/02_models.rds`, extracts the corresponding number(s) from the live manuscript text via regex anchored on stable surrounding phrasing, and diffs them against a tolerance. **Post-varimax-revert status:** both the local pipeline and the live Doc are reverted (Section 5), and the four stale regex patterns that briefly reported `NOT_FOUND` (the Phi correlation sentences, the AAPI/multiracial/Hispanic-Latine race sentence, and the old "Table A5" label) have since been fixed: the Phi checks are now dual-mode (matching either oblimin's numeric-correlation prose or varimax's "forced to be uncorrelated by construction" phrasing, falling back to asserting the actual Phi matrices are exactly diagonal in the latter case); the race check now captures the `<`/`=` operator independently for all three contrasts so a p-value crossing the `.001` threshold doesn't silently break the match; and the Table A5 -> Table A2 rename was propagated into the check ids/descriptions along with a wording fix for the weak-tie validation sentence ("liberal composition correlates" vs. the old "liberal-composition factor correlates"). `Rscript Scripts/audit_manuscript_stats.R --pull` now reports **30/30 checks OK, 0 MISMATCH, 0 NOT_FOUND**. Run via `Rscript Scripts/audit_manuscript_stats.R` (add `--pull` to force a fresh Drive download instead of reusing `cache/_manuscript_text_cache.txt`); it writes `cache/audit_report.md` and exits non-zero if any check status is `MISMATCH`, so it can be wired into a pre-push hook. Extend it by appending a new check function to the `checks` list in the script whenever a new numeric claim is added to the manuscript; see the script's header comment for the exact contract.
+To catch exactly the kind of numeric drift documented manually in Sections 6-7 below without another manual audit pass, `Scripts/audit_manuscript_stats.R` recomputes ~25 individual reported statistics (KMOs, variance explained, Phi/inter-factor correlations, Table 1/2/3 Wald tests and coefficient ranges, Table A2/fka-A5 validation correlations, and selected p-values) directly from `cache/01_prepared_data.rds`/`cache/02_models.rds`, extracts the corresponding number(s) from the live manuscript text via regex anchored on stable surrounding phrasing, and diffs them against a tolerance. **Post-varimax-revert status:** both the local pipeline and the live Doc are reverted (Section 5), and the four stale regex patterns that briefly reported `NOT_FOUND` (the Phi correlation sentences, the AAPI/multiracial/Hispanic-Latine race sentence, and the old "Table A5" label) have since been fixed: the Phi checks are now dual-mode (matching either oblimin's numeric-correlation prose or varimax's "forced to be uncorrelated by construction" phrasing, falling back to asserting the actual Phi matrices are exactly diagonal in the latter case); the race check now captures the `<`/`=` operator independently for all three contrasts so a p-value crossing the `.001` threshold doesn't silently break the match; and the Table A5 -> Table A2 rename was propagated into the check ids/descriptions along with a wording fix for the weak-tie validation sentence ("liberal composition correlates" vs. the old "liberal-composition factor correlates"). `Rscript Scripts/audit_manuscript_stats.R --pull` now reports **30/30 checks OK, 0 MISMATCH, 0 NOT_FOUND**. Run via `Rscript Scripts/audit_manuscript_stats.R` (add `--pull` to force a fresh Drive download instead of reusing `cache/_manuscript_text_cache.txt`); it writes `manuscript_numbers_audit.md` (project root) and exits non-zero if any check status is `MISMATCH`, so it can be wired into a pre-push hook. Extend it by appending a new check function to the `checks` list in the script whenever a new numeric claim is added to the manuscript; see the script's header comment for the exact contract.
 
 ### 5. Rotation Choice: Varimax (Standing Choice; Oblimin Tried & Reverted, September 2026)
 
@@ -1790,3 +1794,103 @@ After the KMO fix, every quantitative claim in the manuscript (not just the comp
 **Items checked and found still accurate (no edit made)**: the "roughly a half-standard deviation increase" claim for strong-tie variety's effect on arts participation (Model 2 coefficient is .395, a defensible rounding to "roughly half"); the "reduced by about half" claim for weak-tie variety's Model 1 -> 2 attenuation on arts participation (actual ~44% reduction); the "only slightly lower" claim for strong-tie variety's Model 1 -> 2 stability on arts participation (~18% reduction, small relative to the weak-tie comparison); the "no problematic multicollinearity" diagnostic claim (max VIF = 4.15 in the Table 1 full model once composition factors are allowed to correlate under oblimin -- elevated relative to what strict orthogonality would have produced, but still under the conventional VIF < 5 rule of thumb); and every loading/variance-explained/Phi-correlation number already updated during the oblimin revision (Section 5) and the KMO values (Section 6).
 
 **Protocol for future revision rounds**: whenever a factor model, rotation, or regression specification changes, audit *every* numeric claim in the affected Results/Discussion sections against a fresh `readRDS("cache/02_models.rds")` -- not just the coefficients that were the direct target of the change -- since shared-model spillover into other covariates' exact estimates is easy to miss otherwise.
+
+### 8. Rotation Sensitivity: Oblimin Re-Run and Claim-Change Audit (November 2026)
+
+**Reproducible oblimin re-run.** `Scripts/06_rotation_sensitivity.R` is a standalone script that recomputes the three measurement models and the four-model OLS sequence under both varimax and direct oblimin, on the current data (`grabbagdata111925.dta`, N = 1,258; complete-case modeling N = 1,227). It writes to `cache/rotation_sensitivity/` and does not touch the canonical `cache/01_prepared_data.rds` or `cache/02_models.rds`. Run with `Rscript Scripts/06_rotation_sensitivity.R` from the project root. Built-in checks: the varimax recomputation must match the canonical cache exactly (max score difference 0, enforced), and factor-to-label mappings must be one-to-one. Validation: the oblimin re-run reproduces the historical oblimin objects from git commit `aa40dae` exactly (loadings, Phi, and m2/m4 coefficients all identical), so the oblimin numbers in the git-history-era memory above are reproducible from the current code.
+
+**Audit against both rotations.** `Scripts/audit_manuscript_stats.R` now takes `--rotation varimax|oblimin`. It reads the canonical-layout objects `cache/rotation_sensitivity/prepared_<rot>.rds` and `canonical_models_<rot>.rds` (produced by script 06) and writes root `varimax_manuscript_audit.md` / `oblimin_manuscript_audit.md`. The default invocation (no flag) is unchanged. Results against the live (varimax) manuscript text: varimax 30/30 OK; oblimin 10 OK, 20 MISMATCH, 0 NOT_FOUND.
+
+**Claims that would change under oblimin (audit MISMATCH rows):**
+- Phi orthogonality checks (`phi_variety`, `phi_lib_cons`): these are varimax-specific by design (0 under varimax; 0.44 and 0.39 under oblimin). Expected to fail; the text is correct for varimax only.
+- Table A2 validation correlations, all six weak- and strong-tie composition/variety vs. raw count r values (e.g. strong variety r = .61 reported vs .79 oblimin; strong conservative .50 vs .73; weak conservative .46 vs .62). These need rewording if oblimin is adopted.
+- Table 1 (arts participation) Wald test for weak vs. strong variety: chi-square 19.2 reported vs 19.41 oblimin.
+- Table 1 race/ethnicity p-values, Model 2: multiracial p < .001 reported vs .005 oblimin (now only significant at .01); Hispanic/Latine p = .05 reported vs .072 oblimin (no longer marginal at .05 as worded).
+- Residual leisure (Table A3) composition block: m1 to m3 chi-square 5.99 (p = .200) reported vs 4.05 (p = .399) oblimin; m2 to m4 chi-square 5.61 (p = .231) reported vs 7.07 (p = .132) oblimin. Null conclusions hold under both, but every number changes.
+- Table 2 (solitary leisure) ranges across Models 1 to 4: weak-tie variety 0.14 to 0.23 reported vs 0.13 to 0.21 oblimin; strong-tie variety magnitude 0.13 to 0.18 reported vs 0.08 to 0.17 oblimin.
+- Table 2 childhood arts Model 4 p-value: .04 reported vs .024 oblimin (b = 0.038 varimax, 0.042 oblimin; both round to the reported 0.04, so the coefficient claim holds).
+
+**Claims that hold under both rotations (audit OK):** activities KMO .958; weak and strong KMO .938 and .935; activity variance explained 58.7%; tie variance explained 61%; arts Wald df and p < .001; AAPI p < .001; residual leisure composition-block nulls (direction); Table 2 childhood arts Model 4 coefficient.
+
+**Gap in the audit.** The 30 checks cover the statistics the audit was built to track, not every sentence. Substantive significance changes in Table 1 and Table 2 composition terms are not checked by the audit and must be reviewed by hand. From script 06's m4 output: Table 1 strong-tie conservative composition is b = 0.098 (p = .005) under varimax and b = 0.032 (p = .401) under oblimin, so the varimax narrative "significant" versus oblimin "not significant" is a real difference. Table 2 weak-tie liberal composition is b = 0.120 (p = .004) under varimax and b = 0.091 (p = .062) under oblimin, and Table 1 weak-tie variety is b = 0.091 (p = .014) under varimax and b = 0.138 (p < .001) under oblimin. The strong-tie variety effect on solitary leisure is negative and significant under both (-0.153 varimax, -0.170 oblimin).
+
+**Correction to Section 5 of this file.** The September 2026 sentence claiming that Table 1's strong-tie conservative composition effect "attenuates back toward non-significance" under varimax does not match the current canonical output: under varimax m4 that coefficient is significant (p = .005). Treat the live manuscript text and `cache/02_models.rds` as the authority, not the Section 5 narrative. Re-verify before any further revision that touches that paragraph.
+
+**Rotation status.** Varimax remains the standing choice in the canonical pipeline. Oblimin results are reproducible but not adopted. Any move to oblimin requires (1) changing `rotate` in `Scripts/01_prepare_data.R` and `Scripts/02_fit_models.R` (or promoting script 06's oblimin outputs), (2) rerunning `audit_manuscript_stats.R` against the canonical cache, and (3) rewording the MISMATCH claims above plus the hand-reviewed composition-significance changes.
+
+### 9. SSR Revision Workstream (SSR-D-26-01726, November 2026)
+
+**Submission.** Manuscript SSR-D-26-01726, *Beyond Network Variety in Arts Attendance: Network Composition, Ideological Sorting, and Everyday Leisure*, submitted to *Social Science Research*. Initial reviews from Reviewers 1 to 4 are in `SSR-D-26-01726-reviews.zip` (Reviewer 1 and 2 comments appear in the editor PDF; Reviewer 3 is a `.docx`; Reviewer 4 is a separate PDF). Reviews were not yet extracted into the repo.
+
+**Response-to-reviewers artifacts (project root):**
+- `response_to_reviewers_template.md`: seven cross-cutting themes, with verbatim reviewer quotes under each point and empty `Location in Revised Manuscript:` and `Response:` fields.
+- `response_to_reviewers_template.docx`: Word port generated from the markdown (callout boxes for quotes, overview matrix table).
+- `methodological_response_brainstorm.md`: nine candidate approaches to the methodological comments (measurement model, rotation, Factor 1 meaning, ideology interactions, weak/strong separation, causal language, weights, item selection, coding fixes), with suggested sequencing and open decisions.
+
+**Rotation sensitivity work (November 2026):**
+- `Scripts/06_rotation_sensitivity.R` reruns the measurement models and four-model OLS sequence under varimax and oblimin on the current pipeline. Varimax reproduces the canonical cache exactly (score difference 0). Oblimin reproduces the historical oblimin objects from commit `aa40dae` exactly (loadings, Phi, m2/m4 coefficients). It also saves canonical-layout objects (`prepared_<rot>.rds`, `canonical_models_<rot>.rds`) and writes `cache/rotation_sensitivity/varimax_vs_oblimin_results.md` (root copy: `varimax_vs_oblimin_results.md`).
+- `Scripts/audit_manuscript_stats.R` takes `--rotation varimax|oblimin`. Varimax: 30/30 OK. Oblimin: 10 OK, 20 MISMATCH. Report at root `varimax_manuscript_audit.md` / `oblimin_manuscript_audit.md`.
+- `cache/rotation_comparison_oblimin_varimax.md` is an earlier, hand-built comparison. Its oblimin values are confirmed by script 06, but `cache/rotation_sensitivity/varimax_vs_oblimin_results.md` is the reproducible version and should be preferred.
+- root copy `composition_claims_rotation_sensitivity.md` (canonical: `cache/rotation_sensitivity/composition_sentence_review.md`) lists composition-term sentences in the Table 1 and Table 2 discussion that would need rewording under oblimin, and some that are already inconsistent under varimax (see below).
+
+**Substantive findings to keep in view:**
+- Oblimin changes the significance of composition terms that the text relies on: Table 1 strong conservative ties (varimax b = 0.098**, oblimin 0.032, n.s.); Table 2 weak liberal ties (varimax 0.120**, oblimin 0.091, p = .06); Table 2 strong-tie variety in Model 1 (oblimin n.s.).
+- Under varimax, Table 2 Model 3 has weak conservative ties significant (0.091*, p = .035), contradicting the text's "no discernible impact" for conservative ties. This is a live problem independent of the rotation decision.
+- Table 2 gender sentence ("self-identification as a woman") rests on Model 2 only; Model 4 is n.s. under both rotations. The reference category is Woman, so the coefficient is for men. Reviewer 2 flagged a related concern.
+- The audit does not cover composition-term significance, the mediation wording, or the gender sentence. These need manual review or new checks.
+
+**Corrections to earlier memory:**
+- The sentence in Section 5 claiming that Table 1's strong-tie conservative composition effect "attenuates back toward non-significance" under varimax is wrong. Current varimax m4 is significant (p = .005).
+- Section 7 gives Table 2 childhood-arts Model 4 b as .04 under both rotations; the exact values are 0.038 (varimax) and 0.042 (oblimin). Both round to .04.
+
+**Open decisions (not yet made):**
+- Whether to adopt oblimin. Current status: varimax is standing.
+- Whether to add composition-sentence checks to `audit_manuscript_stats.R`.
+- Whether the manuscript should be revised before resubmission, and whether the reviewer-facing wording of the mediation claims should change.
+- Whether weights can be constructed from the survey variables (age, sex, race, education, region) for the Prolific representativeness response.
+
+### 10. Measurement Reliability & CFA Sensitivity Workstream (November 6, 2026)
+
+**Scripts added (all turnkey, Rscript from project root):**
+- `Scripts/07_measurement_reliability_cfa.R`: computes Cronbach's alpha (polychoric-based for ties, Pearson for activities; EFA-loading signs as reverse-keying) and McDonald's omega via `semTools::compRelSEM` on WLSMV ordinal CFAs (`lavaan`, polychoric, `std.lv=TRUE`) for all three measurement models. Items assigned to factors by highest EFA loading; `read_novel_poem_or_play` loads with solitary leisure, not arts. Outputs `cache/07_reliability_cfa.rds`, `cache/tableR1_reliability.md`, `cache/tableR2_cfa_fit.md`.
+- `Scripts/08_solitary_robustness.R`: solitary-leisure sensitivity, variants A (2-item PCA walk+exercise), B (formative mean-z of 3 items), C (19-item PCA with reading dropped; full reassignment). Variant scores z-standardized before regressions. Outputs `cache/08_solitary_robustness.rds`, `cache/tableR3_solitary_robustness.md`.
+- `Scripts/09_no_gender_robustness.R`: drops all four Knowmen_/Knowwomen_ items (16 per battery), re-derives tie factor scores with the same anchoring scheme, refits Tables 1-2 sequences. Outputs `cache/09_no_gender_robustness.rds`, `cache/tableR4_no_gender.md`.
+
+**Headline numbers (canonical pipeline, varimax):**
+- Omega: arts .957, solitary leisure .389, residual .545; weak ties .881/.881/.809 (variety/liberal/conservative); strong ties .917/.794/.859. Substantive factors omega .79-.96; the two 3-item factors are the exceptions.
+- WLSMV CFA fit: activities CFI .956, RMSEA .095 [.092,.099], SRMR .061 (acceptable, RMSEA at the high edge); weak ties CFI .891, RMSEA .119; strong ties CFI .918, RMSEA .105.
+- Tie-model misfit is localized in three interpretable sources: (1) antonym-pair bipolarity (VeryLib-VeryCons, City-Rural, LGBTQ-VeryCons/LotsaChurch negative residual covariances; observed r only .10-.24 but overpredicted by positive-loading factors); (2) variety is not unidimensional (minority items Asian-BornElsewhere r = .66, HawaiiPI-AmIndian r = .74; majority block White-men r = .76); (3) gender items, esp. Knowmen_weak (MI = 343 on conservative, 237 on variety). Relaxing 3 cross-loadings + 4 residual covariances: weak .891/.119 -> .934/.065; strong .918/.105 -> .940/.091; all substantive omegas unchanged (.916/.779/.875 under relaxed strong).
+- Four-factor EFA (oblimin, WLS, polychoric) on each tie battery: the 4th factor is a two-item City-vs-Rural bipolar contrast, not a construct; variance explained 61% -> 66%. Splitting rejected on both empirical and substantive grounds.
+- No-gender refit: every Table 1/2 significance verdict replicates; no coefficient moves more than ~.04; weak=strong Wald arts p < .001, leisure p = .001; composition block chi2 = 36.8 (arts) / 39.9 (leisure), both p < .001.
+- Solitary-leisure sensitivity: weak-tie variety effect robust across all three variants; strong-tie variety effect holds only under canonical and variant C (reading dropped), nulls under A and B; variant C arts factor r = .996 with canonical. Variant C's 2-item leisure factor is Heywood-degenerate: its nominally high omega (.78) is an underidentification artifact; honest bounds alpha ~ .40-.50.
+- Full extract (`grabbagdata111925_full.dta`, 179 cols) contains only evaluative-taste batteries (photos, Is-It-Art, fashion, food tastes, cuisines); max correlation with the solitary-leisure factor is r = .18 (avocado). No additional practice items exist; the weak factor is an instrument-design limitation.
+
+**PCA vs CFA factor scores (critical methodological finding):**
+- CFA (MAP) scores diverge substantially from varimax PCA scores: arts r = .89, tie factors .70-.80, solitary leisure .62, residual .37.
+- Substituting CFA scores into the Table 1/2 sequences changes results materially: strong-tie variety on solitary leisure flips from -.13 to -.18 (all sig.) to +.19 to +.31 (all sig.); weak liberal comp on leisure flips +.12 to -.17/-.37; leisure composition block chi2 drops ~40 -> 13.8. Two structural causes: (a) varimax PCA scores are orthogonal by construction (within-battery composites r = .00), which identifies the weak-vs-strong contrast; CFA scores of correlated factors are strongly intercorrelated (factor-score indeterminacy), so regression coefficients become suppression-dominated and unstable; (b) the CFA leisure factor weights items differently (exercise .59, reading .50, walk .21), a somewhat different construct.
+- Recommended position: PCA scores remain the regression inputs (orthogonality is what makes the weak-vs-strong contrast stable and interpretable); the CFA serves as measurement validation (reliability, fit, diagnostics), which is exactly what reviewers asked for. If reviewers press for CFA-consistent estimation, the correct route is a full SEM with outcomes regressed on latent factors, not a score swap. Citable: factor-score indeterminacy literature (e.g., Grice 2001, Psychometrika).
+
+**Reports in project root (all .md):**
+- `measurement_overview_report.md` (renamed from `sensitivity_analysis_report.md`, slimmed to cross-battery headline numbers + pointers).
+- `activities_cfa_sensitivity_report.md` (activities battery deep dive: reliability, CFA fit, solitary-leisure sensitivity, variant-C omega caveat, no-additional-items finding).
+- `tie_cfa_sensitivity_report.md` (tie-battery deep dive: misfit diagnostics, relaxed refits, four-factor test, gender-item robustness).
+
+**Audit script updates (`Scripts/audit_manuscript_stats.R`):**
+- Now 38 checks: 30 canonical manuscript checks (30 OK vs live Doc) + 8 reliability/CFA/robustness checks keyed to the three root reports' wording (validated 10/10 OK against measurement_overview_report.md before the split, now distributed across the reports). The new checks read `cache/07_reliability_cfa.rds` and `cache/08_solitary_robustness.rds`/`cache/09_no_gender_robustness.rds` defensively (NOT_FOUND, not failure, if absent).
+- Output paths now write directly to project root: `manuscript_numbers_audit.md` (default) and `varimax_manuscript_audit.md` / `oblimin_manuscript_audit.md` (--rotation). Root no longer holds stale copies; `06_rotation_sensitivity.R` writes `cache/rotation_sensitivity/varimax_vs_oblimin_results.md`.
+- Renamed root reports: audit_report.md -> manuscript_numbers_audit.md; audit_varimax/oblimin.md -> varimax/oblimin_manuscript_audit.md; rotation_comparison.md -> varimax_vs_oblimin_results.md; composition_sentence_review.md -> composition_claims_rotation_sensitivity.md.
+- Old-named files remain in cache/ and cache/rotation_sensitivity/ as historical artifacts.
+
+**Technical gotchas from this session:**
+- This psych version (2.6.5): `psych::alpha()` has no `cor`/`poly.cor` arg (compute polychoric alpha manually: k/(k-1) * (1 - k/sum(R)) on the smoothed polychoric matrix); `psych::polychoric()` has no `smoothing` arg (use default `smooth=TRUE`); `a$total$raw_alpha` (not `raw_r`).
+- `semTools::compRelSEM(fit)` returns one lavaan.vector per factor whose value IS omega (no `[["omega"]]` subscript).
+- `setNames(nm = ...)` without `object =` returns a zero-length vector (lapply over it silently does nothing).
+- `mods_canon$mdat` is a tibble: its rownames are 1..N, not original df row numbers. Never align via rownames; use `which(complete.cases(df[, model_vars]))` for positional alignment. Tibble character-rownames subsetting silently misaligns.
+- `lavPredict()` on the activities CFA returns 1243 rows (complete ordinal cases), not 1258; align via complete.cases on the item set. Column renaming from lavaan factor names to canonical df names needs a name->name mapping, not a named-vector-by-name subset.
+- estimatr `lm_robust` cached objects: use object's own `$coefficients/$std.error/$p.value` slots; `summary()` fails on cached objects ("atomic vectors").
+- car::linearHypothesis on these models returns `Pr(>Chisq)`, not `Pr(>F)`.
+
+**Open items (not yet done):**
+- None of this text is in the live Google Doc or the reviewer response; audit checks sit at NOT_FOUND against the manuscript until incorporation.
+- Relaxed-refit CFA models were run interactively, not saved as cached pipeline objects.
+- Full SEM (outcomes on latents) sketched but not run, as the fallback if reviewers insist on CFA-consistent estimation.

@@ -1,9 +1,17 @@
-# Manuscript statistic audit -- 2026-09-27 09:52 PDT
+# Manuscript statistic audit -- 2026-11-06 15:14 PST
 
-30 checks: **30 OK**, **0 MISMATCH**, **0 NOT_FOUND**.
+38 checks: **30 OK**, **0 MISMATCH**, **8 NOT_FOUND**.
 
 | id | description | reported | actual | status | note |
 |---|---|---|---|---|---|
+| rel_omega_range | Reliability: substantive omega range | NA | NA | NOT_FOUND | pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded |
+| rel_leisure_corr | Reliability: solitary-leisure inter-item correlation range | NA | NA | NOT_FOUND | pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded |
+| cfa_load_act | CFA: activities standardized loading range | NA | NA | NOT_FOUND | pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded |
+| cfa_load_ties | CFA: tie-model standardized loading range | NA | NA | NOT_FOUND | pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded |
+| rob_arts_r | Robustness: variant-C vs. canonical arts factor correlation | NA | NA | NOT_FOUND | pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded |
+| rob_wald_B | Robustness: formative-index weak-vs-strong Wald p | NA | NA | NOT_FOUND | pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded |
+| rob_nogender_wald | No-gender robustness: weak-vs-strong variety Wald p-values | NA | NA | NOT_FOUND | pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded |
+| rob_nogender_comp | No-gender robustness: composition-block Wald chi-squares | NA | NA | NOT_FOUND | pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded |
 | act_kmo | Activities factor model KMO | 0.958 | 0.9584 | OK |  |
 | act_var_pct | Activities factor model cumulative variance explained (%) | 58.7 | 58.66 | OK |  |
 | tie_kmo_weak | Weak-tie factor model KMO | 0.938 | 0.938 | OK |  |

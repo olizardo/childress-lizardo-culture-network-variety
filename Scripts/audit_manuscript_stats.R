@@ -13,6 +13,10 @@
 #   Rscript Scripts/audit_manuscript_stats.R              # use cached manuscript text if present, else pull
 #   Rscript Scripts/audit_manuscript_stats.R --pull        # force a fresh download from Google Drive
 #   Rscript Scripts/audit_manuscript_stats.R --local x.docx # audit a local docx instead of Google Drive
+#   Rscript Scripts/audit_manuscript_stats.R --rotation oblimin
+#       # audit the rotation-sensitivity objects in cache/rotation_sensitivity/
+#       # (produced by Scripts/06_rotation_sensitivity.R) instead of the canonical
+#       # varimax cache; writes cache/rotation_sensitivity/audit_<rotation>.md
 #
 # Exit status: 1 if any MISMATCH is found (wire this into a pre-push
 # hook or CI step); 0 otherwise. A NOT_FOUND result (the manuscript no
@@ -32,11 +36,17 @@
 
 suppressPackageStartupMessages(library(stringr))
 suppressPackageStartupMessages(library(estimatr))
+suppressPackageStartupMessages(library(psych))
 
 args <- commandArgs(trailingOnly = TRUE)
 force_pull <- "--pull" %in% args
 local_idx <- which(args == "--local")
 local_path <- if (length(local_idx) && length(args) > local_idx[1]) args[local_idx[1] + 1] else NA
+rot_idx <- which(args == "--rotation")
+rotation <- if (length(rot_idx) && length(args) > rot_idx[1]) args[rot_idx[1] + 1] else NA
+if (!is.na(rotation) && !rotation %in% c("varimax", "oblimin")) {
+  stop("--rotation must be 'varimax' or 'oblimin'")
+}
 
 DOC_ID <- "1llEbgZ8lZK7pMy3IjZFbLNoek5CK-S47MhNw91-Sa4A"
 TEXT_CACHE <- "cache/_manuscript_text_cache.txt"
@@ -84,14 +94,25 @@ message(sprintf(
 # ---------------------------------------------------------------------
 # 2. Load the ground-truth modeling cache
 # ---------------------------------------------------------------------
-if (!file.exists("cache/01_prepared_data.rds") || !file.exists("cache/02_models.rds")) {
+if (is.na(rotation)) {
+  prep_path <- "cache/01_prepared_data.rds"
+  mods_path <- "cache/02_models.rds"
+  report_path <- "manuscript_numbers_audit.md"
+} else {
+  prep_path <- sprintf("cache/rotation_sensitivity/prepared_%s.rds", rotation)
+  mods_path <- sprintf("cache/rotation_sensitivity/canonical_models_%s.rds", rotation)
+  report_path <- sprintf("%s_manuscript_audit.md", rotation)
+}
+if (!file.exists(prep_path) || !file.exists(mods_path)) {
   stop(
-    "cache/01_prepared_data.rds and/or cache/02_models.rds not found. ",
-    "Run Scripts/01_prepare_data.R and Scripts/02_fit_models.R first."
+    prep_path, " and/or ", mods_path, " not found. ",
+    "Run Scripts/01_prepare_data.R and Scripts/02_fit_models.R first, ",
+    "or Scripts/06_rotation_sensitivity.R for --rotation runs."
   )
 }
-prep <- readRDS("cache/01_prepared_data.rds")
-mods <- readRDS("cache/02_models.rds")
+message("Auditing objects: ", prep_path, " and ", mods_path)
+prep <- readRDS(prep_path)
+mods <- readRDS(mods_path)
 
 coef_of <- function(model, term) unname(coef(model)[term])
 pval_of <- function(model, term) unname(summary(model)$coefficients[term, "Pr(>|t|)"])
@@ -322,6 +343,137 @@ checks <- list(
       row_for("arts_race_mixed_p", "Table 1: multiracial vs. White p-value, Model 2", m[1, 4], m[1, 5], "race_fmixed/other"),
       row_for("arts_race_latine_p", "Table 1: Hispanic/Latine vs. White p-value, Model 2", m[1, 6], m[1, 7], "race_flatine")
     )
+  },
+
+  # -- Reliability (omega/alpha) and ordinal CFA claims ----------------
+  # These checks track the claims added for the Reviewer 1 / Reviewer 4
+  # response (see measurement_overview_report.md, Scripts/
+  # 07_measurement_reliability_cfa.R and Scripts/08_solitary_robustness.R).
+  # They are patterned on the phrasing used in the sensitivity report, so
+  # they can be run against either the live manuscript (once this text is
+  # incorporated) or the report itself via --local. If the underlying
+  # caches (07/08) are absent, the checks report NOT_FOUND rather than
+  # failing.
+  function(txt_flat, prep, mods) {
+    rel_path <- "cache/07_reliability_cfa.rds"
+    if (!file.exists(rel_path)) {
+      return(not_found_row("rel_omega_range", "Reliability: substantive omega range (cache/07 missing)"))
+    }
+    rel <- readRDS(rel_path)
+    m <- str_match(txt_flat, "omega between \\.?(\\d+) and \\.?(\\d+)")
+    if (is.na(m[1, 1])) return(not_found_row("rel_omega_range", "Reliability: substantive omega range"))
+    # Substantive factors only: exclude the residual (DIY) contrast and
+    # the 3-item solitary-leisure factor, whose omegas the sentence
+    # deliberately brackets out.
+    om <- rel$omega_table
+    substantive <- om[!(om$model == "Activities" & om$factor %in% c("leisure", "residual")), ]
+    rbind(
+      num_row("rel_omega_min", "Reliability: min substantive omega", as.numeric(paste0(".", m[1, 2])), min(substantive$omega), tol = 0.006),
+      num_row("rel_omega_max", "Reliability: max substantive omega", as.numeric(paste0(".", m[1, 3])), max(substantive$omega), tol = 0.006)
+    )
+  },
+
+  function(txt_flat, prep, mods) {
+    m <- str_match(txt_flat, "intercorrelate at only \\.?(\\d+) to \\.?(\\d+)")
+    if (is.na(m[1, 1])) return(not_found_row("rel_leisure_corr", "Reliability: solitary-leisure inter-item correlation range"))
+    leis <- c("go_for_walk", "exercise_or_yoga", "read_novel_poem_or_play")
+    R <- psych::polychoric(prep$df[leis])$rho
+    offs <- R[lower.tri(R)]
+    rbind(
+      num_row("rel_leisure_corr_min", "Solitary leisure: min inter-item polychoric r", as.numeric(paste0(".", m[1, 2])), min(offs), tol = 0.006),
+      num_row("rel_leisure_corr_max", "Solitary leisure: max inter-item polychoric r", as.numeric(paste0(".", m[1, 3])), max(offs), tol = 0.006)
+    )
+  },
+
+  function(txt_flat, prep, mods) {
+    rel_path <- "cache/07_reliability_cfa.rds"
+    if (!file.exists(rel_path)) {
+      return(not_found_row("cfa_load_act", "CFA: activities standardized loading range (cache/07 missing)"))
+    }
+    rel <- readRDS(rel_path)
+    m <- str_match(txt_flat, "range from \\.?(\\d+) to \\.?(\\d+) for the activities model")
+    if (is.na(m[1, 1])) return(not_found_row("cfa_load_act", "CFA: activities standardized loading range"))
+    act <- rel$loadings[[which(sapply(rel$loadings, function(l) unique(l$model)) == "Activities")]]
+    rbind(
+      num_row("cfa_load_act_min", "CFA activities: min |standardized loading|", as.numeric(paste0(".", m[1, 2])), min(abs(act$est.std)), tol = 0.006),
+      num_row("cfa_load_act_max", "CFA activities: max |standardized loading|", as.numeric(paste0(".", m[1, 3])), max(abs(act$est.std)), tol = 0.006)
+    )
+  },
+
+  function(txt_flat, prep, mods) {
+    rel_path <- "cache/07_reliability_cfa.rds"
+    if (!file.exists(rel_path)) {
+      return(not_found_row("cfa_load_ties", "CFA: tie-model standardized loading range (cache/07 missing)"))
+    }
+    rel <- readRDS(rel_path)
+    m <- str_match(txt_flat, "and from \\.?(\\d+) to \\.?(\\d+) for the tie models")
+    if (is.na(m[1, 1])) return(not_found_row("cfa_load_ties", "CFA: tie-model standardized loading range"))
+    tie <- do.call(rbind, rel$loadings[sapply(rel$loadings, function(l) unique(l$model)) != "Activities"])
+    rbind(
+      num_row("cfa_load_ties_min", "CFA ties: min |standardized loading|", as.numeric(paste0(".", m[1, 2])), min(abs(tie$est.std)), tol = 0.006),
+      num_row("cfa_load_ties_max", "CFA ties: max |standardized loading|", as.numeric(paste0(".", m[1, 3])), max(abs(tie$est.std)), tol = 0.006)
+    )
+  },
+
+  function(txt_flat, prep, mods) {
+    rob_path <- "cache/08_solitary_robustness.rds"
+    if (!file.exists(rob_path)) {
+      return(not_found_row("rob_arts_r", "Robustness: variant-C vs. canonical arts factor correlation (cache/08 missing)"))
+    }
+    rob <- readRDS(rob_path)
+    m <- str_match(txt_flat, "correlates at \\.?(\\d+) with the canonical arts factor")
+    if (is.na(m[1, 1])) return(not_found_row("rob_arts_r", "Robustness: variant-C vs. canonical arts factor correlation"))
+    num_row("rob_arts_r", "Robustness: variant-C vs. canonical arts factor correlation", as.numeric(paste0(".", m[1, 2])), rob$r_arts_canon, tol = 0.0006)
+  },
+
+  function(txt_flat, prep, mods) {
+    rob_path <- "cache/08_solitary_robustness.rds"
+    if (!file.exists(rob_path)) {
+      return(not_found_row("rob_wald_B", "Robustness: formative-index weak-vs-strong Wald p (cache/08 missing)"))
+    }
+    rob <- readRDS(rob_path)
+    m <- str_match(txt_flat, "keeps the weak-vs-strong contrast significant at p\\s*=\\s*\\.(\\d+)")
+    if (is.na(m[1, 1])) return(not_found_row("rob_wald_B", "Robustness: formative-index weak-vs-strong Wald p"))
+    w <- rob$results[["B: formative mean-z"]]$wald
+    num_row("rob_wald_B", "Robustness: formative-index weak-vs-strong Wald p (variant B, m2)", as.numeric(paste0(".", m[1, 2])), unname(w[["Pr(>Chisq)"]][2]), tol = 0.006)
+  },
+
+  # -- No-gender tie-model robustness (Scripts/09_no_gender_robustness.R)
+  function(txt_flat, prep, mods) {
+    rob_path <- "cache/09_no_gender_robustness.rds"
+    if (!file.exists(rob_path)) {
+      return(not_found_row("rob_nogender_wald", "No-gender robustness: weak-vs-strong variety Wald p-values (cache/09 missing)"))
+    }
+    rob <- readRDS(rob_path)
+    m <- str_match(txt_flat,
+      "variety Wald test remains p\\s*(<|=)\\s*\\.(\\d+)")
+    if (is.na(m[1, 1])) return(not_found_row("rob_nogender_wald", "No-gender robustness: weak-vs-strong variety Wald p-values"))
+    w_arts <- unname(rob$ng_arts_wald[["Pr(>Chisq)"]][2])
+    if (m[1, 2] == "<") {
+      lt_row("rob_nogender_wald_arts", "No-gender robustness: arts weak-vs-strong Wald p (m2)", as.numeric(paste0(".", m[1, 3])), w_arts)
+    } else {
+      num_row("rob_nogender_wald_arts", "No-gender robustness: arts weak-vs-strong Wald p (m2)", as.numeric(paste0(".", m[1, 3])), w_arts, tol = 0.006)
+    }
+  },
+
+  function(txt_flat, prep, mods) {
+    rob_path <- "cache/09_no_gender_robustness.rds"
+    if (!file.exists(rob_path)) {
+      return(not_found_row("rob_nogender_comp", "No-gender robustness: composition-block Wald chi-squares (cache/09 missing)"))
+    }
+    rob <- readRDS(rob_path)
+    m <- str_match(txt_flat,
+      "composition-block Wald tests remain decisively non-null \\(\u03c7\u00b2\\s*=\\s*([\\d.]+) and ([\\d.]+), both p\\s*(<|=)\\s*\\.?(\\d+)\\)")
+    if (is.na(m[1, 1])) return(not_found_row("rob_nogender_comp", "No-gender robustness: composition-block Wald chi-squares"))
+    rbind(
+      num_row("rob_nogender_comp_arts", "No-gender robustness: arts composition-block chi2 (m2->m4)", as.numeric(m[1, 2]), unname(rob$ng_arts_comp_m2m4$Chisq[2]), tol = 0.05),
+      num_row("rob_nogender_comp_leis", "No-gender robustness: leisure composition-block chi2 (m2->m4)", as.numeric(m[1, 3]), unname(rob$ng_leis_comp_m2m4$Chisq[2]), tol = 0.05),
+      if (m[1, 4] == "<") {
+        lt_row("rob_nogender_comp_p", "No-gender robustness: composition-block p-values", as.numeric(paste0(".", m[1, 5])), min(unname(rob$ng_arts_comp_m2m4[["Pr(>Chisq)"]][2]), unname(rob$ng_leis_comp_m2m4[["Pr(>Chisq)"]][2])))
+      } else {
+        num_row("rob_nogender_comp_p", "No-gender robustness: composition-block p-values (max)", as.numeric(paste0(".", m[1, 5])), max(unname(rob$ng_arts_comp_m2m4[["Pr(>Chisq)"]][2]), unname(rob$ng_leis_comp_m2m4[["Pr(>Chisq)"]][2])), tol = 0.006)
+      }
+    )
   }
 )
 
@@ -344,8 +496,7 @@ message(sprintf(
 ))
 print(results, row.names = FALSE)
 
-dir.create("cache", showWarnings = FALSE, recursive = TRUE)
-report_path <- "cache/audit_report.md"
+dir.create(dirname(report_path), showWarnings = FALSE, recursive = TRUE)
 lines <- c(
   sprintf("# Manuscript statistic audit -- %s", format(Sys.time(), "%Y-%m-%d %H:%M %Z")),
   "",

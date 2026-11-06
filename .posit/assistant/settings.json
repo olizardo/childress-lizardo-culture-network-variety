@@ -6,6 +6,9 @@
       "tail *": "allow",
       "ls *": "allow",
       "echo *": "allow"
+    },
+    "edit": {
+      "*.py": "allow"
     }
   },
   "sandbox": {
