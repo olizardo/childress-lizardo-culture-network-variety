@@ -111,10 +111,12 @@ orient_factor <- function(fa, factor_col, marker_item, want_positive = TRUE) {
   fa
 }
 
+source("Scripts/poly_helpers.R")
+
 fit_measurement <- function(df, rotation) {
   message(sprintf("  [%s] activity battery", rotation))
   act_df <- as.data.frame(df[activity_items])
-  act_fa <- principal(act_df, nfactors = 3, rotate = rotation, scores = TRUE)
+  act_fa <- poly_pca(act_df, nfactors = 3, rotate = rotation)
   act_idx <- label_activity_factors(unclass(act_fa$loadings))
   stopifnot(length(unique(act_idx)) == 3)
   # Residual factor: positive on gardening/home repair, negative on fast food.
@@ -122,30 +124,30 @@ fit_measurement <- function(df, rotation) {
 
   message(sprintf("  [%s] weak-tie battery", rotation))
   weak_df <- as.data.frame(df[network_weak_items])
-  weak_fa <- principal(weak_df, nfactors = 3, rotate = rotation, scores = TRUE)
+  weak_fa <- poly_pca(weak_df, nfactors = 3, rotate = rotation)
   weak_idx <- label_tie_factors(unclass(weak_fa$loadings), "_weak")
   stopifnot(length(unique(weak_idx)) == 3)
 
   message(sprintf("  [%s] strong-tie battery", rotation))
   strong_df <- as.data.frame(df[network_strong_items])
-  strong_fa <- principal(strong_df, nfactors = 3, rotate = rotation, scores = TRUE)
+  strong_fa <- poly_pca(strong_df, nfactors = 3, rotate = rotation)
   strong_idx <- label_tie_factors(unclass(strong_fa$loadings), "_strong")
   stopifnot(length(unique(strong_idx)) == 3)
 
   list(
     rotation = rotation,
     act = list(
-      fa = act_fa, idx = act_idx, kmo = KMO(cor(act_df, use = "complete.obs"))$MSA,
+      fa = act_fa, idx = act_idx, kmo = KMO(act_fa$poly_R)$MSA,
       var_explained = act_fa$Vaccounted["Cumulative Var", 3],
       phi = named_phi(act_fa, act_idx)
     ),
     weak = list(
-      fa = weak_fa, idx = weak_idx, kmo = KMO(cor(weak_df, use = "complete.obs"))$MSA,
+      fa = weak_fa, idx = weak_idx, kmo = KMO(weak_fa$poly_R)$MSA,
       var_explained = weak_fa$Vaccounted["Cumulative Var", 3],
       phi = named_phi(weak_fa, weak_idx)
     ),
     strong = list(
-      fa = strong_fa, idx = strong_idx, kmo = KMO(cor(strong_df, use = "complete.obs"))$MSA,
+      fa = strong_fa, idx = strong_idx, kmo = KMO(strong_fa$poly_R)$MSA,
       var_explained = strong_fa$Vaccounted["Cumulative Var", 3],
       phi = named_phi(strong_fa, strong_idx)
     )

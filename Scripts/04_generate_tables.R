@@ -204,12 +204,14 @@ val_counts <- c(
   strong = "strong_variety_count1", strong2 = "strong_variety_count2"
 )
 
+source("Scripts/poly_helpers.R")
+
 cor_row <- function(v) {
   c(
-    `>=1 (weak)` = round(cor(df[[v]], df$weak_variety_count1, use = "complete.obs"), 3),
-    `>=2 (weak)` = round(cor(df[[v]], df$weak_variety_count2, use = "complete.obs"), 3),
-    `>=1 (strong)` = round(cor(df[[v]], df$strong_variety_count1, use = "complete.obs"), 3),
-    `>=2 (strong)` = round(cor(df[[v]], df$strong_variety_count2, use = "complete.obs"), 3)
+    `>=1 (weak)` = round(poly_cor_count(df[[v]], df$weak_variety_count1), 3),
+    `>=2 (weak)` = round(poly_cor_count(df[[v]], df$weak_variety_count2), 3),
+    `>=1 (strong)` = round(poly_cor_count(df[[v]], df$strong_variety_count1), 3),
+    `>=2 (strong)` = round(poly_cor_count(df[[v]], df$strong_variety_count2), 3)
   )
 }
 table_a5 <- data.frame(

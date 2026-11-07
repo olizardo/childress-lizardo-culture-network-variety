@@ -89,12 +89,12 @@ strong_struct <- tie_items_by_factor(prep$strong_fit)
 
 # ------------------------------------------------------------------------
 # (A) Cronbach's alpha (secondary) on assigned item sets.
-# Ordinal items; psych::alpha polychoric option used for the tie items
-# (0-4 scale), Pearson for the 1-7 activity items (7 categories, near-
-# continuous); report both bases where informative.
+# Ordinal items; alpha is computed from the polychoric correlation matrix
+# for all three batteries (activity items are 7-point, tie items are
+# ordinal scale codes).
 # ------------------------------------------------------------------------
 
-alpha_one <- function(items, keys, poly = FALSE) {
+alpha_one <- function(items, keys, poly = TRUE) {
   if (poly) {
     # Cronbach's alpha from the polychoric correlation matrix
     # (alpha = k/(k-1) * (1 - sum(diag(R)) / sum(R)); with a correlation

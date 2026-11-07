@@ -17,16 +17,33 @@ This repository contains the full analytic pipeline, from the raw survey extract
 
 ## Software requirements
 
-- R (developed and tested under R 4.5.3).
-- R packages: `haven`, `dplyr`, `tidyr`, `psych`, `estimatr`, `car`, `ggplot2`.
+- R 4.5.3 (the version recorded in `renv.lock`).
+- R packages are pinned in `renv.lock`; install them with `renv::restore()` as described in the reproducibility section above. The analysis uses `haven`, `dplyr`, `tidyr`, `psych`, `polycor`, `GPArotation`, `lavaan`, `semTools`, `estimatr`, `car`, `ggplot2`, and `stringr`. `semPlot` is recorded in the lockfile for two diagnostic plotting scripts in `Scripts/diagnostics/`, and `googledrive` is used only by the audit's `--pull` option and the maintainers' sync scripts. The statistical pipeline (`run_all.R` and scripts 01 to 09) needs no external services.
 
-Install everything with:
+## Reproducibility environment (renv)
 
-```r
-install.packages(c("haven", "dplyr", "tidyr", "psych", "estimatr", "car", "ggplot2"))
-```
+The package versions used for the analysis are pinned in `renv.lock` (R 4.5.3, with `psych` 2.6.9, `lavaan` 0.7-3, `estimatr` 2.0.1, `polycor` 0.8-2, and `semTools` 0.5-10, among others). To reproduce the same environment:
 
-No compiled dependencies, external services, or non-CRAN packages are required to reproduce the statistical results. (`googledrive` is used only by the maintainers' internal manuscript-sync scripts, described below, and is not needed to reproduce the analysis.)
+1. Open R in the repository root. The included `.Rprofile` activates renv automatically.
+2. Run `renv::restore()` to install the pinned packages into the project library.
+3. Check with `renv::status()`; the only expected flag is four recommended base packages (`class`, `codetools`, `KernSmooth`, `spatial`), which are installed but not used directly by the scripts.
+
+## Script run order
+
+Run the scripts in this order from the repository root. `run_all.R` runs steps 1 to 4 in one call; the remaining scripts are run individually after it.
+
+1. `Scripts/01_prepare_data.R`: factor models and prepared data (writes `cache/01_prepared_data.rds`).
+2. `Scripts/02_fit_models.R`: regressions and Wald tests (`cache/02_models.rds`).
+3. `Scripts/03_generate_figures.R`: Figures 1 to 4 and Figure A1 in `Plots/`.
+4. `Scripts/04_generate_tables.R`: markdown tables in `cache/`.
+5. `Scripts/05_render_table_images.R`: flat table PNGs in `Plots/` (manuscript embedding only).
+6. `Scripts/06_rotation_sensitivity.R`: varimax versus oblimin comparison (`cache/rotation_sensitivity/`).
+7. `Scripts/07_measurement_reliability_cfa.R`: reliability and ordinal CFA (`cache/07_reliability_cfa.rds`).
+8. `Scripts/08_solitary_robustness.R`: solitary-leisure sensitivity (`cache/08_solitary_robustness.rds`).
+9. `Scripts/09_no_gender_robustness.R`: refits without gender items (`cache/09_no_gender_robustness.rds`).
+10. `Scripts/audit_manuscript_stats.R`: checks reported statistics against the manuscript text. This needs the manuscript text cache (`cache/_manuscript_text_cache.txt`), or the maintainers' Google Drive access to refresh it with `--pull`.
+
+Each script expects the working directory to be the repository root and reads `grabbagdata111925.dta` directly. The factor models use polychoric correlations throughout (`Scripts/poly_helpers.R`), so no Pearson correlations enter the measurement models.
 
 ## Reproducing the analysis
 

@@ -2,3 +2,6 @@ Loading required namespace: GPArotation
 analytic N = 1227 
 fitting free 
 fitting ideology 
+fitting tie 
+
+Execution halted

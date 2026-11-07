@@ -222,7 +222,10 @@ corr_labels <- c(
 )
 
 corr_data <- prep$df[corr_vars]
-cor_mat <- cor(corr_data, use = "pairwise.complete.obs")
+# Ordinal predictors (income, education, childhood arts, politics) use polychoric
+# and polyserial correlations; age-squared and the continuous tie factor scores
+# are continuous by design. mixedCor() chooses the coefficient by variable type.
+cor_mat <- psych::mixedCor(corr_data, c = c("income", "educ", "child_arts", "poli"), use = "pairwise.complete.obs")$rho
 colnames(cor_mat) <- corr_labels[colnames(cor_mat)]
 rownames(cor_mat) <- corr_labels[rownames(cor_mat)]
 diag(cor_mat) <- NA

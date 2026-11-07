@@ -37,6 +37,7 @@
 suppressPackageStartupMessages(library(stringr))
 suppressPackageStartupMessages(library(estimatr))
 suppressPackageStartupMessages(library(psych))
+source("Scripts/poly_helpers.R")
 
 args <- commandArgs(trailingOnly = TRUE)
 force_pull <- "--pull" %in% args
@@ -244,9 +245,9 @@ checks <- list(
     scores <- as.data.frame(prep$strong_fit$fa$scores)
     colnames(scores) <- names(idx)[match(seq_len(3), idx)]
     rbind(
-      num_row("tableA2_strong_variety", "Table A2: strong-tie variety vs. raw count (r)", as.numeric(paste0(".", m[1, 2])), cor(scores$variety, d$strong_variety_count1, use = "complete.obs"), tol = 0.01),
-      num_row("tableA2_strong_liberal", "Table A2: strong-tie liberal composition vs. raw count (r)", as.numeric(paste0(".", m[1, 3])), cor(scores$liberal, d$strong_variety_count1, use = "complete.obs"), tol = 0.01),
-      num_row("tableA2_strong_conservative", "Table A2: strong-tie conservative composition vs. raw count (r)", as.numeric(paste0(".", m[1, 4])), cor(scores$conservative, d$strong_variety_count1, use = "complete.obs"), tol = 0.01)
+      num_row("tableA2_strong_variety", "Table A2: strong-tie variety vs. raw count (r)", as.numeric(paste0(".", m[1, 2])), poly_cor_count(scores$variety, d$strong_variety_count1), tol = 0.01),
+      num_row("tableA2_strong_liberal", "Table A2: strong-tie liberal composition vs. raw count (r)", as.numeric(paste0(".", m[1, 3])), poly_cor_count(scores$liberal, d$strong_variety_count1), tol = 0.01),
+      num_row("tableA2_strong_conservative", "Table A2: strong-tie conservative composition vs. raw count (r)", as.numeric(paste0(".", m[1, 4])), poly_cor_count(scores$conservative, d$strong_variety_count1), tol = 0.01)
     )
   },
   function(txt_flat, prep, mods) {
@@ -263,9 +264,9 @@ checks <- list(
     scores <- as.data.frame(prep$weak_fit$fa$scores)
     colnames(scores) <- names(idx)[match(seq_len(3), idx)]
     rbind(
-      num_row("tableA2_weak_liberal", "Table A2: weak-tie liberal composition vs. raw count (r)", as.numeric(paste0(".", m[1, 2])), cor(scores$liberal, d$weak_variety_count1, use = "complete.obs"), tol = 0.01),
-      num_row("tableA2_weak_variety", "Table A2: weak-tie variety vs. raw count (r)", as.numeric(paste0(".", m[1, 3])), cor(scores$variety, d$weak_variety_count1, use = "complete.obs"), tol = 0.01),
-      num_row("tableA2_weak_conservative", "Table A2: weak-tie conservative composition vs. raw count (r)", as.numeric(paste0(".", m[1, 4])), cor(scores$conservative, d$weak_variety_count1, use = "complete.obs"), tol = 0.01)
+      num_row("tableA2_weak_liberal", "Table A2: weak-tie liberal composition vs. raw count (r)", as.numeric(paste0(".", m[1, 2])), poly_cor_count(scores$liberal, d$weak_variety_count1), tol = 0.01),
+      num_row("tableA2_weak_variety", "Table A2: weak-tie variety vs. raw count (r)", as.numeric(paste0(".", m[1, 3])), poly_cor_count(scores$variety, d$weak_variety_count1), tol = 0.01),
+      num_row("tableA2_weak_conservative", "Table A2: weak-tie conservative composition vs. raw count (r)", as.numeric(paste0(".", m[1, 4])), poly_cor_count(scores$conservative, d$weak_variety_count1), tol = 0.01)
     )
   },
 

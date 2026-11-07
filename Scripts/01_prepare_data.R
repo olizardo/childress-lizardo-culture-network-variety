@@ -27,6 +27,10 @@ suppressPackageStartupMessages({
   library(GPArotation)
 })
 
+# NOTE ON CORRELATION MATRIX (November 2026): all three batteries use
+# polychoric correlations (ordinal items), and KMO is computed on the same
+# matrix. No Pearson correlations enter the measurement models.
+#
 # NOTE ON ROTATION (reverted to varimax, September 2026): all three factor
 # models use orthogonal (varimax) rotation. An oblimin (oblique) variant
 # was tried and is documented in project memory/git history, but the
@@ -41,7 +45,7 @@ message(sprintf("  Loaded %d respondents, %d columns.", nrow(df), ncol(df)))
 # ------------------------------------------------------------------------
 # 1. Activities / leisure factor model (Table A2, Figure 1)
 # ------------------------------------------------------------------------
-message("[2/4] Fitting 3-factor PCA (varimax) on 20 activity items...")
+message("[2/4] Fitting 3-factor PCA (varimax, polychoric) on 20 activity items...")
 
 activity_items <- c(
   "museum", "art_gallery", "symphony_orchestra_opera", "gardening",
@@ -52,8 +56,19 @@ activity_items <- c(
   "historic_site", "go_to_festival"
 )
 
-act_df <- as.data.frame(df[activity_items])
-act_fa <- principal(act_df, nfactors = 3, rotate = "varimax", scores = TRUE)
+act_df <- as.data.frame(lapply(df[activity_items], function(x) as.numeric(unclass(x))))
+# Project policy (November 2026): the activity items are 7-point ordinal
+# frequency codes, so the varimax solution is computed on the polychoric
+# correlation matrix. Scores for a correlation-matrix solution are
+# regression-method scores on the standardized items (complete cases define
+# the centering and scaling); rows with any missing item get NA scores.
+act_complete <- complete.cases(act_df)
+act_poly <- polychoric(act_df[act_complete, ])$rho
+act_fa <- principal(act_poly, nfactors = 3, rotate = "varimax", n.obs = sum(act_complete))
+act_item_center <- colMeans(act_df[act_complete, ])
+act_item_scale  <- apply(act_df[act_complete, ], 2, sd)
+act_weights     <- solve(act_poly, unclass(act_fa$loadings))
+act_fa$scores   <- scale(act_df, center = act_item_center, scale = act_item_scale) %*% act_weights
 
 # Identify which rotated component corresponds to each substantive factor
 # by looking at where theoretically anchoring items load highest, rather
@@ -94,7 +109,7 @@ df$arts_participation <- act_fa$scores[, act_factor_id["arts"]]
 df$solitary_leisure    <- act_fa$scores[, act_factor_id["leisure"]]
 df$residual_leisure    <- act_fa$scores[, act_factor_id["residual"]]
 
-act_kmo <- KMO(cor(act_df, use = "complete.obs"))$MSA
+act_kmo <- KMO(act_poly)$MSA
 act_var_explained <- act_fa$Vaccounted["Cumulative Var", 3]
 # Under varimax, factors are orthogonal by construction (Phi = identity,
 # so act_fa$Phi is NULL); fall back to an explicit identity matrix so
@@ -134,14 +149,20 @@ label_tie_factors <- function(loadings_mat, suffix) {
 }
 
 fit_tie_factors <- function(items, suffix) {
-  item_df <- as.data.frame(df[items])
-  fa <- principal(item_df, nfactors = 3, rotate = "varimax", scores = TRUE)
+  item_df <- as.data.frame(lapply(df[items], function(x) as.numeric(unclass(x))))
+  tie_complete <- complete.cases(item_df)
+  tie_poly <- polychoric(item_df[tie_complete, ])$rho
+  fa <- principal(tie_poly, nfactors = 3, rotate = "varimax", n.obs = sum(tie_complete))
+  tie_center <- colMeans(item_df[tie_complete, ])
+  tie_scale  <- apply(item_df[tie_complete, ], 2, sd)
+  tie_weights <- solve(tie_poly, unclass(fa$loadings))
+  fa$scores <- scale(item_df, center = tie_center, scale = tie_scale) %*% tie_weights
   idx <- label_tie_factors(unclass(fa$loadings), suffix)
   stopifnot(length(unique(idx)) == 3)
   list(
     fa = fa,
     idx = idx,
-    kmo = KMO(cor(item_df, use = "complete.obs"))$MSA,
+    kmo = KMO(tie_poly)$MSA,
     var_explained = fa$Vaccounted["Cumulative Var", 3],
     # Inter-factor correlations (Phi); under varimax these are 0 by
     # construction (fa$Phi is NULL), so fall back to an explicit identity

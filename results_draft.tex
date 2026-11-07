@@ -1,0 +1,257 @@
+% !TEX program = xelatex
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt
+]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs,array}
+\usepackage{calc}
+\usepackage{needspace} % keep table captions with their tables
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+\hypertarget{factor-validation-of-activities}{%
+\subsection{Factor Validation of Activities}\label{factor-validation-of-activities}}
+
+The activity battery asks respondents how often they participated in 20 cultural, leisure, and home practices over the past year on a seven-point frequency scale. We use a principal components solution with varimax rotation on the polychoric correlation matrix ---to account for the ordinal nature of the items--- to define the candidate factors and treat its item assignments as hypothesized targets. The solution places fourteen items on an arts factor, three on a leisure factor (walking, exercise, and reading), and three on a residual factor (gardening, fast food, and home auto repair). It explains 63.2 percent of the variance (Table 1), and the Kaiser-Meyer-Olkin measure is .955. Of the 1,258 completed surveys, 1,243 have complete responses on all 20 items, and every model in this section uses those complete cases. Varimax serves as the source of the targets because it gives the clearest pattern of item assignments; the models below relax its orthogonality constraint rather than assume that the factors are uncorrelated.\footnote{We also ran an oblimin exploratory factor analysis on the same polychoric matrix (Table 2). The oblimin solution itself fits the 20 items reasonably well (χ²(133) = 290.8, p \textless{} .001, TLI = .911, RMSEA = .080 {[}.076, .084{]}). Under oblimin, the arts factor holds, but the other two do not. Assigning each item to its highest-loading factor moves reading, gardening, and home auto repair onto arts, leaving only one item on the residual factor. Forcing the three-factor and two-factor versions of that assignment into confirmatory models produces inadmissible solutions, including a negative variance and a latent correlation above one. The oblique factor correlations from the exploratory solution are small (.19, .15, and .01), so the orthogonal and oblique solutions differ little here, and nothing in the data privileges one rotation over the other.}
+
+Table 3 ranks the candidate structures with confirmatory factor analysis on the varimax targets, with simple structure and correlated factors (N = 1,243; WLSMV). The three-factor model fits best on every index, and the two-factor and one-factor alternatives fit significantly worse, including against each other (Δχ²(1) = 23.1 for the model with the residual items merged into arts and 124.5 for the model with them merged into leisure, both against the one-factor model, p \textless{} .001 in each case). Absolute fit is weak, however. The three-factor model has a CFI of .956 and an RMSEA of .095, and none of the models reaches conventional thresholds. The confirmatory comparison ranks the target structure against its alternatives; it does not confirm the structure on its own.
+
+The three-factor model's misfit comes largely from cross-loadings, so we next estimate an exploratory structural equation model (ESEM) with target rotation. The ESEM uses the varimax assignments as targets, allows every item to load on every factor, and estimates factor correlations. It fits well (CFI = .979, RMSEA = .074 {[}.070, .079{]}, SRMR = .035) and improves on the three-factor confirmatory model by a scaled Δχ²(34) of 746.7 (Table 3). The factor correlations are .36 for arts and leisure, .21 for arts and residual, and .11 for leisure and residual (Table 4). The arts items keep large primary loadings. Walking marks the leisure factor (.78), and exercise loads on it (.42), with a smaller arts loading (.32). Reading is the weakest item on the leisure factor in every solution (.44 in Table 1, .21 in Table 2, and .19 in Table 4), a weak link that matters for how the solitary-leisure findings hold up under alternative ways of measuring the factor. Gardening (.45), home auto repair (.32), and fast food (−.38) define the residual factor. Several arts items also load weakly on the residual factor, including museum (.24), historic site (.23), and hiking (.21), so the residual factor remains the least distinct of the three.\footnote{Geomin rotation gives the same fit, because rotation does not change the implied covariance. It does change the factor content. Under geomin, the second factor is built from movie theater, fast food, fancy restaurant, and attend sports, and walking moves to the third factor. We report the varimax-based targets because they match the battery design and give the clearest interpretation.}
+
+Three limitations qualify these results. The residual factor rests on three items with an omega reliability of .55 and a polychoric alpha of .31, so its findings carry less weight than those for arts and leisure, whose polychoric alphas are .96 and .49. The gap between the residual factor's two reliability figures arises because omega draws on the correlated factors of the confirmatory model, whereas alpha treats the three items as a stand-alone scale. Eight of the 20 items have fewer than ten responses in the top category, between two and nine for symphony, dance, carnival, and several others, which makes the polychoric thresholds for those items unstable. Collapsing the top two categories for those eight items leaves the varimax assignment unchanged, and the three-factor confirmatory model fits essentially identically (χ²(167) = 2049.8, CFI = .955, RMSEA = .095 {[}.092, .099{]}), so the reported structure does not depend on the unstable thresholds. Finally, the oblique exploratory solution does not cleanly separate the residual factor, so the three-factor structure rests on the varimax targets, the confirmatory ranking, and the ESEM fit together.
+
+\Needspace{38\baselineskip}
+Table 1. Varimax Loadings for the Activity Battery
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.4200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}@{}}
+\toprule
+Item & Assigned target & Arts & Leisure & Residual \\
+Museum & Arts & 0.80 & 0.21 & 0.21 \\
+Art gallery & Arts & 0.83 & 0.19 & 0.20 \\
+Symphony, orchestra, or opera & Arts & 0.89 & 0.06 & 0.23 \\
+Carnival, fair, or amusement park & Arts & 0.83 & 0.13 & 0.01 \\
+Music concert or festival & Arts & 0.84 & 0.17 & 0.02 \\
+Play or musical & Arts & 0.84 & 0.09 & 0.13 \\
+Library & Arts & 0.49 & 0.39 & 0.15 \\
+Fancy restaurant & Arts & 0.72 & 0.26 & −0.15 \\
+Dance performance & Arts & 0.89 & 0.00 & 0.15 \\
+Movie theater & Arts & 0.74 & 0.23 & −0.24 \\
+Attend sports & Arts & 0.79 & 0.21 & −0.07 \\
+Hiking, camping, or boating & Arts & 0.52 & 0.37 & 0.32 \\
+Historic site & Arts & 0.70 & 0.23 & 0.26 \\
+Go to festival & Arts & 0.78 & 0.27 & 0.15 \\
+Go for a walk & Leisure & −0.14 & 0.87 & 0.07 \\
+Exercise or yoga & Leisure & 0.35 & 0.60 & −0.19 \\
+Read a novel, poem, or play & Leisure & 0.27 & 0.44 & 0.18 \\
+Gardening & Residual & 0.27 & 0.31 & 0.62 \\
+Fast food & Residual & 0.21 & 0.22 & −0.66 \\
+Home auto repair & Residual & 0.38 & 0.24 & 0.49 \\
+\midrule
+\endhead
+\bottomrule
+\end{longtable}
+
+Note. Varimax-rotated component loadings from a principal components analysis (N = 1,243). The assigned target column reports the factor on which each item is assigned in the ESEM targets. The three components together explain 63.2 percent of the variance.
+
+\Needspace{38\baselineskip}
+Table 2. Oblimin-Rotated Exploratory Factor Loadings for the Activity Battery
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.4200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}@{}}
+\toprule
+Item & Assigned target & Arts & Leisure & Residual \\
+Museum & Arts & 0.84 & 0.08 & −0.10 \\
+Art gallery & Arts & 0.88 & 0.03 & −0.09 \\
+Symphony, orchestra, or opera & Arts & 0.95 & −0.14 & −0.11 \\
+Carnival, fair, or amusement park & Arts & 0.78 & −0.02 & 0.16 \\
+Music concert or festival & Arts & 0.81 & 0.01 & 0.15 \\
+Play or musical & Arts & 0.86 & −0.08 & 0.00 \\
+Library & Arts & 0.53 & 0.19 & −0.07 \\
+Fancy restaurant & Arts & 0.64 & 0.11 & 0.29 \\
+Dance performance & Arts & 0.93 & −0.20 & −0.02 \\
+Movie theater & Arts & 0.64 & 0.05 & 0.37 \\
+Attend sports & Arts & 0.73 & 0.05 & 0.26 \\
+Hiking, camping, or boating & Arts & 0.58 & 0.26 & −0.14 \\
+Historic site & Arts & 0.74 & 0.12 & −0.12 \\
+Go to festival & Arts & 0.80 & 0.12 & 0.01 \\
+Go for a walk & Leisure & −0.08 & 0.79 & 0.00 \\
+Exercise or yoga & Leisure & 0.31 & 0.37 & 0.25 \\
+Read a novel, poem, or play & Leisure & 0.35 & 0.21 & −0.11 \\
+Gardening & Residual & 0.42 & 0.22 & −0.34 \\
+Fast food & Residual & 0.06 & 0.06 & 0.43 \\
+Home auto repair & Residual & 0.48 & 0.16 & −0.23 \\
+\midrule
+\endhead
+\bottomrule
+\end{longtable}
+
+Note. Oblimin-rotated pattern loadings from an exploratory factor analysis (WLS estimation, N = 1,243). The EFA fits the 20 items reasonably well (χ²(133) = 290.8, p \textless{} .001, TLI = .911, RMSEA = .080 {[}.076, .084{]}). The assigned target column reports the varimax assignment used as the ESEM targets. Factor correlations from the oblique solution are .19 (arts and leisure), .15 (arts and residual), and .01 (leisure and residual).
+
+\Needspace{26\baselineskip}
+Table 3. Confirmatory and Exploratory Structural Models of the Activity Battery
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.3000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.0600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.0800}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.1000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 12\tabcolsep) * \real{0.2400}}@{}}
+\toprule
+Model & df & Scaled χ² & CFI & RMSEA & SRMR & Scaled Δχ² (df) vs.~three-factor CFA \\
+One-factor CFA & 170 & 2225.6 & .952 & .099 & .064 & 146.4 (3), p \textless{} .001 \\
+Two-factor CFA, residual merged into arts & 169 & 2199.3 & .952 & .098 & .063 & 121.6 (2), p \textless{} .001 \\
+Two-factor CFA, residual merged into leisure & 169 & 2120.8 & .954 & .096 & .062 & 51.0 (2), p \textless{} .001 \\
+Three-factor CFA & 167 & 2051.2 & .956 & .095 & .061 & --- \\
+ESEM, target rotation & 133 & 1045.1 & .979 & .074 & .035 & 746.7 (34), p \textless{} .001 \\
+\midrule
+\endhead
+\bottomrule
+\end{longtable}
+
+Note. N = 1,243. WLSMV estimation. The three-factor CFA is nested within the ESEM's implied covariance class as the case with zero cross-loadings, so the ESEM row reports a scaled difference test against it. The ESEM degrees of freedom reflect its rotation constraints. Latent factor correlations in the three-factor CFA are .76 (arts and leisure), .68 (arts and residual), and .59 (leisure and residual). RMSEA 90\% confidence intervals are {[}.095, .102{]} (one-factor), {[}.095, .102{]} (residual into arts), {[}.093, .100{]} (residual into leisure), {[}.092, .099{]} (three-factor), and {[}.070, .079{]} (ESEM). Scaled difference tests use the Satorra-Bentler scaled statistic with per-model scaling factors.
+
+\Needspace{38\baselineskip}
+Table 4. ESEM Loadings with Target Rotation
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.4200}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1600}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}@{}}
+\toprule
+Item & Target factor & Arts & Leisure & Residual \\
+Museum & Arts & 0.78 & 0.03 & 0.24 \\
+Art gallery & Arts & 0.83 & −0.02 & 0.20 \\
+Symphony, orchestra, or opera & Arts & 0.95 & −0.22 & 0.11 \\
+Carnival, fair, or amusement park & Arts & 0.82 & 0.04 & −0.11 \\
+Music concert or festival & Arts & 0.86 & 0.02 & −0.11 \\
+Play or musical & Arts & 0.90 & −0.16 & 0.02 \\
+Library & Arts & 0.47 & 0.16 & 0.14 \\
+Fancy restaurant & Arts & 0.71 & 0.15 & −0.20 \\
+Dance performance & Arts & 0.97 & −0.25 & 0.01 \\
+Movie theater & Arts & 0.75 & 0.11 & −0.30 \\
+Attend sports & Arts & 0.80 & 0.08 & −0.21 \\
+Hiking, camping, or boating & Arts & 0.48 & 0.23 & 0.21 \\
+Historic site & Arts & 0.65 & 0.11 & 0.23 \\
+Go to festival & Arts & 0.78 & 0.10 & 0.04 \\
+Go for a walk & Leisure & −0.22 & 0.78 & 0.12 \\
+Exercise or yoga & Leisure & 0.32 & 0.42 & −0.17 \\
+Read a novel, poem, or play & Leisure & 0.27 & 0.19 & 0.16 \\
+Gardening & Residual & 0.23 & 0.17 & 0.45 \\
+Fast food & Residual & 0.20 & 0.14 & −0.38 \\
+Home auto repair & Residual & 0.34 & 0.14 & 0.32 \\
+\midrule
+\endhead
+\bottomrule
+\end{longtable}
+
+Note. Standardized loadings from an ESEM with target rotation (WLSMV, N = 1,243). Factor correlations: arts and leisure .36, arts and residual .21, leisure and residual .11.
+
+
+\subsection{Factor Validation of Network Composition}\label{factor-validation-of-network-composition}
+
+The weak-tie and strong-tie batteries each ask about the same sixteen kinds of people, once for weak ties and once for strong ties, and we validate them together. Separate varimax-rotated principal components solutions on each battery recover three components per tie type, and the two sortings agree on most items. The exceptions are Hispanic or Latine people, Black people, and city people, which load on the liberal factor for weak ties and on variety (Hispanic or Latine and Black) or liberal (city) for strong ties. Born elsewhere is ambiguous in the weak-tie PCA, where it loads nearly equally on variety and liberal, but it loads cleanly on variety in the joint model and in the strong-tie battery. The gender items, which are excluded from the joint model, sit closest to the liberal and conservative boundary.
+
+We then estimate one measurement model for both tie types. Each tie type contributes three network factors (variety, liberal, and conservative), and each weak item shares a residual covariance with the strong item asking the same question. That covariance comes from the design, not from the fit statistics. The gender items are set aside from the network factors and reported as a sensitivity check. The model fits the remaining 32 items with CFI = .915, RMSEA = .080 {[}.078, .083{]}, and SRMR = .072 (scaled $\chi^2$(433) = 3956.0). That fit is adequate but not strong. Table 5 reports the standardized loadings, and every item loads on its assigned factor at .60 or above.
+
+The weak-tie factors correlate at .82 (liberal and variety), .62 (variety and conservative), and .69 (liberal and conservative), and the strong-tie factors correlate at .76, .68, and .64 in the same order. Factors of the same type correlate across tie types at .84 for variety, .73 for liberal, and .74 for conservative, so the two batteries measure much the same ideological and ethnic structure. Reliability is good for the variety factors (omega = .90 for weak ties and .91 for strong ties) and for the weak-tie liberal and conservative factors (.85 and .79). The strong-tie liberal factor is the thinnest, with four items and omega = .79, and estimates that depend on it should be read with that in mind.
+
+Two sources of misfit remain. The liberal and conservative items include antonym pairs, such as very liberal and very conservative, whose responses share variance beyond the factors, and the joint model does not free those residuals because they were not specified in the design. The joint model is the measurement model for the structural analyses that follow.
+
+Table 5. Standardized Loadings from the Joint Weak-and-Strong Measurement Model
+
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Item & Weak factor & Loading & Strong factor & Loading \\
+\midrule
+Asian people & Variety & 0.79 & Variety & 0.78 \\
+Second home & Variety & 0.70 & Variety & 0.72 \\
+Born elsewhere & Variety & 0.76 & Variety & 0.78 \\
+Middle Eastern or North African people & Variety & 0.84 & Variety & 0.87 \\
+Native Hawaiian or Pacific Islander people & Variety & 0.84 & Variety & 0.83 \\
+American Indian people & Variety & 0.77 & Variety & 0.80 \\
+LGBTQ people & Liberal & 0.69 & Liberal & 0.70 \\
+Little church & Liberal & 0.64 & Liberal & 0.68 \\
+Very liberal & Liberal & 0.71 & Liberal & 0.73 \\
+Hispanic or Latine people & Liberal & 0.77 & Variety & 0.73 \\
+Black people & Liberal & 0.78 & Variety & 0.74 \\
+City people & Liberal & 0.72 & Liberal & 0.76 \\
+Lots of church & Conservative & 0.84 & Conservative & 0.83 \\
+Very conservative & Conservative & 0.74 & Conservative & 0.73 \\
+White people & Conservative & 0.82 & Conservative & 0.77 \\
+Rural people & Conservative & 0.60 & Conservative & 0.62 \\
+\bottomrule
+\end{tabular}
+
+Note. Standardized loadings from the joint weak-and-strong CFA (WLSMV, N = 1,258). Gender items are excluded from the network factors. Item labels are abbreviated from the variable names and should be checked against the question wording.
+
+\end{document}

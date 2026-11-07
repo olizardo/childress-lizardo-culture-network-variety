@@ -82,7 +82,8 @@ make_dat <- function(outcome_col) {
 # Variant A: two-item PCA (walk + exercise)
 # ------------------------------------------------------------------------
 message("[1/4] Variant A: two-item PCA score...")
-faA <- principal(df[c("go_for_walk", "exercise_or_yoga")], nfactors = 1, scores = TRUE)
+source("Scripts/poly_helpers.R")
+faA <- poly_pca(df[c("go_for_walk", "exercise_or_yoga")], nfactors = 1, rotate = "none")
 if (unclass(faA$loadings)["go_for_walk", 1] < 0) {
   faA$scores[, 1] <- -faA$scores[, 1]
 }
@@ -102,7 +103,7 @@ df$sol_leis_B <- as.numeric(scale(rowMeans(do.call(cbind, z3))))
 message("[3/4] Variant C: 19-item activities PCA (reading dropped)...")
 items19 <- setdiff(prep$activity_items, "read_novel_poem_or_play")
 act19 <- as.data.frame(df[items19])
-faC <- principal(act19, nfactors = 3, rotate = "varimax", scores = TRUE)
+faC <- poly_pca(act19, nfactors = 3, rotate = "varimax")
 lmC <- unclass(faC$loadings)
 # Relabel with the same anchors as 01_prepare_data.R
 leisure_id   <- unname(which.max(colMeans(lmC[c("go_for_walk", "exercise_or_yoga"), ])))

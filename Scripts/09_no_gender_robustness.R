@@ -57,6 +57,8 @@ fit_four_models <- function(outcome, data) {
 # ------------------------------------------------------------------------
 message("[1/3] Refitting tie factor models without gender items...")
 
+source("Scripts/poly_helpers.R")
+
 label_tie_factors <- function(loadings_mat, suffix) {
   anchors <- list(
     variety      = paste0(c("KnowHawaiiPI", "KnowAmIndianppl", "KnowMENAppl"), suffix),
@@ -68,7 +70,7 @@ label_tie_factors <- function(loadings_mat, suffix) {
 
 refit_ties <- function(items16, suffix) {
   X <- as.data.frame(df[items16])
-  fa <- principal(X, nfactors = 3, rotate = "varimax", scores = TRUE)
+  fa <- poly_pca(X, nfactors = 3, rotate = "varimax")
   idx <- label_tie_factors(unclass(fa$loadings), suffix)
   stopifnot(length(unique(idx)) == 3)
   lapply(stats::setNames(names(idx), names(idx)), function(fid) {
