@@ -1,0 +1,58 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+Observed polyserial corr(poli, item):
+     KnowAsianppl_weak       Know2ndHome_weak KnowBornElsewhere_weak 
+                 -0.04                   0.14                  -0.01 
+      KnowMENAppl_weak      KnowHawaiiPI_weak   KnowAmIndianppl_weak 
+                  0.01                   0.06                   0.08 
+        KnowLGBTQ_weak  KnowLittleChurch_weak       KnowVeryLib_weak 
+                 -0.31                  -0.11                  -0.43 
+  KnowHispanixppl_weak      KnowBlackppl_weak       KnowCityppl_weak 
+                 -0.11                  -0.07                  -0.06 
+  KnowLotsaChurch_weak      KnowVeryCons_weak      KnowWhiteppl_weak 
+                  0.23                   0.43                   0.04 
+     KnowRuralppl_weak 
+                  0.09 
+
+--- implied corr(poli, item), ESEM-with-regressions ---
+     KnowAsianppl_weak       Know2ndHome_weak KnowBornElsewhere_weak 
+                  0.20                  -0.21                   0.22 
+      KnowMENAppl_weak      KnowHawaiiPI_weak   KnowAmIndianppl_weak 
+                  0.07                  -0.06                  -0.15 
+        KnowLGBTQ_weak  KnowLittleChurch_weak       KnowVeryLib_weak 
+                  0.56                   0.28                   0.60 
+  KnowHispanixppl_weak      KnowBlackppl_weak       KnowCityppl_weak 
+                  0.34                   0.18                   0.25 
+  KnowLotsaChurch_weak      KnowVeryCons_weak      KnowWhiteppl_weak 
+                 -0.34                  -0.59                  -0.02 
+     KnowRuralppl_weak 
+                 -0.18 
+max |implied - observed| = 1.027
+
+--- implied corr(poli, item), CFA-with-regressions ---
+     KnowAsianppl_weak       Know2ndHome_weak KnowBornElsewhere_weak 
+                  0.04                   0.03                   0.03 
+      KnowMENAppl_weak      KnowHawaiiPI_weak   KnowAmIndianppl_weak 
+                  0.04                   0.04                   0.03 
+        KnowLGBTQ_weak  KnowLittleChurch_weak       KnowVeryLib_weak 
+                 -0.19                  -0.17                  -0.21 
+  KnowHispanixppl_weak      KnowBlackppl_weak       KnowCityppl_weak 
+                 -0.21                  -0.20                  -0.18 
+  KnowLotsaChurch_weak      KnowVeryCons_weak      KnowWhiteppl_weak 
+                  0.24                   0.24                   0.23 
+     KnowRuralppl_weak 
+                  0.17 
+max |implied - observed| = 0.224
+
+ESEM regression estimates (est, std.all, p):
+   lhs    est std.all pvalue
+49  Wv -0.045  -0.081  0.137
+50  Wl  0.505   0.674  0.000
+51  Wc -0.328  -0.510  0.000
+
+CFA regression estimates (est, std.all, p):
+   lhs    est std.all pvalue
+17  Wv  0.025   0.046  0.136
+18  Wl -0.159  -0.277  0.000
+19  Wc  0.174   0.300  0.000
+
+Done.

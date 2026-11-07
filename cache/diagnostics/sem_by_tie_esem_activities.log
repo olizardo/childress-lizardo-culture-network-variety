@@ -1,0 +1,139 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+
+===== weak ties with ESEM activities block, N = 1227 =====
+converged=TRUE npar=341
+CFI=0.923 TLI=0.944 RMSEA=0.051 [0.049, 0.052] SRMR=0.052
+Latent covariance matrix positive definite: TRUE 
+
+Network-to-activity paths:
+ lhs rhs    est    se   pvalue std.all
+   A  Wv  1.142 0.188 1.30e-09   0.894
+   A  Wl -0.865 0.217 6.68e-05  -0.635
+   A  Wc  0.140 0.099 1.60e-01   0.105
+ Lis  Wv -0.192 0.183 2.93e-01  -0.201
+ Lis  Wl  0.370 0.268 1.67e-01   0.363
+ Lis  Wc  0.053 0.169 7.53e-01   0.054
+   R  Wv  0.324 0.173 6.13e-02   0.315
+   R  Wl -0.351 0.204 8.57e-02  -0.321
+   R  Wc  0.052 0.159 7.43e-01   0.049
+Joint Wald for A    network block: chi2(3) = 103.74, p = 2.436e-22
+Joint Wald for Lis  network block: chi2(3) = 18.95, p = 0.0002804
+Joint Wald for R    network block: chi2(3) = 4.47, p = 0.2146
+
+Network factor residual correlations:
+ lhs rhs std.all
+  Wv  Wl   0.834
+  Wv  Wc   0.600
+  Wl  Wc   0.779
+
+Demographic paths on activity factors:
+ lhs                      rhs    est    se   pvalue
+   A              gender_fMan -0.176 0.090 4.97e-02
+   A gender_fNon.binary.Trans  0.413 0.330 2.11e-01
+   A                 educ_ord  0.325 0.060 5.04e-08
+   A               child_arts  0.150 0.026 1.03e-08
+   A                   income  0.007 0.016 6.67e-01
+   A                     age2  0.001 0.004 7.41e-01
+   A              race_fblack -0.045 0.149 7.61e-01
+   A             race_flatine  0.050 0.191 7.95e-01
+   A               race_fAAPI -0.728 0.214 6.49e-04
+   A        race_fmixed.other -0.072 0.125 5.66e-01
+   A                     poli -0.139 0.056 1.36e-02
+ Lis              gender_fMan -0.027 0.106 8.02e-01
+ Lis gender_fNon.binary.Trans  0.125 0.347 7.19e-01
+ Lis                 educ_ord -0.023 0.090 7.99e-01
+ Lis               child_arts  0.028 0.030 3.55e-01
+ Lis                   income -0.021 0.014 1.34e-01
+ Lis                     age2 -0.012 0.008 1.18e-01
+ Lis              race_fblack  0.536 0.312 8.65e-02
+ Lis             race_flatine  0.184 0.284 5.18e-01
+ Lis               race_fAAPI -0.454 0.211 3.12e-02
+ Lis        race_fmixed.other -0.359 0.183 5.01e-02
+ Lis                     poli -0.025 0.069 7.15e-01
+   R              gender_fMan  0.190 0.156 2.24e-01
+   R gender_fNon.binary.Trans -0.588 0.545 2.80e-01
+   R                 educ_ord  0.004 0.080 9.58e-01
+   R               child_arts -0.015 0.033 6.48e-01
+   R                   income  0.042 0.021 4.09e-02
+   R                     age2 -0.025 0.014 7.04e-02
+   R              race_fblack  0.476 0.354 1.79e-01
+   R             race_flatine  0.388 0.358 2.79e-01
+   R               race_fAAPI -0.056 0.229 8.07e-01
+   R        race_fmixed.other -0.246 0.166 1.39e-01
+   R                     poli  0.103 0.061 8.96e-02
+
+EFA activity factor correlations:
+        A   Lis     R
+A   1.000 0.209 0.237
+Lis 0.209 1.000 0.058
+R   0.237 0.058 1.000
+
+===== strong ties with ESEM activities block, N = 1227 =====
+converged=TRUE npar=341
+CFI=0.922 TLI=0.944 RMSEA=0.051 [0.050, 0.053] SRMR=0.051
+Latent covariance matrix positive definite: TRUE 
+
+Network-to-activity paths:
+ lhs rhs    est    se   pvalue std.all
+   A  Sv  0.932 0.158 3.61e-09   0.717
+   A  Sl -0.411 0.273 1.32e-01  -0.314
+   A  Sc  0.004 0.160 9.78e-01   0.004
+ Lis  Sv -0.370 0.837 6.58e-01  -0.377
+ Lis  Sl  0.445 1.136 6.95e-01   0.450
+ Lis  Sc  0.039 0.355 9.12e-01   0.041
+   R  Sv  0.003 0.283 9.91e-01   0.003
+   R  Sl  0.138 0.422 7.44e-01   0.138
+   R  Sc -0.109 0.116 3.47e-01  -0.113
+Joint Wald for A    network block: chi2(3) = 189.33, p = 8.538e-41
+Joint Wald for Lis  network block: chi2(3) = 5.49, p = 0.1395
+Joint Wald for R    network block: chi2(3) = 0.90, p = 0.8263
+
+Network factor residual correlations:
+ lhs rhs std.all
+  Sv  Sl   0.780
+  Sv  Sc   0.708
+  Sl  Sc   0.740
+
+Demographic paths on activity factors:
+ lhs                      rhs    est    se   pvalue
+   A              gender_fMan -0.106 0.105 3.12e-01
+   A gender_fNon.binary.Trans  0.394 0.659 5.50e-01
+   A                 educ_ord  0.412 0.059 3.39e-12
+   A               child_arts  0.149 0.026 5.93e-09
+   A                   income  0.033 0.020 8.96e-02
+   A                     age2  0.000 0.005 9.60e-01
+   A              race_fblack -0.347 0.156 2.62e-02
+   A             race_flatine -0.328 0.369 3.74e-01
+   A               race_fAAPI -0.553 0.374 1.39e-01
+   A        race_fmixed.other -0.144 0.340 6.72e-01
+   A                     poli -0.036 0.153 8.14e-01
+ Lis              gender_fMan  0.022 0.108 8.35e-01
+ Lis gender_fNon.binary.Trans  0.360 0.770 6.41e-01
+ Lis                 educ_ord  0.033 0.065 6.07e-01
+ Lis               child_arts  0.031 0.030 3.08e-01
+ Lis                   income  0.011 0.053 8.41e-01
+ Lis                     age2 -0.011 0.006 7.89e-02
+ Lis              race_fblack  0.198 0.274 4.72e-01
+ Lis             race_flatine -0.200 0.507 6.94e-01
+ Lis               race_fAAPI -0.558 0.721 4.39e-01
+ Lis        race_fmixed.other -0.562 0.715 4.32e-01
+ Lis                     poli -0.060 0.166 7.18e-01
+   R              gender_fMan  0.153 0.320 6.34e-01
+   R gender_fNon.binary.Trans -0.588 1.484 6.92e-01
+   R                 educ_ord -0.014 0.305 9.64e-01
+   R               child_arts -0.010 0.079 9.00e-01
+   R                   income  0.044 0.087 6.16e-01
+   R                     age2 -0.025 0.069 7.16e-01
+   R              race_fblack  0.532 1.441 7.12e-01
+   R             race_flatine  0.483 1.218 6.92e-01
+   R               race_fAAPI -0.051 0.323 8.74e-01
+   R        race_fmixed.other -0.207 0.814 7.99e-01
+   R                     poli  0.016 0.191 9.35e-01
+
+EFA activity factor correlations:
+        A   Lis    R
+A   1.000 0.193 0.14
+Lis 0.193 1.000 0.10
+R   0.140 0.100 1.00
+
+Done.

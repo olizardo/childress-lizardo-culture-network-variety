@@ -1,0 +1,62 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+Observed polyserial corr(poli, item):
+     KnowAsianppl_weak       Know2ndHome_weak KnowBornElsewhere_weak 
+                 -0.04                   0.14                  -0.01 
+      KnowMENAppl_weak      KnowHawaiiPI_weak   KnowAmIndianppl_weak 
+                  0.01                   0.06                   0.08 
+        KnowLGBTQ_weak  KnowLittleChurch_weak       KnowVeryLib_weak 
+                 -0.31                  -0.11                  -0.43 
+  KnowHispanixppl_weak      KnowBlackppl_weak       KnowCityppl_weak 
+                 -0.11                  -0.07                  -0.06 
+  KnowLotsaChurch_weak      KnowVeryCons_weak      KnowWhiteppl_weak 
+                  0.23                   0.43                   0.04 
+     KnowRuralppl_weak 
+                  0.09 
+
+===== variant: fxTRUE =====
+Regression estimates:
+   lhs    est std.all pvalue
+49  Wv -0.045  -0.081  0.137
+50  Wl  0.505   0.674  0.000
+51  Wc -0.328  -0.510  0.000
+Implied vs observed corr(poli, item):
+                      implied observed  resid
+KnowVeryLib_weak        0.598   -0.429 -1.027
+KnowVeryCons_weak      -0.594    0.429  1.023
+KnowLGBTQ_weak          0.555   -0.314 -0.869
+KnowLotsaChurch_weak   -0.338    0.227  0.565
+KnowHispanixppl_weak    0.339   -0.107 -0.446
+KnowLittleChurch_weak   0.280   -0.110 -0.390
+max |implied - observed| = 1.027
+fit: chi2=544.8 df=88 CFI=0.972 RMSEA=0.065 SRMR=0.035
+
+===== variant: fxFALSE_regress =====
+FAILED: lavaan->lav_options_set():  
+   fixed_x = FALSE is not supported when conditional_x = TRUE.
+
+===== variant: fxFALSE_regr_covs =====
+Regression estimates:
+   lhs    est std.all pvalue
+49  Wv  0.007   0.012  0.923
+50  Wl -0.017  -0.030  0.735
+51  Wc  0.012   0.022  0.884
+Implied vs observed corr(poli, item):
+                      implied observed  resid
+KnowVeryLib_weak       -0.027   -0.429 -0.403
+KnowVeryCons_weak       0.029    0.429  0.400
+KnowLGBTQ_weak         -0.023   -0.314 -0.290
+KnowLotsaChurch_weak    0.017    0.227  0.210
+Know2ndHome_weak        0.013    0.138  0.125
+KnowLittleChurch_weak  -0.011   -0.110 -0.099
+max |implied - observed| = 0.403
+fit: chi2=NA df=85 CFI=NA RMSEA=NA SRMR=0.032
+Warning messages:
+1: lavaan->lav_test_sb():  
+   could not invert information matrix needed for robust test statistic 
+2: lavaan->lav_model_vcov():  
+   The variance-covariance matrix of the estimated parameters (vcov) does not 
+   appear to be positive definite! The smallest eigenvalue (= -6.416572e-03) 
+   is smaller than zero. This may be a symptom that the model is not 
+   identified. 
+
+Done.

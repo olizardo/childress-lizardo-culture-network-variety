@@ -1,0 +1,37 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+===== Part 1. Unadjusted fit indices for the set-ESEM structural models =====
+
+--- Separate set-ESEM, weak ties ---
+chisq=2268.2 df=843 CFI=0.987 TLI=0.990 RMSEA=0.037 [0.035, 0.039] SRMR=0.037
+--- Separate set-ESEM, strong ties ---
+chisq=2336.8 df=843 CFI=0.987 TLI=0.990 RMSEA=0.038 [0.036, 0.040] SRMR=0.040
+
+CFA measurement baselines, no-gender models (scaled indices; from cache/diagnostics/separate_tie_measurement_cfa.rds):
+                     tie    N   CFI RMSEA  SRMR   VL   VC   LC
+weak.cfi.scaled     weak 1258 0.909 0.111 0.072 0.81 0.62 0.69
+strong.cfi.scaled strong 1258 0.919 0.106 0.071 0.76 0.68 0.64
+
+===== Part 2. Model-implied composite reliability (omega) per EFA factor =====
+
+--- weak ties, ESEM (pst target) ---
+Factor f1: omega = 0.932 (target-only variant 0.920)
+Factor f2: omega = 0.908 (target-only variant 0.876)
+Factor f3: omega = 0.896 (target-only variant 0.870)
+--- strong ties, ESEM (pst target) ---
+Factor f1: omega = 0.943 (target-only variant 0.936)
+Factor f2: omega = 0.876 (target-only variant 0.839)
+Factor f3: omega = 0.883 (target-only variant 0.858)
+
+CFA-baseline omegas (script 07, compRelSEM):
+        model       factor     omega
+1  Activities         arts 0.9571238
+2  Activities      leisure 0.3885127
+3  Activities     residual 0.5450802
+4   Weak ties      variety 0.8977908
+5   Weak ties      liberal 0.8653848
+6   Weak ties conservative 0.8096762
+7 Strong ties      variety 0.9173015
+8 Strong ties      liberal 0.7939532
+9 Strong ties conservative 0.8590900
+
+Done.

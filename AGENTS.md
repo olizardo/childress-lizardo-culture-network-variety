@@ -287,3 +287,98 @@ Treat the scripts and logs as the authority over this summary.
 - README.md now has a renv section, a script run order (01 through 09, then the audit), and a rewritten software requirements section.
 - Run scripts with `sys.source()` in an isolated environment from an interactive session, or with `Rscript` from the repository root.
 
+## 16. Network Measurement, SEM, and Results Draft (November 7, 2026)
+
+These decisions supersede earlier notes in this file where they conflict, in particular the pooled-oblimin sorting and the joint-model statements in Sections 13 and 14.
+
+**Measurement model (settled).**
+- Separate weak-tie and strong-tie measurement models, each with three factors (variety, liberal, conservative). Item sorting is the script 07 per-battery sorting (`cache/07_reliability_cfa.rds`, `structures`). Gender items (Knowmen_, Knowwomen_) are excluded, leaving 16 items per tie type. No cross-tie residuals.
+- Baseline fit (N = 1,258): weak CFI .909, RMSEA .111, SRMR .072; strong CFI .919, RMSEA .106, SRMR .071. Both are admissible. Weak factor correlations .81 (V–L), .62 (V–C), .69 (L–C); strong .76, .68, .64. Omega weak .90/.85/.79, strong .91/.79/.80.
+- Antonym sensitivity: three residual covariances freed within each battery, chosen from item labels (very liberal with very conservative; little church with lots of church; city with rural). Full-sample fit weak CFI .915, RMSEA .108; strong .928, .101. The little church pair is weak (weak .10, strong −.05) and does not replicate in sign. It remains in the specification pending the author's decision on reporting.
+- Holdout checks on random halves (seed 4217) show the antonym gain replicates in both directions.
+- The joint six-factor measurement model (weak and strong factors in one CFA) is not admissible: the latent covariance matrix is not positive definite, and cross-tie same-factor correlations approach .84 to .96. Do not report it. Freeing residuals or using the varimax item-level sorting did not fix this. Scripts: `Scripts/diagnostics/joint_*` outputs under `cache/diagnostics/`.
+
+**Structural models (settled for reporting).**
+- Separate weak-tie and strong-tie SEMs on the script 07 sorting: `Scripts/diagnostics/sem_by_tie_script07.R` (baseline and antonym-freed runs in one script; caches `cache/diagnostics/sem_by_tie_script07.rds`). Both admissible. Weak CFI .906, RMSEA .055; strong CFI .903, RMSEA .056.
+- The older `Scripts/diagnostics/sem_by_tie_strength.R` uses the pooled oblimin sorting and is superseded for reporting.
+- The full six-factor SEM (`Scripts/diagnostics/sem_full_six_factor.R`) is not admissible (non-positive-definite latent covariance; conservative weak–strong residual correlation 1.007). Do not report it.
+- Education enters the SEM as one ordinal variable (`educ_ord`, 1 = HS or less to 4 = graduate degree). This departs from the dummy coding (`educ_cat`) in Tables 1 and 2, and the paper should say so.
+- Other covariates follow `Scripts/02_fit_models.R`: gender (ref. Woman), race (ref. White), `child_arts` numeric, `income` numeric, `age2` (linear age in years; the name is misleading), `poli` numeric 1–7 (1 = very liberal, 7 = very conservative).
+- Collinearity (`Scripts/diagnostics/collinearity_weak_sem.R`): weak-tie VIFs variety 3.4, liberal 5.5, conservative 2.6; condition number 21. The liberal coefficient on arts is negative conditional on variety and positive marginally. Report weak-tie composition effects as conditional on each other.
+- Decomposition (`Scripts/diagnostics/sem_decomposition.R`, checked by `check_decomposition_se.R`): direct effects and network-mediated effects, with mediated effects summed over the three network factors. Delta-method SEs were checked by hand against lavaan and match. Two results are sensitive to covariance among path estimates: the weak-tie leisure aggregate is significant though no single factor path is, and the strong-tie leisure aggregate for political conservatism is not significant though the liberal path is (p = .03). Verify with a bootstrap before reporting either as a finding.
+
+**Terminology (use consistently in prose).**
+- Network factors are variety, liberal composition, and conservative composition. Variety is not a composition term.
+- "Network-mediated effects" for indirect effects. Use "direct effects" for the demographic-to-activity paths.
+- Refer to the predictor as "political conservatism" in interpreted effects (higher = more conservative). Tables and coding sentences keep "political ideology" and the scale "(1 to 7)".
+
+**Results draft (`results_draft.tex`).** Tables and figures as of this update:
+- Table 5: standardized loadings from the separate weak-tie and strong-tie models, with the antonym residuals listed below them.
+- Table 6: standardized network-to-activity paths, six rows, stars for significance, no tie-type column.
+- Tables 7 to 10: demographic predictors of network factors (7, 8 by tie) and activity factors (9, 10 by tie). Stars for significance. Predictor labels: "Political ideology (1 to 7)".
+- Tables 11 and 12: direct and network-mediated effects by tie (weak, strong).
+- Figures 5 to 7: path diagrams for education, childhood arts exposure, and political conservatism (weak ties). Only significant paths are drawn; the note says the network-mediated effects are a subset of the total.
+- Footnotes: the gender-exclusion reason and the no-gender refit results (no network-term significance verdict changes; largest coefficient change .049).
+- All tables are `tabular*` at full text width with fixed column widths. The draft compiles with xelatex (15 pages).
+- Figure and table numbers are provisional and must be reconciled with the live manuscript.
+
+**Open items.**
+- Bootstrap the two sensitive indirect results.
+- Decide whether to report the little church residual (currently listed, not interpreted).
+- Strong-tie figures have not been made. Only weak-tie diagrams exist.
+- Confirm that the paper's coding statement matches the SEM coding (education ordinal, age linear in years).
+- Verify the figures and tables in the live Google Doc; this draft has not been synced to Drive.
+
+
+## 17. ESEM Workstream and the Lavaan Regression Pathology (November 7, 2026)
+
+**Tie ESEMs (computed and validated).** `Scripts/diagnostics/esem_ties_target.R` + `cache/diagnostics/esem_ties_target.{rds,log}`: target-rotation ESEMs for the weak- and strong-tie batteries (script 07 sorting, 16 items, gender excluded, WLSMV, N = 1,258). Weak: chi2(75) = 428.6, CFI .979, RMSEA .061 [.056, .067], SRMR .029. Strong: chi2(75) = 520.6, CFI .975, RMSEA .069 [.063, .074], SRMR .033. Scaled SB2001-style difference vs the three-factor CFAs: 857.9 (26 df) weak, 693.1 (26 df) strong, both p < .001. The November "target ignored" note is resolved: lavaan 0.7-3's `efa()` has no strict target; `target.strict` and NA/0 matrices are silently downgraded to PST with a warning. PST pulls off-target zeros toward zero but does not pin them; off-target max |loading| is .41 (weak) and .36 (strong), carried by real cross-loadings (Hispanic/Black/city straddling variety and liberal; White on liberal). Factor correlations drop sharply vs the CFA (weak V-L .52 vs .81; strong .48 vs .76). The activities ESEM retains up to .32 off-target loadings under the same PST semantics.
+
+**Set-ESEM structural models (partly untrustworthy, see pathology below).** `Scripts/diagnostics/sem_set_esem_full.R` + `cache/diagnostics/sem_set_esem_full.{rds,log}`: joint three-block model (weak + strong + activities EFA blocks) is again inadmissible (min eigenvalue -.13; weak-strong same-factor residual correlations 1.09/.96), replicating the six-factor CFA failure. Separate by-tie set-ESEM models converge, positive definite, SRMR .037/.040, unadjusted ML-discrepancy fit (robust scaled correction unavailable even with `information = "expected"`): weak CFI .987 / RMSEA .037 [.035, .039], strong CFI .987 / RMSEA .038 [.036, .040] (df 843 each). Network-to-activity paths: weak variety .554***, weak liberal -.358*** (conditional negative survives; V-L residual correlation .58 vs .83 under CFA), weak conservative n.s.; strong variety .577**, strong liberal n.s. (-.235), strong conservative n.s. All residual-factor and strong-leisure blocks null. ESEM omegas (model-implied, `esem_reliability.R`): weak V .932 / L .908 / C .896; strong V .943 / L .876 / C .883.
+
+**CRITICAL: lavaan 0.7-3 regression pathology onto EFA blocks.** `Scripts/diagnostics/esem_regression_pathology_check.R` + log/rds: with `fixed.x = TRUE`, covariate regressions onto EFA-block factors produce estimates that contradict the item-level associations. Minimal weak-tie reproduction with poli alone: observed polyserial corr(poli, KnowVeryCons) = +.43 and (KnowVeryLib) = -.43, but the ESEM-with-regressions fit implies corr(poli, VeryLib item) = +.60 and (VeryCons item) = -.59 (max residual 1.03); the otherwise identical CFA model implies the correct signs (max residual .22). Diagnosis: the rotation criterion is evaluated on the model-implied latent covariance of the block, which depends on the regression coefficients, so the optimizer trades rotation simplicity against regression fit; Mplus additionally correlates covariates freely with factors, which lavaan does not under fixed.x = TRUE. Consequence: the demographic-to-network paths in the set-ESEM models (e.g., poli to liberal +.52, to conservative -.15, opposite of the CFA signs and the raw data) are NOT trustworthy. Demographic-to-activity paths in the same models kept plausible signs; network-to-activity paths agreed in direction and significance with the CFA baseline across all specifications, but any covariate-path-onto-EFA-block result in this lavaan version should be treated as suspect.
+
+**Antonym residuals under ESEM.** Weak: freeing them barely moves SRMR (.037 to .036) and the very liberal/very conservative residual flips sign (+.13, was -.32 under CFA), i.e., the cross-loadings absorb most of the bipolarity; city-rural stays strongly negative (-.25). Strong: the antonym-freed refit is numerically unstable (SEs up to 11) and not reportable. The antonym analysis belongs in the CFA appendix, not the ESEM main text.
+
+**Set-ESEM decomposition.** `Scripts/diagnostics/sem_set_esem_decomposition.R` + rds/log: labeled refits reproduce exactly; delta-method direct/network-mediated/total effects computed per tie. Under set-ESEM weak ties: education total .505*** (direct .396***, mediated .108**); childhood arts total .255*** (direct .155***, mediated .100***); political conservatism total on arts -.335*** (direct -.081*, mediated -.254***) — note this reverses the CFA-based positive total (+.09), and given the pathology above the set-ESEM demographic layer (including these mediated decompositions) should not be reported. The two formerly "sensitive" aggregates (weak leisure indirect; strong conservatism leisure) are null under set-ESEM by delta method with modest SEs, so the planned bootstrap has no surviving finding to verify; the bootstrap open item is retired unless the CFA-based decomposition is retained for reporting.
+
+**Status of the ESEM-first plan (updated November 7, 2026, see Section 18).** Measurement section rewritten around the tie ESEMs; the CFA-based SEMs are the main structural results; the set-ESEM structural layer is not reported (lavaan pathology, Section 17). The plan's phases A-C are complete for the draft; the bootstrap (A5) is scripted but not run.
+
+**fixed.x = FALSE test (November 7, 2026).** `Scripts/diagnostics/esem_fixedx_false_test.R` + rds/log: `fixed.x = FALSE` with regressions onto EFA blocks is rejected by lavaan (`fixed_x = FALSE is not supported when conditional_x = TRUE`). With `fixed.x = FALSE` plus explicit `factor ~~ poli` covariances and regressions, the model is not identified (vcov smallest eigenvalue -.0064), and the regression/covariance split is arbitrary (both paths collapse toward zero). Conclusion: no viable lavaan 0.7-3 route to trustworthy covariate effects on EFA-block factors; the ESEM structural layer is out for this toolchain.
+
+**Validation section rewritten around the tie ESEMs (November 7, 2026).** `results_draft.tex` Section "Factor Validation of Network Composition" now reports the target-rotated tie ESEMs as the measurement models (new Table 5: loadings for both batteries; primary loadings bold). The simple-structure CFAs and the antonym-residual analysis moved to Appendix Table A1. The structural models remain on the confirmatory factors (main results). A robustness paragraph reports the network-to-activity paths re-estimated on the ESEM blocks.
+
+**Correction to the set-ESEM robustness reading.** An earlier note said the network-to-activity paths agreed with the CFA baseline "in direction and significance across all specifications." That is wrong for two estimates. Under the set-ESEM blocks, the strong-tie liberal path on arts is −.24 with p = .65 (CFA: −.27, p < .001), and the strong-tie joint test for solitary leisure is χ²(3) = 6.4, p = .095 (CFA: significant). The weak-tie variety and liberal paths remain significant (.55 and −.36 against .85 and −.58 under CFA). Report the attenuation and the loss of significance as they stand.
+
+
+## 18. Validation Rewrite, Style Pass, and Hoffman2 Setup (November 7, 2026, later session)
+
+**Decisions.** Tie ESEMs (target rotation) are the primary measurement models. Confirmatory three-factor SEMs (script 07 sorting, gender excluded) are the main structural results. The set-ESEM structural models are not reported, because covariate paths onto EFA blocks are pathological in lavaan 0.7-3 and the fixed.x = FALSE variant is not identified.
+
+**Draft (`results_draft.tex`, 19 pages, xelatex clean; local file only, not synced to Drive).**
+- Section "Factor Validation of Network Composition" rewritten around the ESEMs. Table 5 = ESEM loadings for both batteries (primary loadings bold). Factor correlations: weak .52/.46/.47; strong .48/.54/.34. Fit: weak CFI .979, RMSEA .061; strong CFI .975, RMSEA .069. Scaled difference vs CFA: 857.9 and 693.1 on 26 df.
+- Appendix Table A1 holds the confirmatory loadings and antonym residuals.
+- Structural section states that the models run on the confirmatory factors, and adds a robustness paragraph with the ESEM-block estimates: weak variety .55***, weak liberal −.36***, weak conservative n.s.; weak leisure joint χ²(3) = 15.9, p = .001; strong variety .58 (p = .005); strong liberal −.24 (p = .65); strong leisure joint χ²(3) = 6.4, p = .095; residual paths null.
+- Figures 8–10 added: strong-tie paths from the confirmatory Tables 6, 8, and 12.
+- Gender footnote corrected to weak CFI .896, RMSEA .116 (earlier .891/.119 was stale). Strong-tie values .918/.105 unchanged.
+- Confirmatory p-values verified against `cache/diagnostics/sem_by_tie_script07.rds`: weak liberal → leisure p = .10; strong liberal → leisure p = .02 (text had .03, corrected). Joint leisure χ²(3): weak 34.2, strong 28.6; residual: weak 52.5, strong 70.0; arts: 137.1 and 207.3.
+- Coding statement verified: age2 is age in years (17–81), politics 1–7, educ_cat four levels (ordinal 1–4 in SEM), income a 1–13 bracket entered linearly.
+- Style pass: removed hyperbole ("stark", "commanding", "unmistakable", "remarkably", "intriguing", "sharply", "strongly predicts"), "Crucially", and a sentence-initial "These". The pre-pass copy is in the session scratch directory, not in the project.
+- Build artifacts (`results_draft.aux`, `.fls`, `.log`, `.fdb_latexmk`) are tracked by git. Consider untracking them.
+
+**Bootstrap (not run).** `Scripts/diagnostics/bootstrap_cfa_decomposition.R` targets ind_Lis_arts (weak) and ind_Lis_poli (strong) and bootstraps all direct, indirect, and total effects. It uses a PSOCK cluster with core count from BOOT_CORES. Forked mclapply runs halted silently in this environment. Local attempts were stopped.
+
+**Hoffman2 setup (this project's compute route).**
+- The `hoffman2` alias resolves to login.hoffman2.OARC.ucla.edu. Key authentication works. The old-domain note in the global memory is stale.
+- Submit with Slurm without `-p`. The account pi_olizardo routes to the campus QOS (campus24).
+- R 4.6.1 is at `/u/local/apps/R/4.6.1/gcc-11.5.0_intel-2026.2.0/bin`. `module load` does not work in a non-login shell, so set PATH directly.
+- lavaan 0.7.3 (the 0.7-3 release) is installed at `~/R/x86_64-pc-linux-gnu-library/4.5`, built under R 4.6.1. Set R_LIBS to that path.
+- Run with `Rscript --vanilla`. The project `.Rprofile` activates renv and bootstraps renv, which hides lavaan.
+- The project is copied to `~/childress-lizardo-culture-network-variety` (326 MB, excluding .git and cache/archive*). That copy predates the style pass. Re-sync before any run.
+- A 40-minute smoke-test allocation (job 1018254) may still be running. Cancelling it was blocked, so it needs a manual `scancel`.
+
+**Open items.**
+- Run the bootstrap on Hoffman2 (R 4.6.1, 1,000 draws per tie, BOOT_CORES set to the allocation) or locally, then update the two indirect-effect claims in the decomposition text (around the weak leisure childhood-arts aggregate and the strong conservatism leisure aggregate).
+- Decide whether to report the little-church residual (currently listed, not interpreted).
+- Reconcile table and figure numbering with the live Google Doc, then sync. This needs author approval for Drive writes.
+- The variety-only df discrepancy (Section 14) is not cited in the draft and does not block the draft.

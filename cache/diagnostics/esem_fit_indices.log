@@ -1,0 +1,112 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+
+===== weak, information = default =====
+converged=TRUE chi2=NA df=843 CFI=NA RMSEA=NA [NA, NA] SRMR=0.037
+Network-to-activity paths (est, se, p, std.all):
+ lhs rhs    est    se pvalue std.all
+   A  Wv  0.722 0.032  0.000   0.554
+   A  Wl -0.354 0.019  0.000  -0.358
+   A  Wc  0.032 0.025  0.201   0.022
+ Lis  Wv -0.039 0.202  0.846  -0.039
+ Lis  Wl  0.241 0.260  0.354   0.320
+ Lis  Wc  0.085 0.133  0.522   0.078
+   R  Wv  0.128 0.352  0.717   0.120
+   R  Wl -0.035 0.323  0.915  -0.043
+   R  Wc -0.095 0.234  0.684  -0.081
+
+===== weak, information = expected =====
+converged=TRUE chi2=NA df=843 CFI=NA RMSEA=NA [NA, NA] SRMR=0.037
+Network-to-activity paths (est, se, p, std.all):
+ lhs rhs    est    se pvalue std.all
+   A  Wv  0.722 0.032  0.000   0.554
+   A  Wl -0.354 0.019  0.000  -0.358
+   A  Wc  0.032 0.025  0.201   0.022
+ Lis  Wv -0.039 0.202  0.846  -0.039
+ Lis  Wl  0.241 0.260  0.354   0.320
+ Lis  Wc  0.085 0.133  0.522   0.078
+   R  Wv  0.128 0.352  0.717   0.120
+   R  Wl -0.035 0.323  0.915  -0.043
+   R  Wc -0.095 0.234  0.684  -0.081
+
+===== weak, antonym residuals =====
+converged=TRUE chi2=NA df=840 CFI=NA RMSEA=NA [NA, NA] SRMR=0.036
+Antonym residual covariances:
+                   lhs                  rhs    est    se   pvalue
+      KnowVeryLib_weak    KnowVeryCons_weak  0.133 0.027 9.68e-07
+ KnowLittleChurch_weak KnowLotsaChurch_weak  0.005 0.022 8.22e-01
+      KnowCityppl_weak    KnowRuralppl_weak -0.246 0.024 0.00e+00
+Network-to-activity paths (est, se, p, std.all):
+ lhs rhs    est    se pvalue std.all
+   A  Wv  0.716 0.032  0.000   0.553
+   A  Wl -0.329 0.019  0.000  -0.337
+   A  Wc  0.006 0.027  0.811   0.004
+ Lis  Wv -0.038 0.184  0.838  -0.038
+ Lis  Wl  0.232 0.224  0.301   0.309
+ Lis  Wc  0.097 0.135  0.471   0.087
+   R  Wv  0.121 0.343  0.724   0.113
+   R  Wl -0.022 0.309  0.944  -0.027
+   R  Wc -0.109 0.246  0.658  -0.091
+Latent covariance positive definite: TRUE (min eigenvalue 0.3597)
+
+===== strong, information = default =====
+converged=TRUE chi2=NA df=843 CFI=NA RMSEA=NA [NA, NA] SRMR=0.040
+Network-to-activity paths (est, se, p, std.all):
+ lhs rhs    est    se  pvalue std.all
+   A  Sv  0.721 0.258 0.00513   0.577
+   A  Sl -0.272 0.596 0.64800  -0.235
+   A  Sc  0.018 0.360 0.96000   0.018
+ Lis  Sv -0.178 0.355 0.61600  -0.174
+ Lis  Sl  0.305 0.774 0.69400   0.322
+ Lis  Sc  0.069 0.334 0.83700   0.085
+   R  Sv  0.202 0.317 0.52500   0.180
+   R  Sl -0.008 0.777 0.99100  -0.008
+   R  Sc -0.052 0.817 0.94900  -0.059
+
+===== strong, information = expected =====
+converged=TRUE chi2=NA df=843 CFI=NA RMSEA=NA [NA, NA] SRMR=0.040
+Network-to-activity paths (est, se, p, std.all):
+ lhs rhs    est    se  pvalue std.all
+   A  Sv  0.721 0.258 0.00513   0.577
+   A  Sl -0.272 0.596 0.64800  -0.235
+   A  Sc  0.018 0.360 0.96000   0.018
+ Lis  Sv -0.178 0.355 0.61600  -0.174
+ Lis  Sl  0.305 0.774 0.69400   0.322
+ Lis  Sc  0.069 0.334 0.83700   0.085
+   R  Sv  0.202 0.317 0.52500   0.180
+   R  Sl -0.008 0.777 0.99100  -0.008
+   R  Sc -0.052 0.817 0.94900  -0.059
+
+===== strong, antonym residuals =====
+converged=TRUE chi2=NA df=840 CFI=NA RMSEA=NA [NA, NA] SRMR=0.039
+Antonym residual covariances:
+                     lhs                    rhs    est    se pvalue
+      KnowVeryLib_strong    KnowVeryCons_strong  0.164 2.545 0.9490
+ KnowLittleChurch_strong KnowLotsaChurch_strong -0.040 0.188 0.8300
+      KnowCityppl_strong    KnowRuralppl_strong -0.268 0.150 0.0747
+Network-to-activity paths (est, se, p, std.all):
+ lhs rhs    est     se pvalue std.all
+   A  Sv  0.723  1.981  0.715   0.577
+   A  Sl -0.249  5.229  0.962  -0.209
+   A  Sc -0.015  2.835  0.996  -0.015
+ Lis  Sv -0.169  7.485  0.982  -0.168
+ Lis  Sl  0.285 11.274  0.980   0.297
+ Lis  Sc  0.088  1.697  0.958   0.111
+   R  Sv  0.189  1.166  0.871   0.170
+   R  Sl  0.002  3.612  1.000   0.002
+   R  Sc -0.061  7.388  0.993  -0.069
+Latent covariance positive definite: TRUE (min eigenvalue 0.3125)
+Warning messages:
+1: lavaan->lav_test_sb():  
+   could not invert information matrix needed for robust test statistic 
+2: lavaan->lav_test_sb():  
+   could not invert information matrix needed for robust test statistic 
+3: lavaan->lav_test_sb():  
+   could not invert information matrix needed for robust test statistic 
+4: lavaan->lav_test_sb():  
+   could not invert information matrix needed for robust test statistic 
+5: lavaan->lav_test_sb():  
+   could not invert information matrix needed for robust test statistic 
+6: lavaan->lav_test_sb():  
+   could not invert information matrix needed for robust test statistic 
+
+Done.
