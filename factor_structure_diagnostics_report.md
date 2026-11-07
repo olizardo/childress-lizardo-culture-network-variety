@@ -322,3 +322,76 @@ The single-item estimate is on a latent-response scale for an ordered observed o
 - `Scripts/diagnostics/model7_sem_activities_freed.R` (leisure SEM with reading, with and without freed loadings, Section 13.3)
 - `Scripts/diagnostics/model7_sem_activities_noreading.R` (leisure SEM without reading, with and without freed loadings, Section 13.3)
 - `Scripts/diagnostics/leisure_outcome_alternatives.R` (walking-only and alternative three-item outcomes, Section 13.3)
+
+### 13.5 Demographic Effects, Direct and Indirect (Marker Scaling)
+
+Script: `Scripts/diagnostics/model7_mediation_sem.R` (with reading) and `Scripts/diagnostics/model7_mediation_sem_noreading.R`. Demographics predict the network factors (G, L, C) and both activity factors. Latent factors use marker scaling (`std.lv = FALSE`, first indicator fixed to 1), so arts and leisure effects are in the marker item's metric. Compare direction and significance across outcomes, not magnitudes. Total = direct + sum of indirect paths through G, L, and C. Model CFI .861, RMSEA .060.
+
+Arts participation (with reading):
+
+| Predictor | Direct | Via G | Via L | Via C | Total |
+|---|---|---|---|---|---|
+| Some college | 0.39 (p < .001) | 0.04 | −0.11 | −0.04 | 0.28 (p = .001) |
+| College degree | 0.67 (p < .001) | 0.26 (p < .001) | −0.03 | 0.00 | 0.89 (p < .001) |
+| Graduate degree | 0.66 (p < .001) | 0.37 (p < .001) | 0.06 | 0.01 | 1.09 (p < .001) |
+| Black | −0.36 (p < .001) | 0.15 (p < .001) | 0.15 (p = .001) | 0.22 (p < .001) | 0.15 (p = .05) |
+| Hispanic/Latine | −0.27 (p = .06) | 0.13 (p = .02) | 0.01 | 0.23 (p < .001) | 0.09 (p = .40) |
+| AAPI | −0.78 (p < .001) | 0.07 | 0.13 (p = .04) | 0.29 (p < .001) | −0.30 (p = .006) |
+| Multiracial/other | −0.34 (p < .001) | 0.07 (p = .08) | 0.04 | 0.16 (p < .001) | −0.08 (p = .27) |
+| Politics (per point) | −0.03 (p = .18) | 0.02 (p = .02) | 0.11 (p < .001) | −0.05 (p < .001) | 0.05 (p < .001) |
+
+Solitary leisure (with reading), direct and total only:
+
+| Predictor | Direct | Total |
+|---|---|---|
+| Some college | 0.13 (p = .005) | 0.15 (p = .002) |
+| College degree | 0.28 (p < .001) | 0.32 (p < .001) |
+| Graduate degree | 0.27 (p < .001) | 0.32 (p < .001) |
+| Black | 0.00 | −0.01 |
+| Hispanic/Latine | −0.02 | −0.01 |
+| AAPI | −0.06 | −0.08 |
+| Multiracial/other | 0.02 | 0.01 |
+| Politics (per point) | −0.01 | −0.01 (p = .06) |
+
+Education effects on arts run mostly through direct paths, with the graduate and college effects also carried by variety (G). For race, lower conservative composition among Black, Hispanic/Latine, and AAPI respondents raises arts participation through C, which offsets a large negative direct effect, so the total race effects are small. Politics works through liberal composition (positive) and conservative composition (negative), which largely cancel. For leisure, race and politics have no meaningful total effect.
+
+Mediation paths are cross-sectional, so the indirect effects assume no unmeasured confounding of network composition with arts participation beyond the measured covariates.
+
+### 13.6 Direction of Effects: Networks → Activities vs Activities → Networks
+
+Same data, same measurement model, same covariates, and the same number of free paths between the network and activity blocks (386 with reading, 379 without). Both are marker-scaled WLSMV models.
+
+| Item set | Direction | χ² (scaled) | df | CFI | RMSEA | SRMR |
+|---|---|---|---|---|---|---|
+| With reading | Networks → activities | 8874.0 | 1657 | .861 | .060 | .075 |
+| With reading | Activities → networks | 9087.7 | 1657 | .857 | .060 | .076 |
+| Without reading | Networks → activities | 8732.3 | 1597 | .861 | .060 | .076 |
+| Without reading | Activities → networks | 8437.3 | 1597 | .867 | .059 | .073 |
+
+With reading, networks → activities fits slightly better (Δχ² = 214, same df). Without reading, activities → networks fits better (Δχ² = 295). The preferred direction therefore changes with the leisure item set. Both models have poor absolute fit (χ² ≫ df, CFI ≈ .86).
+
+The two models have the same number of paths, so the χ² difference is descriptive. Because the data are cross-sectional, reversing the direction of paths between blocks does not change the fit when the blocks are saturated, and the differences here arise from the measurement constraints (orthogonal G, fixed residual covariances) rather than from causal ordering. The comparison therefore does not establish that networks cause activities or the reverse. Scripts: `Scripts/diagnostics/model7_direction_test.R` and `Scripts/diagnostics/model7_direction_test_noreading.R`.
+
+### 13.7 Demographics Predicting Both Network Factors and Activities
+
+Specification: the marker-scaled mediation SEM in 13.5 (with reading, N = 1,227, CFI .861, RMSEA .060), in which demographics predict G, L, and C and also the two activity factors directly. The no-reading specification gives nearly identical network-on-demographic paths, so only the with-reading values are shown. Estimates are in the marker metric, so they differ from the standardized-latent values in Section 11 (for example, the college-degree path to G is 0.44 here and 0.62 under standardized latents). Compare direction and significance, not magnitude, against the earlier tables.
+
+| Demographic | G (variety) | L (liberal) | C (conservative) |
+|---|---|---|---|
+| Men (vs. women) | −0.01 (n.s.) | −0.13 (p = .001) | −0.12 (p = .002) |
+| Non-binary (vs. women) | −0.27 (n.s.) | −0.09 (n.s.) | −0.24 (n.s.) |
+| Some college (vs. none) | 0.06 (n.s.) | 0.17 (p = .02) | 0.09 (n.s.) |
+| College degree | 0.44 (p < .001) | 0.04 (n.s.) | 0.00 (n.s.) |
+| Graduate degree | 0.63 (p < .001) | −0.09 (n.s.) | −0.02 (n.s.) |
+| Childhood arts (per unit) | 0.15 (p < .001) | −0.03 (p = .02) | −0.04 (p < .001) |
+| Income | 0.01 (n.s.) | 0.01 (p = .02) | 0.01 (n.s.) |
+| Age squared | −0.006 (p < .001) | 0.003 (p = .01) | 0.004 (p = .002) |
+| Black (vs. White) | 0.26 (p < .001) | −0.23 (p < .001) | −0.51 (p < .001) |
+| Hispanic/Latine | 0.22 (p = .02) | −0.01 (n.s.) | −0.55 (p < .001) |
+| AAPI | 0.11 (n.s.) | −0.21 (p = .04) | −0.68 (p < .001) |
+| Multiracial/other | 0.12 (p = .08) | −0.06 (n.s.) | −0.37 (p < .001) |
+| Politics (per point) | 0.03 (p = .02) | −0.17 (p < .001) | 0.11 (p < .001) |
+
+Education is associated with broader networks (G), not with more conservative or liberal composition. Race is associated with less conservative composition across all three non-White groups, and with less liberal composition for Black and AAPI respondents. Politics has opposing associations with liberal (negative) and conservative (positive) composition, the expected pattern for a respondent's own ideology. Men report less of both ideological composition types.
+
+These paths describe how demographics relate to the composition of networks, not how composition is produced. The paths are conditional on the other covariates and on the activity equations, and they are cross-sectional. The fit cost of adding them is small (CFI .868 to .861). Scripts: `Scripts/diagnostics/model7_mediation_sem.R` and `Scripts/diagnostics/model7_mediation_sem_noreading.R`.

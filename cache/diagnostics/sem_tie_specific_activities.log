@@ -1,0 +1,174 @@
+Loading required namespace: GPArotation
+analytic N = 1227 
+
+SEM: converged=TRUE PD=TRUE CFI=0.905 TLI=0.929 RMSEA=0.048 SRMR=0.060
+
+Network-to-activity paths (tie-specific factors):
+ lhs rhs    est    se pvalue std.all
+   A  Wv  1.470 0.898  0.101   1.112
+   A  Wl -1.414 0.871  0.105  -1.003
+   A  Wc  0.269 0.333  0.419   0.196
+   A  Sv -0.269 0.720  0.709  -0.201
+   A  Sl  0.602 0.597  0.313   0.455
+   A  Sc -0.121 0.301  0.688  -0.093
+ Lis  Wv  0.802 1.011  0.428   0.711
+ Lis  Wl -0.104 0.899  0.908  -0.087
+ Lis  Wc -0.362 0.360  0.315  -0.309
+ Lis  Sv -0.813 0.880  0.356  -0.714
+ Lis  Sl  0.405 0.655  0.536   0.359
+ Lis  Sc  0.412 0.355  0.246   0.370
+   R  Wv  2.555 1.826  0.162   2.133
+   R  Wl -2.866 1.855  0.122  -2.243
+   R  Wc  1.067 0.665  0.109   0.859
+   R  Sv -1.236 1.401  0.378  -1.022
+   R  Sl  1.468 1.244  0.238   1.224
+   R  Sc -0.416 0.541  0.442  -0.352
+
+Demographic paths on all factors (sig. at p < .05 flagged):
+ lhs                      rhs    est    se   pvalue std.all sig
+  Wv              gender_fMan -0.011 0.064 8.61e-01  -0.005    
+  Wv gender_fNon.binary.Trans -0.434 0.388 2.64e-01  -0.041    
+  Wv     educ_catSome.college  0.139 0.109 2.05e-01   0.054    
+  Wv   educ_catCollege.degree  0.646 0.113 1.21e-08   0.265   *
+  Wv  educ_catGraduate.degree  0.928 0.126 1.95e-13   0.344   *
+  Wv               child_arts  0.186 0.020 0.00e+00   0.263   *
+  Wv                   income  0.031 0.010 2.13e-03   0.090   *
+  Wv                     age2 -0.008 0.002 1.50e-04  -0.109   *
+  Wv              race_fblack  0.164 0.098 9.52e-02   0.048    
+  Wv             race_flatine  0.213 0.132 1.07e-01   0.043    
+  Wv               race_fAAPI  0.345 0.131 8.39e-03   0.068   *
+  Wv        race_fmixed.other  0.209 0.092 2.32e-02   0.060   *
+  Wv                     poli  0.020 0.017 2.62e-01   0.030    
+  Wl              gender_fMan -0.160 0.064 1.28e-02  -0.073   *
+  Wl gender_fNon.binary.Trans -0.526 0.350 1.33e-01  -0.053    
+  Wl     educ_catSome.college  0.224 0.112 4.68e-02   0.094   *
+  Wl   educ_catCollege.degree  0.438 0.116 1.65e-04   0.191   *
+  Wl  educ_catGraduate.degree  0.450 0.127 3.90e-04   0.178   *
+  Wl               child_arts  0.114 0.020 2.06e-08   0.172   *
+  Wl                   income  0.023 0.010 2.46e-02   0.072   *
+  Wl                     age2 -0.002 0.002 2.64e-01  -0.034    
+  Wl              race_fblack  0.092 0.099 3.54e-01   0.029    
+  Wl             race_flatine  0.269 0.130 3.83e-02   0.059   *
+  Wl               race_fAAPI -0.090 0.147 5.41e-01  -0.019    
+  Wl        race_fmixed.other  0.128 0.097 1.88e-01   0.039    
+  Wl                     poli -0.162 0.018 0.00e+00  -0.269   *
+  Wc              gender_fMan -0.192 0.067 4.36e-03  -0.086   *
+  Wc gender_fNon.binary.Trans -0.781 0.248 1.63e-03  -0.077   *
+  Wc     educ_catSome.college  0.195 0.118 9.82e-02   0.080    
+  Wc   educ_catCollege.degree  0.419 0.120 4.68e-04   0.178   *
+  Wc  educ_catGraduate.degree  0.498 0.132 1.52e-04   0.192   *
+  Wc               child_arts  0.066 0.020 1.22e-03   0.097   *
+  Wc                   income  0.034 0.011 1.30e-03   0.103   *
+  Wc                     age2  0.000 0.002 9.92e-01   0.000    
+  Wc              race_fblack -0.499 0.102 1.03e-06  -0.151   *
+  Wc             race_flatine -0.650 0.139 2.70e-06  -0.137   *
+  Wc               race_fAAPI -0.786 0.146 6.59e-08  -0.162   *
+  Wc        race_fmixed.other -0.352 0.100 4.51e-04  -0.106   *
+  Wc                     poli  0.162 0.019 0.00e+00   0.262   *
+  Sv              gender_fMan -0.036 0.063 5.70e-01  -0.016    
+  Sv gender_fNon.binary.Trans -0.362 0.293 2.16e-01  -0.035    
+  Sv     educ_catSome.college  0.086 0.109 4.33e-01   0.034    
+  Sv   educ_catCollege.degree  0.586 0.112 1.65e-07   0.242   *
+  Sv  educ_catGraduate.degree  0.829 0.124 2.62e-11   0.310   *
+  Sv               child_arts  0.199 0.021 0.00e+00   0.285   *
+  Sv                   income  0.004 0.010 6.67e-01   0.013    
+  Sv                     age2 -0.008 0.002 2.32e-04  -0.103   *
+  Sv              race_fblack  0.372 0.096 9.99e-05   0.110   *
+  Sv             race_flatine  0.371 0.134 5.67e-03   0.076   *
+  Sv               race_fAAPI  0.110 0.135 4.13e-01   0.022    
+  Sv        race_fmixed.other  0.129 0.092 1.63e-01   0.037    
+  Sv                     poli  0.040 0.018 2.21e-02   0.063   *
+  Sl              gender_fMan -0.217 0.069 1.78e-03  -0.093   *
+  Sl gender_fNon.binary.Trans -0.075 0.337 8.24e-01  -0.007    
+  Sl     educ_catSome.college  0.361 0.125 3.95e-03   0.142   *
+  Sl   educ_catCollege.degree  0.554 0.127 1.32e-05   0.227   *
+  Sl  educ_catGraduate.degree  0.575 0.136 2.32e-05   0.213   *
+  Sl               child_arts  0.142 0.022 1.20e-10   0.201   *
+  Sl                   income  0.030 0.011 6.11e-03   0.088   *
+  Sl                     age2 -0.001 0.002 6.10e-01  -0.016    
+  Sl              race_fblack -0.155 0.104 1.36e-01  -0.045    
+  Sl             race_flatine -0.018 0.146 9.03e-01  -0.004    
+  Sl               race_fAAPI -0.538 0.142 1.55e-04  -0.107   *
+  Sl        race_fmixed.other -0.160 0.108 1.37e-01  -0.046    
+  Sl                     poli -0.246 0.020 0.00e+00  -0.384   *
+  Sc              gender_fMan -0.201 0.068 2.98e-03  -0.085   *
+  Sc gender_fNon.binary.Trans -0.506 0.280 7.10e-02  -0.047    
+  Sc     educ_catSome.college  0.212 0.117 7.05e-02   0.082    
+  Sc   educ_catCollege.degree  0.423 0.119 4.03e-04   0.171   *
+  Sc  educ_catGraduate.degree  0.626 0.130 1.43e-06   0.229   *
+  Sc               child_arts  0.094 0.020 4.20e-06   0.132   *
+  Sc                   income  0.009 0.011 4.00e-01   0.026    
+  Sc                     age2  0.000 0.002 8.29e-01  -0.006    
+  Sc              race_fblack -0.473 0.102 3.87e-06  -0.136   *
+  Sc             race_flatine -0.544 0.134 4.73e-05  -0.109   *
+  Sc               race_fAAPI -1.065 0.147 4.09e-13  -0.208   *
+  Sc        race_fmixed.other -0.565 0.103 4.21e-08  -0.161   *
+  Sc                     poli  0.231 0.020 0.00e+00   0.355   *
+   A              gender_fMan -0.072 0.086 4.07e-01  -0.023    
+   A gender_fNon.binary.Trans  0.122 0.388 7.54e-01   0.009    
+   A     educ_catSome.college  0.317 0.191 9.66e-02   0.094    
+   A   educ_catCollege.degree  0.791 0.205 1.11e-04   0.245   *
+   A  educ_catGraduate.degree  0.755 0.266 4.51e-03   0.212   *
+   A               child_arts  0.116 0.030 1.27e-04   0.124   *
+   A                   income -0.001 0.030 9.66e-01  -0.003    
+   A                     age2 -0.007 0.003 1.18e-02  -0.076   *
+   A              race_fblack  0.389 0.360 2.81e-01   0.086    
+   A             race_flatine  0.425 0.427 3.19e-01   0.066    
+   A               race_fAAPI -0.648 0.239 6.71e-03  -0.097   *
+   A        race_fmixed.other -0.094 0.183 6.08e-01  -0.021    
+   A                     poli -0.036 0.047 4.45e-01  -0.043    
+ Lis              gender_fMan -0.219 0.112 5.08e-02  -0.083    
+ Lis gender_fNon.binary.Trans -0.377 0.536 4.82e-01  -0.032    
+ Lis     educ_catSome.college  0.509 0.205 1.29e-02   0.177   *
+ Lis   educ_catCollege.degree  1.255 0.240 1.68e-07   0.455   *
+ Lis  educ_catGraduate.degree  1.152 0.304 1.50e-04   0.378   *
+ Lis               child_arts  0.119 0.038 1.60e-03   0.149   *
+ Lis                   income  0.026 0.033 4.25e-01   0.068    
+ Lis                     age2 -0.012 0.004 9.61e-04  -0.146   *
+ Lis              race_fblack  0.213 0.427 6.17e-01   0.055    
+ Lis             race_flatine  0.093 0.450 8.36e-01   0.017    
+ Lis               race_fAAPI -0.183 0.263 4.87e-01  -0.032    
+ Lis        race_fmixed.other  0.188 0.220 3.94e-01   0.048    
+ Lis                     poli  0.003 0.059 9.63e-01   0.004    
+   R              gender_fMan  0.004 0.153 9.81e-01   0.001    
+   R gender_fNon.binary.Trans -0.090 0.731 9.02e-01  -0.007    
+   R     educ_catSome.college  0.038 0.333 9.08e-01   0.013    
+   R   educ_catCollege.degree -0.059 0.390 8.81e-01  -0.020    
+   R  educ_catGraduate.degree -0.059 0.512 9.08e-01  -0.018    
+   R               child_arts  0.022 0.056 6.93e-01   0.026    
+   R                   income -0.064 0.062 2.96e-01  -0.157    
+   R                     age2  0.013 0.006 2.98e-02   0.142   *
+   R              race_fblack  0.630 0.700 3.68e-01   0.153    
+   R             race_flatine  1.024 0.862 2.35e-01   0.174    
+   R               race_fAAPI  0.065 0.389 8.66e-01   0.011    
+   R        race_fmixed.other  0.514 0.368 1.63e-01   0.124    
+   R                     poli -0.085 0.081 2.95e-01  -0.110    
+
+Network factor disturbance correlations:
+ lhs rhs std.all
+  Wv  Wl   0.836
+  Wv  Wc   0.601
+  Wv  Sv   0.778
+  Wv  Sl   0.537
+  Wv  Sc   0.469
+  Wl  Wc   0.776
+  Wl  Sv   0.536
+  Wl  Sl   0.633
+  Wl  Sc   0.452
+  Wc  Sv   0.369
+  Wc  Sl   0.454
+  Wc  Sc   0.659
+  Sv  Sl   0.768
+  Sv  Sc   0.716
+  Sl  Sc   0.735
+
+Joint Wald tests of the six network paths per activity outcome:
+A    chi2(6) = 166.42, p = 2.589e-33
+Lis  chi2(6) = 33.28, p = 9.281e-06
+R    chi2(6) = 34.93, p = 4.451e-06
+
+Activity-factor disturbance covariances:
+ lhs rhs std.all
+   A Lis   0.663
+   A   R   0.535
+ Lis   R   0.625

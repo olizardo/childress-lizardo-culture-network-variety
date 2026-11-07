@@ -1,0 +1,74 @@
+Loading required namespace: GPArotation
+
+===== full sample  N = 1258 =====
+ model conv   pd chisq_scaled  df   CFI RMSEA  SRMR
+    M1 TRUE TRUE       6061.9 445 0.865 0.100 0.093
+    M2 TRUE TRUE       3965.2 433 0.915 0.081 0.073
+    M3 TRUE TRUE       2786.7 412 0.943 0.068 0.055
+    M4 TRUE TRUE       2601.0 400 0.947 0.066 0.052
+
+Nested tests:
+ comparison df_diff scaled_chisq_diff         p
+   M2 vs M1      12            1048.0 9.06e-217
+   M4 vs M3      12             152.1  2.14e-26
+   M3 vs M1      33            1824.9  0.00e+00
+   M4 vs M2      33             968.7 3.76e-182
+
+Weak-strong latent correlations, M4:
+ lhs rhs std.all
+  Wv  Sv   0.931
+  Wl  Sl  -0.359
+  Wc  Sc   0.792
+Method-factor standardized loadings range, M4: 0.29 0.82 
+
+===== random half A  N = 629 =====
+ model conv   pd chisq_scaled  df   CFI RMSEA  SRMR
+    M1 TRUE TRUE       3245.8 445 0.864 0.100 0.100
+    M2 TRUE TRUE       2340.6 433 0.908 0.084 0.082
+    M3 TRUE TRUE       1665.5 412 0.939 0.070 0.062
+    M4 TRUE TRUE       1538.4 400 0.945 0.067 0.058
+
+Nested tests:
+ comparison df_diff scaled_chisq_diff         p
+   M2 vs M1      12             512.8 4.22e-102
+   M4 vs M3      12              93.1  1.24e-14
+   M3 vs M1      33             931.0 3.11e-174
+   M4 vs M2      33             578.1 8.29e-101
+
+Weak-strong latent correlations, M4:
+ lhs rhs std.all
+  Wv  Sv   0.928
+  Wl  Sl  -0.150
+  Wc  Sc   0.786
+Method-factor standardized loadings range, M4: 0.2 0.82 
+
+===== random half B  N = 629 =====
+ model conv    pd chisq_scaled  df   CFI RMSEA  SRMR
+    M1 TRUE  TRUE       2988.0 445 0.879 0.095 0.091
+    M2 TRUE  TRUE       1893.6 433 0.931 0.073 0.069
+    M3 TRUE  TRUE       1406.1 412 0.953 0.062 0.054
+    M4 TRUE FALSE       1323.4 400 0.956 0.061 0.050
+
+Nested tests:
+ comparison df_diff scaled_chisq_diff         p
+   M2 vs M1      12             556.2 2.39e-111
+   M4 vs M3      12              76.8  1.70e-11
+   M3 vs M1      33             910.8 5.30e-170
+   M4 vs M2      33             436.0  7.75e-72
+
+Weak-strong latent correlations, M4:
+ lhs rhs std.all
+  Wv  Sv   0.947
+  Wl  Sl  -0.457
+  Wc  Sc   0.789
+Method-factor standardized loadings range, M4: 0.35 0.84 
+Warning messages:
+1: lavaan->lav_object_post_check():  
+   covariance matrix of latent variables is not positive definite; use 
+   lavInspect(fit, "cov.lv") to investigate. 
+2: lavaan->lav_object_post_check():  
+   covariance matrix of latent variables is not positive definite; use 
+   lavInspect(fit, "cov.lv") to investigate. 
+3: lavaan->lav_object_post_check():  
+   covariance matrix of latent variables is not positive definite; use 
+   lavInspect(fit, "cov.lv") to investigate. 
