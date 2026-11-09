@@ -1,0 +1,178 @@
+=== Scripts/04_generate_tables.R 08:56:03
+- The project is out-of-sync -- use `renv::status()` for details.
+Done. Tables saved to cache/. (Table A4 replaced by Plots/figA1_predictor_correlation_heatmap.png)
+=== Scripts/05_render_table_images.R 08:56:11
+- The project is out-of-sync -- use `renv::status()` for details.
+Done. Table images saved to Plots/.
+=== audit 08:56:16
+- The project is out-of-sync -- use `renv::status()` for details.
+Downloading live manuscript from Google Drive...
+Auto-refreshing stale OAuth token.
+File downloaded:
+• 'lizardo-childress-beyond-network-variety'
+  <id: 1llEbgZ8lZK7pMy3IjZFbLNoek5CK-S47MhNw91-Sa4A>
+Saved locally as:
+• '/tmp/pa-1000/d61b60a9-c807-4910-9e1b-96885146bcbd/Rtmp4gBqTw/file37953960da13.docx'
+Manuscript text: 61579 characters (61309 after whitespace collapse).
+Auditing objects: cache/01_prepared_data.rds and cache/02_models.rds
+
+38 checks: 12 OK, 18 MISMATCH, 8 NOT_FOUND.
+
+                          id
+                     act_kmo
+                 act_var_pct
+            tie_var_pct_weak
+          tie_var_pct_strong
+      tableA2_strong_variety
+      tableA2_strong_liberal
+        tableA2_weak_liberal
+        tableA2_weak_variety
+   tableA2_weak_conservative
+              arts_wald_stat
+    residual_wald_m1m3_chisq
+        residual_wald_m1m3_p
+    residual_wald_m2m4_chisq
+        residual_wald_m2m4_p
+          leisure_strong_max
+     leisure_child_arts_m4_b
+     leisure_child_arts_m4_p
+          arts_race_latine_p
+             rel_omega_range
+            rel_leisure_corr
+                cfa_load_act
+               cfa_load_ties
+                  rob_arts_r
+                  rob_wald_B
+           rob_nogender_wald
+           rob_nogender_comp
+                tie_kmo_weak
+              tie_kmo_strong
+                 phi_variety
+                phi_lib_cons
+ tableA2_strong_conservative
+               arts_wald_df2
+                 arts_wald_p
+            leisure_weak_min
+            leisure_weak_max
+          leisure_strong_min
+            arts_race_aapi_p
+           arts_race_mixed_p
+                                                                                       description
+                                                                       Activities factor model KMO
+                                         Activities factor model cumulative variance explained (%)
+                                                      Weak-tie factor model variance explained (%)
+                                                    Strong-tie factor model variance explained (%)
+                                                    Table A2: strong-tie variety vs. raw count (r)
+                                        Table A2: strong-tie liberal composition vs. raw count (r)
+                                          Table A2: weak-tie liberal composition vs. raw count (r)
+                                                      Table A2: weak-tie variety vs. raw count (r)
+                                     Table A2: weak-tie conservative composition vs. raw count (r)
+                                                          Arts Wald test statistic (F/Chisq, df=1)
+                                Residual leisure: composition block Chisq (vs. variety-only model)
+                                    Residual leisure: composition block p (vs. variety-only model)
+                              Residual leisure: composition block Chisq (vs. full covariate model)
+                                  Residual leisure: composition block p (vs. full covariate model)
+                                  Table 2: |strong-tie variety coefficient|, max across Models 1-4
+                                                      Table 2: childhood arts coefficient, Model 4
+                                                          Table 2: childhood arts p-value, Model 4
+                                               Table 1: Hispanic/Latine vs. White p-value, Model 2
+                                                              Reliability: substantive omega range
+                                        Reliability: solitary-leisure inter-item correlation range
+                                                        CFA: activities standardized loading range
+                                                         CFA: tie-model standardized loading range
+                                       Robustness: variant-C vs. canonical arts factor correlation
+                                                 Robustness: formative-index weak-vs-strong Wald p
+                                        No-gender robustness: weak-vs-strong variety Wald p-values
+                                          No-gender robustness: composition-block Wald chi-squares
+                                                                         Weak-tie factor model KMO
+                                                                       Strong-tie factor model KMO
+ Phi(variety, liberal/conservative composition), weak & strong ties -- varimax orthogonality check
+         Phi(liberal, conservative composition), weak & strong ties -- varimax orthogonality check
+                                   Table A2: strong-tie conservative composition vs. raw count (r)
+                                                                        Arts Wald test residual df
+                                                                            Arts Wald test p-value
+                                      Table 2: weak-tie variety coefficient, min across Models 1-4
+                                      Table 2: weak-tie variety coefficient, max across Models 1-4
+                                  Table 2: |strong-tie variety coefficient|, min across Models 1-4
+                                                          Table 1: AAPI vs. White p-value, Model 2
+                                                   Table 1: multiracial vs. White p-value, Model 2
+ reported    actual     tol    status
+    0.958    0.9552 1.5e-03  MISMATCH
+     58.7     63.21 1.5e-01  MISMATCH
+       61     68.04 1.5e+00  MISMATCH
+       61     68.02 1.5e+00  MISMATCH
+     0.61    0.6413 1.0e-02  MISMATCH
+      0.5    0.4688 1.0e-02  MISMATCH
+     0.59    0.5118 1.0e-02  MISMATCH
+     0.56    0.6472 1.0e-02  MISMATCH
+     0.46     0.408 1.0e-02  MISMATCH
+     19.2     16.52 2.0e-02  MISMATCH
+     5.99     7.821 2.0e-02  MISMATCH
+      0.2   0.09834 2.0e-03  MISMATCH
+     5.61     5.105 2.0e-02  MISMATCH
+    0.231    0.2767 2.0e-03  MISMATCH
+     0.18     0.195 6.0e-03  MISMATCH
+     0.04    0.0338 6.0e-03  MISMATCH
+     0.04   0.06411 6.0e-03  MISMATCH
+     0.05   0.04125 6.0e-03  MISMATCH
+     <NA>      <NA>      NA NOT_FOUND
+     <NA>      <NA>      NA NOT_FOUND
+     <NA>      <NA>      NA NOT_FOUND
+     <NA>      <NA>      NA NOT_FOUND
+     <NA>      <NA>      NA NOT_FOUND
+     <NA>      <NA>      NA NOT_FOUND
+     <NA>      <NA>      NA NOT_FOUND
+     <NA>      <NA>      NA NOT_FOUND
+    0.938    0.9385 1.5e-03        OK
+    0.935    0.9347 1.5e-03        OK
+        0         0 1.0e-08        OK
+        0         0 1.0e-08        OK
+      0.5    0.4928 1.0e-02        OK
+     1211      1211 0.0e+00        OK
+  < 0.001 4.824e-05      NA        OK
+     0.14    0.1403 6.0e-03        OK
+     0.23     0.232 6.0e-03        OK
+     0.13    0.1339 6.0e-03        OK
+  < 0.001 7.426e-08      NA        OK
+  < 0.001 1.132e-05      NA        OK
+                                                                                                         note
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+ pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded
+ pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded
+ pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded
+ pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded
+ pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded
+ pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded
+ pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded
+ pattern not matched in current manuscript text -- check wording, or the claim may have been removed/reworded
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                         reported as an upper-bound threshold (e.g. p < .001)
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                         reported as an upper-bound threshold (e.g. p < .001)
+                                                         reported as an upper-bound threshold (e.g. p < .001)
+Report written to manuscript_numbers_audit.md
+AUDIT_EXIT=1 08:56:25

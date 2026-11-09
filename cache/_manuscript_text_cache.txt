@@ -633,10 +633,10 @@ more “conservative” social positions, consistent with a homophily effect
 Table 2 examines the network predictors of everyday solitary leisure,
 again focusing on weak- and strong-tie network variety in Models 1 and
 2, with measures of ideological network composition added in Models 3
-and 4. In contrast to public-arts models, the variety of weak- and
-strong-tie personal networks exerts countervailing influences. Across
-all specifications, weak-tie variety is positively associated with
-everyday solitary leisure, whereas strong-tie variety is negatively
+and 4. In contrast to public-arts participation models, the variety of
+weak- and strong-tie personal networks exerts countervailing influences.
+Across all specifications, weak-tie variety is positively associated
+with everyday solitary leisure, whereas strong-tie variety is negatively
 associated, net of other predictors. Substantively, a one-unit increase
 in the predicted factor score for weak-tie variety corresponds to an
 increase of approximately 0.14 to 0.23 standard deviations in solitary
@@ -740,6 +740,7 @@ activities, network variety in weak and strong ties operates
 orthogonally to each other, with those with more variety in their weak
 ties still engaging in more of these cultural practices as the NVM might
 suggest, while those with more strong-tie variety engaging in them less.
+
 Taken together, these findings suggest that network variety may not
 operate as a uniform engine of cultural omnivorousness. We also find
 that network composition is structured mainly around political ideology
@@ -770,12 +771,14 @@ but because of their close alignment with state cultural policy and
 public funding infrastructures. Our findings suggest that some
 individuals otherwise classified as culturally “inactive” may instead be
 differently active in domains that standard attendance-based measures
-fail to capture. While these cultural practices may be of less interest
-to tourism boards, asking about them reveals interesting patterns of
-network associations both within and beyond the scope of the NVM. The
-problem is further compounded by a heavy reliance on participation in
-highbrow fine arts, forms that have experienced long-term decline due to
-limited cohort replacement (Peterson and Rossman 2012), thereby possibly
+fail to capture.
+
+While these cultural practices may be of less interest to tourism
+boards, asking about them reveals interesting patterns of network
+associations both within and beyond the scope of the NVM. The problem is
+further compounded by a heavy reliance on participation in highbrow fine
+arts, forms that have experienced long-term decline due to limited
+cohort replacement (Peterson and Rossman 2012), thereby possibly
 inflating the number of misclassified “inactives.” This observation
 echoes Bourdieu’s (1993) observation that defining the boundaries of
 legitimate cultural activity is a fundamentally political, rather than
@@ -796,19 +799,20 @@ Mark 2003). In this respect, the continued reliance on occupations to
 measure network variety is increasingly out of step with how variety and
 diversity are more broadly conceptualized in sociology, which (perhaps
 unfortunately) privileges identity-based distinctions while sidelining
-class and economic heterogeneity (Childress and Lizardo 2026). Second,
-sociodemographic group–based measures provide greater theoretical
-leverage for understanding cultural participation and taste. For
-example, networks composed primarily of particular occupations (e.g.,
-lawyers or carpenters) are comparatively limited in what they reveal
-about social segmentation in cultural practices. In contrast, networks
-structured more explicitly along class, racial, gendered, or ideological
-lines may more directly map onto the symbolic boundaries that organize
-cultural engagement. Again, this is not to suggest that we have
-identified the correct group-based measures, nor that occupation-based
-and group-based position generators should be treated as equivalent in a
-pro forma sense. Instead, we argue that further investigation along
-these lines is both warranted and necessary.
+class and economic heterogeneity (Childress and Lizardo 2026).
+
+Second, sociodemographic group–based measures provide greater
+theoretical leverage for understanding cultural participation and taste.
+For example, networks composed primarily of particular occupations
+(e.g., lawyers or carpenters) are comparatively limited in what they
+reveal about social segmentation in cultural practices. In contrast,
+networks structured more explicitly along class, racial, gendered, or
+ideological lines may more directly map onto the symbolic boundaries
+that organize cultural engagement. Again, this is not to suggest that we
+have identified the correct group-based measures, nor that
+occupation-based and group-based position generators should be treated
+as equivalent in a pro forma sense. Instead, we argue that further
+investigation along these lines is both warranted and necessary.
 Finally, our findings contribute to the growing literature on cultural
 tastes and the ideological segmentation of everyday life by
 demonstrating that ideological sorting within personal networks affects
@@ -818,6 +822,7 @@ central role in structuring cultural engagement. Whereas prior research
 has treated political ideology primarily as an individual attribute, our
 results indicate that the relationship between ideology and cultural
 participation operates mainly through patterned social environments.
+
 Across both cultural domains we examine, the direct association between
 respondents’ ideological self-placement and participation is fully
 mediated by personal network composition, suggesting that cultural

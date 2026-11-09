@@ -1,0 +1,170 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+
+===== target | half full | weak ties | start 12:42:02 =====
+N=1227, PD=TRUE, CFI=0.889, RMSEA=0.058
+ lhs rhs    est    se   pvalue std.all
+   A  Wv  0.200 0.015 0.00e+00   0.190
+   A  Wl  0.049 0.011 1.61e-05   0.047
+   A  Wc  0.045 0.009 3.28e-07   0.043
+ Lis  Wv  0.057 0.042 1.72e-01   0.065
+ Lis  Wl  0.177 0.049 2.85e-04   0.201
+ Lis  Wc  0.047 0.048 3.27e-01   0.053
+   R  Wv  0.094 0.038 1.28e-02   0.098
+   R  Wl -0.081 0.045 7.37e-02  -0.084
+   R  Wc -0.015 0.046 7.34e-01  -0.016
+
+===== target | half full | strong ties | start 12:42:25 =====
+N=1227, PD=TRUE, CFI=0.860, RMSEA=0.066
+ lhs rhs    est    se   pvalue std.all
+   A  Sv  0.265 0.015 0.00e+00   0.248
+   A  Sl  0.045 0.008 2.97e-08   0.044
+   A  Sc  0.081 0.008 0.00e+00   0.080
+ Lis  Sv -0.042 0.041 2.95e-01  -0.048
+ Lis  Sl  0.183 0.050 2.30e-04   0.215
+ Lis  Sc  0.029 0.051 5.73e-01   0.034
+   R  Sv  0.100 0.038 8.54e-03   0.103
+   R  Sl -0.034 0.046 4.60e-01  -0.036
+   R  Sc  0.007 0.048 8.85e-01   0.008
+
+===== target | half A | weak ties | start 12:42:45 =====
+N=600, PD=TRUE, CFI=0.888, RMSEA=0.058
+ lhs rhs    est    se   pvalue std.all
+   A  Wv  0.196 0.019 0.00e+00   0.185
+   A  Wl  0.056 0.015 1.57e-04   0.052
+   A  Wc  0.046 0.012 1.41e-04   0.042
+ Lis  Wv  0.029 0.060 6.25e-01   0.033
+ Lis  Wl  0.289 0.071 4.18e-05   0.320
+ Lis  Wc -0.022 0.073 7.68e-01  -0.024
+   R  Wv  0.038 0.053 4.75e-01   0.040
+   R  Wl -0.135 0.068 4.86e-02  -0.140
+   R  Wc -0.028 0.070 6.88e-01  -0.029
+
+===== target | half A | strong ties | start 12:43:05 =====
+N=600, PD=TRUE, CFI=0.860, RMSEA=0.066
+ lhs rhs    est    se   pvalue std.all
+   A  Sv  0.263 0.019 0.00e+00   0.245
+   A  Sl  0.052 0.011 2.27e-06   0.051
+   A  Sc  0.086 0.010 0.00e+00   0.081
+ Lis  Sv -0.088 0.060 1.41e-01  -0.099
+ Lis  Sl  0.276 0.073 1.43e-04   0.327
+ Lis  Sc -0.064 0.080 4.24e-01  -0.073
+   R  Sv  0.058 0.056 2.93e-01   0.062
+   R  Sl -0.044 0.068 5.19e-01  -0.049
+   R  Sc -0.025 0.077 7.41e-01  -0.027
+
+===== target | half B | weak ties | start 12:43:25 =====
+N=627, PD=TRUE, CFI=0.914, RMSEA=0.052
+ lhs rhs    est    se   pvalue std.all
+   A  Wv  0.205 0.022 0.000000   0.196
+   A  Wl  0.041 0.017 0.015600   0.040
+   A  Wc  0.046 0.013 0.000309   0.045
+ Lis  Wv  0.103 0.056 0.066300   0.116
+ Lis  Wl  0.092 0.063 0.145000   0.105
+ Lis  Wc  0.131 0.060 0.030000   0.151
+   R  Wv  0.120 0.050 0.016700   0.120
+   R  Wl  0.010 0.057 0.859000   0.010
+   R  Wc -0.019 0.055 0.734000  -0.019
+
+===== target | half B | strong ties | start 12:43:44 =====
+N=627, PD=TRUE, CFI=0.886, RMSEA=0.060
+ lhs rhs    est    se   pvalue std.all
+   A  Sv  0.271 0.021 0.00e+00   0.254
+   A  Sl  0.038 0.012 1.18e-03   0.037
+   A  Sc  0.075 0.011 3.07e-11   0.077
+ Lis  Sv  0.016 0.054 7.67e-01   0.018
+ Lis  Sl  0.114 0.064 7.74e-02   0.131
+ Lis  Sc  0.134 0.063 3.49e-02   0.165
+   R  Sv  0.140 0.050 4.85e-03   0.139
+   R  Sl  0.001 0.056 9.87e-01   0.001
+   R  Sc -0.013 0.057 8.16e-01  -0.014
+
+===== oblimin | half full | weak ties | start 12:44:03 =====
+N=1227, PD=TRUE, CFI=0.891, RMSEA=0.058
+ lhs rhs    est    se  pvalue std.all
+   A  Wv  0.197 0.015 0.00000   0.184
+   A  Wl -0.005 0.011 0.65000  -0.005
+   A  Wc  0.027 0.009 0.00179   0.025
+ Lis  Wv  0.075 0.047 0.10700   0.083
+ Lis  Wl  0.154 0.063 0.01370   0.166
+ Lis  Wc  0.018 0.057 0.75600   0.019
+   R  Wv -0.081 0.042 0.05290  -0.082
+   R  Wl -0.001 0.057 0.98200  -0.001
+   R  Wc -0.031 0.055 0.56800  -0.031
+
+===== oblimin | half full | strong ties | start 12:44:30 =====
+N=1227, PD=TRUE, CFI=0.862, RMSEA=0.066
+ lhs rhs    est    se   pvalue std.all
+   A  Sv  0.244 0.014 0.00e+00   0.225
+   A  Sl  0.013 0.008 8.45e-02   0.013
+   A  Sc  0.051 0.008 5.41e-11   0.049
+ Lis  Sv -0.044 0.052 4.02e-01  -0.048
+ Lis  Sl  0.183 0.053 5.77e-04   0.208
+ Lis  Sc  0.047 0.058 4.15e-01   0.054
+   R  Sv -0.094 0.045 3.88e-02  -0.095
+   R  Sl  0.039 0.049 4.30e-01   0.040
+   R  Sc -0.004 0.056 9.44e-01  -0.004
+
+===== oblimin | half A | weak ties | start 12:44:52 =====
+N=600, PD=TRUE, CFI=0.886, RMSEA=0.058
+ lhs rhs    est    se  pvalue std.all
+   A  Wv  0.186 0.019 0.00000   0.172
+   A  Wl  0.008 0.014 0.58600   0.007
+   A  Wc  0.027 0.012 0.02040   0.024
+ Lis  Wv  0.041 0.067 0.54000   0.046
+ Lis  Wl  0.276 0.087 0.00151   0.292
+ Lis  Wc -0.068 0.082 0.40500  -0.073
+   R  Wv -0.037 0.061 0.53700  -0.039
+   R  Wl -0.138 0.086 0.10900  -0.137
+   R  Wc -0.003 0.080 0.96800  -0.003
+
+===== oblimin | half A | strong ties | start 12:45:14 =====
+N=600, PD=TRUE, CFI=0.858, RMSEA=0.066
+ lhs rhs    est    se   pvalue std.all
+   A  Sv  0.231 0.018 0.00e+00   0.212
+   A  Sl  0.022 0.010 3.18e-02   0.021
+   A  Sc  0.058 0.010 2.45e-08   0.054
+ Lis  Sv -0.065 0.080 4.15e-01  -0.073
+ Lis  Sl  0.269 0.073 2.28e-04   0.311
+ Lis  Sc -0.029 0.087 7.41e-01  -0.032
+   R  Sv -0.019 0.072 7.88e-01  -0.020
+   R  Sl -0.032 0.068 6.34e-01  -0.035
+   R  Sc -0.013 0.084 8.77e-01  -0.014
+
+===== oblimin | half B | weak ties | start 12:45:36 =====
+N=627, PD=TRUE, CFI=0.920, RMSEA=0.051
+ lhs rhs    est    se  pvalue std.all
+   A  Wv  0.215 0.023 0.00000   0.201
+   A  Wl -0.020 0.017 0.25000  -0.019
+   A  Wc  0.028 0.013 0.03640   0.027
+ Lis  Wv  0.105 0.062 0.09070   0.114
+ Lis  Wl  0.046 0.082 0.57000   0.051
+ Lis  Wc  0.123 0.074 0.09810   0.135
+   R  Wv -0.153 0.054 0.00485  -0.147
+   R  Wl  0.166 0.068 0.01480   0.160
+   R  Wc -0.074 0.065 0.25200  -0.072
+
+===== oblimin | half B | strong ties | start 12:45:55 =====
+N=627, PD=TRUE, CFI=0.893, RMSEA=0.058
+ lhs rhs    est    se   pvalue std.all
+   A  Sv  0.265 0.021 0.000000   0.247
+   A  Sl  0.005 0.012 0.691000   0.004
+   A  Sc  0.045 0.012 0.000117   0.045
+ Lis  Sv -0.006 0.066 0.923000  -0.007
+ Lis  Sl  0.112 0.073 0.125000   0.124
+ Lis  Sc  0.136 0.073 0.062200   0.160
+   R  Sv -0.158 0.056 0.004570  -0.153
+   R  Sl  0.124 0.063 0.047400   0.121
+   R  Sc -0.049 0.066 0.461000  -0.051
+Warning messages:
+1: In psych::polychoric(d, smooth = TRUE, progress = FALSE, correct = 0) :
+  The items do not have an equal number of response alternatives, global set to FALSE.
+2: In psych::polychoric(d, smooth = TRUE, progress = FALSE, correct = 0) :
+  The items do not have an equal number of response alternatives, global set to FALSE.
+3: In psych::polychoric(d, smooth = TRUE, progress = FALSE, correct = 0) :
+  The items do not have an equal number of response alternatives, global set to FALSE.
+4: In psych::polychoric(d, smooth = TRUE, progress = FALSE, correct = 0) :
+  The items do not have an equal number of response alternatives, global set to FALSE.
+5: lavaan->lav_object_post_check():  
+   some estimated ov variances are negative 
+
+Done.

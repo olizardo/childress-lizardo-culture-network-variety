@@ -1,0 +1,53 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+
+===== Joint fixed-ESEM with covariates, no matched residuals, N = 1227 =====
+converged=FALSE npar=383
+Warning message:
+lavaan->lav_step11_estoptim():  
+   the optimizer warns that a solution has NOT been found! 
+
+===== Joint fixed-ESEM with covariates, 16 matched residuals, N = 1227 =====
+converged=TRUE npar=399
+Latent covariance PD: TRUE (min eigenvalue 0.1493)
+scaled chisq=7441.0 df=1747 CFI=0.893 RMSEA=0.052 SRMR=0.071
+
+Network-to-activity paths:
+ lhs rhs    est    se   pvalue std.all
+   A  Wv  0.094 0.010 0.00e+00   0.088
+   A  Wl  0.009 0.009 3.13e-01   0.009
+   A  Wc  0.016 0.007 2.82e-02   0.015
+   A  Sv  0.217 0.012 0.00e+00   0.202
+   A  Sl  0.037 0.007 2.58e-07   0.036
+   A  Sc  0.069 0.007 0.00e+00   0.068
+ Lis  Wv  0.416 0.232 7.34e-02   0.458
+ Lis  Wl  0.051 0.109 6.40e-01   0.056
+ Lis  Wc -0.006 0.101 9.53e-01  -0.007
+ Lis  Sv -0.425 0.224 5.80e-02  -0.467
+ Lis  Sl  0.210 0.118 7.52e-02   0.240
+ Lis  Sc  0.053 0.100 5.98e-01   0.061
+   R  Wv -0.031 0.107 7.72e-01  -0.032
+   R  Wl -0.089 0.060 1.42e-01  -0.092
+   R  Wc -0.025 0.062 6.94e-01  -0.025
+   R  Sv  0.116 0.106 2.70e-01   0.120
+   R  Sl  0.021 0.063 7.32e-01   0.023
+   R  Sc  0.022 0.065 7.34e-01   0.024
+
+Network factor disturbance correlations:
+ lhs rhs std.all
+  Wv  Wl  -0.027
+  Wv  Wc  -0.097
+  Wv  Sv   0.836
+  Wv  Sl  -0.120
+  Wv  Sc  -0.082
+  Wl  Wc   0.211
+  Wl  Sv   0.009
+  Wl  Sl   0.602
+  Wl  Sc   0.119
+  Wc  Sv  -0.101
+  Wc  Sl   0.135
+  Wc  Sc   0.643
+  Sv  Sl  -0.014
+  Sv  Sc  -0.049
+  Sl  Sc   0.243
+
+Done.
