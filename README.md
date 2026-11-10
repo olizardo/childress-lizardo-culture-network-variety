@@ -84,21 +84,47 @@ Several additional scripts are present but are **not** part of the statistical p
 
 ## Table and figure correspondence
 
-| Manuscript item | Output file |
-|---|---|
-| Table 1 (Public Arts Participation regression) | `cache/table1_arts_participation.md` |
-| Table 2 (Solitary Leisure regression) | `cache/table2_solitary_leisure.md` |
-| Table 3 (Residual/DIY-practical leisure regression, discriminant-validity check) | fitted as `residual_models` in `cache/02_models.rds` |
-| Table A1 (Descriptive statistics) | `cache/tableA1_descriptives_continuous.md`, `cache/tableA1_descriptives_categorical.md` |
-| Table A2 (Activity/leisure item factor loadings) | `cache/tableA2_activity_loadings.md` |
-| Table A3 (Weak- and strong-tie item factor loadings) | `cache/tableA3_weak_tie_loadings.md`, `cache/tableA3_strong_tie_loadings.md` |
-| Table A5 (Network variety factor validation) | `cache/tableA5_variety_validation.md` |
-| Figure 1 (Activity/leisure factor loadings heat map) | `Plots/fig1_activity_loadings_heatmap.png` |
-| Figure 2 (Weak- and strong-tie factor loadings heat map) | `Plots/fig2_network_loadings_heatmap.png` |
-| Figure 3 (Predicted margins: network variety on arts participation) | `Plots/fig3_variety_margins_plot.png` |
-| Figure A4 (Correlation heat map of continuous/ordinal predictors) | `Plots/figA1_predictor_correlation_heatmap.png` |
+Every item below is generated; nothing table-related is typed in `results_draft.tex`. The one-command chain is `Scripts/manuscript/build_manuscript.sh` (see the run-order section above).
 
-`Plots/table*.png` and `Plots/tableA*.png` are flat-image renders of the same tables, produced by the non-pipeline script noted above for embedding in the manuscript; the authoritative numeric source for every table is the corresponding `.md` file in `cache/` (or, for Table 3, `cache/02_models.rds`).
+### Measurement tables (Tables 1 to 4, A1, A2)
+
+Produced by `Scripts/manuscript/build_measurement_blocks.R` (full blocks to `cache/manuscript/measurement_blocks.tex`, numbers cached in `measurement_numbers.rds`):
+
+| Manuscript item | Content | Sources |
+|---|---|---|
+| Table 1 | Varimax PCA loadings, activity battery | `cache/01_prepared_data.rds` (`act_fa`) |
+| Table 2 | Activity CFAs and target ESEM, fit and scaled difference tests | refits in the generator (WLSMV) |
+| Table 3 | Activity ESEM loadings, target rotation | refit in the generator |
+| Table 4 | Weak- and strong-tie ESEM loadings, target rotation | `cache/diagnostics/esem_ties_target.rds` |
+| Table A1 | Oblimin EFA loadings for the activity battery | refit in the generator |
+| Table A2 | Tie confirmatory loadings and antonym residual covariances | `cache/07_reliability_cfa.rds`, refits in the generator |
+
+### Structural tables and path diagrams (Tables 5 to 10, Figures 5 to 10, Table A3)
+
+Produced by `Scripts/manuscript/build_structural_blocks.R` (to `cache/manuscript/structural_blocks.tex` and `structural_numbers.rds`):
+
+| Manuscript item | Content | Sources |
+|---|---|---|
+| Table 5 | Network-to-activity paths, weak and strong ties | `cache/diagnostics/sem_gpa_fixed_sep_covars.rds` |
+| Tables 6 and 7 | Demographic predictors of weak- and strong-tie network factors | same |
+| Table 8 | Demographic predictors of activity factors, ties side by side | same |
+| Figures 5 to 10 | TikZ path diagrams, education / childhood arts / ideology to arts (inline, captions kept with `\Needspace`) | same |
+| Tables 9 and 10 | Direct, network-mediated, and total effects with delta-method SEs | `cache/diagnostics/sem_gpa_fixed_sep_decomposition.rds` |
+| Table A3 | Paths under target and oblimin rotations and in random halves | `cache/diagnostics/sem_gpa_fixed_splithalf.rds` |
+
+### Appendix OLS tables (Tables A4, A5)
+
+Produced by `Scripts/manuscript/build_ols_appendix.R` (to `cache/manuscript/ols_appendix.tex`) from `cache/02_models.rds` (the four-step HC1 OLS sequence on the polychoric PCA scores, Scripts 02).
+
+### Standalone figures (Figures 1 to 4, Figure A1)
+
+`Scripts/03_generate_figures.R` renders `Plots/fig1_activity_loadings_heatmap.png`, `fig2_network_loadings_heatmap.png`, `fig3_variety_margins_plot.png`, `fig4_leisure_variety_margins_plot.png`, and `figA1_predictor_correlation_heatmap.png` at 6.5in width, 300 DPI. These are standalone reproductions of the round-1 figures; the current draft embeds no raster images, and its Figures 5 to 10 are inline TikZ generated with the structural tables.
+
+### Prose numbers
+
+Every statistic cited in the running prose is exported with its cache source to `cache/manuscript/prose_numbers.csv` by `Scripts/manuscript/build_prose_numbers.R` and checked against the draft text by `Scripts/manuscript/check_prose_numbers.py`. Threshold claims (for example, "p < .001") are tested in R; a failing claim is written as `CLAIM FAILS` and surfaces as MISSING in the checker.
+
+The `cache/table*.md` markdown tables and the `Plots/table*.png` flat images from the round-1 pipeline (Scripts 04 and 05) remain in the cache for the record but no longer correspond to the manuscript's tables.
 
 ## Repository structure
 
