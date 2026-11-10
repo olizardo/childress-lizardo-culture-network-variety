@@ -24,3 +24,9 @@ replacements.json
 # Python
 __pycache__/
 *.pyc
+
+# LaTeX build artifacts at repo root (use cache/manuscript/pdf/)
+*.aux
+*.log
+*.synctex.gz
+results_draft.pdf

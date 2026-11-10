@@ -187,29 +187,22 @@ s.geometric.code.tex)) (/usr/share/texmf/tex/latex/lm/lmodern.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/needspace/needspace.sty)
 (/usr/share/texlive/texmf-dist/tex/latex/footnotehyper/footnotehyper.sty)
-No file results_draft.aux.
+(cache/manuscript/pdf/results_draft.aux)
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-LatinModernRoman.cfg)
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
-
 (/usr/share/texmf/tex/latex/lm/omllmm.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg)
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd)
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg) [1] [2] [3]
-[4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17]
-Underfull \hbox (badness 10000) in paragraph at lines 644--694
+[4] [5] [6] [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18]
+Underfull \hbox (badness 10000) in paragraph at lines 647--697
 
-[18]
-Underfull \hbox (badness 10000) in paragraph at lines 701--751
+[19]
+Underfull \hbox (badness 10000) in paragraph at lines 704--754
 
-[19] (cache/manuscript/pdf/results_draft.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- )
+[20] (cache/manuscript/pdf/results_draft.aux) )
 (see the transcript file for additional information)
-Output written on cache/manuscript/pdf/results_draft.pdf (19 pages).
+Output written on cache/manuscript/pdf/results_draft.pdf (20 pages).
 Transcript written on cache/manuscript/pdf/results_draft.log.

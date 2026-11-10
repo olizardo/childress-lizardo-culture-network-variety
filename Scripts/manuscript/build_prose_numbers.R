@@ -182,6 +182,12 @@ tie16 <- unlist(lapply(c07$structures$weak, names))
 tie16 <- tie16[!grepl("^Know(men|women)_", tie16)]
 add("tie_n_items", S2, words[length(tie16)], "Number of position-generator categories per battery (gender excluded)",
   "cache/07_reliability_cfa.rds: $structures$weak items minus Knowmen/Knowwomen")
+add("tie_kmo_weak", S2, d3(prep$weak_fit$kmo), "KMO sampling adequacy, weak-tie battery (polychoric varimax)",
+  "cache/01_prepared_data.rds: prep$weak_fit$kmo")
+add("tie_kmo_strong", S2, d3(prep$strong_fit$kmo), "KMO sampling adequacy, strong-tie battery (polychoric varimax)",
+  "cache/01_prepared_data.rds: prep$strong_fit$kmo")
+add("tie_ve", S2, as.character(round(100 * prep$weak_fit$var_explained)), "Percent variance explained by the three-factor varimax solution (about 68 in both batteries)",
+  "cache/01_prepared_data.rds: 100 * prep$weak_fit$var_explained (strong: prep$strong_fit$var_explained)")
 
 gl <- function(tie, item, fac) {
   f <- prep[[paste0(tie, "_fit")]]
@@ -211,9 +217,10 @@ add("g_max_shift", S2, d3(max(abs(ng$est.x - ng$est.y))), "Largest network-coeff
 
 vl <- function(x) { l <- x$loadings; l$std.all[l$op == "~~" & l$lhs == "V" & l$rhs == "L"] }
 vl_w <- vl(mn$tableA2_weak); vl_s <- vl(mn$tableA2_strong)
-add("cfa_vl_over", S2, claim(max(vl_w, vl_s) > .80, "0.80"),
-  sprintf("Variety-liberal latent correlation in the strict CFA exceeds .80 (weak %.3f; strong %.3f, below .80)", vl_w, vl_s),
-  paste0(src_mn, ": tableA2_weak$loadings / tableA2_strong$loadings std.all for V ~~ L"))
+add("cfa_vl_weak", S2, d2(vl_w), "Variety-liberal latent correlation in the strict weak-tie CFA",
+  paste0(src_mn, ": tableA2_weak$loadings std.all for V ~~ L"))
+add("cfa_vl_strong", S2, d2(vl_s), "Variety-liberal latent correlation in the strict strong-tie CFA",
+  paste0(src_mn, ": tableA2_strong$loadings std.all for V ~~ L"))
 
 efm <- sapply(c("weak", "strong"), function(t) fitMeasures(esem_t[[paste(t, "target")]]$fit, c("cfi.scaled", "rmsea.scaled", "srmr")))
 src_et <- "cache/diagnostics/esem_ties_target.rds: fitMeasures($`<tie> target`$fit)"
@@ -239,14 +246,27 @@ add("tie_omega_min", S2, d2(min(omegas)), "Lowest model-implied omega across the
 add("tie_omega_max", S2, d2(max(omegas)), "Highest model-implied omega across the six tie ESEM factors", src_om)
 
 pj <- parameterEstimates(joint$matched$fit, standardized = TRUE)
-add("joint_vv_cor", S2, d2(pj$std.all[pj$op == "~~" & pj$lhs == "Wv" & pj$rhs == "Sv"]),
-  "Weak-strong variety disturbance correlation in the joint model with matched residuals",
-  "cache/diagnostics/sem_gpa_fixed_joint_covars.rds: $matched$fit std.all Wv ~~ Sv")
+vv_est <- pj$est[pj$op == "~~" & pj$lhs == "Wv" & pj$rhs == "Sv"]
+rv_w <- pj$std.lv[pj$op == "~~" & pj$lhs == "Wv" & pj$rhs == "Wv"]
+rv_s <- pj$std.lv[pj$op == "~~" & pj$lhs == "Sv" & pj$rhs == "Sv"]
+add("joint_vv_cor", S2, d2(vv_est),
+  "Weak-strong variety latent correlation in the joint model with matched residuals (the implied disturbance correlation exceeds 1)",
+  "cache/diagnostics/sem_gpa_fixed_joint_covars.rds: $matched$fit parameterEstimates est for Wv ~~ Sv")
+add("joint_vv_rescor", S2, claim(vv_est / sqrt(rv_w * rv_s) > 1, "1"),
+  sprintf("Disturbance correlation implied by the joint model's Wv-Sv covariance and residual variances (computes to %.2f, exceeds 1)", vv_est / sqrt(rv_w * rv_s)),
+  "cache/diagnostics/sem_gpa_fixed_joint_covars.rds: std.lv(Wv ~~ Sv) / sqrt(std.lv(Wv ~~ Wv) * std.lv(Sv ~~ Sv))")
 
 # ---------------------------------------------------------------- Structural Models of Activity Participation
-add("act_resid_omega", S3, d2(with(c07$omega_table, omega[model == "Activities" & factor == "residual"])),
-  "Omega of the residual activity factor",
-  "cache/07_reliability_cfa.rds: $omega_table (Activities, residual)")
+st_e <- lavInspect(esem_act, "std")
+lam_e <- as.matrix(st_e$lambda); psi_e <- as.matrix(st_e$psi); th_e <- as.matrix(st_e$theta)
+om_e <- sapply(seq_len(ncol(lam_e)), function(k) {
+  w <- lam_e[, k]
+  common <- as.numeric(t(w) %*% (lam_e %*% psi_e %*% t(lam_e)) %*% w)
+  common / (common + as.numeric(t(w) %*% th_e %*% w))
+})
+add("act_resid_omega", S3, d2(om_e[3]),
+  "Model-implied omega of the residual activity factor under the target ESEM (arts .97, leisure .74)",
+  paste0(src_esem, ": model-implied omega, third factor (residual)"))
 sem_dat <- lavInspect(sc$weak$fit, "data")
 add("poli_min", S3, as.character(min(sem_dat[, "poli"])), "Political ideology scale minimum (1 to 7)",
   "cache/diagnostics/sem_gpa_fixed_sep_covars.rds: min(lavInspect($weak$fit, 'data')[, 'poli'])")

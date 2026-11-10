@@ -90,6 +90,18 @@ esem_lam <- lavInspect(esem_obj, "std")$lambda
 colnames(esem_lam) <- c("arts", "leisure", "residual")
 esem_lam <- esem_lam[items, , drop = FALSE]
 
+# Model-implied omega for a fitted SEM's factors (same formula as build_prose_numbers.R)
+factor_omega <- function(fit) {
+  st <- lavInspect(fit, "std")
+  lam <- as.matrix(st$lambda); psi <- as.matrix(st$psi); th <- as.matrix(st$theta)
+  sapply(seq_len(ncol(lam)), function(k) {
+    w <- lam[, k]
+    common <- as.numeric(t(w) %*% (lam %*% psi %*% t(lam)) %*% w)
+    common / (common + as.numeric(t(w) %*% th %*% w))
+  })
+}
+om_act <- factor_omega(esem_obj)
+
 fit_row <- function(f) fitMeasures(f, c("chisq.scaled", "df", "cfi.scaled", "rmsea.scaled", "srmr"))
 f1r <- fit_row(f1); f2ar <- fit_row(f2a); f2lr <- fit_row(f2l); f3r <- fit_row(f3)
 er <- fitMeasures(esem_obj, c("chisq.scaled", "df", "cfi.scaled", "rmsea.scaled", "srmr"))
@@ -109,6 +121,7 @@ t3 <- t(sapply(c(arts_items, leisure_items, resid_items), function(it) {
   })
   c(act_labels[[it]], a, vals)
 }))
+t3 <- rbind(t3, "MIDRULE", c("Model-implied omega", "", sapply(om_act, fmt)))
 
 # ---------------------------------------------------------------- Table A1: oblimin EFA
 ef_obi <- fa(polychoric(act_full)$rho, nfactors = 3, rotate = "oblimin", fm = "wls", n.obs = N_act)
@@ -207,6 +220,11 @@ num$n_weak <- nrow(tie_dat("weak")); num$n_strong <- nrow(tie_dat("strong"))
 num$cor_esem_weak <- lavInspect(esem_t[["weak target"]]$fit, "cor.lv")
 num$cor_esem_strong <- lavInspect(esem_t[["strong target"]]$fit, "cor.lv")
 
+# Model-implied omega for each tie ESEM factor
+om_weak <- factor_omega(esem_t[["weak target"]]$fit)
+om_strong <- factor_omega(esem_t[["strong target"]]$fit)
+t4 <- rbind(t4, "MIDRULE", c("Model-implied omega", sapply(om_weak, fmt), sapply(om_strong, fmt)))
+
 # Table A1: EFA fit statistics and factor correlations (psych stores RMSEA as a named
 # numeric vector: RMSEA, lower, upper, confidence)
 rm <- ef_obi$RMSEA
@@ -223,7 +241,10 @@ numbers <- list(table1 = lv, table2 = list(one = f1r, two_arts = f2ar, two_leis 
 saveRDS(numbers, "cache/manuscript/measurement_numbers.rds")
 
 # ---------------------------------------------------------------- full blocks: caption, table, note
-write_rows <- function(M) apply(M, 1, function(r) paste(paste(r, collapse = " & "), "\\\\"))
+write_rows <- function(M) apply(M, 1, function(r) {
+  if (r[1] == "MIDRULE") return("\\midrule")
+  paste(paste(r, collapse = " & "), "\\\\")
+})
 # Table A2 rows: weak and strong baseline loadings, then antonym residuals
 fac_lab <- c(V = "Variety", L = "Liberal", C = "Conservative")
 a2_rows <- character()
@@ -318,7 +339,8 @@ blocks[["Table 3"]] <- long_block(38, "Table 3. ESEM Loadings with Target Rotati
   "Note. Standardized loadings from an ESEM with target rotation (WLSMV, N = ",
   format(N_act, big.mark = ",", trim = TRUE), "). Bold entries mark each item's assigned factor. ",
   "Factor correlations: arts and leisure ", phi3(num$cor_esem_act)[1], ", arts and residual ",
-  phi3(num$cor_esem_act)[2], ", leisure and residual ", phi3(num$cor_esem_act)[3], "."))
+  phi3(num$cor_esem_act)[2], ", leisure and residual ", phi3(num$cor_esem_act)[3], ". ",
+  "The final row reports the model-implied omega of each factor."))
 
 blocks[["Table 4"]] <- star_block(30,
   "Table 4. Standardized Loadings from the Target-Rotated ESEM of the Weak-Tie and Strong-Tie Batteries",
@@ -333,7 +355,8 @@ blocks[["Table 4"]] <- star_block(30,
   phi3(num$cor_esem_strong)[2], ", and ", phi3(num$cor_esem_strong)[3],
   " in the same order for strong ties. Item labels are abbreviated from the variable names; ",
   "MENA is Middle Eastern or North African, and NHPI is Native Hawaiian or Pacific Islander. ",
-  "Lib. and Con. denote liberal and conservative composition."))
+  "Lib. and Con. denote liberal and conservative composition. ",
+  "The final row reports the model-implied omega of each factor."))
 
 blocks[["Table A1"]] <- long_block(38,
   "Table A1. Oblimin-Rotated Exploratory Factor Loadings for the Activity Battery", lt_spec_5,
