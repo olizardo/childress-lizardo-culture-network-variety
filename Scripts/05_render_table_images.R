@@ -5,7 +5,7 @@
 # booktabs-style screenshots already embedded in the live Google Doc:
 # monospaced-alignment numeric columns, thin top/header/bottom rules,
 # no cell shading) so they can be swapped in via the surgical OpenXML
-# image-replacement pipeline in Scripts/sync_manuscript.py.
+# image-replacement pipeline in Scripts/archive_oneoff/sync_manuscript.py.
 #
 # Outputs to Plots/ (kept alongside the ggplot figures since these are
 # themselves just images, not native Word tables in the source document).

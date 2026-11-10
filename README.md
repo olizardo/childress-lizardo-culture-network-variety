@@ -82,9 +82,9 @@ Several additional scripts are present but are **not** part of the statistical p
 
 - `Scripts/00_extract_minimal_data.R` is a maintainer-only utility that regenerates the committed `data/grabbagdata111925.dta` extract from a full, gitignored raw export (`data/grabbagdata111925_full.dta`). It is not needed to *reproduce* the analysis — the extract it produces is already committed — only to *regenerate* that extract if the underlying raw data changes.
 - `Scripts/05_render_table_images.R` re-renders the tables from `cache/02_models.rds` as flat PNG images. This exists purely to support the maintainers' internal Google Docs manuscript-sync workflow and is unnecessary for statistical reproduction.
-- `Scripts/sync_manuscript.R`, `Scripts/sync_manuscript.py`, `Scripts/fix_figure_table_page_fit.py`, `Scripts/strip_reference_links.py`, and the other `docx_text_edits`, `revert_*`, `apply_*`, and `move_*`/`remove_*` utilities are one-off or maintainer-only helpers for synchronizing or editing the live Google Docs manuscript draft. They require Google Drive credentials the maintainers hold and are irrelevant to reproducing the reported results; for the manuscript itself they are superseded by the generated-block pipeline in `Scripts/manuscript/`.
+- The Google Docs manuscript-sync helpers (`sync_manuscript.R`/`.py`, `fix_figure_table_page_fit.py`, `strip_reference_links.py`, `docx_text_edits.py`, and the `revert_*`, `apply_*`, and `move_*`/`remove_*` utilities) are one-off or maintainer-only helpers that require Google Drive credentials. For the manuscript itself they are superseded by the generated-block pipeline in `Scripts/manuscript/`, and they are archived in `Scripts/archive_oneoff/`.
 - `Scripts/build_ssr_submission_docs.py` rebuilds the blind-review submission docx files into `submission_round1/SSR-submission/`.
-- One-off editing scripts from earlier revision rounds (`insert_table3.py`, `insert_figure4.py`, and the `revise_*` scripts) are archived in `Scripts/archive_oneoff/` and are not runnable in the current layout.
+- Other one-off editing scripts from earlier revision rounds (`insert_*`, `revise_*`) are also archived in `Scripts/archive_oneoff/` and are not runnable in the current layout.
 
 ## Table and figure correspondence
 
