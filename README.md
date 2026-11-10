@@ -45,6 +45,18 @@ Run the scripts in this order from the repository root. `run_all.R` runs steps 1
 
 Each script expects the working directory to be the repository root and reads `data/grabbagdata111925.dta` directly. The factor models use polychoric correlations throughout (`Scripts/poly_helpers.R`), so no Pearson correlations enter the measurement models.
 
+### Manuscript build (reviewers' round)
+
+`Scripts/manuscript/build_manuscript.sh` runs the full manuscript chain in one call and reproduces `results_draft.tex` end to end:
+
+1. The four structural fit scripts in `Scripts/diagnostics/` (`sem_gpa_fixed_sep_covars.R`, `sem_gpa_fixed_sep_decomposition.R`, `sem_gpa_fixed_splithalf.R`, `esem_ties_target.R`), about nine minutes total.
+2. The three table/figure generators in `Scripts/manuscript/` (`build_measurement_blocks.R`, `build_structural_blocks.R`, `build_ols_appendix.R`), which write full LaTeX blocks, including captions and notes, to `cache/manuscript/`.
+3. `build_prose_numbers.R` and `check_prose_numbers.py`, which recompute every statistic cited in the prose from the caches into `cache/manuscript/prose_numbers.csv` (154 rows) and verify each one against the draft text.
+4. `splice_blocks.py` and `splice_ols_appendix.py`, which replace the generated blocks in `results_draft.tex` (block-level; they refuse to write on a missing caption or note).
+5. Two passes of `xelatex` into `cache/manuscript/pdf/`.
+
+Flags: `--skip-fits` reuses the existing fit caches and starts at the generators; `--compile-only` runs only the splices and the compile. Stage logs go to `cache/manuscript/build_logs/`. A full run from the fits reproduces the committed draft byte-for-byte.
+
 ## Reproducing the analysis
 
 From the repository root:
@@ -66,7 +78,7 @@ Total runtime is under a minute on a standard laptop; no parallelization or HPC 
 
 Several additional scripts are present but are **not** part of the statistical pipeline and are not run by `run_all.R`:
 
-- `Scripts/00_extract_minimal_data.R` is a maintainer-only utility that regenerates the committed `data/grabbagdata111925.dta` extract from a full, gitignored raw export (`data/data/grabbagdata111925_full.dta`). It is not needed to *reproduce* the analysis — the extract it produces is already committed — only to *regenerate* that extract if the underlying raw data changes.
+- `Scripts/00_extract_minimal_data.R` is a maintainer-only utility that regenerates the committed `data/grabbagdata111925.dta` extract from a full, gitignored raw export (`data/grabbagdata111925_full.dta`). It is not needed to *reproduce* the analysis — the extract it produces is already committed — only to *regenerate* that extract if the underlying raw data changes.
 - `Scripts/05_render_table_images.R` re-renders the tables from `cache/02_models.rds` as flat PNG images (matching the plain screenshot style already embedded in the manuscript). This exists purely to support the maintainers' internal Google Docs manuscript-sync workflow and is unnecessary for statistical reproduction.
 - `Scripts/sync_manuscript.R`, `Scripts/sync_manuscript.py`, `Scripts/fix_figure_table_page_fit.py`, `Scripts/insert_table3.py`, and `Scripts/strip_reference_links.py` are one-off or maintainer-only utilities for synchronizing the live Google Docs manuscript draft with this repository's figures, tables, and reference list. They require Google Drive credentials the maintainers hold and are irrelevant to reproducing the reported results.
 
@@ -93,7 +105,10 @@ Several additional scripts are present but are **not** part of the statistical p
 ```
 .
 ├── run_all.R                    # Master pipeline driver (Rscript run_all.R)
-├── grabbagdata111925.dta        # Minimal-column survey extract (N = 1,258; 63 of 179 raw columns)
+├── results_draft.tex            # Manuscript of record (tables/figures spliced from caches)
+├── data/
+│   ├── grabbagdata111925.dta      # Minimal-column survey extract (N = 1,258; 63 of 179 raw columns)
+│   └── grabbagdata111925_full.dta # Full raw export (gitignored; source of the extract)
 ├── Scripts/
 │   ├── 00_extract_minimal_data.R # Maintainer-only: regenerates the extract above from the full raw export
 │   ├── 01_prepare_data.R        # Data ingestion & factor models
