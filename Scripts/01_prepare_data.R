@@ -39,7 +39,7 @@ suppressPackageStartupMessages({
 dir.create("cache", showWarnings = FALSE, recursive = TRUE)
 
 message("[1/4] Loading raw data...")
-df <- read_dta("grabbagdata111925.dta")
+df <- read_dta("data/grabbagdata111925.dta")
 message(sprintf("  Loaded %d respondents, %d columns.", nrow(df), ncol(df)))
 
 # ------------------------------------------------------------------------

@@ -19,8 +19,8 @@ suppressPackageStartupMessages({
   library(dplyr)
 })
 
-full_path <- "grabbagdata111925_full.dta"
-minimal_path <- "grabbagdata111925.dta"
+full_path <- "data/grabbagdata111925_full.dta"
+minimal_path <- "data/grabbagdata111925.dta"
 
 if (!file.exists(full_path)) {
   stop(sprintf(

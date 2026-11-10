@@ -133,7 +133,7 @@ def main():
     all_files = load_files(src)
 
     import os
-    outdir = "SSR-submission"
+    outdir = "submission_round1/SSR-submission"
     os.makedirs(outdir, exist_ok=True)
 
     tree = build_manuscript_anonymized(all_files)
