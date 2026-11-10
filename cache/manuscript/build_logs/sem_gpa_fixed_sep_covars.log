@@ -1,0 +1,97 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+
+===== Separate fixed-ESEM with covariates, weak ties, N = 1227 =====
+converged=TRUE npar=265
+scaled chisq=4819.0 df=945 CFI=0.891 RMSEA=0.058 SRMR=0.075
+Latent covariance PD: TRUE (min eigenvalue 0.6844)
+
+Network-to-activity paths:
+ lhs rhs    est    se   pvalue std.all
+   A  Wv  0.202 0.015 0.00e+00   0.191
+   A  Wl  0.049 0.012 1.95e-05   0.047
+   A  Wc  0.045 0.009 3.95e-07   0.043
+ Lis  Wv  0.055 0.042 1.89e-01   0.063
+ Lis  Wl  0.178 0.049 2.54e-04   0.202
+ Lis  Wc  0.047 0.048 3.27e-01   0.053
+   R  Wv  0.099 0.038 9.01e-03   0.103
+   R  Wl -0.085 0.045 6.19e-02  -0.088
+   R  Wc -0.012 0.046 7.99e-01  -0.012
+
+Network factor disturbance correlations:
+ lhs rhs std.all
+  Wv  Wl  -0.019
+  Wv  Wc  -0.077
+  Wl  Wc   0.191
+
+Politics: observed vs fitted (per network factor):
+ factor observed_loading_weighted_polyserial path_from_poli_std
+     Wv                                0.014              0.153
+     Wl                               -0.105             -0.504
+     Wc                                0.106              0.385
+Item-level observed polyserial with politics:
+                   item polyserial
+      KnowAsianppl_weak     -0.043
+       Know2ndHome_weak      0.144
+ KnowBornElsewhere_weak     -0.012
+       KnowMENAppl_weak      0.004
+      KnowHawaiiPI_weak      0.064
+   KnowAmIndianppl_weak      0.082
+         KnowLGBTQ_weak     -0.321
+  KnowLittleChurch_weak     -0.119
+       KnowVeryLib_weak     -0.442
+   KnowHispanixppl_weak     -0.110
+      KnowBlackppl_weak     -0.068
+       KnowCityppl_weak     -0.065
+   KnowLotsaChurch_weak      0.231
+      KnowVeryCons_weak      0.436
+      KnowWhiteppl_weak      0.038
+      KnowRuralppl_weak      0.088
+
+===== Separate fixed-ESEM with covariates, strong ties, N = 1227 =====
+converged=TRUE npar=265
+scaled chisq=5921.4 df=945 CFI=0.862 RMSEA=0.066 SRMR=0.086
+Latent covariance PD: TRUE (min eigenvalue 0.6913)
+
+Network-to-activity paths:
+ lhs rhs    est    se   pvalue std.all
+   A  Sv  0.266 0.015 0.00e+00   0.249
+   A  Sl  0.045 0.008 3.92e-08   0.044
+   A  Sc  0.081 0.008 0.00e+00   0.080
+ Lis  Sv -0.045 0.041 2.70e-01  -0.050
+ Lis  Sl  0.184 0.049 2.03e-04   0.216
+ Lis  Sc  0.028 0.051 5.84e-01   0.033
+   R  Sv  0.104 0.038 6.35e-03   0.107
+   R  Sl -0.038 0.046 4.03e-01  -0.041
+   R  Sc  0.010 0.049 8.33e-01   0.011
+
+Network factor disturbance correlations:
+ lhs rhs std.all
+  Sv  Sl  -0.010
+  Sv  Sc  -0.038
+  Sl  Sc   0.231
+
+Politics: observed vs fitted (per network factor):
+ factor observed_loading_weighted_polyserial path_from_poli_std
+     Sv                                0.055              0.106
+     Sl                               -0.125             -0.543
+     Sc                                0.180              0.425
+Item-level observed polyserial with politics:
+                     item polyserial
+      KnowAsianppl_strong      0.021
+   KnowHispanixppl_strong     -0.016
+      KnowBlackppl_strong      0.016
+       Know2ndHome_strong      0.196
+ KnowBornElsewhere_strong      0.020
+       KnowMENAppl_strong      0.058
+      KnowHawaiiPI_strong      0.108
+   KnowAmIndianppl_strong      0.117
+         KnowLGBTQ_strong     -0.293
+  KnowLittleChurch_strong     -0.052
+       KnowVeryLib_strong     -0.455
+       KnowCityppl_strong     -0.007
+   KnowLotsaChurch_strong      0.301
+      KnowVeryCons_strong      0.524
+      KnowWhiteppl_strong      0.105
+      KnowRuralppl_strong      0.124
+
+Done.

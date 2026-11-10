@@ -59,7 +59,10 @@ s = next(i for i, l in enumerate(L) if l.startswith("Table 5. Standardized Netwo
 e = next(i for i, l in enumerate(L) if l.startswith("\\subsection*{Appendix"))
 # keep structural block only up to Table A3 (A3 handled separately)
 a3_start = next(i for i, l in enumerate(struct) if l.startswith("Table A3."))
-struct_main = struct[:a3_start]
+# drop the "% BEGIN" marker line and leading blanks so repeated splices are idempotent
+struct_main = [l for l in struct[:a3_start] if not l.startswith("% ")]
+while struct_main and struct_main[0] == "":
+    struct_main.pop(0)
 struct_a3 = struct[a3_start:]
 L = L[:s] + struct_main + L[e:]
 

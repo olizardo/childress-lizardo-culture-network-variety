@@ -1,0 +1,65 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+
+===== weak ties, N = 1227: converged = TRUE =====
+CFI = 0.891, RMSEA = 0.058
+          lhs    est    se   pvalue  tie
+   ind_A_educ  0.068 0.009 7.06e-14 weak
+   dir_A_educ  0.391 0.032 0.00e+00 weak
+   tot_A_educ  0.459 0.033 0.00e+00 weak
+   ind_A_arts  0.038 0.005 9.77e-15 weak
+   dir_A_arts  0.167 0.017 0.00e+00 weak
+   tot_A_arts  0.204 0.017 0.00e+00 weak
+   ind_A_poli  0.015 0.005 2.23e-03 weak
+   dir_A_poli  0.047 0.016 2.61e-03 weak
+   tot_A_poli  0.062 0.016 7.67e-05 weak
+ ind_Lis_educ  0.022 0.016 1.61e-01 weak
+ dir_Lis_educ -0.015 0.045 7.34e-01 weak
+ tot_Lis_educ  0.007 0.043 8.71e-01 weak
+ ind_Lis_arts  0.017 0.008 3.95e-02 weak
+ dir_Lis_arts -0.042 0.024 7.46e-02 weak
+ tot_Lis_arts -0.025 0.023 2.80e-01 weak
+ ind_Lis_poli -0.041 0.025 9.38e-02 weak
+ dir_Lis_poli -0.028 0.032 3.88e-01 weak
+ tot_Lis_poli -0.069 0.021 9.30e-04 weak
+   ind_R_educ  0.030 0.014 2.88e-02 weak
+   dir_R_educ  0.124 0.051 1.44e-02 weak
+   tot_R_educ  0.154 0.048 1.36e-03 weak
+   ind_R_arts  0.014 0.007 5.65e-02 weak
+   dir_R_arts  0.039 0.026 1.33e-01 weak
+   tot_R_arts  0.053 0.025 3.64e-02 weak
+   ind_R_poli  0.035 0.022 1.18e-01 weak
+   dir_R_poli -0.078 0.030 9.12e-03 weak
+   tot_R_poli -0.043 0.021 4.27e-02 weak
+
+===== strong ties, N = 1227: converged = TRUE =====
+CFI = 0.862, RMSEA = 0.066
+          lhs    est    se   pvalue    tie
+   ind_A_educ  0.091 0.011 2.22e-16 strong
+   dir_A_educ  0.368 0.031 0.00e+00 strong
+   tot_A_educ  0.459 0.033 0.00e+00 strong
+   ind_A_arts  0.054 0.006 0.00e+00 strong
+   dir_A_arts  0.150 0.016 0.00e+00 strong
+   tot_A_arts  0.204 0.017 0.00e+00 strong
+   ind_A_poli  0.025 0.006 5.65e-06 strong
+   dir_A_poli  0.036 0.015 1.46e-02 strong
+   tot_A_poli  0.062 0.016 7.67e-05 strong
+ ind_Lis_educ -0.014 0.015 3.51e-01 strong
+ dir_Lis_educ  0.021 0.044 6.33e-01 strong
+ tot_Lis_educ  0.007 0.043 8.71e-01 strong
+ ind_Lis_arts  0.000 0.009 9.91e-01 strong
+ dir_Lis_arts -0.025 0.024 3.00e-01 strong
+ tot_Lis_arts -0.025 0.023 2.80e-01 strong
+ ind_Lis_poli -0.062 0.028 2.44e-02 strong
+ dir_Lis_poli -0.007 0.034 8.43e-01 strong
+ tot_Lis_poli -0.069 0.021 9.30e-04 strong
+   ind_R_educ  0.034 0.013 8.07e-03 strong
+   dir_R_educ  0.120 0.050 1.62e-02 strong
+   tot_R_educ  0.154 0.048 1.36e-03 strong
+   ind_R_arts  0.018 0.008 2.28e-02 strong
+   dir_R_arts  0.035 0.027 1.92e-01 strong
+   tot_R_arts  0.053 0.025 3.64e-02 strong
+   ind_R_poli  0.024 0.026 3.44e-01 strong
+   dir_R_poli -0.067 0.032 3.74e-02 strong
+   tot_R_poli -0.043 0.021 4.27e-02 strong
+
+Done.
