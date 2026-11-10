@@ -9,6 +9,9 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
+\usepackage{etoolbox}
+\AtBeginEnvironment{tabular*}{\small\setlength{\tabcolsep}{3pt}}
+\AtBeginEnvironment{longtable}{\small}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,shapes.geometric}
 \usepackage{lmodern}
@@ -78,7 +81,9 @@ Substantively, the orthogonal solution uncovers a structural division between pu
 
 We evaluate the target structure against more parsimonious alternatives using confirmatory factor analysis with diagonally weighted least squares (WLSMV estimation, N = 1,243; Table 2), which relaxes the varimax orthogonality assumption by allowing the factors to be correlated. The three-factor model outperforms more parsimonious alternatives. Forcing residual practical items onto the arts factor produces a significant decrement in fit (scaled $\Delta\chi^2(2) = 121.6$, $p < .001$), as does forcing them onto solitary leisure ($\Delta\chi^2(2) = 51.0$, $p < .001$). A single-factor model specifying a generalized omnivorousness dimension performs worst of all ($\Delta\chi^2(3) = 146.4$, $p < .001$). Although the three-factor confirmatory model fits better than any rival ($\text{CFI} = .956$, $\text{RMSEA} = .095$, $\text{SRMR} = .061$), the elevated RMSEA reflects the restrictive requirement that each practice load onto only a single factor. Everyday cultural activities naturally cross domain boundaries in ways that strict zero-loading constraints penalize.
 
-Because everyday cultural practices rarely divide into mutually exclusive silos, we estimate an exploratory structural equation model (ESEM) using target rotation. By anchoring primary loadings to the varimax configuration while permitting items to exhibit small, substantively plausible cross-loadings, the ESEM achieves a good fit to the observed polychoric covariances ($\text{CFI} = .979$, $\text{RMSEA} = .074$ $[.070, .079]$, $\text{SRMR} = .035$), improving over the confirmatory baseline (scaled $\Delta\chi^2(34) = 746.7$, $p < .001$; Table 2).\footnote{Geomin rotation yields identical omnibus fit because rotation does not alter the implied covariance matrix, but it redistributes factor content in an uninterpretable fashion. Under geomin, commercial entertainment (movie theaters, sporting events, dining out) combines with fast food to form the second factor, displacing walking to the third dimension. We retain the varimax targets because they align with the theoretical design of the battery and preserve substantive interpretability.} Latent factor correlations confirm that while these three domains are distinct, they are modestly interrelated; public arts correlates positively with solitary leisure ($r = .36$) and residual domestic practices ($r = .21$), while leisure and residual practices correlate only weakly ($r = .11$; Table 3). As Table 3 shows, all fourteen public arts items maintain primary loadings between .47 and .97. Solitary leisure is anchored firmly by walking (.78) and physical exercise (.42), though exercise also displays a secondary affinity with public cultural engagement (.32). Literary reading functions as the peripheral anchor of this leisure factor across all specifications (.44 in Table 1, .21 in Table A1, and .19 in Table 3), a structural attenuation that proves central to how solitary leisure behaves across alternative operationalizations. Domestic tasks (gardening at .45, home or auto repair at .32) and fast food avoidance ($-.38$) define the residual factor, which also absorbs modest secondary loadings from institutional excursions (museums at .24, historic sites at .23) and outdoor recreation (hiking at .21).\footnote{Two measurement caveats qualify this three-factor solution. First, the residual practical-domestic factor exhibits modest internal coherence (McDonald's $\omega = .55$, ordinal $\alpha = .31$), contrasting with the high reliability of public arts ($\alpha = .96$) and solitary leisure ($\alpha = .49$). Second, several highbrow practices have sparse counts in the highest frequency tier (two to nine respondents for symphonies, dance performances, and carnivals); sensitivity analyses collapsing the top two categories across these items leave factor assignments and fit indices unchanged.}
+Accordingly, we estimate an exploratory structural equation model (ESEM) using target rotation. The target matrix is built from the varimax primary-loading assignment, so each item is assigned to its primary factor and targeted toward zero on the other two. Because target rotation pulls these off-target loadings toward zero rather than fixing them, items retain small, substantively plausible cross-loadings. The ESEM achieves a good fit to the observed polychoric covariances ($\text{CFI} = .979$, $\text{RMSEA} = .074$ $[.070, .079]$, $\text{SRMR} = .035$), improving over the confirmatory baseline (scaled $\Delta\chi^2(34) = 746.7$, $p < .001$; Table 2). 
+
+We retain the varimax targets because they align with the theoretical design of the battery, and Table A1 reports the oblimin solution of the same battery for comparison. Latent factor correlations confirm that while these three domains are distinct, they are modestly interrelated; public arts correlates positively with solitary leisure ($r = .36$) and residual domestic practices ($r = .21$), while leisure and residual practices correlate only weakly ($r = .11$; Table 3). As Table 3 shows, all fourteen public arts items maintain primary loadings between .47 and .97. Solitary leisure is anchored firmly by walking (.78) and physical exercise (.42), though exercise also displays a secondary affinity with public cultural engagement (.32). Literary reading functions as the peripheral anchor of this leisure factor across all specifications (.44 in Table 1, .21 in Table A1, and .19 in Table 3), a structural attenuation that proves central to how solitary leisure behaves across alternative operationalizations. Domestic tasks (gardening at .45, home or auto repair at .32) and fast food avoidance ($-.38$) define the residual factor, which also absorbs modest secondary loadings from institutional excursions (museums at .24, historic sites at .23) and outdoor recreation (hiking at .21). Several highbrow practices have sparse counts in the highest frequency tier, with only two respondents each for symphonies and dance performances and five for carnivals. A sensitivity analysis that collapses the top two categories of these items leaves every factor assignment unchanged and shifts the CFA fit only in the third decimal place (CFI = .955 against .956; RMSEA = .095 in both).
 
 
 \Needspace{38\baselineskip}
@@ -92,32 +97,32 @@ Table 1. Varimax Loadings for the Activity Battery
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}@{}}
 \toprule
 Item & Assigned target & Arts & Leisure & Residual \\
-Museum & Arts & 0.80 & 0.21 & 0.21 \\
-Art gallery & Arts & 0.83 & 0.19 & 0.20 \\
-Symphony, orchestra, or opera & Arts & 0.89 & 0.06 & 0.23 \\
-Carnival, fair, or amusement park & Arts & 0.83 & 0.13 & 0.01 \\
-Music concert or festival & Arts & 0.84 & 0.17 & 0.02 \\
-Play or musical & Arts & 0.84 & 0.09 & 0.13 \\
-Library & Arts & 0.49 & 0.39 & 0.15 \\
-Fancy restaurant & Arts & 0.72 & 0.26 & −0.15 \\
-Dance performance & Arts & 0.89 & 0.00 & 0.15 \\
-Movie theater & Arts & 0.74 & 0.23 & −0.24 \\
-Attend sports & Arts & 0.79 & 0.21 & −0.07 \\
-Hiking, camping, or boating & Arts & 0.52 & 0.37 & 0.32 \\
-Historic site & Arts & 0.70 & 0.23 & 0.26 \\
-Go to festival & Arts & 0.78 & 0.27 & 0.15 \\
-Go for a walk & Leisure & −0.14 & 0.87 & 0.07 \\
-Exercise or yoga & Leisure & 0.35 & 0.60 & −0.19 \\
-Read a novel, poem, or play & Leisure & 0.27 & 0.44 & 0.18 \\
-Gardening & Residual & 0.27 & 0.31 & 0.62 \\
-Fast food & Residual & 0.21 & 0.22 & −0.66 \\
-Home auto repair & Residual & 0.38 & 0.24 & 0.49 \\
+Museum & Arts & \textbf{0.80} & 0.21 & 0.21 \\
+Art gallery & Arts & \textbf{0.83} & 0.19 & 0.20 \\
+Symphony, orchestra, or opera & Arts & \textbf{0.89} & 0.06 & 0.23 \\
+Carnival, fair, or amusement park & Arts & \textbf{0.83} & 0.13 & 0.01 \\
+Music concert or festival & Arts & \textbf{0.84} & 0.17 & 0.02 \\
+Play or musical & Arts & \textbf{0.84} & 0.09 & 0.13 \\
+Library & Arts & \textbf{0.49} & 0.39 & 0.15 \\
+Fancy restaurant & Arts & \textbf{0.72} & 0.26 & −0.15 \\
+Dance performance & Arts & \textbf{0.89} & 0.00 & 0.15 \\
+Movie theater & Arts & \textbf{0.74} & 0.23 & −0.24 \\
+Attend sports & Arts & \textbf{0.79} & 0.21 & −0.07 \\
+Hiking, camping, or boating & Arts & \textbf{0.52} & 0.37 & 0.32 \\
+Historic site & Arts & \textbf{0.70} & 0.23 & 0.26 \\
+Go to festival & Arts & \textbf{0.78} & 0.27 & 0.15 \\
+Go for a walk & Leisure & −0.14 & \textbf{0.87} & 0.07 \\
+Exercise or yoga & Leisure & 0.35 & \textbf{0.60} & −0.19 \\
+Read a novel, poem, or play & Leisure & 0.27 & \textbf{0.44} & 0.18 \\
+Gardening & Residual & 0.27 & 0.31 & \textbf{0.62} \\
+Fast food & Residual & 0.21 & 0.22 & \textbf{−0.66} \\
+Home auto repair & Residual & 0.38 & 0.24 & \textbf{0.49} \\
 \midrule
 \endhead
 \bottomrule
 \end{longtable}
 
-Note. Varimax-rotated component loadings from a principal components analysis (N = 1,243). The assigned target column reports the factor on which each item is assigned in the ESEM targets. The three components together explain 63.2 percent of the variance.
+Note. Varimax-rotated component loadings from a principal components analysis (N = 1,243). Bold entries mark each item's assigned factor. The assigned target column reports the factor on which each item is assigned in the ESEM targets. The three components together explain 63.2 percent of the variance.
 
 \Needspace{26\baselineskip}
 Table 2. Confirmatory and Exploratory Structural Models of the Activity Battery
@@ -155,39 +160,39 @@ Table 3. ESEM Loadings with Target Rotation
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}@{}}
 \toprule
 Item & Target factor & Arts & Leisure & Residual \\
-Museum & Arts & 0.78 & 0.03 & 0.24 \\
-Art gallery & Arts & 0.83 & −0.02 & 0.20 \\
-Symphony, orchestra, or opera & Arts & 0.95 & −0.22 & 0.11 \\
-Carnival, fair, or amusement park & Arts & 0.82 & 0.04 & −0.11 \\
-Music concert or festival & Arts & 0.86 & 0.02 & −0.11 \\
-Play or musical & Arts & 0.90 & −0.16 & 0.02 \\
-Library & Arts & 0.47 & 0.16 & 0.14 \\
-Fancy restaurant & Arts & 0.71 & 0.15 & −0.20 \\
-Dance performance & Arts & 0.97 & −0.25 & 0.01 \\
-Movie theater & Arts & 0.75 & 0.11 & −0.30 \\
-Attend sports & Arts & 0.80 & 0.08 & −0.21 \\
-Hiking, camping, or boating & Arts & 0.48 & 0.23 & 0.21 \\
-Historic site & Arts & 0.65 & 0.11 & 0.23 \\
-Go to festival & Arts & 0.78 & 0.10 & 0.04 \\
-Go for a walk & Leisure & −0.22 & 0.78 & 0.12 \\
-Exercise or yoga & Leisure & 0.32 & 0.42 & −0.17 \\
-Read a novel, poem, or play & Leisure & 0.27 & 0.19 & 0.16 \\
-Gardening & Residual & 0.23 & 0.17 & 0.45 \\
-Fast food & Residual & 0.20 & 0.14 & −0.38 \\
-Home auto repair & Residual & 0.34 & 0.14 & 0.32 \\
+Museum & Arts & \textbf{0.78} & 0.03 & 0.24 \\
+Art gallery & Arts & \textbf{0.83} & −0.02 & 0.20 \\
+Symphony, orchestra, or opera & Arts & \textbf{0.95} & −0.22 & 0.11 \\
+Carnival, fair, or amusement park & Arts & \textbf{0.82} & 0.04 & −0.11 \\
+Music concert or festival & Arts & \textbf{0.86} & 0.02 & −0.11 \\
+Play or musical & Arts & \textbf{0.90} & −0.16 & 0.02 \\
+Library & Arts & \textbf{0.47} & 0.16 & 0.14 \\
+Fancy restaurant & Arts & \textbf{0.71} & 0.15 & −0.20 \\
+Dance performance & Arts & \textbf{0.97} & −0.25 & 0.01 \\
+Movie theater & Arts & \textbf{0.75} & 0.11 & −0.30 \\
+Attend sports & Arts & \textbf{0.80} & 0.08 & −0.21 \\
+Hiking, camping, or boating & Arts & \textbf{0.48} & 0.23 & 0.21 \\
+Historic site & Arts & \textbf{0.65} & 0.11 & 0.23 \\
+Go to festival & Arts & \textbf{0.78} & 0.10 & 0.04 \\
+Go for a walk & Leisure & −0.22 & \textbf{0.78} & 0.12 \\
+Exercise or yoga & Leisure & 0.32 & \textbf{0.42} & −0.17 \\
+Read a novel, poem, or play & Leisure & 0.27 & \textbf{0.19} & 0.16 \\
+Gardening & Residual & 0.23 & 0.17 & \textbf{0.45} \\
+Fast food & Residual & 0.20 & 0.14 & \textbf{−0.38} \\
+Home auto repair & Residual & 0.34 & 0.14 & \textbf{0.32} \\
 \midrule
 \endhead
 \bottomrule
 \end{longtable}
 
-Note. Standardized loadings from an ESEM with target rotation (WLSMV, N = 1,243). Factor correlations: arts and leisure .36, arts and residual .21, leisure and residual .11.
+Note. Standardized loadings from an ESEM with target rotation (WLSMV, N = 1,243). Bold entries mark each item's assigned factor. Factor correlations: arts and leisure .36, arts and residual .21, leisure and residual .11.
 
 
 \subsection{Factor Validation of Network Composition}\label{factor-validation-of-network-composition}
 
 The position generator batteries assess personal networks across sixteen social categories, measured separately for casual acquaintances (weak ties) and close confidants (strong ties).\footnote{Gender items (knowing men, knowing women) are excluded because they display marked structural ambiguity across both relational domains. In exploratory analyses, knowing women splits nearly equally between the liberal and conservative factors in weak networks (.59 and .60), while knowing men loads heavily on both factors in weak ties (.68 and .57) and on conservative composition in strong ties (.62, alongside a .58 loading on liberal composition). In confirmatory models, retaining them lowers fit to $\text{CFI} = .896$ and $\text{RMSEA} = .116$ for weak ties and $\text{CFI} = .918$ and $\text{RMSEA} = .105$ for strong ties. Re-estimating regression models without the four gender items leaves every substantive finding and significance verdict intact, with no network coefficient shifting by more than .049.} Rather than collapsing social ties into an omnibus index of network diversity, the measurement model uncovers three distinct relational structures across both relational spheres: a generalized breadth of ties spanning ethnic, geographic, and socioeconomic boundaries (Network Variety), and two distinct channels of partisan homophily (Liberal Composition and Conservative Composition). This separation confirms that demographic bridging and ideological sorting operate as distinct relational dynamics; maintaining connections across varied social strata does not imply alignment with a particular political camp.
 
-In everyday American life, however, social diversity and political sorting rarely occupy hermetically sealed environments. Conventional confirmatory factor models, which impose strict zero-loading restrictions by forcing each social position onto a single factor, fit the data poorly and mischaracterize everyday network topology (Table A2).\footnote{In simple-structure confirmatory models, freeing residual covariances between polar opposites (very liberal with very conservative, little church with lots of church, and city with rural) modestly improves fit (Table A2). Under the target-rotated ESEM, however, secondary cross-loadings absorb this bipolarity, rendering those residual covariances redundant and producing numerical instability in strong-tie estimation. We therefore retain the target ESEM without residual covariances.} By penalizing the natural secondary affinities that exist among demographic and political identities, strict confirmatory models artificially force shared social spaces into the latent factor correlations, inflating the overlap between network variety and liberal composition to over .80 and inducing severe collinearity. Estimating exploratory structural equation models (ESEM) with target rotation resolves this distortion (Table 4). By permitting positions to display modest, substantively meaningful secondary affinities, the ESEM achieves an excellent fit ($\text{CFI} \ge .975$, $\text{RMSEA} \le .069$, $\text{SRMR} \le .033$), showing that while demographic diversity and progressive sorting intersect in everyday networks, they remain distinct, moderately related dimensions ($r \approx .50$).
+Social diversity and political sorting rarely occupy hermetically sealed environments. Conventional confirmatory factor models, which impose strict zero-loading restrictions by forcing each social position onto a single factor, fit the data poorly and mischaracterize everyday network topology (Table A2).\footnote{In simple-structure confirmatory models, freeing residual covariances between polar opposites (very liberal with very conservative, little church with lots of church, and city with rural) modestly improves fit (Table A2). Under the target-rotated ESEM, however, secondary cross-loadings absorb this bipolarity, rendering those residual covariances redundant and producing numerical instability in strong-tie estimation. We therefore retain the target ESEM without residual covariances.} By penalizing the natural secondary affinities that exist among demographic and political identities, strict confirmatory models artificially force shared social spaces into the latent factor correlations, inflating the overlap between network variety and liberal composition to over .80 and inducing severe collinearity. Estimating exploratory structural equation models (ESEM) with target rotation resolves this distortion (Table 4). By permitting positions to display modest, substantively meaningful secondary affinities, the ESEM achieves a good fit ($\text{CFI} \ge .975$, $\text{RMSEA} \le .069$, $\text{SRMR} \le .033$), showing that while demographic diversity and progressive sorting intersect in everyday networks, they remain distinct, moderately related dimensions ($r \approx .50$).
 
 The pattern of secondary loadings in Table 4 reveals a meaningful shift in how racial diversity and political sorting operate across levels of intimacy. In casual acquaintance networks, minoritized racial and ethnic ties (Black and Hispanic or Latine acquaintances) straddle both network variety and progressive political composition. This pattern reflects the institutional organization of everyday social life; for many Americans, casual contact across racial lines occurs within progressive urban, educational, or professional environments. In close personal networks, by contrast, these same ties anchor structural variety almost exclusively. When Americans form close, confiding bonds across racial lines, those ties represent genuine cross-boundary social bridging rather than incidental proximity to progressive politics. Conservative composition, meanwhile, exhibits a starkly consolidated relational boundary across both weak and strong spheres; it is anchored exclusively by church attendance, political conservatism, rural residence, and White ties. White ties also display secondary affinities with liberal networks, capturing the partisan divide within the majority population, whereas conservative homophily remains structurally insular and segregated from ethnic diversity.
 
@@ -196,17 +201,17 @@ All three network dimensions achieve high internal reliability across both tie t
 \Needspace{30\baselineskip}
 Table 4. Standardized Loadings from the Target-Rotated ESEM of the Weak-Tie and Strong-Tie Batteries
 
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.34\textwidth} >{\raggedleft\arraybackslash}p{0.09\textwidth} >{\raggedleft\arraybackslash}p{0.09\textwidth} >{\raggedleft\arraybackslash}p{0.09\textwidth} >{\raggedleft\arraybackslash}p{0.09\textwidth} >{\raggedleft\arraybackslash}p{0.09\textwidth} >{\raggedleft\arraybackslash}p{0.09\textwidth}@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.30\textwidth} >{\raggedleft\arraybackslash}p{0.10\textwidth} >{\raggedleft\arraybackslash}p{0.10\textwidth} >{\raggedleft\arraybackslash}p{0.10\textwidth} >{\raggedleft\arraybackslash}p{0.10\textwidth} >{\raggedleft\arraybackslash}p{0.10\textwidth} >{\raggedleft\arraybackslash}p{0.10\textwidth}@{}}
 \toprule
  & \multicolumn{3}{c}{Weak ties} & \multicolumn{3}{c}{Strong ties} \\
 \cmidrule(lr){2-4}\cmidrule(lr){5-7}
-Item & Variety & Liberal & Conservative & Variety & Liberal & Conservative \\
+Item & Variety & Lib. & Con. & Variety & Lib. & Con. \\
 \midrule
 Asian people & \textbf{0.61} & 0.33 & $-$0.03 & \textbf{0.73} & 0.15 & $-$0.06 \\
 Second home & \textbf{0.50} & $-$0.03 & 0.34 & \textbf{0.56} & $-$0.09 & 0.31 \\
 Born elsewhere & \textbf{0.48} & 0.38 & 0.02 & \textbf{0.70} & 0.19 & $-$0.04 \\
-Middle Eastern or North African people & \textbf{0.77} & 0.15 & 0.00 & \textbf{0.88} & 0.02 & $-$0.02 \\
-Native Hawaiian or Pacific Islander people & \textbf{0.93} & $-$0.04 & $-$0.06 & \textbf{0.93} & $-$0.08 & $-$0.05 \\
+MENA people & \textbf{0.77} & 0.15 & 0.00 & \textbf{0.88} & 0.02 & $-$0.02 \\
+NHPI people & \textbf{0.93} & $-$0.04 & $-$0.06 & \textbf{0.93} & $-$0.08 & $-$0.05 \\
 American Indian people & \textbf{0.84} & $-$0.12 & 0.06 & \textbf{0.85} & $-$0.14 & 0.09 \\
 LGBTQ people & 0.03 & \textbf{0.80} & $-$0.07 & 0.24 & \textbf{0.65} & $-$0.10 \\
 Little church & $-$0.11 & \textbf{0.58} & 0.32 & $-$0.07 & \textbf{0.54} & 0.36 \\
@@ -221,7 +226,7 @@ Rural people & $-$0.07 & 0.11 & \textbf{0.61} & $-$0.05 & 0.16 & \textbf{0.60} \
 \bottomrule
 \end{tabular*}
 
-Note. Standardized loadings from exploratory structural equation models with target rotation (WLSMV, polychoric; N = 1,258 per battery). Bold entries are the primary loadings from the target, and all other loadings are estimated rather than fixed at zero. Gender items are excluded. Factor correlations are .52 (variety and liberal), .46 (variety and conservative), and .47 (liberal and conservative) for weak ties, and .48, .54, and .34 in the same order for strong ties. Item labels are abbreviated from the variable names.
+Note. Standardized loadings from exploratory structural equation models with target rotation (WLSMV, polychoric; N = 1,258 per battery). Bold entries are the primary loadings from the target, and all other loadings are estimated rather than fixed at zero. Gender items are excluded. Factor correlations are .52 (variety and liberal), .46 (variety and conservative), and .47 (liberal and conservative) for weak ties, and .48, .54, and .34 in the same order for strong ties. Item labels are abbreviated from the variable names; MENA is Middle Eastern or North African, and NHPI is Native Hawaiian or Pacific Islander. Lib. and Con. denote liberal and conservative composition.
 
 
 \subsection{Structural Models of Activity Participation}\label{structural-models-of-activity-participation}
@@ -232,16 +237,16 @@ Network variety is the main relational channel for public arts attendance in bot
 
 Solitary leisure runs through liberal composition rather than variety. Weak liberal composition (.20) and strong liberal composition (.22) are positive and significant at $p < .001$, while network variety and conservative composition are null in both tie types (weak variety .06, $p = .19$; strong variety $-.05$, $p = .27$). Practical-domestic residual activity shows smaller and less consistent paths, with variety positive in both tie types (.10 for weak ties, $p = .009$; .11 for strong ties, $p = .006$) and weak liberal composition negative and marginal ($-.09$, $p = .06$).
 
-The labeled models also decompose the sociodemographic and background effects into direct and network-mediated components (Tables 10 and 11). Education has a total standardized effect of .35 on arts participation in both tie models, of which about .05 runs through weak ties and about .07 through strong ties. Childhood arts exposure has a total effect of .27, of which about .05 (weak) and .07 (strong) runs through network composition, and the remainder is direct. Political conservatism has a total effect of .09 on arts. Its direct path is about .07 for weak ties and about .05 for strong ties, and its network-mediated path is about .02 for weak ties and about .04 for strong ties, with both mediated paths significant at $p < .01$. The total effects are nearly identical across tie models, because the covariate-to-activity relations are unconstrained in both, so the tie comparison concerns how much of each total runs through the network.\footnote{The total effects differ by no more than .004 between the weak-tie and strong-tie models for every predictor and activity factor. Only the split between direct and network-mediated routes differs by tie type.}
+The labeled models also decompose the sociodemographic and background effects into direct and network-mediated components (Tables 9 and 10). Education has a total standardized effect of .35 on arts participation in both tie models, of which about .05 runs through weak ties and about .07 through strong ties. Childhood arts exposure has a total effect of .27, of which about .05 (weak) and .07 (strong) runs through network composition, and the remainder is direct. Political conservatism has a total effect of .09 on arts. Its direct path is about .07 for weak ties and about .05 for strong ties, and its network-mediated path is about .02 for weak ties and about .04 for strong ties, with both mediated paths significant at $p < .01$. The total effects are nearly identical across tie models, because the covariate-to-activity relations are unconstrained in both, so the tie comparison concerns how much of each total runs through the network.\footnote{The total effects differ by no more than .004 between the weak-tie and strong-tie models for every predictor and activity factor. Only the split between direct and network-mediated routes differs by tie type.}
 
 Political conservatism's total association with solitary leisure is $-.12$ in both models ($p = .001$). Its network-mediated part runs through liberal composition and is $-.07$ for weak ties ($p = .09$) and $-.11$ for strong ties ($p = .02$), so the strong-tie channel is the one that clears conventional thresholds. Network-mediated effects are summed over the three network factors and assume that the covariates are not confounding the network-to-activity paths.
 
-Sociodemographic patterns sit alongside these relational dynamics (Tables 6 to 9). Education predicts network variety in both tie types (.26 for weak and strong ties), and political conservatism predicts liberal composition negatively ($-.50$ weak, $-.54$ strong) and conservative composition positively (.39 weak, .43 strong). Race and ethnicity predict conservative composition most strongly: AAPI respondents show the largest negative conservative paths ($-.20$ weak, $-.25$ strong), and Black, Hispanic or Latine, and multiracial respondents show comparable negative paths. Education and childhood arts exposure predict public arts attendance in both models (education .30 and .28; childhood arts .22 and .20), while AAPI respondents report lower arts participation in both tie models ($-.07$ weak, $-.06$ strong).
+Sociodemographic patterns sit alongside these relational dynamics (Tables 6 to 8). Education predicts network variety in both tie types (.26 for weak and strong ties), and political conservatism predicts liberal composition negatively ($-.50$ weak, $-.54$ strong) and conservative composition positively (.39 weak, .43 strong). Race and ethnicity predict conservative composition most strongly: AAPI respondents show the largest negative conservative paths ($-.20$ weak, $-.25$ strong), and Black, Hispanic or Latine, and multiracial respondents show comparable negative paths. Education and childhood arts exposure predict public arts attendance in both models (education .30 and .28; childhood arts .22 and .20), while AAPI respondents report lower arts participation in both tie models ($-.07$ weak, $-.06$ strong).
 
 
 Table 5. Standardized Network-to-Activity Paths from the Separate Weak-Tie and Strong-Tie Structural Models
 
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.40\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.36\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
 \toprule
 Network factor & Arts & Solitary leisure & Residual \\
 \midrule
@@ -258,7 +263,7 @@ Note. Standardized coefficients from separate WLSMV structural models for weak t
 
 Table 6. Sociodemographic Predictors of Weak-Tie Network Factors
 
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.40\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.36\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
 \toprule
 Predictor & Variety & Liberal & Conservative \\
 \midrule
@@ -280,7 +285,7 @@ Note. Standardized coefficients from the weak-tie structural model (N = 1,227). 
 
 Table 7. Sociodemographic Predictors of Strong-Tie Network Factors
 
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.40\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.36\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
 \toprule
 Predictor & Variety & Liberal & Conservative \\
 \midrule
@@ -300,49 +305,30 @@ Mixed/other (ref. White) & \hphantom{$-$}0.10***\hphantom{} & $-$0.06*\hphantom{
 
 Note. Standardized coefficients from the strong-tie structural model (N = 1,227). Reference categories are shown in parentheses. * p < .05, ** p < .01, *** p < .001.
 
-Table 8. Sociodemographic Predictors of Weak-Tie Activity Factors
+Table 8. Sociodemographic Predictors of Weak- and Strong-Tie Activity Factors
 
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.40\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.27\textwidth}@{\hspace{1pt}}>{\raggedleft\arraybackslash}p{0.112\textwidth}@{\hspace{1pt}}>{\raggedleft\arraybackslash}p{0.112\textwidth}@{\hspace{1pt}}>{\raggedleft\arraybackslash}p{0.112\textwidth}@{\hspace{1pt}}>{\raggedleft\arraybackslash}p{0.112\textwidth}@{\hspace{1pt}}>{\raggedleft\arraybackslash}p{0.112\textwidth}@{\hspace{1pt}}>{\raggedleft\arraybackslash}p{0.112\textwidth}@{}}
 \toprule
-Predictor & Arts & Solitary leisure & Residual \\
+ & \multicolumn{3}{c}{Weak ties} & \multicolumn{3}{c}{Strong ties} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+Predictor & Arts & Leisure & Residual & Arts & Leisure & Residual \\
 \midrule
-Age (years) & $-$0.13***\hphantom{} & \hphantom{$-$}0.00\hphantom{***} & \hphantom{$-$}0.38***\hphantom{} \\
-Education (ordinal, 1 to 4) & \hphantom{$-$}0.30***\hphantom{} & $-$0.01\hphantom{***} & \hphantom{$-$}0.10*\hphantom{**} \\
-Childhood arts exposure & \hphantom{$-$}0.22***\hphantom{} & $-$0.07\hphantom{***} & \hphantom{$-$}0.06\hphantom{***} \\
-Household income & \hphantom{$-$}0.06**\hphantom{*} & \hphantom{$-$}0.09*\hphantom{**} & $-$0.06\hphantom{***} \\
-Political ideology (1 to 7) & \hphantom{$-$}0.07**\hphantom{*} & $-$0.05\hphantom{***} & $-$0.12**\hphantom{*} \\
-Man (ref. woman) & $-$0.01\hphantom{***} & \hphantom{$-$}0.00\hphantom{***} & $-$0.07*\hphantom{**} \\
-Non-binary/trans (ref. woman) & \hphantom{$-$}0.02\hphantom{***} & $-$0.04\hphantom{***} & \hphantom{$-$}0.06\hphantom{***} \\
-Black (ref. White) & \hphantom{$-$}0.04\hphantom{***} & $-$0.07\hphantom{***} & $-$0.21***\hphantom{} \\
-Hispanic or Latine (ref. White) & \hphantom{$-$}0.01\hphantom{***} & \hphantom{$-$}0.01\hphantom{***} & $-$0.10*\hphantom{**} \\
-AAPI (ref. White) & $-$0.07**\hphantom{*} & \hphantom{$-$}0.01\hphantom{***} & $-$0.00\hphantom{***} \\
-Mixed/other (ref. White) & $-$0.04\hphantom{***} & \hphantom{$-$}0.04\hphantom{***} & \hphantom{$-$}0.08*\hphantom{**} \\
+Age (years) & $-$0.13*** & \hphantom{$-$}0.00 & \hphantom{$-$}0.38*** & $-$0.13*** & $-$0.02 & \hphantom{$-$}0.38*** \\
+Education (1 to 4) & \hphantom{$-$}0.30*** & $-$0.01 & \hphantom{$-$}0.10* & \hphantom{$-$}0.28*** & \hphantom{$-$}0.02 & \hphantom{$-$}0.10* \\
+Childhood arts exposure & \hphantom{$-$}0.22*** & $-$0.07 & \hphantom{$-$}0.06 & \hphantom{$-$}0.20*** & $-$0.04 & \hphantom{$-$}0.05 \\
+Household income & \hphantom{$-$}0.06** & \hphantom{$-$}0.09* & $-$0.06 & \hphantom{$-$}0.07** & \hphantom{$-$}0.08* & $-$0.06 \\
+Political ideology (1 to 7) & \hphantom{$-$}0.07** & $-$0.05 & $-$0.12** & \hphantom{$-$}0.05* & $-$0.01 & $-$0.11* \\
+Man (ref. woman) & $-$0.01 & \hphantom{$-$}0.00 & $-$0.07* & \hphantom{$-$}0.00 & \hphantom{$-$}0.00 & $-$0.06 \\
+Non-binary/trans (ref. woman) & \hphantom{$-$}0.02 & $-$0.04 & \hphantom{$-$}0.06 & \hphantom{$-$}0.01 & $-$0.04 & \hphantom{$-$}0.06 \\
+Black (ref. White) & \hphantom{$-$}0.04 & $-$0.07 & $-$0.21*** & \hphantom{$-$}0.03 & $-$0.04 & $-$0.21*** \\
+Hispanic/Latine (ref. White) & \hphantom{$-$}0.01 & \hphantom{$-$}0.01 & $-$0.10* & \hphantom{$-$}0.01 & \hphantom{$-$}0.04 & $-$0.10** \\
+AAPI (ref. White) & $-$0.07** & \hphantom{$-$}0.01 & $-$0.00 & $-$0.06** & \hphantom{$-$}0.04 & $-$0.00 \\
+Mixed/other (ref. White) & $-$0.04 & \hphantom{$-$}0.04 & \hphantom{$-$}0.08* & $-$0.03 & \hphantom{$-$}0.06 & \hphantom{$-$}0.08* \\
 \bottomrule
 \end{tabular*}
 
-Note. Standardized coefficients from the weak-tie structural model in Table 6 (N = 1,227). The activity equations also include the three weak-tie network factors, whose coefficients are reported in Table 5. * p < .05, ** p < .01, *** p < .001.
+Note. Standardized coefficients from the weak-tie and strong-tie structural models (N = 1,227 each). Each activity equation also includes the three network factors of its tie type, whose coefficients are reported in Table 5. * p < .05, ** p < .01, *** p < .001.
 
-Table 9. Sociodemographic Predictors of Strong-Tie Activity Factors
-
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.40\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
-\toprule
-Predictor & Arts & Solitary leisure & Residual \\
-\midrule
-Age (years) & $-$0.13***\hphantom{} & $-$0.02\hphantom{***} & \hphantom{$-$}0.38***\hphantom{} \\
-Education (ordinal, 1 to 4) & \hphantom{$-$}0.28***\hphantom{} & \hphantom{$-$}0.02\hphantom{***} & \hphantom{$-$}0.10*\hphantom{**} \\
-Childhood arts exposure & \hphantom{$-$}0.20***\hphantom{} & $-$0.04\hphantom{***} & \hphantom{$-$}0.05\hphantom{***} \\
-Household income & \hphantom{$-$}0.07**\hphantom{*} & \hphantom{$-$}0.08*\hphantom{**} & $-$0.06\hphantom{***} \\
-Political ideology (1 to 7) & \hphantom{$-$}0.05*\hphantom{**} & $-$0.01\hphantom{***} & $-$0.11*\hphantom{**} \\
-Man (ref. woman) & \hphantom{$-$}0.00\hphantom{***} & \hphantom{$-$}0.00\hphantom{***} & $-$0.06\hphantom{***} \\
-Non-binary/trans (ref. woman) & \hphantom{$-$}0.01\hphantom{***} & $-$0.04\hphantom{***} & \hphantom{$-$}0.06\hphantom{***} \\
-Black (ref. White) & \hphantom{$-$}0.03\hphantom{***} & $-$0.04\hphantom{***} & $-$0.21***\hphantom{} \\
-Hispanic or Latine (ref. White) & \hphantom{$-$}0.01\hphantom{***} & \hphantom{$-$}0.04\hphantom{***} & $-$0.10**\hphantom{*} \\
-AAPI (ref. White) & $-$0.06**\hphantom{*} & \hphantom{$-$}0.04\hphantom{***} & $-$0.00\hphantom{***} \\
-Mixed/other (ref. White) & $-$0.03\hphantom{***} & \hphantom{$-$}0.06\hphantom{***} & \hphantom{$-$}0.08*\hphantom{**} \\
-\bottomrule
-\end{tabular*}
-
-Note. Standardized coefficients from the strong-tie structural model in Table 7 (N = 1,227). The activity equations also include the three strong-tie network factors, whose coefficients are reported in Table 5. * p < .05, ** p < .01, *** p < .001.
 
 \Needspace{18\baselineskip}
 Figure 5. Paths from Education to Arts Participation, Weak Ties
@@ -490,9 +476,9 @@ Figure 10. Paths from Political Conservatism to Arts Participation, Strong Ties
 
 Note. Standardized coefficients from the strong-tie structural model with loadings fixed at the target rotation (N = 1,227). Solid arrows are paths through the network factors, dashed arrows are direct paths, and only paths significant at $p < .05$ are drawn. Asterisks follow Table 5.
 
-Table 10. Direct, Network-Mediated, and Total Standardized Effects of Education, Childhood Arts Exposure, and Political Ideology on the Activity Factors, Weak Ties
+Table 9. Direct, Network-Mediated, and Total Standardized Effects of Education, Childhood Arts Exposure, and Political Ideology on the Activity Factors, Weak Ties
 
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.40\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.36\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
 \toprule
 Predictor and activity factor & Direct & Network-mediated & Total \\
 \midrule
@@ -510,9 +496,9 @@ Residual: political ideology & $-$0.12**\hphantom{***} & \hphantom{$-$}0.06\hpha
 
 Note. Standardized effects from the labeled weak-tie model. Network-mediated effects sum the products of each predictor's path to a network factor and that factor's path to the activity factor, with standard errors from the delta method. Total effects equal direct plus network-mediated effects. * p < .05, ** p < .01, *** p < .001.
 
-Table 11. Direct, Network-Mediated, and Total Standardized Effects of Education, Childhood Arts Exposure, and Political Ideology on the Activity Factors, Strong Ties
+Table 10. Direct, Network-Mediated, and Total Standardized Effects of Education, Childhood Arts Exposure, and Political Ideology on the Activity Factors, Strong Ties
 
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.40\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.36\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.20\textwidth}@{}}
 \toprule
 Predictor and activity factor & Direct & Network-mediated & Total \\
 \midrule
@@ -528,7 +514,7 @@ Residual: political ideology & $-$0.11*\hphantom{***} & \hphantom{$-$}0.04\hphan
 \bottomrule
 \end{tabular*}
 
-Note. Standardized effects from the labeled strong-tie model, with the same definitions as Table 10. * p < .05, ** p < .01, *** p < .001.
+Note. Standardized effects from the labeled strong-tie model, with the same definitions as Table 9. * p < .05, ** p < .01, *** p < .001.
 
 \subsection*{Appendix: Supplementary Measurement and Robustness Models}
 
@@ -543,32 +529,32 @@ Table A1. Oblimin-Rotated Exploratory Factor Loadings for the Activity Battery
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep) * \real{0.1400}}@{}}
 \toprule
 Item & Assigned target & Arts & Leisure & Residual \\
-Museum & Arts & 0.84 & 0.08 & −0.10 \\
-Art gallery & Arts & 0.88 & 0.03 & −0.09 \\
-Symphony, orchestra, or opera & Arts & 0.95 & −0.14 & −0.11 \\
-Carnival, fair, or amusement park & Arts & 0.78 & −0.02 & 0.16 \\
-Music concert or festival & Arts & 0.81 & 0.01 & 0.15 \\
-Play or musical & Arts & 0.86 & −0.08 & 0.00 \\
-Library & Arts & 0.53 & 0.19 & −0.07 \\
-Fancy restaurant & Arts & 0.64 & 0.11 & 0.29 \\
-Dance performance & Arts & 0.93 & −0.20 & −0.02 \\
-Movie theater & Arts & 0.64 & 0.05 & 0.37 \\
-Attend sports & Arts & 0.73 & 0.05 & 0.26 \\
-Hiking, camping, or boating & Arts & 0.58 & 0.26 & −0.14 \\
-Historic site & Arts & 0.74 & 0.12 & −0.12 \\
-Go to festival & Arts & 0.80 & 0.12 & 0.01 \\
-Go for a walk & Leisure & −0.08 & 0.79 & 0.00 \\
-Exercise or yoga & Leisure & 0.31 & 0.37 & 0.25 \\
-Read a novel, poem, or play & Leisure & 0.35 & 0.21 & −0.11 \\
-Gardening & Residual & 0.42 & 0.22 & −0.34 \\
-Fast food & Residual & 0.06 & 0.06 & 0.43 \\
-Home auto repair & Residual & 0.48 & 0.16 & −0.23 \\
+Museum & Arts & \textbf{0.84} & 0.08 & −0.10 \\
+Art gallery & Arts & \textbf{0.88} & 0.03 & −0.09 \\
+Symphony, orchestra, or opera & Arts & \textbf{0.95} & −0.14 & −0.11 \\
+Carnival, fair, or amusement park & Arts & \textbf{0.78} & −0.02 & 0.16 \\
+Music concert or festival & Arts & \textbf{0.81} & 0.01 & 0.15 \\
+Play or musical & Arts & \textbf{0.86} & −0.08 & 0.00 \\
+Library & Arts & \textbf{0.53} & 0.19 & −0.07 \\
+Fancy restaurant & Arts & \textbf{0.64} & 0.11 & 0.29 \\
+Dance performance & Arts & \textbf{0.93} & −0.20 & −0.02 \\
+Movie theater & Arts & \textbf{0.64} & 0.05 & 0.37 \\
+Attend sports & Arts & \textbf{0.73} & 0.05 & 0.26 \\
+Hiking, camping, or boating & Arts & \textbf{0.58} & 0.26 & −0.14 \\
+Historic site & Arts & \textbf{0.74} & 0.12 & −0.12 \\
+Go to festival & Arts & \textbf{0.80} & 0.12 & 0.01 \\
+Go for a walk & Leisure & −0.08 & \textbf{0.79} & 0.00 \\
+Exercise or yoga & Leisure & 0.31 & \textbf{0.37} & 0.25 \\
+Read a novel, poem, or play & Leisure & 0.35 & \textbf{0.21} & −0.11 \\
+Gardening & Residual & 0.42 & 0.22 & \textbf{−0.34} \\
+Fast food & Residual & 0.06 & 0.06 & \textbf{0.43} \\
+Home auto repair & Residual & 0.48 & 0.16 & \textbf{−0.23} \\
 \midrule
 \endhead
 \bottomrule
 \end{longtable}
 
-Note. Oblimin-rotated pattern loadings from an exploratory factor analysis (WLS estimation, N = 1,243). The EFA fits the 20 items adequately ($\chi^2(133) = 290.8$, $p < .001$, $\text{TLI} = .911$, $\text{RMSEA} = .080$ $[.076, .084]$). The assigned target column reports the varimax assignment used as the ESEM targets. Factor correlations from the oblique solution are .19 (arts and leisure), .15 (arts and residual), and .01 (leisure and residual).
+Note. Oblimin-rotated pattern loadings from an exploratory factor analysis (WLS estimation, N = 1,243). Bold entries mark each item's assigned factor. The EFA fits the 20 items adequately ($\chi^2(133) = 290.8$, $p < .001$, $\text{TLI} = .911$, $\text{RMSEA} = .080$ $[.076, .084]$). The assigned target column reports the varimax assignment used as the ESEM targets. Factor correlations from the oblique solution are .19 (arts and leisure), .15 (arts and residual), and .01 (leisure and residual).
 
 
 \Needspace{26\baselineskip}
@@ -606,7 +592,7 @@ Note. Standardized loadings from separate three-factor WLSMV confirmatory models
 \Needspace{30\baselineskip}
 Table A3. Standardized Network-to-Activity Paths in the Separate Structural Models Under Two Rotations and in Random Halves
 
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.27\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth}@{}}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth}@{}}
 \toprule
  & \multicolumn{3}{c}{Target rotation} & \multicolumn{3}{c}{Oblimin rotation} \\
 \cmidrule(lr){2-4}\cmidrule(lr){5-7}
@@ -636,77 +622,118 @@ Strong conservative $\to$ residual & 0.01 & $-$0.03 & $-$0.01 & $-$0.00 & $-$0.0
 Note. Standardized paths from separate fixed-loading WLSMV structural models (weak ties and strong ties, each with gender, education, childhood arts exposure, income, age, race and ethnicity, and political ideology as predictors). The full sample has N = 1,227; the random halves (seed 4217) have N = 600 (half A) and N = 627 (half B). The target-rotation columns match the main results in Table 5, and the oblimin columns re-estimate the loadings under an unconstrained oblimin rotation. No significance stars are shown because the halves are not designed for inference, and standard errors are in the replication output. Paths that are null in the full sample are not interpreted.
 
 
-Table A4
+\Needspace{52\baselineskip}
+Table A4. Ordinary Least Squares Estimates of Public Arts Participation
 
-Ordinary Least Squares Estimates of Public Arts Participation
-
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.40\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth}@{}}
+{\renewcommand{\arraystretch}{0.8}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.42\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth}@{}}
 \toprule
  & Model 1 & Model 2 & Model 3 & Model 4 \\
 \midrule
-Weak-tie variety & 0.18***\\ (0.04) & 0.10**\\ (0.04) & 0.15***\\ (0.04) & 0.09*\\ (0.04) \\
-Strong-tie variety & 0.43***\\ (0.04) & 0.39***\\ (0.04) & 0.46***\\ (0.04) & 0.40***\\ (0.04) \\
-Weak-tie liberal composition &  &  & $-$0.12***\\ (0.03) & $-$0.12***\\ (0.03) \\
-Weak-tie conservative composition &  &  & 0.03\\ (0.04) & $-$0.01\\ (0.03) \\
-Strong-tie liberal composition &  &  & 0.09**\\ (0.03) & 0.03\\ (0.03) \\
-Strong-tie conservative composition &  &  & 0.13***\\ (0.04) & 0.11**\\ (0.03) \\
-Man (ref. woman) &  & $-$0.00\\ (0.04) &  & $-$0.01\\ (0.04) \\
-Non-binary/trans (ref. woman) &  & 0.10\\ (0.15) &  & 0.14\\ (0.14) \\
-Some college (ref. high school or less) &  & 0.09\\ (0.05) &  & 0.09\\ (0.05) \\
-College degree (ref. high school or less) &  & 0.37***\\ (0.06) &  & 0.37***\\ (0.06) \\
-Graduate degree (ref. high school or less) &  & 0.51***\\ (0.08) &  & 0.48***\\ (0.08) \\
-Childhood arts exposure &  & 0.08***\\ (0.01) &  & 0.08***\\ (0.01) \\
-Household income &  & 0.01\\ (0.01) &  & 0.01\\ (0.01) \\
-Age (years) &  & $-$0.01***\\ (0.00) &  & $-$0.01***\\ (0.00) \\
-Black (ref. White) &  & $-$0.02\\ (0.07) &  & 0.01\\ (0.07) \\
-Hispanic or Latine (ref. White) &  & $-$0.17*\\ (0.08) &  & $-$0.08\\ (0.09) \\
-AAPI (ref. White) &  & $-$0.48***\\ (0.09) &  & $-$0.37***\\ (0.09) \\
-Mixed/other (ref. White) &  & $-$0.27***\\ (0.06) &  & $-$0.20***\\ (0.06) \\
-Political ideology (1 to 7) &  & 0.03**\\ (0.01) &  & $-$0.01\\ (0.02) \\
-Intercept & $-$0.01\\ (0.02) & $-$0.45***\\ (0.11) & $-$0.01\\ (0.02) & $-$0.30*\\ (0.12) \\
+Weak-tie variety & \hphantom{$-$}0.18*** & \hphantom{$-$}0.10** & \hphantom{$-$}0.15*** & \hphantom{$-$}0.09* \\
+ & (0.04) & (0.04) & (0.04) & (0.04) \\
+Strong-tie variety & \hphantom{$-$}0.43*** & \hphantom{$-$}0.39*** & \hphantom{$-$}0.46*** & \hphantom{$-$}0.40*** \\
+ & (0.04) & (0.04) & (0.04) & (0.04) \\
+Weak-tie liberal composition &  &  & $-$0.12*** & $-$0.12*** \\
+ &  &  & (0.03) & (0.03) \\
+Weak-tie conservative composition &  &  & \hphantom{$-$}0.03 & $-$0.01 \\
+ &  &  & (0.04) & (0.03) \\
+Strong-tie liberal composition &  &  & \hphantom{$-$}0.09** & \hphantom{$-$}0.03 \\
+ &  &  & (0.03) & (0.03) \\
+Strong-tie conservative composition &  &  & \hphantom{$-$}0.13*** & \hphantom{$-$}0.11** \\
+ &  &  & (0.04) & (0.03) \\
+Man (ref. woman) &  & $-$0.00 &  & $-$0.01 \\
+ &  & (0.04) &  & (0.04) \\
+Non-binary/trans (ref. woman) &  & \hphantom{$-$}0.10 &  & \hphantom{$-$}0.14 \\
+ &  & (0.15) &  & (0.14) \\
+Some college (ref. high school) &  & \hphantom{$-$}0.09 &  & \hphantom{$-$}0.09 \\
+ &  & (0.05) &  & (0.05) \\
+College degree (ref. high school) &  & \hphantom{$-$}0.37*** &  & \hphantom{$-$}0.37*** \\
+ &  & (0.06) &  & (0.06) \\
+Graduate degree (ref. high school) &  & \hphantom{$-$}0.51*** &  & \hphantom{$-$}0.48*** \\
+ &  & (0.08) &  & (0.08) \\
+Childhood arts exposure &  & \hphantom{$-$}0.08*** &  & \hphantom{$-$}0.08*** \\
+ &  & (0.01) &  & (0.01) \\
+Household income &  & \hphantom{$-$}0.01 &  & \hphantom{$-$}0.01 \\
+ &  & (0.01) &  & (0.01) \\
+Age (years) &  & $-$0.01*** &  & $-$0.01*** \\
+ &  & (0.00) &  & (0.00) \\
+Black (ref. White) &  & $-$0.02 &  & \hphantom{$-$}0.01 \\
+ &  & (0.07) &  & (0.07) \\
+Hispanic or Latine (ref. White) &  & $-$0.17* &  & $-$0.08 \\
+ &  & (0.08) &  & (0.09) \\
+AAPI (ref. White) &  & $-$0.48*** &  & $-$0.37*** \\
+ &  & (0.09) &  & (0.09) \\
+Mixed/other (ref. White) &  & $-$0.27*** &  & $-$0.20*** \\
+ &  & (0.06) &  & (0.06) \\
+Political ideology (1 to 7) &  & \hphantom{$-$}0.03** &  & $-$0.01 \\
+ &  & (0.01) &  & (0.02) \\
+Intercept & $-$0.01 & $-$0.45*** & $-$0.01 & $-$0.30* \\
+ & (0.02) & (0.11) & (0.02) & (0.12) \\
 \midrule
 Observations & 1,227 & 1,227 & 1,227 & 1,227 \\
 $R^2$ & 0.356 & 0.451 & 0.388 & 0.467 \\
 \bottomrule
 \end{tabular*}
+}
 
-Note. OLS coefficients with HC1 robust standard errors in parentheses (N = 1,227 complete cases). Outcomes are regression-method factor scores from the polychoric varimax solutions. Model 1 includes the two variety terms, Model 2 adds covariates, Model 3 adds the four composition terms, and Model 4 includes both blocks and covariates. Education enters as three dummy categories relative to high school or less. * p < .05, ** p < .01, *** p < .001.
+{\small Note. OLS coefficients with HC1 robust standard errors in parentheses (N = 1,227). Outcomes are regression-method factor scores from polychoric varimax solutions. Models add covariates (Model 2, 4) and composition terms (Model 3, 4). Education is relative to high school or less. * p < .05, ** p < .01, *** p < .001.}
 
-Table A5
+\Needspace{52\baselineskip}
+Table A5. Ordinary Least Squares Estimates of Solitary Leisure
 
-Ordinary Least Squares Estimates of Solitary Leisure
-
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.40\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth}@{}}
+{\renewcommand{\arraystretch}{0.8}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{0.42\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth} >{\raggedleft\arraybackslash}p{0.13\textwidth}@{}}
 \toprule
  & Model 1 & Model 2 & Model 3 & Model 4 \\
 \midrule
-Weak-tie variety & 0.23***\\ (0.05) & 0.16**\\ (0.05) & 0.20***\\ (0.05) & 0.14**\\ (0.05) \\
-Strong-tie variety & $-$0.19***\\ (0.05) & $-$0.19***\\ (0.05) & $-$0.13**\\ (0.05) & $-$0.16**\\ (0.05) \\
-Weak-tie liberal composition &  &  & 0.14***\\ (0.04) & 0.13**\\ (0.04) \\
-Weak-tie conservative composition &  &  & 0.09*\\ (0.04) & 0.06\\ (0.04) \\
-Strong-tie liberal composition &  &  & 0.13**\\ (0.04) & 0.09*\\ (0.04) \\
-Strong-tie conservative composition &  &  & 0.02\\ (0.04) & 0.03\\ (0.05) \\
-Man (ref. woman) &  & $-$0.09\\ (0.05) &  & $-$0.05\\ (0.05) \\
-Non-binary/trans (ref. woman) &  & $-$0.27\\ (0.27) &  & $-$0.22\\ (0.26) \\
-Some college (ref. high school or less) &  & 0.34***\\ (0.10) &  & 0.30**\\ (0.10) \\
-College degree (ref. high school or less) &  & 0.62***\\ (0.10) &  & 0.55***\\ (0.10) \\
-Graduate degree (ref. high school or less) &  & 0.53***\\ (0.11) &  & 0.47***\\ (0.11) \\
-Childhood arts exposure &  & 0.05*\\ (0.02) &  & 0.03\\ (0.02) \\
-Household income &  & 0.02**\\ (0.01) &  & 0.02*\\ (0.01) \\
-Age (years) &  & $-$0.00\\ (0.00) &  & $-$0.00\\ (0.00) \\
-Black (ref. White) &  & $-$0.09\\ (0.08) &  & $-$0.03\\ (0.08) \\
-Hispanic or Latine (ref. White) &  & 0.06\\ (0.11) &  & 0.06\\ (0.11) \\
-AAPI (ref. White) &  & $-$0.02\\ (0.13) &  & 0.02\\ (0.13) \\
-Mixed/other (ref. White) &  & 0.07\\ (0.09) &  & 0.10\\ (0.09) \\
-Political ideology (1 to 7) &  & $-$0.04*\\ (0.02) &  & $-$0.01\\ (0.02) \\
-Intercept & $-$0.00\\ (0.03) & $-$0.47**\\ (0.16) & $-$0.02\\ (0.03) & $-$0.50**\\ (0.16) \\
+Weak-tie variety & \hphantom{$-$}0.23*** & \hphantom{$-$}0.16** & \hphantom{$-$}0.20*** & \hphantom{$-$}0.14** \\
+ & (0.05) & (0.05) & (0.05) & (0.05) \\
+Strong-tie variety & $-$0.19*** & $-$0.19*** & $-$0.13** & $-$0.16** \\
+ & (0.05) & (0.05) & (0.05) & (0.05) \\
+Weak-tie liberal composition &  &  & \hphantom{$-$}0.14*** & \hphantom{$-$}0.13** \\
+ &  &  & (0.04) & (0.04) \\
+Weak-tie conservative composition &  &  & \hphantom{$-$}0.09* & \hphantom{$-$}0.06 \\
+ &  &  & (0.04) & (0.04) \\
+Strong-tie liberal composition &  &  & \hphantom{$-$}0.13** & \hphantom{$-$}0.09* \\
+ &  &  & (0.04) & (0.04) \\
+Strong-tie conservative composition &  &  & \hphantom{$-$}0.02 & \hphantom{$-$}0.03 \\
+ &  &  & (0.04) & (0.05) \\
+Man (ref. woman) &  & $-$0.09 &  & $-$0.05 \\
+ &  & (0.05) &  & (0.05) \\
+Non-binary/trans (ref. woman) &  & $-$0.27 &  & $-$0.22 \\
+ &  & (0.27) &  & (0.26) \\
+Some college (ref. high school) &  & \hphantom{$-$}0.34*** &  & \hphantom{$-$}0.30** \\
+ &  & (0.10) &  & (0.10) \\
+College degree (ref. high school) &  & \hphantom{$-$}0.62*** &  & \hphantom{$-$}0.55*** \\
+ &  & (0.10) &  & (0.10) \\
+Graduate degree (ref. high school) &  & \hphantom{$-$}0.53*** &  & \hphantom{$-$}0.47*** \\
+ &  & (0.11) &  & (0.11) \\
+Childhood arts exposure &  & \hphantom{$-$}0.05* &  & \hphantom{$-$}0.03 \\
+ &  & (0.02) &  & (0.02) \\
+Household income &  & \hphantom{$-$}0.02** &  & \hphantom{$-$}0.02* \\
+ &  & (0.01) &  & (0.01) \\
+Age (years) &  & $-$0.00 &  & $-$0.00 \\
+ &  & (0.00) &  & (0.00) \\
+Black (ref. White) &  & $-$0.09 &  & $-$0.03 \\
+ &  & (0.08) &  & (0.08) \\
+Hispanic or Latine (ref. White) &  & \hphantom{$-$}0.06 &  & \hphantom{$-$}0.06 \\
+ &  & (0.11) &  & (0.11) \\
+AAPI (ref. White) &  & $-$0.02 &  & \hphantom{$-$}0.02 \\
+ &  & (0.13) &  & (0.13) \\
+Mixed/other (ref. White) &  & \hphantom{$-$}0.07 &  & \hphantom{$-$}0.10 \\
+ &  & (0.09) &  & (0.09) \\
+Political ideology (1 to 7) &  & $-$0.04* &  & $-$0.01 \\
+ &  & (0.02) &  & (0.02) \\
+Intercept & $-$0.00 & $-$0.47** & $-$0.02 & $-$0.50** \\
+ & (0.03) & (0.16) & (0.03) & (0.16) \\
 \midrule
 Observations & 1,227 & 1,227 & 1,227 & 1,227 \\
 $R^2$ & 0.017 & 0.089 & 0.075 & 0.121 \\
 \bottomrule
 \end{tabular*}
+}
 
-Note. OLS coefficients with HC1 robust standard errors in parentheses (N = 1,227 complete cases). Outcomes are regression-method factor scores from the polychoric varimax solutions. Model 1 includes the two variety terms, Model 2 adds covariates, Model 3 adds the four composition terms, and Model 4 includes both blocks and covariates. Education enters as three dummy categories relative to high school or less. * p < .05, ** p < .01, *** p < .001.
-
+{\small Note. OLS coefficients with HC1 robust standard errors in parentheses (N = 1,227). Outcomes are regression-method factor scores from polychoric varimax solutions. Models add covariates (Model 2, 4) and composition terms (Model 3, 4). Education is relative to high school or less. * p < .05, ** p < .01, *** p < .001.}
 
 \end{document}

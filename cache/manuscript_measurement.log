@@ -1,0 +1,5 @@
+- The project is out-of-sync -- use `renv::status()` for details.
+Error in UseMethod("lavInspect", object) : 
+  no applicable method for 'lavInspect' applied to an object of class "c('efaList', 'list')"
+Calls: lavInspect
+Execution halted
