@@ -224,9 +224,12 @@ add("cfa_vl_strong", S2, d2(vl_s), "Variety-liberal latent correlation in the st
 
 efm <- sapply(c("weak", "strong"), function(t) fitMeasures(esem_t[[paste(t, "target")]]$fit, c("cfi.scaled", "rmsea.scaled", "srmr")))
 src_et <- "cache/diagnostics/esem_ties_target.rds: fitMeasures($`<tie> target`$fit)"
-add("tie_esem_cfi_min", S2, d3(min(efm["cfi.scaled", ])), "Lowest scaled CFI across weak and strong tie ESEMs (CFI >= )", src_et)
-add("tie_esem_rmsea_max", S2, d3(max(efm["rmsea.scaled", ])), "Highest scaled RMSEA across tie ESEMs (RMSEA <= )", src_et)
-add("tie_esem_srmr_max", S2, d3(max(efm["srmr", ])), "Highest SRMR across tie ESEMs (SRMR <= )", src_et)
+add("tie_esem_cfi_weak", S2, d3(efm["cfi.scaled", "weak"]), "Scaled CFI of the weak-tie ESEM", src_et)
+add("tie_esem_rmsea_weak", S2, d3(efm["rmsea.scaled", "weak"]), "Scaled RMSEA of the weak-tie ESEM", src_et)
+add("tie_esem_srmr_weak", S2, d3(efm["srmr", "weak"]), "SRMR of the weak-tie ESEM", src_et)
+add("tie_esem_cfi_strong", S2, d3(efm["cfi.scaled", "strong"]), "Scaled CFI of the strong-tie ESEM", src_et)
+add("tie_esem_rmsea_strong", S2, d3(efm["rmsea.scaled", "strong"]), "Scaled RMSEA of the strong-tie ESEM", src_et)
+add("tie_esem_srmr_strong", S2, d3(efm["srmr", "strong"]), "SRMR of the strong-tie ESEM", src_et)
 cor_vl <- sapply(c("weak", "strong"), function(t) lavInspect(esem_t[[paste(t, "target")]]$fit, "cor.lv")[2, 1])
 add("tie_esem_vl_mean", S2, d2(mean(cor_vl)),
   sprintf("Approximate variety-liberal ESEM correlation (mean of weak %.3f and strong %.3f)", cor_vl[1], cor_vl[2]),
@@ -242,8 +245,10 @@ omegas <- unlist(lapply(c("weak", "strong"), function(t) {
   })
 }))
 src_om <- "cache/diagnostics/esem_ties_target.rds: model-implied omega (w'L Psi L'w / (w'L Psi L'w + w'Theta w)), formula of Scripts/diagnostics/esem_reliability.R"
-add("tie_omega_min", S2, d2(min(omegas)), "Lowest model-implied omega across the six tie ESEM factors", src_om)
-add("tie_omega_max", S2, d2(max(omegas)), "Highest model-implied omega across the six tie ESEM factors", src_om)
+add("tie_omega_weak_min", S2, d2(min(omegas[1:3])), "Lowest model-implied omega among the three weak-tie ESEM factors", src_om)
+add("tie_omega_weak_max", S2, d2(max(omegas[1:3])), "Highest model-implied omega among the three weak-tie ESEM factors", src_om)
+add("tie_omega_strong_min", S2, d2(min(omegas[4:6])), "Lowest model-implied omega among the three strong-tie ESEM factors", src_om)
+add("tie_omega_strong_max", S2, d2(max(omegas[4:6])), "Highest model-implied omega among the three strong-tie ESEM factors", src_om)
 
 pj <- parameterEstimates(joint$matched$fit, standardized = TRUE)
 vv_est <- pj$est[pj$op == "~~" & pj$lhs == "Wv" & pj$rhs == "Sv"]
