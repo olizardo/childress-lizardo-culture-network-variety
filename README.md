@@ -9,16 +9,18 @@ This repository contains the full analytic pipeline, from the raw survey extract
 ## Data
 
 - **Source:** `data/grabbagdata111925.dta` — a Prolific "representative sample" quota panel of US adults (fielded April 2025), $N = 1{,}258$ completed surveys.
-- **Minimal reproducibility extract:** The version of `data/grabbagdata111925.dta` committed to this repository is a *minimal-column extract* (63 of the 179 columns in the full raw survey export): the 20 activity/leisure items, the 18 weak-tie and 18 strong-tie group-position-generator items, and the 7 covariates (`educ`, `gender`, `race3`, `child_arts`, `income`, `age2`, `poli`) used anywhere in the pipeline. This is everything `Scripts/01-05` read from the raw data; no other survey columns are needed to reproduce any table or figure in the paper. The full raw export (which may carry additional identifying or unused variables) is kept out of version control — see `Scripts/00_extract_minimal_data.R`, which regenerates the committed extract from a local, gitignored `data/data/grabbagdata111925_full.dta`.
+- **Minimal reproducibility extract:** The version of `data/grabbagdata111925.dta` committed to this repository is a *minimal-column extract* (63 of the 179 columns in the full raw survey export): the 20 activity/leisure items, the 18 weak-tie and 18 strong-tie group-position-generator items, and the 7 covariates (`educ`, `gender`, `race3`, `child_arts`, `income`, `age2`, `poli`) used anywhere in the pipeline. This is everything `Scripts/01-05` read from the raw data; no other survey columns are needed to reproduce any table or figure in the paper. The full raw export (which may carry additional identifying or unused variables) is kept out of version control — see `Scripts/00_extract_minimal_data.R`, which regenerates the committed extract from a local, gitignored `data/grabbagdata111925_full.dta`.
 - **Sample construction:** The paper's reported analytic sample drops duplicate respondents and speeders before listwise deletion on the measurement-model items ($N = 1{,}258 \to 1{,}243$). The extract distributed here does not retain the original `v8` (duplicate-ID) or `duration` (completion-time) columns needed to reproduce that explicit drop step. In practice this has no material consequence: listwise deletion on the 20 activity items alone already recovers exactly $N = 1{,}243$, matching the paper's reported analytic sample for the activities factor model. The regression sample used for all reported models is $N = 1{,}227$ after listwise deletion on every model covariate (see `Scripts/02_fit_models.R`). This is documented in comments at the top of `Scripts/01_prepare_data.R`.
 - **Measurement models:**
   - A 20-item activities/leisure battery, reduced via 3-factor PCA (varimax) to *Public Arts Participation*, *Solitary Leisure*, and a residual ("DIY Practical") factor used as a discriminant-validity check.
   - An 18-item weak-tie and an 18-item strong-tie group-position generator (covering race, gender, religiosity, urbanicity, ideology, etc.), each reduced via a separate 3-factor PCA (varimax) to *Variety*, *Liberal Composition*, and *Conservative Composition*.
 
+The PCA scores above are the round-1 operationalization and remain the basis of the OLS appendix tables. In the revision, both batteries are also modeled with polychoric confirmatory and target-rotated exploratory structural equation models (WLSMV), and those ESEM factors are the measurement blocks of the structural models in the manuscript; see the run-order section and `revision_reports/`.
+
 ## Software requirements
 
 - R 4.5.3 (the version recorded in `renv.lock`).
-- R packages are pinned in `renv.lock`; install them with `renv::restore()` as described in the reproducibility section above. The analysis uses `haven`, `dplyr`, `tidyr`, `psych`, `polycor`, `GPArotation`, `lavaan`, `semTools`, `estimatr`, `car`, `ggplot2`, and `stringr`. `semPlot` is recorded in the lockfile for two diagnostic plotting scripts in `Scripts/diagnostics/`, and `googledrive` is used only by the audit's `--pull` option and the maintainers' sync scripts. The statistical pipeline (`run_all.R` and scripts 01 to 09) needs no external services.
+- R packages are pinned in `renv.lock`; install them with `renv::restore()` as described in the reproducibility section below. The analysis uses `haven`, `dplyr`, `tidyr`, `psych`, `polycor`, `GPArotation`, `lavaan`, `semTools`, `estimatr`, `car`, `ggplot2`, and `stringr`. `semPlot` is recorded in the lockfile for two diagnostic plotting scripts in `Scripts/diagnostics/`, and `googledrive` is used only by the audit's `--pull` option and the maintainers' sync scripts. The statistical pipeline (`run_all.R` and scripts 01 to 09) needs no external services.
 
 ## Reproducibility environment (renv)
 
@@ -36,7 +38,7 @@ Run the scripts in this order from the repository root. `run_all.R` runs steps 1
 2. `Scripts/02_fit_models.R`: regressions and Wald tests (`cache/02_models.rds`).
 3. `Scripts/03_generate_figures.R`: Figures 1 to 4 and Figure A1 in `Plots/`.
 4. `Scripts/04_generate_tables.R`: markdown tables in `cache/`.
-5. `Scripts/05_render_table_images.R`: flat table PNGs in `Plots/` (manuscript embedding only).
+5. `Scripts/05_render_table_images.R`: flat table PNGs in `Plots/` (round-1 manuscript embedding only; not used by the current draft).
 6. `Scripts/06_rotation_sensitivity.R`: varimax versus oblimin comparison (`cache/rotation_sensitivity/`).
 7. `Scripts/07_measurement_reliability_cfa.R`: reliability and ordinal CFA (`cache/07_reliability_cfa.rds`).
 8. `Scripts/08_solitary_robustness.R`: solitary-leisure sensitivity (`cache/08_solitary_robustness.rds`).
@@ -71,7 +73,7 @@ This runs the full pipeline end to end:
 |---|---|---|
 | 1 | `Scripts/01_prepare_data.R` | Loads `data/grabbagdata111925.dta` (the committed minimal-column extract), fits the three factor-analytic measurement models, and writes the analytic data frame to `cache/01_prepared_data.rds`. |
 | 2 | `Scripts/02_fit_models.R` | Fits the hierarchical four-model OLS sequence (variety only → + demographics → + ideological composition → + both) for each outcome, with HC1 robust standard errors, plus the in-text Wald tests. Writes `cache/02_models.rds`. |
-| 3 | `Scripts/03_generate_figures.R` | Renders Figures 1–3 (and the Appendix correlation heat map) to `Plots/` at 6.5in width, 300 DPI. |
+| 3 | `Scripts/03_generate_figures.R` | Renders Figures 1–4 and Figure A1 (the predictor correlation heat map) to `Plots/` at 6.5in width, 300 DPI. |
 | 4 | `Scripts/04_generate_tables.R` | Renders all regression and descriptive tables as GitHub-flavored markdown to `cache/`. |
 
 Total runtime is under a minute on a standard laptop; no parallelization or HPC resources are required.
@@ -141,11 +143,19 @@ The `cache/table*.md` markdown tables and the `Plots/table*.png` flat images fro
 │   ├── 00_extract_minimal_data.R # Maintainer-only: regenerates the extract above from the full raw export
 │   ├── 01_prepare_data.R        # Data ingestion & factor models
 │   ├── 02_fit_models.R          # Hierarchical OLS regressions & Wald tests
-│   ├── 03_generate_figures.R    # Figures 1-3 and Figure A4
+│   ├── 03_generate_figures.R    # Figures 1-4 and Figure A1
 │   ├── 04_generate_tables.R     # Markdown tables
-│   └── ...                      # Maintainer-only manuscript-sync utilities (see above)
-├── cache/                       # Cached model objects (.rds) and markdown tables
-└── Plots/                       # Publication-grade PNG figures and table images
+│   ├── 05_render_table_images.R # Flat table PNGs (round-1 embedding)
+│   ├── 06-09                    # Rotation sensitivity, reliability/CFA, robustness refits
+│   ├── audit_manuscript_stats.R # Doc-text statistic audit (maintainer-only)
+│   ├── diagnostics/             # Reviewer-round diagnostic fits (incl. the four structural fit scripts)
+│   ├── manuscript/              # Manuscript generators, prose-number registry, build_manuscript.sh
+│   ├── archive_oneoff/          # Archived one-off editing scripts
+│   └── poly_helpers.R           # Polychoric helpers shared by the pipeline
+├── submission_round1/           # Round-1 SSR submission package and reviews
+├── revision_reports/            # Narrative reports from the revision round
+├── cache/                       # Cached model objects (.rds) and generated LaTeX fragments
+└── Plots/                       # PNG figures (and archived round-1 table images)
 ```
 
 ## Contact
