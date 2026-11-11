@@ -13,7 +13,7 @@ rowspec <- list(
   c("educ_catSome college", "Some college (ref. high school)"), c("educ_catCollege degree", "College degree (ref. high school)"),
   c("educ_catGraduate degree", "Graduate degree (ref. high school)"), c("child_arts", "Childhood arts exposure"),
   c("income", "Household income"), c("age2", "Age (years)"), c("race_fblack", "Black (ref. White)"),
-  c("race_flatine", "Hispanic or Latine (ref. White)"), c("race_fAAPI", "AAPI (ref. White)"),
+  c("race_flatine", "Hispanic (ref. White)"), c("race_fAAPI", "AAPI (ref. White)"),
   c("race_fmixed/other", "Mixed/other (ref. White)"), c("poli", "Political ideology (1 to 7)"),
   c("(Intercept)", "Intercept"))
 
@@ -30,8 +30,8 @@ cell_se <- function(fit, term) {
 }
 
 tex_table <- function(mods, label, caption) {
-  note <- paste0("Note. OLS coefficients with HC1 robust standard errors in parentheses (N = 1,227). ",
-    "Outcomes are regression-method factor scores from polychoric varimax solutions. ",
+  note <- paste0("Note. OLS coefficients with heteroskedasticity-consistent (HC1) robust standard errors in parentheses (N = 1,227). ",
+    "Outcomes are factor scores computed by the regression method, which weights each standardized item by its loading on the polychoric varimax components. ",
     "Models add covariates (Model 2, 4) and composition terms (Model 3, 4). Education is relative to high school or less. ",
     "* p < .05, ** p < .01, *** p < .001.")
   out <- c(sprintf("%s. %s", label, caption), "",

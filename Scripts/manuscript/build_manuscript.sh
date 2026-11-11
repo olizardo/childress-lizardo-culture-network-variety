@@ -60,7 +60,6 @@ fi
 
 # ---------------------------------------------------------------- 4. splice
 python3 Scripts/manuscript/splice_blocks.py | tee "$LOGS/splice.log"
-python3 Scripts/manuscript/splice_ols_appendix.py | tee "$LOGS/splice_ols.log"
 
 # ---------------------------------------------------------------- 5. compile
 xelatex -interaction=nonstopmode -output-directory "$PDF" results_draft.tex > "$LOGS/xelatex_1.log" 2>&1 || true

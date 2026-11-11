@@ -45,7 +45,15 @@ act_labels <- c(museum = "Museum", art_gallery = "Art gallery",
 assign_of <- c(setNames(rep("Arts", 14), arts_items), setNames(rep("Leisure", 3), leisure_items),
   setNames(rep("Residual", 3), resid_items))
 
-fmt <- function(x) { r <- round(x, 2); ifelse(r < 0, paste0("$-$", sprintf("%.2f", abs(r))), sprintf("%.2f", abs(r) + 0)) }
+fmt <- function(x, hang = TRUE) {
+  r <- round(x, 2)
+  # hang = TRUE: minus hangs left (\llap), for left-aligned (raggedright) columns.
+  # hang = FALSE: sign slot via \hphantom{$-$}, for right-aligned (raggedleft)
+  # columns, where \llap{$-$} forces a line break before the number (verified).
+  neg <- paste0(if (hang) "\\llap{$-$}" else "$-$", sprintf("%.2f", abs(r)))
+  pos <- paste0(if (hang) "" else "\\hphantom{$-$}", sprintf("%.2f", abs(r) + 0))
+  ifelse(r < 0, neg, pos)
+}
 bold_if <- function(txt, b) ifelse(b, paste0("\\textbf{", txt, "}"), txt)
 
 # ---------------------------------------------------------------- Table 1: varimax PCA loadings
@@ -132,12 +140,22 @@ M <- sapply(labs, function(a) colSums(abs(pl[aa == a, , drop = FALSE])))  # M[fa
 perms <- list(c(1, 2, 3), c(1, 3, 2), c(2, 1, 3), c(2, 3, 1), c(3, 1, 2), c(3, 2, 1))
 best <- perms[[which.max(sapply(perms, function(pm) sum(M[cbind(pm, 1:3)])))]]
 pl <- pl[, best, drop = FALSE]
-for (j in 1:2) pl[, j] <- pl[, j] * sign(sum(pl[aa == labs[j], j]))
-# Residual orientation follows the printed table (column sum negative). Sign is arbitrary.
-pl[, 3] <- pl[, 3] * ifelse(sum(pl[aa == labs[3], 3]) > 0, -1, 1)
+# Orient the arts and leisure columns so their assigned items load positively. Orient the
+# residual column to the sign convention of the structural models (script 01): positive on
+# gardening and home repair, negative on fast food. Signs are arbitrary in an exploratory
+# solution; this convention keeps Table A1 reading the same way as Tables 1 to 3.
+col_sign <- sapply(seq_along(labs), function(j) {
+  if (labs[j] == "Residual") {
+    if (pl["fast_food", j] > 0) -1 else 1
+  } else {
+    sign(sum(pl[aa == labs[j], j]))
+  }
+})
+pl <- sweep(pl, 2, col_sign, "*")
 colnames(pl) <- labs
-ob_phi <- ef_obi$Phi[best, best]
-colnames(pl) <- c("Arts", "Leisure", "Residual")
+# The factor correlations must follow the printed orientation of each column.
+ob_phi <- diag(col_sign, nrow = 3) %*% ef_obi$Phi[best, best] %*% diag(col_sign, nrow = 3)
+dimnames(ob_phi) <- list(labs, labs)
 ta1 <- t(sapply(c(arts_items, leisure_items, resid_items), function(it) {
   a <- assign_of[[it]]
   vals <- sapply(c("Arts", "Leisure", "Residual"), function(cn) bold_if(fmt(pl[it, cn]), cn == a))
@@ -154,7 +172,7 @@ label_tie <- function(x) {
   lab <- c(KnowAsianppl = "Asian people", Know2ndHome = "Second home", KnowBornElsewhere = "Born elsewhere",
     KnowMENAppl = "MENA people", KnowHawaiiPI = "NHPI people", KnowAmIndianppl = "American Indian people",
     KnowLGBTQ = "LGBTQ people", KnowLittleChurch = "Little church", KnowVeryLib = "Very liberal",
-    KnowHispanixppl = "Hispanic or Latine people", KnowBlackppl = "Black people", KnowCityppl = "City people",
+    KnowHispanixppl = "Hispanic people", KnowBlackppl = "Black people", KnowCityppl = "City people",
     KnowLotsaChurch = "Lots of church", KnowVeryCons = "Very conservative", KnowWhiteppl = "White people",
     KnowRuralppl = "Rural people")
   unname(lab[base])
@@ -170,9 +188,9 @@ tie_block <- function(tie) {
 bw <- tie_block("weak"); bs <- tie_block("strong")
 t4 <- t(sapply(seq_along(bw$items), function(i) {
   it <- bw$items[i]
-  w <- sapply(1:3, function(k) bold_if(fmt(bw$lam[it, k]), bw$tgt[it, k] == 1))
+  w <- sapply(1:3, function(k) bold_if(fmt(bw$lam[it, k], hang = FALSE), bw$tgt[it, k] == 1))
   its <- paste0(sub("_weak$", "", it), "_strong")
-  st <- sapply(1:3, function(k) bold_if(fmt(bs$lam[its, k]), bs$tgt[its, k] == 1))
+  st <- sapply(1:3, function(k) bold_if(fmt(bs$lam[its, k], hang = FALSE), bs$tgt[its, k] == 1))
   c(label_tie(it), w, st)
 }))
 
@@ -269,7 +287,7 @@ ant_value <- function(a2, pair) {
 }
 a2_res <- sapply(ant_pairs, function(pr) paste(
   paste0(ant_word[[pr[1]]], " with ", ant_word[[pr[2]]]), "& Residual &",
-  fmt(ant_value(a2_weak, pr)), "& Residual &", fmt(ant_value(a2_strong, pr)), "\\\\"))
+  fmt(ant_value(a2_weak, pr), hang = FALSE), "& Residual &", fmt(ant_value(a2_strong, pr), hang = FALSE), "\\\\"))
 a2_rows <- c(a2_rows, a2_res)
 
 lt_spec_5 <- "\\begin{longtable}[]{@{}
@@ -310,7 +328,7 @@ ci_pair <- function(x) {
 }
 
 blocks <- list()
-blocks[["Table 1"]] <- long_block(38, "Table 1. Varimax Loadings for the Activity Battery", lt_spec_5,
+blocks[["Table 1"]] <- long_block(38, "Table \\tabnum{activities-varimax}. Varimax Loadings for the Activity Battery", lt_spec_5,
   "Item & Assigned target & Arts & Leisure & Residual \\\\", write_rows(t1), paste0(
   "Note. Varimax-rotated component loadings from a principal components analysis (N = ",
   format(N_act, big.mark = ",", trim = TRUE), "). Bold entries mark each item's assigned factor. ",
@@ -318,7 +336,7 @@ blocks[["Table 1"]] <- long_block(38, "Table 1. Varimax Loadings for the Activit
   "The three components together explain ", pct1(num$ve_activities), " percent of the variance."))
 
 blocks[["Table 2"]] <- long_block(26,
-  "Table 2. Confirmatory and Exploratory Structural Models of the Activity Battery", lt_spec_7,
+  "Table \\tabnum{activities-cfa}. Confirmatory and Exploratory Structural Models of the Activity Battery", lt_spec_7,
   "Model & df & Scaled $\\chi^2$ & CFI & RMSEA & SRMR & Scaled $\\Delta\\chi^2$ (df) vs.~three-factor CFA \\\\",
   vapply(t2, function(r) paste(r[[1]], "&", sprintf("%d", as.integer(r[[2]]["df"])), "&",
     sprintf("%.1f", r[[2]]["chisq.scaled"]), "&", sprintf("%.3f", r[[2]]["cfi.scaled"]), "&",
@@ -334,7 +352,7 @@ blocks[["Table 2"]] <- long_block(26,
   " (residual into leisure), ", ci_pair(num$rmsea_ci$three), " (three-factor), and ",
   ci_pair(num$rmsea_ci$esem), " (ESEM). Scaled difference tests use the Satorra-Bentler scaled statistic with per-model scaling factors."))
 
-blocks[["Table 3"]] <- long_block(38, "Table 3. ESEM Loadings with Target Rotation", lt_spec_5,
+blocks[["Table 3"]] <- long_block(38, "Table \\tabnum{activities-esem}. ESEM Loadings with Target Rotation", lt_spec_5,
   "Item & Target factor & Arts & Leisure & Residual \\\\", write_rows(t3), paste0(
   "Note. Standardized loadings from an ESEM with target rotation (WLSMV, N = ",
   format(N_act, big.mark = ",", trim = TRUE), "). Bold entries mark each item's assigned factor. ",
@@ -343,7 +361,7 @@ blocks[["Table 3"]] <- long_block(38, "Table 3. ESEM Loadings with Target Rotati
   "The final row reports the model-implied omega of each factor."))
 
 blocks[["Table 4"]] <- star_block(30,
-  "Table 4. Standardized Loadings from the Target-Rotated ESEM of the Weak-Tie and Strong-Tie Batteries",
+  "Table \\tabnum{ties-esem}. Standardized Loadings from the Target-Rotated ESEM of the Weak-Tie and Strong-Tie Batteries",
   t4_spec, t4_header, write_rows(t4), paste0(
   "Note. Standardized loadings from exploratory structural equation models with target rotation ",
   "(WLSMV, polychoric; N = ", format(num$n_weak, big.mark = ",", trim = TRUE),
@@ -359,9 +377,9 @@ blocks[["Table 4"]] <- star_block(30,
   "The final row reports the model-implied omega of each factor."))
 
 blocks[["Table A1"]] <- long_block(38,
-  "Table A1. Oblimin-Rotated Exploratory Factor Loadings for the Activity Battery", lt_spec_5,
+  "Table \\apptabnum{activities-oblimin}. Oblimin-Rotated Exploratory Factor Loadings for the Activity Battery", lt_spec_5,
   "Item & Assigned target & Arts & Leisure & Residual \\\\", write_rows(ta1), paste0(
-  "Note. Oblimin-rotated pattern loadings from an exploratory factor analysis (WLS estimation, N = ",
+  "Note. Oblimin-rotated pattern loadings, the regression weight of each item on each factor adjusting for the correlations among the factors, from an exploratory factor analysis (WLS estimation, distinct from the WLSMV estimator used elsewhere; N = ",
   format(N_act, big.mark = ",", trim = TRUE), "). Bold entries mark each item's assigned factor. ",
   "The EFA fits the 20 items adequately ($\\chi^2(", num$efa$df, ") = ", sprintf("%.1f", num$efa$chi),
   ", $p < .001$, $\\text{TLI} = ", sub("^0", "", sprintf("%.3f", num$efa$tli)),
@@ -369,10 +387,13 @@ blocks[["Table A1"]] <- long_block(38,
   ci_pair(c(num$efa$lo, num$efa$hi)), "). The assigned target column reports the varimax assignment ",
   "used as the ESEM targets. Factor correlations from the oblique solution are ", phi3(num$efa$phi)[1],
   " (arts and leisure), ", phi3(num$efa$phi)[2], " (arts and residual), and ", phi3(num$efa$phi)[3],
-  " (leisure and residual)."))
+  " (leisure and residual). The sign of the arts--residual correlation differs from the positive ",
+  "value in Table~\\ref{tab:activities-esem} because oblimin assigns gardening and home repair to the arts factor, leaving ",
+  "a residual factor close to fast food alone, so that in this solution frequent arts attendance ",
+  "comes with slightly more frequent fast dining."))
 
 blocks[["Table A2"]] <- star_block(26,
-  "Table A2. Standardized Loadings and Antonym Residual Covariances from the Separate Weak-Tie and Strong-Tie Confirmatory Models",
+  "Table \\apptabnum{ties-cfa}. Standardized Loadings and Antonym Residual Covariances from the Separate Weak-Tie and Strong-Tie Confirmatory Models",
   a2_spec, a2_header, c(a2_rows[seq_len(nrow(wl))], "\\midrule", tail(a2_rows, 3)), paste0(
   "Note. Standardized loadings from separate three-factor WLSMV confirmatory models for weak ties and ",
   "strong ties (N = ", format(num$n_ties, big.mark = ",", trim = TRUE),

@@ -16,13 +16,16 @@ suppressPackageStartupMessages(library(lavaan))
 S1 <- "Factor Validation of Activities"
 S2 <- "Factor Validation of Network Composition"
 S3 <- "Structural Models of Activity Participation"
+S3a <- "Sociodemographic Gradients in Network Composition"
+S3b <- "Network Effects on Activity Participation"
+S3c <- "Direct, Network-Mediated, and Total Effects of the Focal Predictors"
+S3d <- "Other Sociodemographic Direct Effects on Activity Factors"
 
 prep <- readRDS("cache/01_prepared_data.rds")
 mn <- readRDS("cache/manuscript/measurement_numbers.rds")
 gaps <- readRDS("cache/diagnostics/activities_reporting_gaps.rds")
 c07 <- readRDS("cache/07_reliability_cfa.rds")
 c09 <- readRDS("cache/09_no_gender_robustness.rds")
-ols <- readRDS("cache/02_models.rds")
 esem_t <- readRDS("cache/diagnostics/esem_ties_target.rds")
 joint <- readRDS("cache/diagnostics/sem_gpa_fixed_joint_covars.rds")
 sc <- readRDS("cache/diagnostics/sem_gpa_fixed_sep_covars.rds")
@@ -63,6 +66,10 @@ add("act_ve", S1, d1(100 * sum(unclass(prep$act_fa$loadings)[items, ]^2) / lengt
   "cache/01_prepared_data.rds: 100 * sum(prep$act_fa$loadings^2) / 20")
 add("act_kmo", S1, d3(prep$act_kmo), "KMO sampling adequacy, activity battery (polychoric)",
   "cache/01_prepared_data.rds: prep$act_kmo")
+add("fit_cfi_benchmark", S1, "0.95", "Conventional CFI benchmark cited in the fit-index footnote",
+  "standard convention (Hu and Bentler 1999); no cache")
+add("fit_rmsea_srmr_benchmark", S1, "0.08", "Conventional RMSEA and SRMR benchmark cited in the fit-index footnote",
+  "standard convention (Hu and Bentler 1999); no cache")
 add("act_n", S1, nfmt(mn$n_activities), "Complete-case N on all 20 activity items",
   paste0(src_mn, ": n_activities"))
 
@@ -230,10 +237,17 @@ add("tie_esem_srmr_weak", S2, d3(efm["srmr", "weak"]), "SRMR of the weak-tie ESE
 add("tie_esem_cfi_strong", S2, d3(efm["cfi.scaled", "strong"]), "Scaled CFI of the strong-tie ESEM", src_et)
 add("tie_esem_rmsea_strong", S2, d3(efm["rmsea.scaled", "strong"]), "Scaled RMSEA of the strong-tie ESEM", src_et)
 add("tie_esem_srmr_strong", S2, d3(efm["srmr", "strong"]), "SRMR of the strong-tie ESEM", src_et)
-cor_vl <- sapply(c("weak", "strong"), function(t) lavInspect(esem_t[[paste(t, "target")]]$fit, "cor.lv")[2, 1])
-add("tie_esem_vl_mean", S2, d2(mean(cor_vl)),
-  sprintf("Approximate variety-liberal ESEM correlation (mean of weak %.3f and strong %.3f)", cor_vl[1], cor_vl[2]),
-  "cache/diagnostics/esem_ties_target.rds: mean of lavInspect(fit, 'cor.lv')[2, 1] over weak and strong")
+cor_lv <- function(t) lavInspect(esem_t[[paste(t, "target")]]$fit, "cor.lv")
+src_cl <- "cache/diagnostics/esem_ties_target.rds: lavInspect($`<tie> target`$fit, 'cor.lv')"
+for (k in list(c("w", "weak"), c("s", "strong"))) {
+  cm <- cor_lv(k[2])
+  add(paste0("tie_esem_", k[1], "_vl"), S2, d2(cm[2, 1]),
+    paste("Variety-liberal ESEM correlation,", k[2], "ties"), src_cl)
+  add(paste0("tie_esem_", k[1], "_vc"), S2, d2(cm[3, 1]),
+    paste("Variety-conservative ESEM correlation,", k[2], "ties"), src_cl)
+  add(paste0("tie_esem_", k[1], "_lc"), S2, d2(cm[3, 2]),
+    paste("Liberal-conservative ESEM correlation,", k[2], "ties"), src_cl)
+}
 
 omegas <- unlist(lapply(c("weak", "strong"), function(t) {
   st <- lavInspect(esem_t[[paste(t, "target")]]$fit, "std")
@@ -272,6 +286,15 @@ om_e <- sapply(seq_len(ncol(lam_e)), function(k) {
 add("act_resid_omega", S3, d2(om_e[3]),
   "Model-implied omega of the residual activity factor under the target ESEM (arts .97, leisure .74)",
   paste0(src_esem, ": model-implied omega, third factor (residual)"))
+add("act_arts_omega", S1, d2(om_e[1]),
+  "Model-implied omega of the arts factor under the target ESEM",
+  paste0(src_esem, ": model-implied omega, first factor (arts)"))
+add("act_leisure_omega", S1, d2(om_e[2]),
+  "Model-implied omega of the solitary leisure factor under the target ESEM",
+  paste0(src_esem, ": model-implied omega, second factor (leisure)"))
+add("act_resid_omega_s1", S1, d2(om_e[3]),
+  "Model-implied omega of the residual activity factor under the target ESEM, stated in the activities section",
+  paste0(src_esem, ": model-implied omega, third factor (residual)"))
 sem_dat <- lavInspect(sc$weak$fit, "data")
 add("poli_min", S3, as.character(min(sem_dat[, "poli"])), "Political ideology scale minimum (1 to 7)",
   "cache/diagnostics/sem_gpa_fixed_sep_covars.rds: min(lavInspect($weak$fit, 'data')[, 'poli'])")
@@ -299,39 +322,47 @@ path <- function(tie, lhs, rhs) {
   list(b = r$std.all, p = r$pvalue,
     src = sprintf("cache/diagnostics/sem_gpa_fixed_sep_covars.rds: std.all %s ~ %s, $%s$fit", lhs, rhs, tie))
 }
-pathrow <- function(id, tie, lhs, rhs, desc, p_style = c("none", "exact", "thr")) {
+pathrow <- function(id, tie, lhs, rhs, desc, p_style = c("none", "exact", "thr"), sec = S3) {
   p_style <- match.arg(p_style)
   x <- path(tie, lhs, rhs)
-  add(id, S3, d2(x$b), desc, x$src)
-  if (p_style == "exact") add(paste0(id, "_p"), S3, pv(x$p), paste(desc, "(p-value)"), sub("std.all", "pvalue", x$src))
-  if (p_style == "thr") add(paste0(id, "_p"), S3, thr(x$p), paste(desc, "(p threshold)"), sub("std.all", "pvalue", x$src))
+  add(id, sec, d2(x$b), desc, x$src)
+  if (p_style == "exact") add(paste0(id, "_p"), sec, pv(x$p), paste(desc, "(p-value)"), sub("std.all", "pvalue", x$src))
+  if (p_style == "thr") add(paste0(id, "_p"), sec, thr(x$p), paste(desc, "(p threshold)"), sub("std.all", "pvalue", x$src))
 }
-pathrow("p_wv_arts", "weak", "A", "Wv", "Weak variety -> arts", "thr")
-pathrow("p_sv_arts", "strong", "A", "Sv", "Strong variety -> arts", "thr")
+pathrow("p_wv_arts", "weak", "A", "Wv", "Weak variety -> arts", "thr", sec = S3b)
+pathrow("p_sv_arts", "strong", "A", "Sv", "Strong variety -> arts", "thr", sec = S3b)
 comp_arts <- list(path("weak", "A", "Wl"), path("weak", "A", "Wc"), path("strong", "A", "Sl"), path("strong", "A", "Sc"))
 cb <- sapply(comp_arts, `[[`, "b"); cp <- sapply(comp_arts, `[[`, "p")
 src_comp <- "cache/diagnostics/sem_gpa_fixed_sep_covars.rds: std.all A ~ Wl, Wc (weak) and A ~ Sl, Sc (strong)"
-add("p_comp_arts_min", S3, claim(all(cb > 0), d2(min(cb))), "Smallest liberal or conservative composition path on arts (both ties)", src_comp)
-add("p_comp_arts_max", S3, claim(all(cb > 0), d2(max(cb))), "Largest liberal or conservative composition path on arts (both ties)", src_comp)
-add("p_comp_arts_p", S3, thr(max(cp)), "All four composition paths on arts significant (p threshold)", sub("std.all", "pvalue", src_comp))
+add("p_comp_arts_min", S3b, claim(all(cb > 0), d2(min(cb))), "Smallest liberal or conservative composition path on arts (both ties)", src_comp)
+add("p_comp_arts_max", S3b, claim(all(cb > 0), d2(max(cb))), "Largest liberal or conservative composition path on arts (both ties)", src_comp)
+add("p_comp_arts_p", S3b, thr(max(cp)), "All four composition paths on arts significant (p threshold)", sub("std.all", "pvalue", src_comp))
 
-a4 <- ols$arts_models[[4]]
-add("ols_wlib_arts", S3, d2(a4$coefficients[["weak_lib_comp"]]), "OLS weak-tie liberal composition on arts, Model 4 (Table A4)",
-  "cache/02_models.rds: $arts_models[[4]]$coefficients['weak_lib_comp']")
-add("ols_wlib_arts_p", S3, thr(a4$p.value[["weak_lib_comp"]]), "OLS weak-tie liberal composition on arts, Model 4 (p threshold)",
-  "cache/02_models.rds: $arts_models[[4]]$p.value['weak_lib_comp']")
+fdec <- readRDS("cache/diagnostics/sem_gpa_fixed_fit_decomp.rds")
+add("decomp_cfi_weak", S3, d3(fdec$weak$fm1[["cfi.scaled"]]), "CFI, fixed-loading measurement model without regressions, weak ties",
+  "cache/diagnostics/sem_gpa_fixed_fit_decomp.rds: $weak$fm1['cfi.scaled']")
+add("decomp_rmsea_weak", S3, d3(fdec$weak$fm1[["rmsea.scaled"]]), "RMSEA, fixed-loading measurement model without regressions, weak ties",
+  "cache/diagnostics/sem_gpa_fixed_fit_decomp.rds: $weak$fm1['rmsea.scaled']")
+add("decomp_srmr_weak", S3, d3(fdec$weak$fm1[["srmr"]]), "SRMR, fixed-loading measurement model without regressions, weak ties",
+  "cache/diagnostics/sem_gpa_fixed_fit_decomp.rds: $weak$fm1['srmr']")
+add("decomp_cfi_strong", S3, d3(fdec$strong$fm1[["cfi.scaled"]]), "CFI, fixed-loading measurement model without regressions, strong ties",
+  "cache/diagnostics/sem_gpa_fixed_fit_decomp.rds: $strong$fm1['cfi.scaled']")
+add("decomp_rmsea_strong", S3, d3(fdec$strong$fm1[["rmsea.scaled"]]), "RMSEA, fixed-loading measurement model without regressions, strong ties",
+  "cache/diagnostics/sem_gpa_fixed_fit_decomp.rds: $strong$fm1['rmsea.scaled']")
+add("decomp_srmr_strong", S3, d3(fdec$strong$fm1[["srmr"]]), "SRMR, fixed-loading measurement model without regressions, strong ties",
+  "cache/diagnostics/sem_gpa_fixed_fit_decomp.rds: $strong$fm1['srmr']")
 seed <- regmatches(readLines("Scripts/diagnostics/sem_gpa_fixed_splithalf.R"),
   regexpr("set\\.seed\\(\\d+\\)", readLines("Scripts/diagnostics/sem_gpa_fixed_splithalf.R")))
-add("splithalf_seed", S3, gsub("\\D", "", seed[1]), "Random seed for the split-half check",
+add("splithalf_seed", S3b, gsub("\\D", "", seed[1]), "Random seed for the split-half check",
   "Scripts/diagnostics/sem_gpa_fixed_splithalf.R: set.seed() call (seed not stored in cache/diagnostics/sem_gpa_fixed_splithalf.rds)")
 
-pathrow("p_wl_leis", "weak", "Lis", "Wl", "Weak liberal -> leisure", "thr")
-pathrow("p_sl_leis", "strong", "Lis", "Sl", "Strong liberal -> leisure", "thr")
-pathrow("p_wv_leis", "weak", "Lis", "Wv", "Weak variety -> leisure", "exact")
-pathrow("p_sv_leis", "strong", "Lis", "Sv", "Strong variety -> leisure", "exact")
-pathrow("p_wv_resid", "weak", "R", "Wv", "Weak variety -> residual", "exact")
-pathrow("p_sv_resid", "strong", "R", "Sv", "Strong variety -> residual", "exact")
-pathrow("p_wl_resid", "weak", "R", "Wl", "Weak liberal -> residual", "exact")
+pathrow("p_wl_leis", "weak", "Lis", "Wl", "Weak liberal -> leisure", "thr", sec = S3b)
+pathrow("p_sl_leis", "strong", "Lis", "Sl", "Strong liberal -> leisure", "thr", sec = S3b)
+pathrow("p_wv_leis", "weak", "Lis", "Wv", "Weak variety -> leisure", "exact", sec = S3b)
+pathrow("p_sv_leis", "strong", "Lis", "Sv", "Strong variety -> leisure", "exact", sec = S3b)
+pathrow("p_wv_resid", "weak", "R", "Wv", "Weak variety -> residual", "exact", sec = S3b)
+pathrow("p_sv_resid", "strong", "R", "Sv", "Strong variety -> residual", "exact", sec = S3b)
+pathrow("p_wl_resid", "weak", "R", "Wl", "Weak liberal -> residual", "exact", sec = S3b)
 
 dpe <- lapply(dc, function(x) { p <- parameterEstimates(x$fit, standardized = TRUE); p[p$op == ":=", ] })
 eff <- function(tie, lab) {
@@ -340,42 +371,73 @@ eff <- function(tie, lab) {
   list(b = r$std.all, p = r$pvalue,
     src = sprintf("cache/diagnostics/sem_gpa_fixed_sep_decomposition.rds: $%s$fit := %s std.all (delta method)", tie, lab))
 }
-effrow <- function(id, tie, lab, desc, p_style = c("none", "exact", "thr")) {
+effrow <- function(id, tie, lab, desc, p_style = c("none", "exact", "thr"), sec = S3) {
   p_style <- match.arg(p_style)
   x <- eff(tie, lab)
-  add(id, S3, d2(x$b), desc, x$src)
-  if (p_style == "exact") add(paste0(id, "_p"), S3, pv(x$p), paste(desc, "(p-value)"), sub("std.all", "pvalue", x$src))
-  if (p_style == "thr") add(paste0(id, "_p"), S3, thr(x$p), paste(desc, "(p threshold)"), sub("std.all", "pvalue", x$src))
+  add(id, sec, d2(x$b), desc, x$src)
+  if (p_style == "exact") add(paste0(id, "_p"), sec, pv(x$p), paste(desc, "(p-value)"), sub("std.all", "pvalue", x$src))
+  if (p_style == "thr") add(paste0(id, "_p"), sec, thr(x$p), paste(desc, "(p threshold)"), sub("std.all", "pvalue", x$src))
 }
 for (tie in c("weak", "strong")) {
-  effrow(paste0("tot_A_educ_", tie), tie, "tot_A_educ", paste("Total effect of education on arts,", tie, "ties"))
-  effrow(paste0("ind_A_educ_", tie), tie, "ind_A_educ", paste("Network-mediated effect of education on arts,", tie, "ties"))
-  effrow(paste0("tot_A_arts_", tie), tie, "tot_A_arts", paste("Total effect of childhood arts on arts,", tie, "ties"))
-  effrow(paste0("ind_A_arts_", tie), tie, "ind_A_arts", paste("Network-mediated effect of childhood arts on arts,", tie, "ties"))
-  effrow(paste0("tot_A_poli_", tie), tie, "tot_A_poli", paste("Total effect of political ideology on arts,", tie, "ties"))
-  effrow(paste0("dir_A_poli_", tie), tie, "dir_A_poli", paste("Direct effect of political ideology on arts,", tie, "ties"))
-  effrow(paste0("ind_A_poli_", tie), tie, "ind_A_poli", paste("Network-mediated effect of political ideology on arts,", tie, "ties"))
-  effrow(paste0("tot_Lis_poli_", tie), tie, "tot_Lis_poli", paste("Total effect of political ideology on leisure,", tie, "ties"), "exact")
+  effrow(paste0("tot_A_educ_", tie), tie, "tot_A_educ", paste("Total effect of education on arts,", tie, "ties"), sec = S3c)
+  effrow(paste0("ind_A_educ_", tie), tie, "ind_A_educ", paste("Network-mediated effect of education on arts,", tie, "ties"), sec = S3c)
+  effrow(paste0("tot_A_arts_", tie), tie, "tot_A_arts", paste("Total effect of childhood arts on arts,", tie, "ties"), sec = S3c)
+  effrow(paste0("ind_A_arts_", tie), tie, "ind_A_arts", paste("Network-mediated effect of childhood arts on arts,", tie, "ties"), sec = S3c)
+  effrow(paste0("tot_A_poli_", tie), tie, "tot_A_poli", paste("Total effect of political ideology on arts,", tie, "ties"), sec = S3c)
+  effrow(paste0("dir_A_poli_", tie), tie, "dir_A_poli", paste("Direct effect of political ideology on arts,", tie, "ties"), sec = S3c)
+  effrow(paste0("ind_A_poli_", tie), tie, "ind_A_poli", paste("Network-mediated effect of political ideology on arts,", tie, "ties"), sec = S3c)
+  effrow(paste0("tot_Lis_poli_", tie), tie, "tot_Lis_poli", paste("Total effect of political ideology on leisure,", tie, "ties"), "exact", sec = S3c)
 }
-add("ind_A_poli_p", S3, thr(max(eff("weak", "ind_A_poli")$p, eff("strong", "ind_A_poli")$p)),
+pctrow <- function(id, tie, ind_lab, tot_lab, desc, sec = S3) {
+  x <- eff(tie, ind_lab); t <- eff(tie, tot_lab)
+  add(id, sec, as.character(floor(100 * x$b / t$b + 0.5)), desc,
+    sprintf("cache/diagnostics/sem_gpa_fixed_sep_decomposition.rds: 100 * := %s std.all / := %s std.all (delta method)", ind_lab, tot_lab))
+}
+pctrow("sh_A_educ_weak", "weak", "ind_A_educ", "tot_A_educ", "Share of education's total effect on arts through weak ties (percent)", sec = S3c)
+pctrow("sh_A_educ_strong", "strong", "ind_A_educ", "tot_A_educ", "Share of education's total effect on arts through strong ties (percent)", sec = S3c)
+pctrow("sh_A_arts_weak", "weak", "ind_A_arts", "tot_A_arts", "Share of childhood arts total effect on arts through weak ties (percent)", sec = S3c)
+pctrow("sh_A_arts_strong", "strong", "ind_A_arts", "tot_A_arts", "Share of childhood arts total effect on arts through strong ties (percent)", sec = S3c)
+pctrow("sh_A_poli_weak", "weak", "ind_A_poli", "tot_A_poli", "Share of ideology total effect on arts through weak ties (percent)", sec = S3c)
+pctrow("sh_A_poli_strong", "strong", "ind_A_poli", "tot_A_poli", "Share of ideology total effect on arts through strong ties (percent)", sec = S3c)
+pctrow("sh_Lis_poli_weak", "weak", "ind_Lis_poli", "tot_Lis_poli", "Share of ideology total effect on leisure through weak ties (percent)", sec = S3c)
+pctrow("sh_Lis_poli_strong", "strong", "ind_Lis_poli", "tot_Lis_poli", "Share of ideology total effect on leisure through strong ties (percent)", sec = S3c)
+pctrow("sh_dir_A_educ_weak", "weak", "dir_A_educ", "tot_A_educ", "Direct share of education's total effect on arts, weak ties (percent)", sec = S3c)
+pctrow("sh_dir_A_educ_strong", "strong", "dir_A_educ", "tot_A_educ", "Direct share of education's total effect on arts, strong ties (percent)", sec = S3c)
+pctrow("sh_dir_A_arts_weak", "weak", "dir_A_arts", "tot_A_arts", "Direct share of childhood arts total effect on arts, weak ties (percent)", sec = S3c)
+pctrow("sh_dir_A_arts_strong", "strong", "dir_A_arts", "tot_A_arts", "Direct share of childhood arts total effect on arts, strong ties (percent)", sec = S3c)
+artpath <- function(tie) {
+  p <- parameterEstimates(sc[[tie]]$fit, standardized = TRUE)
+  setNames(p$std.all[p$op == "~" & p$lhs == "A"], p$rhs[p$op == "~" & p$lhs == "A"])
+}
+vw <- artpath("weak"); vs <- artpath("strong")
+add("ratio_arts_weak_min", S3b, as.character(round(min(vw["Wv"] / vw["Wl"], vw["Wv"] / vw["Wc"]))),
+  "Smallest ratio of the weak variety path to the composition paths on arts",
+  "cache/diagnostics/sem_gpa_fixed_sep_covars.rds: min of std.all(A~Wv)/std.all(A~Wl) and std.all(A~Wv)/std.all(A~Wc)")
+add("ratio_arts_strong_min", S3b, as.character(round(min(vs["Sv"] / vs["Sl"], vs["Sv"] / vs["Sc"]))),
+  "Smallest ratio of the strong variety path to the composition paths on arts",
+  "cache/diagnostics/sem_gpa_fixed_sep_covars.rds: min of std.all(A~Sv)/std.all(A~Sl) and std.all(A~Sv)/std.all(A~Sc)")
+add("ratio_arts_strong_max", S3b, as.character(round(max(vs["Sv"] / vs["Sl"], vs["Sv"] / vs["Sc"]))),
+  "Largest ratio of the strong variety path to the composition paths on arts",
+  "cache/diagnostics/sem_gpa_fixed_sep_covars.rds: max of std.all(A~Sv)/std.all(A~Sl) and std.all(A~Sv)/std.all(A~Sc)")
+add("ind_A_poli_p", S3c, thr(max(eff("weak", "ind_A_poli")$p, eff("strong", "ind_A_poli")$p)),
   "Both mediated ideology-to-arts paths significant (p threshold)",
   "cache/diagnostics/sem_gpa_fixed_sep_decomposition.rds: max pvalue of := ind_A_poli over weak and strong")
-effrow("ind_Lis_poli_weak", "weak", "ind_Lis_poli", "Network-mediated effect of political ideology on leisure, weak ties", "exact")
-effrow("ind_Lis_poli_strong", "strong", "ind_Lis_poli", "Network-mediated effect of political ideology on leisure, strong ties", "exact")
+effrow("ind_Lis_poli_weak", "weak", "ind_Lis_poli", "Network-mediated effect of political ideology on leisure, weak ties", "exact", sec = S3c)
+effrow("ind_Lis_poli_strong", "strong", "ind_Lis_poli", "Network-mediated effect of political ideology on leisure, strong ties", "exact", sec = S3c)
 tots <- sapply(c("weak", "strong"), function(t) { r <- dpe[[t]][grepl("^tot_", dpe[[t]]$lhs), ]; setNames(r$std.all, r$lhs) })
-add("tot_maxdiff", S3, d3(max(abs(tots[, "weak"] - tots[, "strong"]))),
+add("tot_maxdiff", S3c, d3(max(abs(tots[, "weak"] - tots[, "strong"]))),
   "Largest weak-strong difference in total effects over predictors and activity factors",
   "cache/diagnostics/sem_gpa_fixed_sep_decomposition.rds: max |tot_* std.all (weak) - tot_* std.all (strong)|")
 
-for (k in list(c("educ_v", "Wv", "Sv", "educ_ord", "Education -> network variety"),
-  c("poli_l", "Wl", "Sl", "poli", "Political ideology -> liberal composition"),
-  c("poli_c", "Wc", "Sc", "poli", "Political ideology -> conservative composition"),
-  c("aapi_c", "Wc", "Sc", "race_fAAPI", "AAPI -> conservative composition"),
-  c("educ_a", "A", "A", "educ_ord", "Education -> arts (direct)"),
-  c("child_a", "A", "A", "child_arts", "Childhood arts exposure -> arts (direct)"),
-  c("aapi_a", "A", "A", "race_fAAPI", "AAPI -> arts (direct)"))) {
-  pathrow(paste0("c_", k[1], "_weak"), "weak", k[2], k[4], paste(k[5], "weak ties"))
-  pathrow(paste0("c_", k[1], "_strong"), "strong", k[3], k[4], paste(k[5], "strong ties"))
+for (k in list(c("educ_v", "Wv", "Sv", "educ_ord", "Education -> network variety", S3a),
+  c("poli_l", "Wl", "Sl", "poli", "Political ideology -> liberal composition", S3a),
+  c("poli_c", "Wc", "Sc", "poli", "Political ideology -> conservative composition", S3a),
+  c("aapi_c", "Wc", "Sc", "race_fAAPI", "AAPI -> conservative composition", S3a),
+  c("educ_a", "A", "A", "educ_ord", "Education -> arts (direct)", S3c),
+  c("child_a", "A", "A", "child_arts", "Childhood arts exposure -> arts (direct)", S3c),
+  c("aapi_a", "A", "A", "race_fAAPI", "AAPI -> arts (direct)", S3d))) {
+  pathrow(paste0("c_", k[1], "_weak"), "weak", k[2], k[4], paste(k[5], "weak ties"), sec = k[6])
+  pathrow(paste0("c_", k[1], "_strong"), "strong", k[3], k[4], paste(k[5], "strong ties"), sec = k[6])
 }
 
 out <- do.call(rbind, reg)

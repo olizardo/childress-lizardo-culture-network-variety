@@ -10,6 +10,8 @@ table's Note paragraph) and for the structural region and Table A3. The script s
 writing if any caption or note cannot be located. Re-runnable.
 """
 PATH = "results_draft.tex"
+import re
+
 L = open(PATH).read().split("\n")
 
 
@@ -35,17 +37,35 @@ meas = {k: trim_trailing_blank(v) for k, v in sections("cache/manuscript/measure
 struct = open("cache/manuscript/structural_blocks.tex").read().split("\n")
 struct = [l for l in struct if not l.startswith("% ")]
 
-CAP = {"Table 1": "Table 1. Varimax Loadings",
-       "Table 2": "Table 2. Confirmatory and Exploratory",
-       "Table 3": "Table 3. ESEM Loadings",
-       "Table 4": "Table 4. Standardized Loadings",
-       "Table A1": "Table A1. Oblimin",
-       "Table A2": "Table A2. Standardized Loadings and Antonym"}
+# Captions are matched on their cross-reference macro, not on a literal table number, so the
+# splicer keeps working when a table is added or reordered. The literal forms are accepted so a
+# draft written before the cross-reference macros can still be spliced once.
+def pref(macro):
+    return (macro, re.sub(r"\\\\[a-z]+\{([a-z-]+)\}", lambda m: m.group(1), macro).split(".")[0])
+
+
+CAP = {"Table 1": "Table \\tabnum{activities-varimax}.",
+       "Table 2": "Table \\tabnum{activities-cfa}.",
+       "Table 3": "Table \\tabnum{activities-esem}.",
+       "Table 4": "Table \\tabnum{ties-esem}.",
+       "Table A1": "Table \\apptabnum{activities-oblimin}.",
+       "Table A2": "Table \\apptabnum{ties-cfa}."}
+LEGACY = {"Table \\tabnum{activities-varimax}.": "Table 1. Varimax Loadings",
+          "Table \\tabnum{activities-cfa}.": "Table 2. Confirmatory and Exploratory",
+          "Table \\tabnum{activities-esem}.": "Table 3. ESEM Loadings",
+          "Table \\tabnum{ties-esem}.": "Table 4. Standardized Loadings",
+          "Table \\apptabnum{activities-oblimin}.": "Table A1. Oblimin",
+          "Table \\apptabnum{ties-cfa}.": "Table A2. Standardized Loadings and Antonym"}
+
+
+def find_line(lines, macro, legacy):
+    return next((i for i, l in enumerate(lines)
+                 if l.startswith(macro) or l.startswith(legacy)), None)
 
 # ---------------------------------------------------------------- measurement blocks (block-level)
 for key, cap in CAP.items():
     gen = meas[key]
-    c = next((i for i, l in enumerate(L) if l.startswith(cap)), None)
+    c = find_line(L, cap, LEGACY[cap])
     if c is None:
         raise SystemExit(f"{key}: caption not found in draft; nothing written")
     start = c - 1 if c > 0 and L[c - 1].startswith("\\Needspace") else c
@@ -55,21 +75,34 @@ for key, cap in CAP.items():
     L[start:end + 1] = gen
 
 # ---------------------------------------------------------------- structural region
-s = next(i for i, l in enumerate(L) if l.startswith("Table 5. Standardized Network-to-Activity"))
+s = find_line(L, "Table \\tabnum{network-activity}.", "Table 5. Standardized Network-to-Activity")
+while s > 0 and L[s - 1].startswith("\\Needspace"):
+    s -= 1
 e = next(i for i, l in enumerate(L) if l.startswith("\\subsection*{Appendix"))
 # keep structural block only up to Table A3 (A3 handled separately)
-a3_start = next(i for i, l in enumerate(struct) if l.startswith("Table A3."))
+a3_start = next(i for i, l in enumerate(struct) if l.startswith("Table \\apptabnum{rotation-halves}."))
+if a3_start > 0 and struct[a3_start - 1].startswith("\\Needspace"):
+    a3_start -= 1
 # drop the "% BEGIN" marker line and leading blanks so repeated splices are idempotent
 struct_main = [l for l in struct[:a3_start] if not l.startswith("% ")]
 while struct_main and struct_main[0] == "":
     struct_main.pop(0)
-struct_a3 = struct[a3_start:]
+while struct_main and struct_main[-1] == "":
+    struct_main.pop()
+struct_a3 = [l for l in struct[a3_start:] if not l.startswith("% ")]
+while struct_a3 and struct_a3[0] == "":
+    struct_a3.pop(0)
 L = L[:s] + struct_main + L[e:]
 
 # ---------------------------------------------------------------- Table A3 block
-a3s = next(i for i, l in enumerate(L) if l.startswith("Table A3."))
-a4 = next(i for i, l in enumerate(L) if l.startswith("Table A4"))
-if a4 > 0 and L[a4 - 1].startswith("\\Needspace"):
+a3s = find_line(L, "Table \\apptabnum{rotation-halves}.", "Table A3.")
+while a3s > 0 and L[a3s - 1].startswith("\\Needspace"):
+    a3s -= 1
+a4 = next((i for i, l in enumerate(L) if l.startswith("Table A4")), None)
+if a4 is None:
+    # Tables A4/A5 were dropped (November 11, 2026); the A3 block now runs to the end of the document
+    a4 = next(i for i, l in enumerate(L) if l.startswith("\\end{document}"))
+elif a4 > 0 and L[a4 - 1].startswith("\\Needspace"):
     a4 -= 1
 L = L[:a3s] + struct_a3 + [""] + L[a4:]
 
